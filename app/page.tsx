@@ -1,4 +1,4 @@
-import Folio from "../src/components/Folio";
+import Folio from "../src/components/folio/Folio";
 
 export default function Home() {
   return <Folio />;
