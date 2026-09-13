@@ -1,6 +1,10 @@
 "use client";
 
 import SiteNav from "@/components/layout/SiteNav";
+import HeroSection from "@/components/hero/HeroSection";
+import EZCalcsPreview from "@/components/previews/EZCalcsPreview";
+import LaConcheriaPreview from "@/components/previews/LaConcheriaPreview";
+import PianoTeacherLinkPreview from "@/components/previews/PianoTeacherLinkPreview";
 
 import { useState, useEffect, useRef } from "react";
 
@@ -42,119 +46,6 @@ export default function App() {
   );
 }
 
-// ─── Hero section ─────────────────────────────────────────────────────────────
-
-function HeroSection() {
-  const w = useW();
-  const mobile = w < 640;
-  const tablet = w < 1024;
-
-  const scrollToCarousel = () => {
-    document.getElementById("carousel")?.scrollIntoView({ behavior:"smooth" });
-  };
-
-  return (
-    <section style={{
-      position:"relative", minHeight:"100svh",
-      display:"flex", flexDirection: tablet ? "column" : "row",
-      alignItems:"center",
-      padding: mobile ? "80px 24px 60px" : tablet ? "100px 48px 60px" : "0 clamp(48px,6vw,100px)",
-      overflow:"hidden",
-    }}>
-
-      {/* Atmospheric floaties */}
-      <div style={{ position:"absolute", top:"-15%", left:"-8%", width:"55vw", height:"55vw", maxWidth:700, maxHeight:700, borderRadius:"50%", background:"radial-gradient(circle, rgba(205,185,130,0.22) 0%, transparent 68%)", animation:"folioDrift 32s ease-in-out infinite", pointerEvents:"none" }} />
-      <div style={{ position:"absolute", bottom:"-10%", right:"-5%", width:"45vw", height:"45vw", maxWidth:560, maxHeight:560, borderRadius:"50%", background:"radial-gradient(circle, rgba(58,94,200,0.1) 0%, transparent 68%)", animation:"folioDrift 40s ease-in-out infinite reverse", pointerEvents:"none" }} />
-      <div style={{ position:"absolute", top:"40%", right:"28%", width:"30vw", height:"30vw", maxWidth:360, maxHeight:360, borderRadius:"50%", background:"radial-gradient(circle, rgba(190,62,30,0.07) 0%, transparent 68%)", animation:"folioDrift 26s ease-in-out infinite", pointerEvents:"none" }} />
-
-      {/* Floating formula fragment */}
-      {!mobile && (
-        <div style={{ position:"absolute", right: tablet ? "5%" : "44%", bottom:"18%", animation:"folioFloat 10s 1s ease-in-out infinite", pointerEvents:"none", zIndex:1 }}>
-          <div style={{ background:"rgba(255,255,255,0.88)", border:"1.5px solid rgba(58,94,200,0.2)", boxShadow:"4px 4px 0 rgba(58,94,200,0.14)", borderRadius:5, padding:"12px 16px", width:160 }}>
-            <div style={{ fontFamily:M, fontSize:8, color:EZA, letterSpacing:"0.1em", marginBottom:6 }}>formula.py</div>
-            <div style={{ fontFamily:M, fontSize:10.5, color:INK, lineHeight:1.8, opacity:0.8 }}>
-              <div>M_n = A_s · f_y</div>
-              <div style={{ paddingLeft:10, opacity:0.55 }}>· (d – a/2)</div>
-              <div style={{ color:EZA, opacity:0.7 }}># → 124.8 kN·m</div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Floating shop tag */}
-      {!tablet && (
-        <div style={{ position:"absolute", right:"42%", top:"22%", transform:"rotate(3.5deg)", animation:"folioFloat 13s 3s ease-in-out infinite", pointerEvents:"none", zIndex:1 }}>
-          <div style={{ background:"rgba(255,255,255,0.85)", border:"1.5px solid rgba(190,62,30,0.2)", boxShadow:"4px 4px 0 rgba(190,62,30,0.12)", borderRadius:4, padding:"8px 14px" }}>
-            <div style={{ fontFamily:M, fontSize:8, color:LCA, letterSpacing:"0.1em", marginBottom:3 }}>SHOPIFY</div>
-            <div style={{ fontFamily:S, fontSize:12, color:INK, fontWeight:600 }}>La Concheria</div>
-            <div style={{ fontFamily:S, fontSize:11, color:INK, opacity:0.5 }}>Custom theme ↗</div>
-          </div>
-        </div>
-      )}
-
-      {/* Hero text */}
-      <div style={{
-        position:"relative", zIndex:2,
-        maxWidth: tablet ? "100%" : "52%",
-        paddingTop: tablet ? 0 : 0,
-      }}>
-        <div style={{ fontFamily:M, fontSize:11, color:INK, opacity:0.35, letterSpacing:"0.2em", marginBottom: mobile ? 32 : 52 }}>FOLIO</div>
-
-        <h1 style={{
-          fontFamily:D, fontStyle:"italic",
-          fontSize:`clamp(56px, 8vw, 110px)`,
-          lineHeight:0.88, color:INK, letterSpacing:"-0.03em",
-          margin:"0 0 24px",
-        }}>
-          Kevin<br/>Stahl
-        </h1>
-
-        <p style={{ fontFamily:S, fontWeight:500, fontSize:`clamp(14px, 1.4vw, 18px)`, color:INK, opacity:0.5, letterSpacing:"0.01em", margin:"0 0 22px" }}>
-          Full-Stack Developer · Digital Commerce · Systems
-        </p>
-
-        <div style={{ width:38, height:2, background:ACC, opacity:0.75, marginBottom:26 }} />
-
-        <p style={{ fontFamily:S, fontSize:`clamp(14px, 1.2vw, 17px)`, color:INK, opacity:0.62, lineHeight:1.8, maxWidth:480, margin:"0 0 44px" }}>
-          I build full-stack web applications, digital commerce experiences, and custom engineering systems — from database design to deployed product.
-        </p>
-
-        <div style={{ display:"flex", gap:12, alignItems:"center", flexWrap:"wrap" }}>
-          <button onClick={scrollToCarousel}
-            style={{ fontFamily:S, fontWeight:700, fontSize:15, color:"white", background:INK, border:`2px solid ${INK}`, borderRadius:3, padding:"13px 30px", cursor:"pointer", letterSpacing:"0.04em", transition:"background 0.15s, transform 0.15s" }}
-            onMouseEnter={e => { e.currentTarget.style.background="#2a2220"; e.currentTarget.style.transform="translateY(-1px)"; }}
-            onMouseLeave={e => { e.currentTarget.style.background=INK; e.currentTarget.style.transform="translateY(0)"; }}>
-            View Work →
-          </button>
-          <button
-            style={{ fontFamily:S, fontWeight:500, fontSize:15, color:INK, background:"transparent", border:"1.5px solid rgba(26,23,20,0.22)", borderRadius:3, padding:"12px 24px", cursor:"pointer", opacity:0.75, letterSpacing:"0.01em", transition:"opacity 0.15s" }}
-            onMouseEnter={e => (e.currentTarget.style.opacity="1")}
-            onMouseLeave={e => (e.currentTarget.style.opacity="0.75")}>
-            Resume ↗
-          </button>
-        </div>
-
-        <div style={{ display:"flex", alignItems:"center", gap:10, marginTop:52, opacity:0.3 }}>
-          <div style={{ width:1, height:24, background:INK }} />
-          <span style={{ fontFamily:M, fontSize:10, color:INK, letterSpacing:"0.14em" }}>SCROLL TO BROWSE WORK</span>
-        </div>
-      </div>
-
-      {/* Hero right side: stats on desktop */}
-      {!tablet && (
-        <div style={{ position:"absolute", right:"clamp(40px,5vw,80px)", top:"50%", transform:"translateY(-50%)", display:"flex", flexDirection:"column", gap:28, zIndex:1 }}>
-          {[["8+","Years\nbuilding"],["40+","Engineers\nserved"],["3","Products\nshipped"]].map(([n,l]) => (
-            <div key={n} style={{ textAlign:"right" }}>
-              <div style={{ fontFamily:D, fontStyle:"italic", fontSize:52, color:INK, opacity:0.12, lineHeight:1 }}>{n}</div>
-              <div style={{ fontFamily:M, fontSize:9, color:INK, opacity:0.28, letterSpacing:"0.08em", lineHeight:1.5 }}>{l.replace("\n","\n")}</div>
-            </div>
-          ))}
-        </div>
-      )}
-    </section>
-  );
-}
-
 // ─── Carousel section ────────────────────────────────────────────────────────
 
 function CarouselSection() {
@@ -185,9 +76,9 @@ function CarouselSection() {
   const cardH = Math.round(cardW * 1.22);
 
   const projects = [
-    { id:"ezc", title:"EZCalcs", sub:"Engineering Platform", rotation:-2.8, accent:EZA, content:<EZCalcsMockup /> },
-    { id:"lca", title:"La Concheria", sub:"Shopify E-Commerce", rotation:2.2, accent:LCA, content:<LaConPreview /> },
-    { id:"ptl", title:"PianoTeacherLink", sub:"Drupal Marketplace", rotation:-1.8, accent:PTLC, content:<PTLPreview /> },
+    { id:"ezc", title:"EZCalcs", sub:"Engineering Platform", rotation:-2.8, accent:EZA, content:<EZCalcsPreview /> },
+    { id:"lca", title:"La Concheria", sub:"Shopify E-Commerce", rotation:2.2, accent:LCA, content:<LaConcheriaPreview /> },
+    { id:"ptl", title:"PianoTeacherLink", sub:"Drupal Marketplace", rotation:-1.8, accent:PTLC, content:<PianoTeacherLinkPreview /> },
   ];
 
   return (
@@ -416,7 +307,7 @@ function EZSection() {
         "Formula template sharing and team collaboration features",
       ]}
       extra={{ label:"Architecture details", body:"User submits a formula expression and variable values via Livewire → Laravel dispatches a Python subprocess running SymPy → result is returned as JSON and rendered inline. Formulas are stored as structured JSON blobs in MySQL for portability and versioning." }}
-      mockup={<EZCalcsMockup />}
+      mockup={<EZCalcsPreview />}
     />
   );
 }
@@ -436,7 +327,7 @@ function LaConSection() {
         "Shopify metafields for provenance, sustainability, and sourcing data",
       ]}
       extra={{ label:"Challenges", body:"The client had high expectations for visual fidelity from day one. Translating print-quality brand materials into a responsive Shopify theme required meticulous CSS work and custom section schemas. Metafields were extended to support sustainability certifications per product SKU." }}
-      mockup={<LaConPreview />}
+      mockup={<LaConcheriaPreview />}
       mockupLeft
     />
   );
@@ -457,7 +348,7 @@ function PTLSection() {
         "Admin dashboard for teacher verification and platform management",
       ]}
       extra={{ label:"Architecture", body:"Built on Drupal's entity and field API to model teachers, lessons, and booking requests as structured content. Custom modules handle geolocation queries. The theming layer uses a custom subtheme with component-level CSS scoping." }}
-      mockup={<PTLPreview />}
+      mockup={<PianoTeacherLinkPreview />}
     />
   );
 }
@@ -579,150 +470,5 @@ function ContactSection() {
         </button>
       </div>
     </section>
-  );
-}
-
-// ─── EZCalcs app mockup ───────────────────────────────────────────────────────
-
-function EZCalcsMockup() {
-  return (
-    <div style={{ width:"100%", height:"100%", display:"flex", flexDirection:"column", background:"white" }}>
-      <div style={{ height:44, background:"#12225a", display:"flex", alignItems:"center", padding:"0 18px", gap:12, flexShrink:0 }}>
-        <span style={{ fontFamily:D, fontStyle:"italic", fontSize:20, color:"white", letterSpacing:"-0.02em" }}>EZCalcs</span>
-        <span style={{ fontFamily:M, fontSize:8, color:"rgba(255,255,255,0.3)", letterSpacing:"0.08em" }}>STRUCTURAL ENGINEERING</span>
-        <div style={{ flex:1 }} />
-        <div style={{ background:"rgba(255,255,255,0.12)", border:"1px solid rgba(255,255,255,0.2)", borderRadius:3, padding:"4px 10px", fontFamily:S, fontSize:11, color:"rgba(255,255,255,0.7)", cursor:"pointer" }}>+ New</div>
-        <div style={{ width:28, height:28, borderRadius:"50%", background:EZA, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:S, fontSize:11, fontWeight:700, color:"white" }}>KS</div>
-      </div>
-      <div style={{ display:"flex", flex:1, overflow:"hidden", minHeight:0 }}>
-        <div style={{ width:150, background:"#f2f5fc", borderRight:"1px solid rgba(58,94,200,0.1)", padding:"12px 0", flexShrink:0, overflow:"hidden" }}>
-          <div style={{ fontFamily:M, fontSize:8.5, color:EZA, letterSpacing:"0.1em", padding:"0 12px", marginBottom:8 }}>FORMULAS</div>
-          <div style={{ padding:"5px 12px", fontFamily:S, fontSize:12, color:EZA, fontWeight:600, display:"flex", gap:4 }}>▾ Beams</div>
-          {[["Moment Capacity",true],["Shear Force",false],["Deflection",false]].map(([lbl,active]) => (
-            <div key={lbl as string} style={{ padding:"4px 12px 4px 24px", fontFamily:S, fontSize:11.5, color: active ? EZA : "#666", fontWeight: active ? 600 : 400, background: active ? "rgba(58,94,200,0.1)" : "transparent", borderLeft: active ? `2px solid ${EZA}` : "2px solid transparent" }}>{lbl as string}</div>
-          ))}
-          {["Columns","Slabs"].map(g => (
-            <div key={g} style={{ padding:"5px 12px", fontFamily:S, fontSize:12, color:"#555", display:"flex", gap:4 }}>▸ {g}</div>
-          ))}
-          <div style={{ margin:"10px 12px", height:1, background:"rgba(58,94,200,0.1)" }} />
-          <div style={{ fontFamily:M, fontSize:8.5, color:EZA, letterSpacing:"0.1em", padding:"0 12px", marginBottom:6 }}>TEMPLATES</div>
-          {["Bridge Beams","Column Set A"].map(t => (
-            <div key={t} style={{ padding:"4px 12px", fontFamily:S, fontSize:11.5, color:"#777" }}>{t}</div>
-          ))}
-        </div>
-        <div style={{ flex:1, background:"white", padding:"14px 20px", overflow:"hidden", minWidth:0 }}>
-          <div style={{ fontFamily:M, fontSize:9, color:"#bbb", marginBottom:10 }}>Beams / Moment Capacity</div>
-          <div style={{ display:"flex", alignItems:"center", marginBottom:16 }}>
-            <span style={{ fontFamily:S, fontWeight:700, fontSize:16, color:INK }}>Moment Capacity</span>
-            <div style={{ flex:1 }} />
-            <div style={{ background:EZA, borderRadius:3, padding:"5px 14px", fontFamily:S, fontSize:12, fontWeight:600, color:"white", cursor:"pointer" }}>▷ Calculate</div>
-          </div>
-          <div style={{ fontFamily:M, fontSize:8.5, color:EZA, letterSpacing:"0.1em", marginBottom:8 }}>VARIABLES</div>
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:8, marginBottom:14 }}>
-            {[["b","350","mm"],["d","560","mm"],["fy","420","MPa"]].map(([name,val,unit]) => (
-              <div key={name} style={{ border:"1px solid rgba(58,94,200,0.18)", borderRadius:4, padding:"7px 10px", background:"#fafbff" }}>
-                <div style={{ fontFamily:M, fontSize:8, color:"#999", marginBottom:2 }}>{name}</div>
-                <div style={{ fontFamily:M, fontSize:15, color:INK, fontWeight:500 }}>{val} <span style={{ fontSize:9, color:"#999" }}>{unit}</span></div>
-              </div>
-            ))}
-          </div>
-          <div style={{ background:"#f8f9ff", border:"1px solid rgba(58,94,200,0.14)", borderRadius:4, padding:"10px 14px", marginBottom:14, fontFamily:M, fontSize:13, color:INK }}>
-            M<sub style={{ fontSize:9 }}>n</sub> = A<sub style={{ fontSize:9 }}>s</sub> · f<sub style={{ fontSize:9 }}>y</sub> · (d – a/2)
-          </div>
-          <div style={{ display:"flex", alignItems:"center", gap:14 }}>
-            <div style={{ background:"rgba(58,94,200,0.05)", border:"2px solid rgba(58,94,200,0.3)", borderRadius:4, padding:"8px 16px" }}>
-              <span style={{ fontFamily:M, fontSize:20, color:INK, fontWeight:500 }}>124.8 </span>
-              <span style={{ fontFamily:M, fontSize:10, color:"#888" }}>kN·m</span>
-            </div>
-            <div style={{ fontFamily:S, fontSize:13, color:"#4caf50", fontWeight:600 }}>✓ Saved</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// ─── La Concheria preview ────────────────────────────────────────────────────
-
-function LaConPreview() {
-  return (
-    <div style={{ width:"100%", height:"100%", background:"#faf5ef", display:"flex", flexDirection:"column" }}>
-      <div style={{ height:46, background:"white", borderBottom:"1px solid rgba(0,0,0,0.07)", display:"flex", alignItems:"center", padding:"0 20px", gap:20, flexShrink:0 }}>
-        <div style={{ fontFamily:D, fontStyle:"italic", fontSize:18, color:"#3a1a0a" }}>La Concheria</div>
-        <div style={{ flex:1 }} />
-        {["Menu","Shop","Our Story","Contact"].map(l => (
-          <span key={l} style={{ fontFamily:S, fontSize:11.5, color:"#777" }}>{l}</span>
-        ))}
-        <div style={{ background:LCA, borderRadius:2, padding:"4px 12px", fontFamily:S, fontSize:11, fontWeight:600, color:"white" }}>Shop</div>
-      </div>
-      <div style={{ flex:1, background:"linear-gradient(155deg, #e8d5c0 0%, #c9976a 52%, #a05030 100%)", position:"relative", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", overflow:"hidden" }}>
-        <div style={{ position:"absolute", inset:0, background:"linear-gradient(to bottom, transparent 30%, rgba(50,15,0,0.4) 100%)" }} />
-        <div style={{ position:"relative", textAlign:"center" }}>
-          <div style={{ fontFamily:M, fontSize:9, color:"rgba(255,255,255,0.55)", letterSpacing:"0.16em", marginBottom:12 }}>ARTISANAL SEAFOOD · SPAIN</div>
-          <div style={{ fontFamily:D, fontStyle:"italic", fontSize:38, color:"white", lineHeight:1.0, textShadow:"0 4px 16px rgba(0,0,0,0.3)", marginBottom:10 }}>Fresh from<br/>the Sea</div>
-          <div style={{ fontFamily:S, fontSize:12, color:"rgba(255,255,255,0.72)", marginBottom:18 }}>Premium seafood, sustainably sourced</div>
-          <div style={{ display:"inline-flex", gap:10 }}>
-            <div style={{ border:"2px solid rgba(255,255,255,0.8)", borderRadius:2, padding:"7px 20px", fontFamily:S, fontSize:11, fontWeight:700, color:"white", letterSpacing:"0.06em" }}>SHOP NOW</div>
-            <div style={{ background:"rgba(255,255,255,0.15)", borderRadius:2, padding:"7px 20px", fontFamily:S, fontSize:11, color:"rgba(255,255,255,0.85)" }}>OUR STORY</div>
-          </div>
-        </div>
-      </div>
-      <div style={{ background:"white", padding:"12px 16px", display:"flex", gap:8, flexShrink:0 }}>
-        {[["Gambas al Ajillo","€18.50","#e9d5c2"],["Pulpo Gallego","€24.00","#d4c0b0"],["Mejillones","€12.00","#c8a898"]].map(([name,price,bg]) => (
-          <div key={name as string} style={{ flex:1, background:bg as string, borderRadius:3, padding:"8px 10px", cursor:"pointer" }}>
-            <div style={{ fontFamily:D, fontStyle:"italic", fontSize:13, color:"#3a1a0a", marginBottom:2 }}>{name as string}</div>
-            <div style={{ fontFamily:M, fontSize:11, color:LCA, fontWeight:700 }}>{price as string}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-// ─── PianoTeacherLink preview ─────────────────────────────────────────────────
-
-function PTLPreview() {
-  return (
-    <div style={{ width:"100%", height:"100%", background:"#f2f0fa", display:"flex", flexDirection:"column" }}>
-      <div style={{ height:46, background:"white", borderBottom:"1px solid rgba(0,0,0,0.07)", display:"flex", alignItems:"center", padding:"0 18px", flexShrink:0 }}>
-        <div style={{ fontFamily:S, fontWeight:800, fontSize:14, color:PTLC, letterSpacing:"-0.02em" }}>PianoTeacherLink</div>
-        <div style={{ flex:1 }} />
-        {["Find a Teacher","How it Works","For Teachers"].map(l => (
-          <span key={l} style={{ fontFamily:S, fontSize:11.5, color:"#777", marginLeft:16 }}>{l}</span>
-        ))}
-        <div style={{ marginLeft:16, background:PTLC, borderRadius:3, padding:"5px 14px", fontFamily:S, fontSize:11, fontWeight:600, color:"white" }}>Sign Up</div>
-      </div>
-      <div style={{ padding:"16px 20px", background:"linear-gradient(135deg, #e8e4f8 0%, #d8d0f0 100%)", flexShrink:0 }}>
-        <div style={{ fontFamily:D, fontStyle:"italic", fontSize:22, color:"#2a1a6a", marginBottom:10 }}>Find your perfect piano teacher</div>
-        <div style={{ display:"flex", gap:6 }}>
-          <div style={{ flex:1, background:"white", border:"1px solid #d0c8f0", borderRadius:3, padding:"7px 12px", fontFamily:S, fontSize:11.5, color:"#aaa" }}>📍 City or ZIP...</div>
-          <div style={{ background:"white", border:"1px solid #d0c8f0", borderRadius:3, padding:"7px 12px", fontFamily:S, fontSize:11.5, color:"#aaa" }}>Level ▾</div>
-          <div style={{ background:PTLC, borderRadius:3, padding:"7px 18px", fontFamily:S, fontSize:11.5, fontWeight:600, color:"white" }}>Search</div>
-        </div>
-      </div>
-      <div style={{ flex:1, padding:"12px 18px", overflow:"hidden" }}>
-        <div style={{ fontFamily:M, fontSize:9, color:PTLC, letterSpacing:"0.1em", marginBottom:10 }}>12 TEACHERS NEAR YOU</div>
-        <div style={{ display:"flex", flexDirection:"column", gap:7 }}>
-          {[
-            ["Sarah M.","Classical · Jazz · All levels","$45/hr","#c8b4f0","★ 4.9"],
-            ["James L.","Contemporary · Pop","$40/hr","#b4a0e8","★ 4.7"],
-            ["Mei W.","Classical · Theory","$55/hr","#d4c4f8","★ 5.0"],
-            ["Carlos R.","Jazz · Improv","$50/hr","#bfaff0","★ 4.8"],
-          ].map(([n,s,p,c,r]) => (
-            <div key={n as string} style={{ background:"white", borderRadius:4, padding:"9px 12px", display:"flex", alignItems:"center", gap:10, border:"1px solid rgba(74,63,154,0.1)", cursor:"pointer" }}>
-              <div style={{ width:32, height:32, borderRadius:"50%", background:`linear-gradient(135deg, ${c} 0%, #5a40c0 100%)`, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:D, fontStyle:"italic", fontSize:14, color:"white", flexShrink:0 }}>
-                {(n as string).charAt(0)}
-              </div>
-              <div style={{ flex:1, minWidth:0 }}>
-                <div style={{ fontFamily:S, fontWeight:700, fontSize:12.5, color:"#2a1a6a" }}>{n as string}</div>
-                <div style={{ fontFamily:S, fontSize:11, color:"#999" }}>{s as string}</div>
-              </div>
-              <div style={{ fontFamily:M, fontSize:12, color:PTLC, fontWeight:700 }}>{p as string}</div>
-              <div style={{ background:PTLC, borderRadius:2, padding:"4px 10px", fontFamily:S, fontSize:10.5, fontWeight:600, color:"white" }}>Book</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
   );
 }
