@@ -1,14 +1,123 @@
 "use client";
 
-import { useWindowWidth } from "@/hooks/useWindowWidth";
 import { colors, fonts } from "@/lib/theme";
+import {
+    Code2,
+    Database,
+    Layers3,
+    ShoppingBag,
+    Megaphone,
+    Mail,
+    Phone,
+    ArrowRight,
+    ExternalLink,
+    MapPin,
+    Pin
+} from "lucide-react";
+
+import {
+    SiPhp,
+    SiPython,
+    SiJavascript,
+    SiTypescript,
+    SiHtml5,
+    SiCss3,
+
+    SiLaravel,
+    SiReact,
+    SiNextdotjs,
+    SiRemix,
+    SiVite,
+
+    SiMysql,
+    SiMariadb,
+    SiSupabase,
+    SiRedis,
+    SiPrisma,
+    SiLinux,
+
+    SiShopify,
+    SiDrupal,
+    SiWordpress,
+    SiSquarespace,
+    SiVercel,
+    SiGoogleads,
+    SiMeta,
+    SiTiktok,
+} from "react-icons/si";
+
+import styles from "./HeroSection.module.css";
+
+const skillGroups = [
+    {
+        label: "01 / Languages",
+        icon: Code2,
+        rotate: "-1.2deg",
+        items: [
+
+            { name: "PHP", icon: SiPhp, color: "#777BB4" },
+            { name: "Python", icon: SiPython, color: "#3776AB" },
+            { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
+            { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+            { name: "SQL", icon: Database, color: "#336791" },
+            { name: "HTML / CSS", icon: SiHtml5, color: "#E34F26" },
+            
+        ],
+    },
+{
+    label: "02 / Frameworks",
+        icon: Layers3,
+            rotate: "1deg",
+                items: [
+                    { name: "Laravel", icon: SiLaravel },
+                    { name: "React", icon: SiReact },
+                    { name: "Next.js", icon: SiNextdotjs },
+                    { name: "Remix", icon: SiRemix },
+                    { name: "Livewire", icon: Layers3 },
+                    { name: "Vite", icon: SiVite },
+                ],
+    },
+{
+    label: "03 / Data + Infra",
+        icon: Database,
+            rotate: "-0.6deg",
+                items: [
+                    { name: "MySQL", icon: SiMysql },
+                    { name: "MariaDB", icon: SiMariadb },
+                    { name: "Supabase", icon: SiSupabase },
+                    { name: "Redis", icon: SiRedis },
+                    { name: "Prisma", icon: SiPrisma },
+                    { name: "Linux", icon: SiLinux },
+                ],
+    },
+{
+    label: "04 / Platforms",
+        icon: ShoppingBag,
+            rotate: "1.3deg",
+                items: [
+                    { name: "Shopify", icon: SiShopify },
+                    { name: "Drupal", icon: SiDrupal },
+                    { name: "WordPress", icon: SiWordpress },
+                    { name: "Squarespace", icon: SiSquarespace },
+                    { name: "Vercel", icon: SiVercel },
+                    { name: "Cloudways", icon: Database },
+                ],
+    },
+{
+    label: "05 / Commerce + Ads",
+        icon: Megaphone,
+            rotate: "-0.9deg",
+                items: [
+                    { name: "Shopify POS", icon: SiShopify },
+                    { name: "TikTok Shop", icon: SiTiktok },
+                    { name: "Meta Commerce", icon: SiMeta },
+                    { name: "Google Ads", icon: SiGoogleads },
+                    { name: "Meta Ads", icon: SiMeta },
+                ],
+    },
+];
 
 export default function HeroSection() {
-    const w = useWindowWidth();
-
-    const mobile = w < 640;
-    const tablet = w < 1024;
-
     const scrollToCarousel = () => {
         document
             .getElementById("carousel")
@@ -17,409 +126,464 @@ export default function HeroSection() {
 
     return (
         <section
+            className={styles.hero}
             style={{
                 position: "relative",
                 minHeight: "100svh",
-                display: "flex",
-                flexDirection: tablet ? "column" : "row",
-                alignItems: "center",
-                padding: mobile
-                    ? "80px 24px 60px"
-                    : tablet
-                        ? "100px 48px 60px"
-                        : "0 clamp(48px,6vw,100px)",
                 overflow: "hidden",
+                padding: "72px clamp(44px, 5vw, 88px)",
+                display: "flex",
+                alignItems: "center",
             }}
         >
-            {/* Atmospheric floaties */}
+            {/* Atmospheric background */}
             <div
+                className={styles.driftOne}
+                aria-hidden="true"
                 style={{
                     position: "absolute",
                     top: "-15%",
                     left: "-8%",
-                    width: "55vw",
-                    height: "55vw",
-                    maxWidth: 700,
-                    maxHeight: 700,
+                    width: "52vw",
+                    height: "52vw",
+                    maxWidth: 720,
+                    maxHeight: 720,
                     borderRadius: "50%",
                     background:
                         "radial-gradient(circle, rgba(205,185,130,0.22) 0%, transparent 68%)",
-                    animation: "folioDrift 32s ease-in-out infinite",
                     pointerEvents: "none",
                 }}
             />
 
             <div
+                aria-hidden="true"
+                className={styles.driftTwo}
                 style={{
                     position: "absolute",
-                    bottom: "-10%",
-                    right: "-5%",
-                    width: "45vw",
-                    height: "45vw",
-                    maxWidth: 560,
-                    maxHeight: 560,
+                    right: "-12%",
+                    bottom: "-15%",
+                    width: "48vw",
+                    height: "48vw",
+                    maxWidth: 620,
+                    maxHeight: 620,
                     borderRadius: "50%",
                     background:
-                        "radial-gradient(circle, rgba(58,94,200,0.1) 0%, transparent 68%)",
-                    animation: "folioDrift 40s ease-in-out infinite reverse",
+                        "radial-gradient(circle, rgba(58,94,200,0.10) 0%, transparent 68%)",
                     pointerEvents: "none",
                 }}
             />
 
+            {/* Main hero layout */}
             <div
-                style={{
-                    position: "absolute",
-                    top: "40%",
-                    right: "28%",
-                    width: "30vw",
-                    height: "30vw",
-                    maxWidth: 360,
-                    maxHeight: 360,
-                    borderRadius: "50%",
-                    background:
-                        "radial-gradient(circle, rgba(190,62,30,0.07) 0%, transparent 68%)",
-                    animation: "folioDrift 26s ease-in-out infinite",
-                    pointerEvents: "none",
-                }}
-            />
-
-            {/* Floating formula fragment */}
-            {!mobile && (
-                <div
-                    style={{
-                        position: "absolute",
-                        right: tablet ? "5%" : "44%",
-                        bottom: "18%",
-                        animation: "folioFloat 10s 1s ease-in-out infinite",
-                        pointerEvents: "none",
-                        zIndex: 1,
-                    }}
-                >
-                    <div
-                        style={{
-                            background: "rgba(255,255,255,0.88)",
-                            border: "1.5px solid rgba(58,94,200,0.2)",
-                            boxShadow: "4px 4px 0 rgba(58,94,200,0.14)",
-                            borderRadius: 5,
-                            padding: "12px 16px",
-                            width: 160,
-                        }}
-                    >
-                        <div
-                            style={{
-                                fontFamily: fonts.mono,
-                                fontSize: 8,
-                                color: colors.projects.ezcalcs,
-                                letterSpacing: "0.1em",
-                                marginBottom: 6,
-                            }}
-                        >
-                            formula.py
-                        </div>
-
-                        <div
-                            style={{
-                                fontFamily: fonts.mono,
-                                fontSize: 10.5,
-                                color: colors.ink,
-                                lineHeight: 1.8,
-                                opacity: 0.8,
-                            }}
-                        >
-                            <div>M_n = A_s · f_y</div>
-                            <div style={{ paddingLeft: 10, opacity: 0.55 }}>
-                                · (d – a/2)
-                            </div>
-                            <div
-                                style={{
-                                    color: colors.projects.ezcalcs,
-                                    opacity: 0.7,
-                                }}
-                            >
-                                # → 124.8 kN·m
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* Floating shop tag */}
-            {!tablet && (
-                <div
-                    style={{
-                        position: "absolute",
-                        right: "42%",
-                        top: "22%",
-                        transform: "rotate(3.5deg)",
-                        animation: "folioFloat 13s 3s ease-in-out infinite",
-                        pointerEvents: "none",
-                        zIndex: 1,
-                    }}
-                >
-                    <div
-                        style={{
-                            background: "rgba(255,255,255,0.85)",
-                            border: "1.5px solid rgba(190,62,30,0.2)",
-                            boxShadow: "4px 4px 0 rgba(190,62,30,0.12)",
-                            borderRadius: 4,
-                            padding: "8px 14px",
-                        }}
-                    >
-                        <div
-                            style={{
-                                fontFamily: fonts.mono,
-                                fontSize: 8,
-                                color: colors.projects.laConcheria,
-                                letterSpacing: "0.1em",
-                                marginBottom: 3,
-                            }}
-                        >
-                            SHOPIFY
-                        </div>
-
-                        <div
-                            style={{
-                                fontFamily: fonts.sans,
-                                fontSize: 12,
-                                color: colors.ink,
-                                fontWeight: 600,
-                            }}
-                        >
-                            La Concheria
-                        </div>
-
-                        <div
-                            style={{
-                                fontFamily: fonts.sans,
-                                fontSize: 11,
-                                color: colors.ink,
-                                opacity: 0.5,
-                            }}
-                        >
-                            Custom theme ↗
-                        </div>
-                    </div>
-                </div>
-            )}
-
-            {/* Hero text */}
-            <div
+                className={styles.heroGrid}
                 style={{
                     position: "relative",
                     zIndex: 2,
-                    maxWidth: tablet ? "100%" : "52%",
-                    paddingTop: 0,
+                    width: "100%",
+                    maxWidth: 1500,
+                    margin: "0 auto",
+                    display: "grid",
+                    gridTemplateColumns:
+                        "minmax(240px, 0.85fr) minmax(320px, 1fr) minmax(440px, 1.45fr)",
+                    gap: "clamp(36px, 5vw, 78px)",
+                    alignItems: "center",
                 }}
             >
-                <div
-                    style={{
-                        fontFamily: fonts.mono,
-                        fontSize: 11,
-                        color: colors.ink,
-                        opacity: 0.35,
-                        letterSpacing: "0.2em",
-                        marginBottom: mobile ? 32 : 52,
-                    }}
-                >
-                    FOLIO
-                </div>
-
-                <h1
-                    style={{
-                        fontFamily: fonts.display,
-                        fontStyle: "italic",
-                        fontSize: "clamp(56px, 8vw, 110px)",
-                        lineHeight: 0.88,
-                        color: colors.ink,
-                        letterSpacing: "-0.03em",
-                        margin: "0 0 24px",
-                    }}
-                >
-                    Kevin
-                    <br />
-                    Stahl
-                </h1>
-
-                <p
-                    style={{
-                        fontFamily: fonts.sans,
-                        fontWeight: 500,
-                        fontSize: "clamp(14px, 1.4vw, 18px)",
-                        color: colors.ink,
-                        opacity: 0.5,
-                        letterSpacing: "0.01em",
-                        margin: "0 0 22px",
-                    }}
-                >
-                    Full-Stack Developer · Digital Commerce · Systems
-                </p>
-
-                <div
-                    style={{
-                        width: 38,
-                        height: 2,
-                        background: colors.accent,
-                        opacity: 0.75,
-                        marginBottom: 26,
-                    }}
-                />
-
-                <p
-                    style={{
-                        fontFamily: fonts.sans,
-                        fontSize: "clamp(14px, 1.2vw, 17px)",
-                        color: colors.ink,
-                        opacity: 0.62,
-                        lineHeight: 1.8,
-                        maxWidth: 480,
-                        margin: "0 0 44px",
-                    }}
-                >
-                    I build full-stack web applications, digital commerce experiences,
-                    and custom engineering systems — from database design to deployed
-                    product.
-                </p>
-
-                <div
+                {/* LEFT / identity */}
+                <aside
+                    className={styles.identity}
                     style={{
                         display: "flex",
-                        gap: 12,
-                        alignItems: "center",
-                        flexWrap: "wrap",
+                        flexDirection: "column",
+                        alignItems: "stretch",
                     }}
                 >
-                    <button
-                        onClick={scrollToCarousel}
+                    <div
+                        className={styles.portraitWrapper}
                         style={{
-                            fontFamily: fonts.sans,
-                            fontWeight: 700,
-                            fontSize: 15,
-                            color: "white",
-                            background: colors.ink,
-                            border: `2px solid ${colors.ink}`,
-                            borderRadius: 3,
-                            padding: "13px 30px",
-                            cursor: "pointer",
-                            letterSpacing: "0.04em",
-                            transition: "background 0.15s, transform 0.15s",
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.background = "#2a2220";
-                            e.currentTarget.style.transform = "translateY(-1px)";
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.background = colors.ink;
-                            e.currentTarget.style.transform = "translateY(0)";
+                            position: "relative",
+                            width: "100%",
+                            maxWidth: 300,
+                            marginBottom: 28,
                         }}
                     >
-                        View Work →
-                    </button>
+                        <div
+                            aria-hidden="true"
+                            style={{
+                                position: "absolute",
+                                inset: "10px -10px -10px 10px",
+                                background: colors.ink,
+                                borderRadius: 4,
+                            }}
+                        />
 
-                    <button
+                        <div
+                            style={{
+                                position: "relative",
+                                overflow: "hidden",
+                                border: `2px solid ${colors.ink}`,
+                                borderRadius: 4,
+                                background: "#eee7db",
+                                aspectRatio: "4 / 5",
+                            }}
+                        >
+                            <img
+                                src="/images/kevin-portrait.jpg"
+                                alt="Portrait of Kevin Stahl"
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    display: "block",
+                                }}
+                            />
+                        </div>
+
+                        <div
+                            className={styles.accentFloat}
+                            aria-hidden="true"
+                            style={{
+                                position: "absolute",
+                                top: -14,
+                                right: 120,
+                                zIndex: 5,
+                                color: colors.accent,
+                                filter: "drop-shadow(2px 3px 0 rgba(26,23,20,0.18))",
+                                transform: "rotate(18deg)",
+                            }}
+                        >
+                            <Pin
+                                size={30}
+                                strokeWidth={1.4}
+                                fill={colors.accent}
+                            />
+                        </div>
+                    </div>
+
+                    <div style={{ marginBottom: 26 }}>
+                        <h1
+                            style={{
+                                margin: 0,
+                                fontFamily: fonts.display,
+                                fontStyle: "italic",
+                                fontSize: "clamp(36px, 4vw, 56px)",
+                                lineHeight: 0.95,
+                                color: colors.ink,
+                                letterSpacing: "-0.03em",
+                            }}
+                        >
+                            Kevin Stahl
+                        </h1>
+
+                        <p
+                            style={{
+                                margin: "12px 0 0",
+                                fontFamily: fonts.sans,
+                                fontSize: 14,
+                                fontWeight: 700,
+                                color: colors.ink,
+                                letterSpacing: "0.04em",
+                                textTransform: "uppercase",
+                            }}
+                        >
+                            Full-Stack Developer
+                        </p>
+
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 7,
+                                marginTop: 8,
+                                opacity: 0.58,
+                                fontFamily: fonts.sans,
+                                fontSize: 13,
+                                color: colors.ink,
+                            }}
+                        >
+                            <MapPin size={14} aria-hidden="true" />
+                            Alamo, Texas
+                        </div>
+                    </div>
+
+                    <div
                         style={{
-                            fontFamily: fonts.sans,
-                            fontWeight: 500,
-                            fontSize: 15,
-                            color: colors.ink,
-                            background: "transparent",
-                            border: "1.5px solid rgba(26,23,20,0.22)",
-                            borderRadius: 3,
-                            padding: "12px 24px",
-                            cursor: "pointer",
-                            opacity: 0.75,
-                            letterSpacing: "0.01em",
-                            transition: "opacity 0.15s",
-                        }}
-                        onMouseEnter={(e) => {
-                            e.currentTarget.style.opacity = "1";
-                        }}
-                        onMouseLeave={(e) => {
-                            e.currentTarget.style.opacity = "0.75";
+                            display: "flex",
+                            flexWrap: "wrap",
+                            gap: 10,
+                            marginBottom: 24,
                         }}
                     >
-                        Resume ↗
-                    </button>
-                </div>
+                        <button
+                            onClick={scrollToCarousel}
+                            style={{
+                                fontFamily: fonts.sans,
+                                fontWeight: 800,
+                                fontSize: 14,
+                                color: "white",
+                                background: colors.ink,
+                                border: `2px solid ${colors.ink}`,
+                                borderRadius: 3,
+                                padding: "12px 18px",
+                                cursor: "pointer",
+                                display: "inline-flex",
+                                alignItems: "center",
+                                gap: 8,
+                                boxShadow: "4px 4px 0 rgba(26,23,20,0.16)",
+                            }}
+                        >
+                            View Work
+                            <ArrowRight size={15} aria-hidden="true" />
+                        </button>
 
+                        <a
+                            href="/resume.pdf"
+                            target="_blank"
+                            rel="noreferrer"
+                            style={{
+                                fontFamily: fonts.sans,
+                                fontWeight: 700,
+                                fontSize: 14,
+                                color: colors.ink,
+                                textDecoration: "none",
+                                border: `2px solid ${colors.ink}`,
+                                borderRadius: 3,
+                                padding: "10px 16px",
+                                display: "inline-flex",
+                                alignItems: "center",
+                                gap: 8,
+                                background: "rgba(255,255,255,0.56)",
+                            }}
+                        >
+                            Résumé
+                            <ExternalLink size={14} aria-hidden="true" />
+                        </a>
+                    </div>
+
+                    <div
+                        style={{
+                            display: "grid",
+                            gap: 10,
+                            fontFamily: fonts.sans,
+                            fontSize: 14,
+                        }}
+                    >
+                        <a
+                            href="tel:+1956XXXXXXX"
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 10,
+                                color: colors.ink,
+                                textDecoration: "none",
+                            }}
+                        >
+                            <Phone size={15} aria-hidden="true" />
+                            (956) XXX-XXXX
+                        </a>
+
+                        <a
+                            href="mailto:your@email.com"
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 10,
+                                color: colors.ink,
+                                textDecoration: "none",
+                            }}
+                        >
+                            <Mail size={15} aria-hidden="true" />
+                            your@email.com
+                        </a>
+                    </div>
+                </aside>
+                {/* CENTER / editorial statement */}
                 <div
                     style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 10,
-                        marginTop: 52,
-                        opacity: 0.3,
+                        alignSelf: "center",
+                        maxWidth: 520,
                     }}
                 >
                     <div
                         style={{
-                            width: 1,
-                            height: 24,
-                            background: colors.ink,
+                            fontFamily: fonts.mono,
+                            fontSize: 10,
+                            letterSpacing: "0.18em",
+                            textTransform: "uppercase",
+                            color: colors.ink,
+                            opacity: 0.42,
+                            marginBottom: 22,
+                        }}
+                    >
+                        Developer · Commerce · Systems
+                    </div>
+
+                    <h2
+                        style={{
+                            margin: 0,
+                            fontFamily: fonts.display,
+                            fontStyle: "italic",
+                            fontSize: "clamp(46px, 5.4vw, 82px)",
+                            lineHeight: 0.94,
+                            letterSpacing: "-0.04em",
+                            color: colors.ink,
+                        }}
+                    >
+                        I build digital products end to end.
+                    </h2>
+
+                    <div
+                        aria-hidden="true"
+                        style={{
+                            width: 56,
+                            height: 4,
+                            background: colors.accent,
+                            margin: "28px 0 24px",
+                            transform: "rotate(-2deg)",
                         }}
                     />
 
-                    <span
+                    <p
                         style={{
-                            fontFamily: fonts.mono,
-                            fontSize: 10,
+                            margin: 0,
+                            fontFamily: fonts.sans,
+                            fontSize: "clamp(15px, 1.25vw, 18px)",
+                            lineHeight: 1.75,
                             color: colors.ink,
-                            letterSpacing: "0.14em",
+                            opacity: 0.67,
+                            maxWidth: 470,
                         }}
                     >
-                        SCROLL TO BROWSE WORK
-                    </span>
+                        I design and build full-stack web applications, commerce
+                        experiences, and custom systems — from database architecture
+                        and application logic through deployment and customer-facing
+                        interfaces.
+                    </p>
+                </div>
+
+                {/* RIGHT / skill groups */}
+                <div
+                    className={styles.skillsGrid}
+                    style={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                        gap: 18,
+                        alignItems: "start",
+                    }}
+                >
+                    {skillGroups.map((group, index) => {
+                        const Icon = group.icon;
+
+                        return (
+                            <section
+                                key={group.label}
+                                className={styles.skillCard}
+                                style={{
+                                    position: "relative",
+                                    padding: "22px 22px 21px",
+                                    border: `2px solid ${colors.ink}`,
+                                    borderRadius: 4,
+                                    background: "rgba(250, 247, 241, 0.88)",
+                                    boxShadow:
+                                        index % 2 === 0
+                                            ? "5px 5px 0 rgba(26,23,20,0.12)"
+                                            : "3px 5px 0 rgba(58,94,200,0.11)",
+                                    transform: `rotate(${group.rotate})`,
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                        gap: 9,
+                                        marginBottom: 16,
+                                    }}
+                                >
+                                    <div
+                                        style={{
+                                            width: 30,
+                                            height: 30,
+                                            display: "grid",
+                                            placeItems: "center",
+                                            border: `1.5px solid ${colors.ink}`,
+                                            borderRadius: 3,
+                                            background:
+                                                index % 2 === 0
+                                                    ? "rgba(205,185,130,0.22)"
+                                                    : "rgba(58,94,200,0.08)",
+                                        }}
+                                    >
+                                        <Icon size={16} aria-hidden="true" />
+                                    </div>
+
+                                    <h3
+                                        style={{
+                                            margin: 0,
+                                            fontFamily: fonts.mono,
+                                            fontSize: 10,
+                                            letterSpacing: "0.12em",
+                                            textTransform: "uppercase",
+                                            color: colors.ink,
+                                        }}
+                                    >
+                                        {group.label}
+                                    </h3>
+                                </div>
+
+                                <div
+                                    style={{
+                                        display: "grid",
+                                        gridTemplateColumns:
+                                            "repeat(2, minmax(0, 1fr))",
+                                        gap: "12px 18px",
+                                    }}
+                                >
+                                    {group.items.map((item) => {
+                                        const TechIcon = item.icon;
+
+                                        return (
+                                            <div
+                                                key={item.name}
+                                                style={{
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    gap: 9,
+                                                    minWidth: 0,
+                                                    fontFamily: fonts.sans,
+                                                    fontSize: 14,
+                                                    fontWeight: 700,
+                                                    lineHeight: 1.25,
+                                                    color: colors.ink,
+                                                }}
+                                            >
+                                                <TechIcon
+                                                    size={15}
+                                                    aria-hidden="true"
+                                                    style={{
+                                                        flex: "0 0 auto",
+                                                        opacity: 0.72,
+                                                        color: item.color,
+                                                    }}
+                                                />
+
+                                                <span>{item.name}</span>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </section>
+                        );
+                    })}
                 </div>
             </div>
 
-            {/* Hero right side: stats on desktop */}
-            {!tablet && (
-                <div
-                    style={{
-                        position: "absolute",
-                        right: "clamp(40px,5vw,80px)",
-                        top: "50%",
-                        transform: "translateY(-50%)",
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 28,
-                        zIndex: 1,
-                    }}
-                >
-                    {[
-                        ["8+", "Years\nbuilding"],
-                        ["40+", "Engineers\nserved"],
-                        ["3", "Products\nshipped"],
-                    ].map(([n, l]) => (
-                        <div key={n} style={{ textAlign: "right" }}>
-                            <div
-                                style={{
-                                    fontFamily: fonts.display,
-                                    fontStyle: "italic",
-                                    fontSize: 52,
-                                    color: colors.ink,
-                                    opacity: 0.12,
-                                    lineHeight: 1,
-                                }}
-                            >
-                                {n}
-                            </div>
+            {/*
+                TEMP DIAGNOSTIC:
+                No <style jsx> block.
 
-                            <div
-                                style={{
-                                    fontFamily: fonts.mono,
-                                    fontSize: 9,
-                                    color: colors.ink,
-                                    opacity: 0.28,
-                                    letterSpacing: "0.08em",
-                                    lineHeight: 1.5,
-                                }}
-                            >
-                                {l.replace("\n", "\n")}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </section>
+                If this compiles, the previous styled-jsx block is the culprit.
+                Responsive CSS is intentionally absent for this test.
+            */}
+        </section >
     );
 }

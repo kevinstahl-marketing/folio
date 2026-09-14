@@ -1,0 +1,174 @@
+.hero {
+    /* desktop appearance stays controlled by your current inline styles */
+}
+
+.heroGrid {
+    /* desktop appearance stays controlled by your current inline styles */
+}
+
+.identity {
+    /* desktop appearance stays controlled by your current inline styles */
+}
+
+.portraitWrapper {
+    /* desktop appearance stays controlled by your current inline styles */
+}
+
+.skillsGrid {
+    /* desktop appearance stays controlled by your current inline styles */
+}
+
+/* TABLET */
+@media (max-width: 1024px) {
+    .hero {
+        padding: 110px 44px 72px !important;
+        align-items: flex-start !important;
+    }
+
+    .heroGrid {
+        grid-template-columns: minmax(220px, 280px) minmax(0, 1fr) !important;
+        gap: 48px !important;
+        align-items: start !important;
+    }
+
+    .identity {
+        align-items: flex-start !important;
+    }
+
+    .portraitWrapper {
+        width: min(280px, 100%) !important;
+    }
+
+    .skillsGrid {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+    .hero {
+        padding: 88px 22px 56px !important;
+    }
+
+    .heroGrid {
+        grid-template-columns: 1fr !important;
+        gap: 42px !important;
+    }
+
+    .portraitWrapper {
+        width: min(270px, 82vw) !important;
+    }
+
+    .skillsGrid {
+        grid-column: auto;
+        grid-template-columns: 1fr !important;
+    }
+}
+
+.skillCard {
+    animation: folioFloat 8s ease-in-out infinite;
+    transition:
+        translate 220ms ease,
+        scale 220ms ease,
+        box-shadow 220ms ease,
+        border-color 220ms ease;
+    will-change: translate, scale;
+}
+
+.skillCard:hover {
+    translate: 0 -7px;
+    scale: 1.025;
+    box-shadow: 8px 10px 0 rgba(26, 23, 20, 0.14) !important;
+    z-index: 5;
+}
+
+.skillCard:nth-child(2) {
+    animation-delay: -1.6s;
+}
+
+.skillCard:nth-child(3) {
+    animation-delay: -3.2s;
+}
+
+.skillCard:nth-child(4) {
+    animation-delay: -4.8s;
+}
+
+.skillCard:nth-child(5) {
+    animation-delay: -6.4s;
+}
+
+.driftOne {
+    animation: folioDrift 32s ease-in-out infinite;
+}
+
+.driftTwo {
+    animation: folioDrift 38s ease-in-out infinite reverse;
+}
+
+.accentFloat {
+    animation: accentFloat 7s ease-in-out infinite;
+}
+
+@keyframes folioFloat {
+
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -4px;
+    }
+}
+
+@keyframes folioDrift {
+
+    0%,
+    100% {
+        translate: 0 0;
+        scale: 1;
+    }
+
+    35% {
+        translate: 18px -12px;
+        scale: 1.025;
+    }
+
+    70% {
+        translate: -10px 10px;
+        scale: 0.985;
+    }
+}
+
+.accentFloat {
+    animation: pinWiggle 8s ease-in-out infinite;
+    transform-origin: 50% 80%;
+}
+
+@keyframes pinWiggle {
+
+    0%,
+    100% {
+        rotate: 0deg;
+    }
+
+    50% {
+        rotate: 3deg;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .skillCard,
+    .driftOne,
+    .driftTwo,
+    .accentFloat {
+        animation: none !important;
+    }
+
+    .skillCard:hover {
+        translate: 0 -4px;
+    }
+}
