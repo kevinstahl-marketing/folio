@@ -172,3 +172,14 @@
         translate: 0 -4px;
     }
 }
+
+.techItem svg {
+    transition:
+        transform 180ms ease,
+        filter 180ms ease;
+}
+
+.techItem:hover svg {
+    transform: scale(1.22) rotate(-4deg);
+    filter: saturate(1.15);
+}

@@ -12,7 +12,11 @@ import {
     ArrowRight,
     ExternalLink,
     MapPin,
-    Pin
+    Pin,
+    FlaskConical,
+    FileSpreadsheet,
+    ServerCog,
+    Atom,
 } from "lucide-react";
 
 import {
@@ -21,8 +25,6 @@ import {
     SiJavascript,
     SiTypescript,
     SiHtml5,
-    SiCss3,
-
     SiLaravel,
     SiReact,
     SiNextdotjs,
@@ -61,59 +63,96 @@ const skillGroups = [
             { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
             { name: "SQL", icon: Database, color: "#336791" },
             { name: "HTML / CSS", icon: SiHtml5, color: "#E34F26" },
-            
+
         ],
     },
-{
-    label: "02 / Frameworks",
+    {
+        label: "02 / Frameworks",
         icon: Layers3,
-            rotate: "1deg",
-                items: [
-                    { name: "Laravel", icon: SiLaravel },
-                    { name: "React", icon: SiReact },
-                    { name: "Next.js", icon: SiNextdotjs },
-                    { name: "Remix", icon: SiRemix },
-                    { name: "Livewire", icon: Layers3 },
-                    { name: "Vite", icon: SiVite },
-                ],
+        rotate: "1deg",
+        items: [
+            { name: "Laravel", icon: SiLaravel, color: "#FF2D20" },
+            { name: "React", icon: SiReact, color: "#61DAFB" },
+            { name: "Next.js", icon: SiNextdotjs, color: "#000000" },
+            { name: "Remix", icon: SiRemix, color: "#000000" },
+            { name: "Livewire", icon: Layers3, color: "#FB70A9" },
+            { name: "Vite", icon: SiVite, color: "#646CFF" },
+        ],
     },
-{
-    label: "03 / Data + Infra",
+    {
+        label: "03 / Data + Infra",
         icon: Database,
-            rotate: "-0.6deg",
-                items: [
-                    { name: "MySQL", icon: SiMysql },
-                    { name: "MariaDB", icon: SiMariadb },
-                    { name: "Supabase", icon: SiSupabase },
-                    { name: "Redis", icon: SiRedis },
-                    { name: "Prisma", icon: SiPrisma },
-                    { name: "Linux", icon: SiLinux },
-                ],
+        rotate: "-0.6deg",
+        items: [
+            { name: "MySQL", icon: SiMysql, color: "#4479A1" },
+            { name: "MariaDB", icon: SiMariadb, color: "#003545" },
+            { name: "Supabase", icon: SiSupabase, color: "#3FCF8E" },
+            { name: "Redis", icon: SiRedis, color: "#DC382D" },
+            { name: "Prisma", icon: SiPrisma, color: "#2D3748" },
+            { name: "Linux", icon: SiLinux, color: "#FCC624" },
+        ],
     },
-{
-    label: "04 / Platforms",
+    {
+        label: "04 / Platforms",
         icon: ShoppingBag,
-            rotate: "1.3deg",
-                items: [
-                    { name: "Shopify", icon: SiShopify },
-                    { name: "Drupal", icon: SiDrupal },
-                    { name: "WordPress", icon: SiWordpress },
-                    { name: "Squarespace", icon: SiSquarespace },
-                    { name: "Vercel", icon: SiVercel },
-                    { name: "Cloudways", icon: Database },
-                ],
+        rotate: "1.3deg",
+        items: [
+            { name: "Shopify", icon: SiShopify, color: "#7AB55C" },
+            { name: "Drupal", icon: SiDrupal, color: "#0678BE" },
+            { name: "WordPress", icon: SiWordpress, color: "#21759B" },
+            { name: "Squarespace", icon: SiSquarespace, color: "#000000" },
+            { name: "Vercel", icon: SiVercel, color: "#000000" },
+            { name: "Cloudways", icon: Database, color: "#2C39BD" },
+        ],
     },
-{
-    label: "05 / Commerce + Ads",
+    {
+        label: "05 / Commerce + Ads",
         icon: Megaphone,
-            rotate: "-0.9deg",
-                items: [
-                    { name: "Shopify POS", icon: SiShopify },
-                    { name: "TikTok Shop", icon: SiTiktok },
-                    { name: "Meta Commerce", icon: SiMeta },
-                    { name: "Google Ads", icon: SiGoogleads },
-                    { name: "Meta Ads", icon: SiMeta },
-                ],
+        rotate: "-0.9deg",
+        items: [
+            { name: "Shopify POS", icon: SiShopify, color: "#7AB55C" },
+            { name: "TikTok Shop", icon: SiTiktok, color: "#000000" },
+            { name: "Meta Commerce", icon: SiMeta, color: "#0866FF" },
+            { name: "Google Ads", icon: SiGoogleads, color: "#4285F4" },
+            { name: "Meta Ads", icon: SiMeta, color: "#0866FF" },
+        ],
+    },
+    {
+        label: "06 / Scientific + Systems",
+        icon: Atom,
+        rotate: "0.7deg",
+        items: [
+            {
+                name: "VBA",
+                icon: FileSpreadsheet,
+                color: "#217346",
+            },
+            {
+                name: "GC-MS",
+                icon: Atom,
+                color: "#7255A3",
+            },
+            {
+                name: "ChemStation",
+                icon: FlaskConical,
+                color: "#D58B28",
+            },
+            {
+                name: "Access SQL",
+                icon: Database,
+                color: "#A4373A",
+            },
+            {
+                name: "Excel Automation",
+                icon: FileSpreadsheet,
+                color: "#217346",
+            },
+            {
+                name: "LIMS",
+                icon: ServerCog,
+                color: "#3A5EC8",
+            },
+        ],
     },
 ];
 
@@ -400,18 +439,19 @@ export default function HeroSection() {
                 {/* CENTER / editorial statement */}
                 <div
                     style={{
-                        alignSelf: "center",
                         maxWidth: 520,
                     }}
                 >
                     <div
                         style={{
                             fontFamily: fonts.mono,
-                            fontSize: 10,
+                            fontSize: 12,
+                            fontWeight: 700,
+                            lineHeight: 1.2,
                             letterSpacing: "0.18em",
                             textTransform: "uppercase",
                             color: colors.ink,
-                            opacity: 0.42,
+                            opacity: 0.8,
                             marginBottom: 22,
                         }}
                     >
@@ -463,6 +503,7 @@ export default function HeroSection() {
 
                 {/* RIGHT / skill groups */}
                 <div
+
                     className={styles.skillsGrid}
                     style={{
                         display: "grid",
@@ -520,9 +561,11 @@ export default function HeroSection() {
                                         style={{
                                             margin: 0,
                                             fontFamily: fonts.mono,
-                                            fontSize: 10,
-                                            letterSpacing: "0.12em",
+                                            fontSize: 12,
+                                            fontWeight: 800,
+                                            letterSpacing: "0.09em",
                                             textTransform: "uppercase",
+                                            lineHeight: 1.2,
                                             color: colors.ink,
                                         }}
                                     >
@@ -535,7 +578,7 @@ export default function HeroSection() {
                                         display: "grid",
                                         gridTemplateColumns:
                                             "repeat(2, minmax(0, 1fr))",
-                                        gap: "12px 18px",
+                                        gap: "14px 20px",
                                     }}
                                 >
                                     {group.items.map((item) => {
@@ -543,6 +586,7 @@ export default function HeroSection() {
 
                                         return (
                                             <div
+                                                className={styles.techItem}
                                                 key={item.name}
                                                 style={{
                                                     display: "flex",
@@ -550,18 +594,17 @@ export default function HeroSection() {
                                                     gap: 9,
                                                     minWidth: 0,
                                                     fontFamily: fonts.sans,
-                                                    fontSize: 14,
+                                                    fontSize: 15,
                                                     fontWeight: 700,
                                                     lineHeight: 1.25,
                                                     color: colors.ink,
                                                 }}
                                             >
                                                 <TechIcon
-                                                    size={15}
+                                                    size={20}
                                                     aria-hidden="true"
                                                     style={{
                                                         flex: "0 0 auto",
-                                                        opacity: 0.72,
                                                         color: item.color,
                                                     }}
                                                 />
