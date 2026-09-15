@@ -17,7 +17,8 @@ export default function ProjectCarousel() {
   const [titleDirection, setTitleDirection] = useState<"left" | "right">("left");
   const railRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-
+  const [buttonPulse, setButtonPulse] =
+    useState<"left" | "right" | null>(null);
   const [activeProject, setActiveProject] = useState(1);
 
 
@@ -92,24 +93,30 @@ export default function ProjectCarousel() {
     rail.scrollLeft = target;
   }, [cardW]);
   const previousProject = () => {
-    setTitleDirection("right");
+  setTitleDirection("right");
+  setButtonPulse("left");
 
-    goToProject(
-      activeProject === 0
-        ? projects.length - 1
-        : activeProject - 1
-    );
-  };
+  window.setTimeout(() => setButtonPulse(null), 240);
+
+  goToProject(
+    activeProject === 0
+      ? projects.length - 1
+      : activeProject - 1
+  );
+};
 
   const nextProject = () => {
-    setTitleDirection("left");
+  setTitleDirection("left");
+  setButtonPulse("right");
 
-    goToProject(
-      activeProject === projects.length - 1
-        ? 0
-        : activeProject + 1
-    );
-  };
+  window.setTimeout(() => setButtonPulse(null), 240);
+
+  goToProject(
+    activeProject === projects.length - 1
+      ? 0
+      : activeProject + 1
+  );
+};
 
   const selectProject = (index: number) => {
     if (index === activeProject) return;
@@ -133,9 +140,50 @@ export default function ProjectCarousel() {
         zIndex: 4,
       }}
     >
+
+      <div
+  style={{
+    padding: mobile
+      ? "8px 22px 0"
+      : "8px clamp(32px, 5vw, 80px) 0",
+    display: "flex",
+    alignItems: "flex-end",
+    gap: mobile ? 12 : 20,
+  }}
+>
+
+
+  <div
+    style={{
+      paddingBottom: 2,
+      fontFamily: fonts.mono,
+      fontSize: mobile ? 10 : 12,
+      fontWeight: 800,
+      lineHeight: 1.25,
+      letterSpacing: "0.08em",
+      textTransform: "uppercase",
+      color: colors.ink,
+    }}
+  >
+    PROJECTS
+    <br />
+    <span style={{ opacity: 0.35 }}>// SHIPPED</span>
+  </div>
+
+  <div
+    style={{
+      height: 2,
+      flex: 1,
+      marginBottom: 5,
+      background: colors.ink,
+      opacity: 0.16,
+    }}
+  />
+
+</div>
       <div
         style={{
-          padding: "28px clamp(24px,4vw,72px) 4px",
+          padding: "28px clamp(24px,4vw,72px) 0px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -187,7 +235,7 @@ export default function ProjectCarousel() {
             return (
               <button
                 key={`${project.id}-${position}`}
-               onClick={() => selectProject(index)}
+                onClick={() => selectProject(index)}
                 style={{
                   position: "relative",
                   minWidth: 0,
@@ -274,8 +322,7 @@ export default function ProjectCarousel() {
             alignItems: "center",
             gap: mobile ? 20 : 32,
 
-            padding: `${mobile ? 32 : 50}px 0 ${mobile ? 48 : 72}px`,
-
+            padding: `${mobile ? 22 : 30}px 0 ${mobile ? 42 : 56}px`,
             overflowX: "scroll",
             overflowY: "visible",
 
@@ -317,7 +364,7 @@ export default function ProjectCarousel() {
             }}
           />
         </div>
-         </div>
+      </div>
 
       <style>{`
         @keyframes projectTitlesLeft {
