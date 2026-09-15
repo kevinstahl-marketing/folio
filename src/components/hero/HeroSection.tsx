@@ -169,7 +169,6 @@ export default function HeroSection() {
             style={{
                 position: "relative",
                 minHeight: "100svh",
-                overflow: "hidden",
                 padding: "72px clamp(44px, 5vw, 88px)",
                 display: "flex",
                 alignItems: "center",

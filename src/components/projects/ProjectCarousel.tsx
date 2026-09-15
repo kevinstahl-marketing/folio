@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 import { useWindowWidth } from "@/hooks/useWindowWidth";
 import { colors, fonts } from "@/lib/theme";
@@ -14,38 +14,12 @@ import PianoTeacherLinkPreview from "@/components/previews/PianoTeacherLinkPrevi
 export default function ProjectCarousel() {
   const w = useWindowWidth();
   const mobile = w < 640;
-
+  const [titleDirection, setTitleDirection] = useState<"left" | "right">("left");
   const railRef = useRef<HTMLDivElement>(null);
-  const dragging = useRef(false);
-  const startX = useRef(0);
-  const startSL = useRef(0);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const onMouseDown = (e: React.MouseEvent) => {
-    dragging.current = true;
-    startX.current = e.pageX;
-    startSL.current = railRef.current?.scrollLeft ?? 0;
+  const [activeProject, setActiveProject] = useState(1);
 
-    if (railRef.current) {
-      railRef.current.style.cursor = "grabbing";
-    }
-  };
-
-  const onMouseMove = (e: React.MouseEvent) => {
-    if (!dragging.current || !railRef.current) return;
-
-    e.preventDefault();
-
-    railRef.current.scrollLeft =
-      startSL.current - (e.pageX - startX.current) * 1.2;
-  };
-
-  const onMouseUp = () => {
-    dragging.current = false;
-
-    if (railRef.current) {
-      railRef.current.style.cursor = "grab";
-    }
-  };
 
   const cardW = mobile
     ? Math.min(w - 48, 320)
@@ -80,104 +54,300 @@ export default function ProjectCarousel() {
     },
   ];
 
+  const prevIndex =
+    (activeProject - 1 + projects.length) % projects.length;
+
+  const nextIndex =
+    (activeProject + 1) % projects.length;
+  const goToProject = (index: number) => {
+    const rail = railRef.current;
+    const card = cardRefs.current[index];
+
+    if (!rail || !card) return;
+
+    const target =
+      card.offsetLeft -
+      rail.clientWidth / 2 +
+      card.clientWidth / 2;
+
+    rail.scrollTo({
+      left: target,
+      behavior: "smooth",
+    });
+
+    setActiveProject(index);
+  };
+
+  useEffect(() => {
+    const rail = railRef.current;
+    const card = cardRefs.current[1];
+
+    if (!rail || !card) return;
+
+    const target =
+      card.offsetLeft -
+      rail.clientWidth / 2 +
+      card.clientWidth / 2;
+
+    rail.scrollLeft = target;
+  }, [cardW]);
+  const previousProject = () => {
+    setTitleDirection("right");
+
+    goToProject(
+      activeProject === 0
+        ? projects.length - 1
+        : activeProject - 1
+    );
+  };
+
+  const nextProject = () => {
+    setTitleDirection("left");
+
+    goToProject(
+      activeProject === projects.length - 1
+        ? 0
+        : activeProject + 1
+    );
+  };
+
+  const selectProject = (index: number) => {
+    if (index === activeProject) return;
+
+    // Since the visible titles are only previous/current/next,
+    // this correctly handles the wraparound too.
+    if (index === nextIndex) {
+      setTitleDirection("left");
+    } else {
+      setTitleDirection("right");
+    }
+
+    goToProject(index);
+  };
+
   return (
     <section
       id="carousel"
       style={{
-        paddingTop: mobile ? 40 : 60,
+        position: "relative",
+        zIndex: 4,
       }}
     >
       <div
         style={{
-          padding: "0 clamp(24px,4vw,72px)",
-          marginBottom: 40,
+          padding: "28px clamp(24px,4vw,72px) 4px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "clamp(18px, 3vw, 42px)",
         }}
       >
-        <div
+        <button
+          onClick={previousProject}
+          aria-label="Previous project"
           style={{
-            fontFamily: fonts.mono,
-            fontSize: 10,
+            width: 44,
+            height: 44,
+            flexShrink: 0,
+            display: "grid",
+            placeItems: "center",
+            border: `1.5px solid ${colors.ink}`,
+            borderRadius: "50%",
+            background: "transparent",
             color: colors.ink,
-            opacity: 0.35,
-            letterSpacing: "0.18em",
-            marginBottom: 12,
+            fontSize: 20,
+            cursor: "pointer",
           }}
         >
-          SELECTED WORK
-        </div>
+          ←
+        </button>
 
         <div
+          key={activeProject}
           style={{
-            display: "flex",
-            alignItems: "flex-end",
-            gap: 16,
+            display: "grid",
+            gridTemplateColumns: mobile
+              ? "1fr 1.3fr 1fr"
+              : "minmax(140px, 1fr) minmax(180px, 1.3fr) minmax(140px, 1fr)",
+            alignItems: "center",
+            gap: mobile ? 12 : 28,
+            width: "min(720px, 100%)",
+
+            animation:
+              titleDirection === "left"
+                ? "projectTitlesLeft 320ms cubic-bezier(0.22, 1, 0.36, 1)"
+                : "projectTitlesRight 320ms cubic-bezier(0.22, 1, 0.36, 1)",
           }}
         >
-          <h2
-            style={{
-              fontFamily: fonts.display,
-              fontStyle: "italic",
-              fontSize: "clamp(36px,4vw,58px)",
-              color: colors.ink,
-              letterSpacing: "-0.02em",
-              lineHeight: 0.9,
-              margin: 0,
-            }}
-          >
-            Projects
-          </h2>
 
-          <span
-            style={{
-              fontFamily: fonts.sans,
-              fontSize: 14,
-              color: colors.ink,
-              opacity: 0.4,
-              paddingBottom: 6,
-            }}
-          >
-            — drag to browse, click to explore
-          </span>
+          {[prevIndex, activeProject, nextIndex].map((index, position) => {
+            const project = projects[index];
+            const active = position === 1;
+
+            return (
+              <button
+                key={`${project.id}-${position}`}
+               onClick={() => selectProject(index)}
+                style={{
+                  position: "relative",
+                  minWidth: 0,
+                  border: 0,
+                  padding: "12px 4px",
+                  background: "transparent",
+                  cursor: "pointer",
+
+                  fontFamily: fonts.mono,
+                  fontSize: mobile ? 9 : 12,
+                  fontWeight: active ? 800 : 600,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+
+                  color: colors.ink,
+                  opacity: active ? 1 : 0.35,
+
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+
+                  transition:
+                    "opacity 180ms ease, transform 180ms ease",
+                  transform: active
+                    ? "translateY(-2px)"
+                    : "translateY(0)",
+                }}
+              >
+
+                {project.title}
+                {active && (
+                  <span
+                    style={{
+                      position: "absolute",
+                      left: "50%",
+                      bottom: 3,
+                      width: "70%",
+                      maxWidth: 120,
+                      height: 3,
+                      background: project.accent,
+                      transform: "translateX(-50%)",
+                    }}
+
+
+                  />
+
+                )}
+
+
+              </button>
+
+            );
+          })}
+
+
         </div>
+        <button
+          onClick={nextProject}
+          aria-label="Next project"
+          style={{
+            width: 44,
+            height: 44,
+            flexShrink: 0,
+            display: "grid",
+            placeItems: "center",
+            border: `1.5px solid ${colors.ink}`,
+            borderRadius: "50%",
+            background: colors.ink,
+            color: "#f5f2ee",
+            fontSize: 20,
+            cursor: "pointer",
+            boxShadow: "3px 3px 0 rgba(26,23,20,0.12)",
+          }}
+        >
+          →
+        </button>
       </div>
 
       <div style={{ overflow: "hidden", width: "100%" }}>
         <div
           ref={railRef}
-          onMouseDown={onMouseDown}
-          onMouseMove={onMouseMove}
-          onMouseUp={onMouseUp}
-          onMouseLeave={onMouseUp}
           style={{
             display: "flex",
+            alignItems: "center",
             gap: mobile ? 20 : 32,
-            padding: `${
-              mobile ? 40 : 64
-            }px clamp(24px,4vw,72px) ${mobile ? 48 : 72}px`,
+
+            padding: `${mobile ? 32 : 50}px 0 ${mobile ? 48 : 72}px`,
+
             overflowX: "scroll",
             overflowY: "visible",
-            cursor: "grab",
+
             userSelect: "none",
             scrollbarWidth: "none",
+
+            scrollBehavior: "smooth",
           }}
         >
-          {projects.map((project) => (
-            <FloatingCard
-              key={project.id}
-              {...project}
-              cardW={cardW}
-              cardH={cardH}
-            />
-          ))}
-
+          {/* LEFT CENTERING SPACE */}
           <div
             style={{
-              width: mobile ? 8 : 48,
-              flexShrink: 0,
+              flex: `0 0 calc(50vw - ${cardW / 2}px)`,
+            }}
+          />
+
+          {projects.map((project, index) => (
+            <div
+              key={project.id}
+              ref={(el) => {
+                cardRefs.current[index] = el;
+              }}
+              style={{
+                flexShrink: 0,
+              }}
+            >
+              <FloatingCard
+                {...project}
+                cardW={cardW}
+                cardH={cardH}
+              />
+            </div>
+          ))}
+
+          {/* RIGHT CENTERING SPACE */}
+          <div
+            style={{
+              flex: `0 0 calc(50vw - ${cardW / 2}px)`,
             }}
           />
         </div>
-      </div>
+         </div>
+
+      <style>{`
+        @keyframes projectTitlesLeft {
+          from {
+            opacity: 0;
+            transform: translateX(22px);
+            filter: blur(3px);
+          }
+
+          to {
+            opacity: 1;
+            transform: translateX(0);
+            filter: blur(0);
+          }
+        }
+
+        @keyframes projectTitlesRight {
+          from {
+            opacity: 0;
+            transform: translateX(-22px);
+            filter: blur(3px);
+          }
+
+          to {
+            opacity: 1;
+            transform: translateX(0);
+            filter: blur(0);
+          }
+        }
+      `}</style>
     </section>
   );
 }
