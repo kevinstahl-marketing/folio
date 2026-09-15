@@ -1,0 +1,549 @@
+/* =========================================================
+   PROJECT CAROUSEL
+   ========================================================= */
+
+.carousel {
+    position: relative;
+    z-index: 4;
+
+    width: 100%;
+    min-width: 0;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   SECTION MARKER
+   ========================================================= */
+
+.sectionMarker {
+    display: flex;
+    align-items: flex-end;
+    gap: 18px;
+
+    padding: 10px clamp(28px, 5vw, 80px) 0;
+}
+
+.sectionLabel {
+    flex: 0 0 auto;
+
+    font-family: var(--font-mono, monospace);
+    font-size: 12px;
+    font-weight: 900;
+    line-height: 1.1;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.sectionLabel span {
+    display: block;
+
+    margin-top: 4px;
+
+    opacity: 0.32;
+}
+
+.sectionRule {
+    flex: 1;
+
+    height: 2px;
+    margin-bottom: 3px;
+
+    background: currentColor;
+    opacity: 0.15;
+}
+
+.sectionCode {
+    flex: 0 0 auto;
+
+    margin-bottom: -1px;
+
+    font-family: var(--font-mono, monospace);
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.08em;
+
+    opacity: 0.25;
+}
+
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+
+.projectNav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: clamp(16px, 3vw, 42px);
+
+    padding:
+        clamp(14px, 2vw, 26px)
+        clamp(20px, 4vw, 72px)
+        0;
+}
+
+
+/* =========================================================
+   ARROWS
+   ========================================================= */
+
+.arrowButton {
+    width: 46px;
+    height: 46px;
+
+    flex: 0 0 46px;
+
+    display: grid;
+    place-items: center;
+
+    padding: 0;
+
+    border: 2px solid currentColor;
+    border-radius: 0;
+
+    font: inherit;
+    font-size: 21px;
+
+    cursor: pointer;
+
+    transition:
+        transform 150ms ease,
+        box-shadow 150ms ease,
+        background-color 150ms ease;
+}
+
+.arrowButton span {
+    display: block;
+
+    transition: transform 180ms
+        cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+
+/* LEFT */
+
+.arrowPrevious {
+    background: rgba(255, 255, 255, 0.22);
+
+    box-shadow:
+        -4px 4px 0 rgba(26, 23, 20, 0.13);
+}
+
+.arrowPrevious:hover {
+    transform: translate(-2px, -2px);
+
+    box-shadow:
+        -6px 6px 0 rgba(26, 23, 20, 0.16);
+}
+
+.arrowPrevious:hover span {
+    transform: translateX(-3px);
+}
+
+.arrowPrevious:active {
+    transform: translate(-4px, 3px) scale(0.94);
+
+    box-shadow:
+        -1px 1px 0 rgba(26, 23, 20, 0.14);
+}
+
+
+/* RIGHT */
+
+.arrowNext {
+    color: #f5f2ee;
+    background: #1a1714;
+
+    box-shadow:
+        4px 4px 0 rgba(26, 23, 20, 0.16);
+}
+
+.arrowNext:hover {
+    transform: translate(2px, -2px);
+
+    box-shadow:
+        6px 6px 0 rgba(26, 23, 20, 0.18);
+}
+
+.arrowNext:hover span {
+    transform: translateX(3px);
+}
+
+.arrowNext:active {
+    transform: translate(4px, 3px) scale(0.94);
+
+    box-shadow:
+        1px 1px 0 rgba(26, 23, 20, 0.12);
+}
+
+
+/* =========================================================
+   PROJECT TITLES
+   ========================================================= */
+
+.projectTitles {
+    display: grid;
+
+    grid-template-columns:
+        minmax(120px, 1fr)
+        minmax(170px, 1.3fr)
+        minmax(120px, 1fr);
+
+    align-items: center;
+
+    gap: clamp(12px, 2vw, 28px);
+
+    width: min(720px, 100%);
+    min-width: 0;
+}
+
+.titlesFromRight {
+    animation:
+        projectTitlesLeft
+        320ms
+        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.titlesFromLeft {
+    animation:
+        projectTitlesRight
+        320ms
+        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.projectTitle {
+    position: relative;
+
+    min-width: 0;
+
+    padding: 12px 4px;
+
+    border: 0;
+    background: transparent;
+
+    font-family: var(--font-mono, monospace);
+    font-size: 12px;
+    font-weight: 650;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    opacity: 0.3;
+
+    cursor: pointer;
+
+    transition:
+        opacity 160ms ease,
+        transform 160ms ease;
+}
+
+.projectTitle:hover {
+    opacity: 0.65;
+    transform: translateY(-2px);
+}
+
+.projectTitleActive {
+    font-weight: 900;
+
+    opacity: 1;
+
+    transform: translateY(-2px);
+}
+
+.projectTitleActive:hover {
+    opacity: 1;
+}
+
+
+.activeUnderline {
+    position: absolute;
+
+    left: 50%;
+    bottom: 2px;
+
+    width: 70%;
+    max-width: 120px;
+    height: 3px;
+
+    transform: translateX(-50%);
+
+    animation:
+        projectUnderlineIn
+        360ms
+        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   CARD RAIL
+   ========================================================= */
+
+.railViewport {
+    width: 100%;
+
+    overflow: hidden;
+}
+
+.rail {
+    display: flex;
+    align-items: center;
+
+    gap: clamp(20px, 2.5vw, 32px);
+
+    padding:
+        clamp(24px, 3vw, 34px)
+        0
+        clamp(44px, 5vw, 64px);
+
+    overflow-x: auto;
+    overflow-y: visible;
+
+    scrollbar-width: none;
+
+    scroll-behavior: smooth;
+
+    user-select: none;
+
+    overscroll-behavior-x: contain;
+}
+
+.rail::-webkit-scrollbar {
+    display: none;
+}
+
+.railSpacer {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.cardSlot {
+    flex: 0 0 auto;
+
+    transition:
+        transform 220ms ease,
+        opacity 220ms ease;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .sectionMarker {
+        gap: 12px;
+
+        padding:
+            8px
+            24px
+            0;
+    }
+
+    .sectionCode {
+        display: none;
+    }
+
+    .projectNav {
+        gap: 14px;
+
+        padding:
+            16px
+            18px
+            0;
+    }
+
+    .arrowButton {
+        width: 40px;
+        height: 40px;
+
+        flex-basis: 40px;
+
+        font-size: 18px;
+    }
+
+    .projectTitles {
+        grid-template-columns:
+            minmax(0, 0.8fr)
+            minmax(0, 1.35fr)
+            minmax(0, 0.8fr);
+
+        gap: 10px;
+    }
+
+    .projectTitle {
+        font-size: 10px;
+        letter-spacing: 0.05em;
+    }
+
+    .rail {
+        gap: 22px;
+
+        padding:
+            24px
+            0
+            48px;
+    }
+}
+
+
+/* =========================================================
+   PHONE
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+    .sectionMarker {
+        padding:
+            6px
+            20px
+            0;
+    }
+
+    .sectionLabel {
+        font-size: 10px;
+    }
+
+    .projectNav {
+        gap: 8px;
+
+        padding:
+            14px
+            12px
+            0;
+    }
+
+    .arrowButton {
+        width: 36px;
+        height: 36px;
+
+        flex-basis: 36px;
+
+        border-width: 1.5px;
+
+        font-size: 17px;
+    }
+
+    .projectTitles {
+        grid-template-columns:
+            minmax(0, 0.7fr)
+            minmax(0, 1.5fr)
+            minmax(0, 0.7fr);
+
+        gap: 5px;
+    }
+
+    .projectTitle {
+        padding:
+            10px
+            2px;
+
+        font-size: 8px;
+
+        letter-spacing: 0.03em;
+    }
+
+    .activeUnderline {
+        width: 76%;
+        height: 2px;
+    }
+
+    .rail {
+        gap: 20px;
+
+        padding:
+            20px
+            0
+            42px;
+    }
+}
+
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+.arrowButton:focus-visible,
+.projectTitle:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+@keyframes projectTitlesLeft {
+
+    from {
+        opacity: 0;
+        transform: translateX(22px);
+        filter: blur(3px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes projectTitlesRight {
+
+    from {
+        opacity: 0;
+        transform: translateX(-22px);
+        filter: blur(3px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes projectUnderlineIn {
+
+    from {
+        opacity: 0;
+        scale: 0 1;
+    }
+
+    to {
+        opacity: 1;
+        scale: 1 1;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .titlesFromRight,
+    .titlesFromLeft,
+    .activeUnderline {
+        animation: none;
+    }
+
+    .arrowButton,
+    .arrowButton span,
+    .projectTitle,
+    .cardSlot {
+        transition: none;
+    }
+}
