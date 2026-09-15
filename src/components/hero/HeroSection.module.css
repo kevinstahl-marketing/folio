@@ -1,80 +1,124 @@
+/* =========================================================
+   HERO — BASE / DESKTOP
+   Inline TSX styles still control most visual appearance.
+   This file controls layout, responsiveness and motion.
+   ========================================================= */
+
 .hero {
-    /* desktop appearance stays controlled by your current inline styles */
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
 }
 
 .heroGrid {
-    /* desktop appearance stays controlled by your current inline styles */
+    width: 100%;
+    min-width: 0;
+
+    grid-template-columns:
+        minmax(220px, 280px)
+        minmax(300px, 440px)
+        minmax(520px, 1fr);
+
+    gap: clamp(28px, 3vw, 48px) !important;
+    align-items: center;
+}
+.identity,
+.portraitWrapper,
+.skillsGrid,
+.skillCard,
+.techItem {
+    min-width: 0;
 }
 
-.identity {
-    /* desktop appearance stays controlled by your current inline styles */
-}
+
+/* =========================================================
+   PORTRAIT
+   ========================================================= */
 
 .portraitWrapper {
-    /* desktop appearance stays controlled by your current inline styles */
+    width: 100%;
+    max-width: 300px;
 }
+
+
+/* =========================================================
+   SKILLS
+   ========================================================= */
 
 .skillsGrid {
-    /* desktop appearance stays controlled by your current inline styles */
-}
+    width: 100%;
+    min-width: 0;
 
-/* TABLET */
-@media (max-width: 1024px) {
-    .hero {
-        padding: 110px 44px 72px !important;
-        align-items: flex-start !important;
-    }
-
-    .heroGrid {
-        grid-template-columns: minmax(220px, 280px) minmax(0, 1fr) !important;
-        gap: 48px !important;
-        align-items: start !important;
-    }
-
-    .identity {
-        align-items: flex-start !important;
-    }
-
-    .portraitWrapper {
-        width: min(280px, 100%) !important;
-    }
-
-    .skillsGrid {
-        grid-column: 1 / -1;
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
-}
-
-/* MOBILE */
-@media (max-width: 640px) {
-    .hero {
-        padding: 88px 22px 56px !important;
-    }
-
-    .heroGrid {
-        grid-template-columns: 1fr !important;
-        gap: 42px !important;
-    }
-
-    .portraitWrapper {
-        width: min(270px, 82vw) !important;
-    }
-
-    .skillsGrid {
-        grid-column: auto;
-        grid-template-columns: 1fr !important;
-    }
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .skillCard {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+
+    box-sizing: border-box;
+    overflow: visible;
+
     animation: folioFloat 8s ease-in-out infinite;
     transition:
         translate 220ms ease,
         scale 220ms ease,
         box-shadow 220ms ease,
         border-color 220ms ease;
+
     will-change: translate, scale;
 }
+
+.skillCard>* {
+    min-width: 0;
+    max-width: 100%;
+}
+
+
+/* =========================================================
+   TECH ITEMS
+   Internal card layout stays 2-column.
+   Icons keep their size; labels wrap normally.
+   ========================================================= */
+
+.techGrid {
+    width: 100%;
+    min-width: 0;
+}
+
+.techItem {
+    min-width: 0;
+    width: 100%;
+}
+
+.techItem svg {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+
+    transition:
+        transform 180ms ease,
+        filter 180ms ease;
+}
+
+.techItem span {
+    min-width: 0;
+
+    /* normal word wrapping only */
+    overflow-wrap: normal;
+    word-break: normal;
+}
+
+.techItem:hover svg {
+    transform: scale(1.22) rotate(-4deg);
+    filter: saturate(1.15);
+}
+
+/* =========================================================
+   CARD MOTION
+   ========================================================= */
 
 .skillCard:hover {
     translate: 0 -7px;
@@ -99,6 +143,11 @@
     animation-delay: -6.4s;
 }
 
+
+/* =========================================================
+   ATMOSPHERE
+   ========================================================= */
+
 .driftOne {
     animation: folioDrift 32s ease-in-out infinite;
 }
@@ -108,8 +157,126 @@
 }
 
 .accentFloat {
-    animation: accentFloat 7s ease-in-out infinite;
+    animation: pinWiggle 8s ease-in-out infinite;
+    transform-origin: 50% 80%;
 }
+
+
+/* =========================================================
+   MEDIUM DESKTOP / LAPTOP
+   Portrait + identity on first row.
+   Skills get their OWN full-width row.
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .hero {
+        padding:
+            clamp(72px, 8vw, 100px) clamp(32px, 5vw, 60px) 64px !important;
+
+        align-items: flex-start !important;
+    }
+
+    .heroGrid {
+        grid-template-columns:
+            minmax(210px, 260px) minmax(0, 1fr);
+
+        gap: 48px !important;
+        align-items: start !important;
+    }
+
+    .portraitWrapper {
+        width: 100%;
+        max-width: 260px;
+    }
+
+    .identity {
+        align-items: flex-start !important;
+    }
+
+    /*
+     * Critical:
+     * skills span BOTH columns instead of being squeezed
+     * into the right-hand column.
+     */
+    .skillsGrid {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   TABLET
+   One-column editorial layout.
+   Skills remain two-up.
+   ========================================================= */
+
+@media (max-width: 820px) {
+
+    .hero {
+        padding: 72px 32px 56px !important;
+    }
+
+    .heroGrid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 40px !important;
+    }
+
+    .portraitWrapper {
+        width: min(240px, 100%);
+        max-width: 240px;
+    }
+
+    .skillsGrid {
+        grid-column: auto;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        width: 100%;
+    }
+}
+
+
+/* =========================================================
+   PHONE
+   Everything stacks.
+   ========================================================= */
+
+@media (max-width: 680px) {
+
+    .hero {
+        padding: 54px 20px 44px !important;
+    }
+
+    .heroGrid {
+        gap: 32px !important;
+    }
+
+    .portraitWrapper {
+        width: min(220px, 72vw);
+    }
+
+    .skillsGrid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .skillCard {
+        min-width: 0;
+        max-width: 100%;
+        width: 100%;
+
+        box-sizing: border-box;
+        overflow: visible;
+    }
+}
+
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
 
 @keyframes folioFloat {
 
@@ -142,11 +309,6 @@
     }
 }
 
-.accentFloat {
-    animation: pinWiggle 8s ease-in-out infinite;
-    transform-origin: 50% 80%;
-}
-
 @keyframes pinWiggle {
 
     0%,
@@ -158,6 +320,11 @@
         rotate: 3deg;
     }
 }
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -173,13 +340,82 @@
     }
 }
 
-.techItem svg {
+/* =========================================================
+   INTERACTIONS
+   ========================================================= */
+
+.primaryButton,
+.secondaryButton {
     transition:
-        transform 180ms ease,
-        filter 180ms ease;
+        translate 160ms ease,
+        scale 160ms ease,
+        box-shadow 160ms ease,
+        background-color 160ms ease;
 }
 
-.techItem:hover svg {
-    transform: scale(1.22) rotate(-4deg);
-    filter: saturate(1.15);
+.primaryButton:hover {
+    translate: -2px -3px;
+    scale: 1.02;
+
+    box-shadow:
+        7px 7px 0 rgba(26, 23, 20, 0.16) !important;
+}
+
+.primaryButton:active {
+    translate: 3px 3px;
+    scale: 0.98;
+
+    box-shadow:
+        1px 1px 0 rgba(26, 23, 20, 0.16) !important;
+}
+
+
+.secondaryButton:hover {
+    translate: -2px -3px;
+
+    background: #fff !important;
+
+    box-shadow:
+        6px 6px 0 rgba(26, 23, 20, 0.14);
+}
+
+.secondaryButton:active {
+    translate: 2px 2px;
+    scale: 0.98;
+
+    box-shadow:
+        1px 1px 0 rgba(26, 23, 20, 0.12);
+}
+
+
+/* phone / email */
+
+.contactLink {
+    width: fit-content;
+
+    transition:
+        translate 160ms ease,
+        opacity 160ms ease;
+}
+
+.contactLink:hover {
+    translate: 5px 0;
+}
+
+.contactLink:hover svg {
+    transform: rotate(-8deg) scale(1.12);
+}
+
+.contactLink svg {
+    transition: transform 160ms ease;
+}
+
+
+/* keyboard navigation */
+
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible,
+.contactLink:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 4px;
 }

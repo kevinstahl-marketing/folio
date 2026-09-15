@@ -221,10 +221,7 @@ export default function HeroSection() {
                     maxWidth: 1500,
                     margin: "0 auto",
                     display: "grid",
-                    gridTemplateColumns:
-                        "minmax(240px, 0.85fr) minmax(320px, 1fr) minmax(440px, 1.45fr)",
-                    gap: "clamp(36px, 5vw, 78px)",
-                    alignItems: "center",
+                    gap: "clamp(32px, 4vw, 64px)", alignItems: "center",
                 }}
             >
                 {/* LEFT / identity */}
@@ -353,6 +350,7 @@ export default function HeroSection() {
                         }}
                     >
                         <button
+                            className={styles.primaryButton}
                             onClick={scrollToCarousel}
                             style={{
                                 fontFamily: fonts.sans,
@@ -375,6 +373,7 @@ export default function HeroSection() {
                         </button>
 
                         <a
+                            className={styles.secondaryButton}
                             href="/resume.pdf"
                             target="_blank"
                             rel="noreferrer"
@@ -406,7 +405,7 @@ export default function HeroSection() {
                             fontSize: 14,
                         }}
                     >
-                        <a
+                        <a className={styles.contactLink}
                             href="tel:+1956XXXXXXX"
                             style={{
                                 display: "flex",
@@ -416,11 +415,11 @@ export default function HeroSection() {
                                 textDecoration: "none",
                             }}
                         >
-                            <Phone size={15} aria-hidden="true" />
+                            <Phone size={15} aria-hidden="true" className={styles.contactLink} />
                             (956) XXX-XXXX
                         </a>
 
-                        <a
+                        <a className={styles.contactLink}
                             href="mailto:your@email.com"
                             style={{
                                 display: "flex",
@@ -506,7 +505,6 @@ export default function HeroSection() {
                     className={styles.skillsGrid}
                     style={{
                         display: "grid",
-                        gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
                         gap: 18,
                         alignItems: "start",
                     }}
@@ -520,7 +518,7 @@ export default function HeroSection() {
                                 className={styles.skillCard}
                                 style={{
                                     position: "relative",
-                                    padding: "22px 22px 21px",
+                                    padding: "24px 26px 23px",
                                     border: `2px solid ${colors.ink}`,
                                     borderRadius: 4,
                                     background: "rgba(250, 247, 241, 0.88)",
@@ -573,11 +571,12 @@ export default function HeroSection() {
                                 </div>
 
                                 <div
+                                    className={styles.techGrid}
                                     style={{
                                         display: "grid",
                                         gridTemplateColumns:
                                             "repeat(2, minmax(0, 1fr))",
-                                        gap: "14px 20px",
+                                        gap: "15px 24px",
                                     }}
                                 >
                                     {group.items.map((item) => {
