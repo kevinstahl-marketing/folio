@@ -128,7 +128,10 @@ export const projects: Project[] = [
       },
     ],
 
-    links: {},
+    links: {
+      live: "https://example.com",
+      github: "https://github.com/username/repo",
+    },
 
     role: "Lead Developer",
     roleDetail: "Full build · brand to launch",

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+import { createPortal } from "react-dom";
 import type { Project } from "@/data/projects";
 import StackBadge from "./StackBadge";
 
@@ -45,7 +45,7 @@ export default function ProjectModal({
 
     if (!project) return null;
 
-    return (
+    return createPortal(
         <div
             className={styles.backdrop}
             onMouseDown={(event) => {
@@ -181,29 +181,31 @@ export default function ProjectModal({
                         )}
                     </div>
 
-                    <div className={styles.actions}>
-                        {project.links?.github && (
-                            <a
-                                href={project.links.github}
-                                target="_blank"
-                                rel="noreferrer"
-                                className={styles.secondaryAction}
-                            >
-                                GITHUB ↗
-                            </a>
-                        )}
+                    {(project.links?.github || project.links?.live) && (
+                        <div className={styles.actions}>
+                            {project.links?.github && (
+                                <a
+                                    href={project.links.github}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className={styles.secondaryAction}
+                                >
+                                    GITHUB ↗
+                                </a>
+                            )}
 
-                        {project.links?.live && (
-                            <a
-                                href={project.links.live}
-                                target="_blank"
-                                rel="noreferrer"
-                                className={styles.primaryAction}
-                            >
-                                VISIT SITE ↗
-                            </a>
-                        )}
-                    </div>
+                            {project.links?.live && (
+                                <a
+                                    href={project.links.live}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className={styles.primaryAction}
+                                >
+                                    VISIT SITE ↗
+                                </a>
+                            )}
+                        </div>
+                    )}
                 </footer>
 
                 {expanded && project.extra && (
@@ -216,6 +218,7 @@ export default function ProjectModal({
                     </div>
                 )}
             </article>
-        </div>
+        </div>,
+        document.body
     );
 }
