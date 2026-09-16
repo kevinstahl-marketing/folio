@@ -1,6 +1,7 @@
 "use client";
 
 import { colors, fonts } from "@/lib/theme";
+
 import {
     Code2,
     Database,
@@ -30,14 +31,12 @@ import {
     SiNextdotjs,
     SiRemix,
     SiVite,
-
     SiMysql,
     SiMariadb,
     SiSupabase,
     SiRedis,
     SiPrisma,
     SiLinux,
-
     SiShopify,
     SiDrupal,
     SiWordpress,
@@ -50,20 +49,23 @@ import {
 
 import styles from "./HeroSection.module.css";
 
+
+/* =========================================================
+   SKILL DATA
+   ========================================================= */
+
 const skillGroups = [
     {
         label: "01 / Languages",
         icon: Code2,
         rotate: "-1.2deg",
         items: [
-
             { name: "PHP", icon: SiPhp, color: "#777BB4" },
             { name: "Python", icon: SiPython, color: "#3776AB" },
             { name: "JavaScript", icon: SiJavascript, color: "#F7DF1E" },
             { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
             { name: "SQL", icon: Database, color: "#336791" },
             { name: "HTML / CSS", icon: SiHtml5, color: "#E34F26" },
-
         ],
     },
     {
@@ -156,6 +158,11 @@ const skillGroups = [
     },
 ];
 
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
 export default function HeroSection() {
     const scrollToCarousel = () => {
         document
@@ -174,7 +181,10 @@ export default function HeroSection() {
                 alignItems: "center",
             }}
         >
-            {/* Atmospheric background */}
+            {/* =====================================================
+                ATMOSPHERE
+                ===================================================== */}
+
             <div
                 className={styles.driftOne}
                 aria-hidden="true"
@@ -194,8 +204,8 @@ export default function HeroSection() {
             />
 
             <div
-                aria-hidden="true"
                 className={styles.driftTwo}
+                aria-hidden="true"
                 style={{
                     position: "absolute",
                     right: "-12%",
@@ -211,20 +221,26 @@ export default function HeroSection() {
                 }}
             />
 
-            {/* Main hero layout */}
+
+            {/* =====================================================
+                MAIN HERO GRID
+                Grid columns / gaps are controlled by CSS.
+                ===================================================== */}
+
             <div
                 className={styles.heroGrid}
                 style={{
                     position: "relative",
                     zIndex: 2,
-                    width: "100%",
                     maxWidth: 1500,
                     margin: "0 auto",
                     display: "grid",
-                    gap: "clamp(32px, 4vw, 64px)", alignItems: "center",
                 }}
             >
-                {/* LEFT / identity */}
+                {/* =================================================
+                    LEFT — IDENTITY
+                    ================================================= */}
+
                 <aside
                     className={styles.identity}
                     style={{
@@ -233,15 +249,17 @@ export default function HeroSection() {
                         alignItems: "stretch",
                     }}
                 >
+                    {/* Portrait */}
+
                     <div
                         className={styles.portraitWrapper}
                         style={{
                             position: "relative",
-                            width: "100%",
-                            maxWidth: 300,
                             marginBottom: 28,
                         }}
                     >
+                        {/* Offset shadow */}
+
                         <div
                             aria-hidden="true"
                             style={{
@@ -251,6 +269,8 @@ export default function HeroSection() {
                                 borderRadius: 4,
                             }}
                         />
+
+                        {/* Portrait image */}
 
                         <div
                             style={{
@@ -274,6 +294,8 @@ export default function HeroSection() {
                             />
                         </div>
 
+                        {/* Floating pin */}
+
                         <div
                             className={styles.accentFloat}
                             aria-hidden="true"
@@ -283,7 +305,8 @@ export default function HeroSection() {
                                 right: 120,
                                 zIndex: 5,
                                 color: colors.accent,
-                                filter: "drop-shadow(2px 3px 0 rgba(26,23,20,0.18))",
+                                filter:
+                                    "drop-shadow(2px 3px 0 rgba(26,23,20,0.18))",
                                 transform: "rotate(18deg)",
                             }}
                         >
@@ -294,6 +317,9 @@ export default function HeroSection() {
                             />
                         </div>
                     </div>
+
+
+                    {/* Identity text */}
 
                     <div style={{ marginBottom: 26 }}>
                         <h1
@@ -341,6 +367,9 @@ export default function HeroSection() {
                         </div>
                     </div>
 
+
+                    {/* Actions */}
+
                     <div
                         style={{
                             display: "flex",
@@ -365,7 +394,8 @@ export default function HeroSection() {
                                 display: "inline-flex",
                                 alignItems: "center",
                                 gap: 8,
-                                boxShadow: "4px 4px 0 rgba(26,23,20,0.16)",
+                                boxShadow:
+                                    "4px 4px 0 rgba(26,23,20,0.16)",
                             }}
                         >
                             View Work
@@ -397,6 +427,9 @@ export default function HeroSection() {
                         </a>
                     </div>
 
+
+                    {/* Contact */}
+
                     <div
                         style={{
                             display: "grid",
@@ -405,7 +438,8 @@ export default function HeroSection() {
                             fontSize: 14,
                         }}
                     >
-                        <a className={styles.contactLink}
+                        <a
+                            className={styles.contactLink}
                             href="tel:+1956XXXXXXX"
                             style={{
                                 display: "flex",
@@ -415,11 +449,12 @@ export default function HeroSection() {
                                 textDecoration: "none",
                             }}
                         >
-                            <Phone size={15} aria-hidden="true" className={styles.contactLink} />
+                            <Phone size={15} aria-hidden="true" />
                             (956) XXX-XXXX
                         </a>
 
-                        <a className={styles.contactLink}
+                        <a
+                            className={styles.contactLink}
                             href="mailto:your@email.com"
                             style={{
                                 display: "flex",
@@ -434,9 +469,15 @@ export default function HeroSection() {
                         </a>
                     </div>
                 </aside>
-                {/* CENTER / editorial statement */}
+
+
+                {/* =================================================
+                    CENTER — EDITORIAL STATEMENT
+                    ================================================= */}
+
                 <div
                     style={{
+                        minWidth: 0,
                         maxWidth: 520,
                     }}
                 >
@@ -492,25 +533,22 @@ export default function HeroSection() {
                             maxWidth: 470,
                         }}
                     >
-                        I design and build full-stack web applications, commerce
-                        experiences, and custom systems — from database architecture
-                        and application logic through deployment and customer-facing
-                        interfaces.
+                        I design and build full-stack web applications,
+                        commerce experiences, and custom systems — from
+                        database architecture and application logic through
+                        deployment and customer-facing interfaces.
                     </p>
                 </div>
 
-                {/* RIGHT / skill groups */}
-                <div
 
-                    className={styles.skillsGrid}
-                    style={{
-                        display: "grid",
-                        gap: 18,
-                        alignItems: "start",
-                    }}
-                >
+                {/* =================================================
+                    RIGHT — SKILLS
+                    All grid sizing now belongs to CSS.
+                    ================================================= */}
+
+                <div className={styles.skillsGrid}>
                     {skillGroups.map((group, index) => {
-                        const Icon = group.icon;
+                        const GroupIcon = group.icon;
 
                         return (
                             <section
@@ -518,10 +556,10 @@ export default function HeroSection() {
                                 className={styles.skillCard}
                                 style={{
                                     position: "relative",
-                                    padding: "24px 26px 23px",
                                     border: `2px solid ${colors.ink}`,
                                     borderRadius: 4,
-                                    background: "rgba(250, 247, 241, 0.88)",
+                                    background:
+                                        "rgba(250, 247, 241, 0.88)",
                                     boxShadow:
                                         index % 2 === 0
                                             ? "5px 5px 0 rgba(26,23,20,0.12)"
@@ -529,18 +567,22 @@ export default function HeroSection() {
                                     transform: `rotate(${group.rotate})`,
                                 }}
                             >
+                                {/* Card heading */}
+
                                 <div
                                     style={{
                                         display: "flex",
                                         alignItems: "center",
                                         gap: 9,
                                         marginBottom: 16,
+                                        minWidth: 0,
                                     }}
                                 >
                                     <div
                                         style={{
                                             width: 30,
                                             height: 30,
+                                            flex: "0 0 30px",
                                             display: "grid",
                                             placeItems: "center",
                                             border: `1.5px solid ${colors.ink}`,
@@ -551,11 +593,15 @@ export default function HeroSection() {
                                                     : "rgba(58,94,200,0.08)",
                                         }}
                                     >
-                                        <Icon size={16} aria-hidden="true" />
+                                        <GroupIcon
+                                            size={16}
+                                            aria-hidden="true"
+                                        />
                                     </div>
 
                                     <h3
                                         style={{
+                                            minWidth: 0,
                                             margin: 0,
                                             fontFamily: fonts.mono,
                                             fontSize: 12,
@@ -570,15 +616,10 @@ export default function HeroSection() {
                                     </h3>
                                 </div>
 
-                                <div
-                                    className={styles.techGrid}
-                                    style={{
-                                        display: "grid",
-                                        gridTemplateColumns:
-                                            "repeat(2, minmax(0, 1fr))",
-                                        gap: "15px 24px",
-                                    }}
-                                >
+
+                                {/* Technologies */}
+
+                                <div className={styles.techGrid}>
                                     {group.items.map((item) => {
                                         const TechIcon = item.icon;
 
@@ -589,8 +630,6 @@ export default function HeroSection() {
                                                 style={{
                                                     display: "flex",
                                                     alignItems: "center",
-                                                    gap: 9,
-                                                    minWidth: 0,
                                                     fontFamily: fonts.sans,
                                                     fontSize: 15,
                                                     fontWeight: 700,
@@ -602,7 +641,6 @@ export default function HeroSection() {
                                                     size={20}
                                                     aria-hidden="true"
                                                     style={{
-                                                        flex: "0 0 auto",
                                                         color: item.color,
                                                     }}
                                                 />
@@ -617,14 +655,6 @@ export default function HeroSection() {
                     })}
                 </div>
             </div>
-
-            {/*
-                TEMP DIAGNOSTIC:
-                No <style jsx> block.
-
-                If this compiles, the previous styled-jsx block is the culprit.
-                Responsive CSS is intentionally absent for this test.
-            */}
-        </section >
+        </section>
     );
 }
