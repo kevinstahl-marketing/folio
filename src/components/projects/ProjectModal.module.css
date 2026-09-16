@@ -10,6 +10,7 @@
 
     background: rgba(26, 23, 20, 0.46);
     backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .modal {
@@ -34,9 +35,8 @@
         18px 18px 0 rgba(26, 23, 20, 0.16);
 }
 
-
 /* =========================================================
-   TOP
+   TOP BAR
    ========================================================= */
 
 .topBar {
@@ -56,7 +56,6 @@
     font-family: var(--font-mono, monospace);
     font-size: 10px;
     font-weight: 900;
-
     letter-spacing: 0.1em;
 }
 
@@ -74,7 +73,6 @@
 
     display: grid;
     place-items: center;
-
     flex: 0 0 auto;
 
     padding: 0;
@@ -100,15 +98,12 @@
 
 .closeButton:hover {
     transform: translate(-2px, -2px);
-
     box-shadow: 6px 6px 0 var(--project-accent);
 }
 
 .closeButton:active {
     transform: translate(4px, 4px);
-
     box-shadow: 0 0 0 var(--project-accent);
-
     transition-duration: 55ms;
 }
 
@@ -127,9 +122,11 @@
     font-size: clamp(42px, 6vw, 78px);
     font-style: italic;
     font-weight: 700;
-    line-height: 0.92;
 
+    line-height: 0.92;
     letter-spacing: -0.035em;
+
+    overflow-wrap: anywhere;
 }
 
 .sub {
@@ -138,7 +135,6 @@
     font-family: var(--font-mono, monospace);
     font-size: 11px;
     font-weight: 800;
-
     letter-spacing: 0.1em;
 
     opacity: 0.5;
@@ -152,7 +148,6 @@
 
     background: var(--project-accent);
 }
-
 
 /* =========================================================
    HERO
@@ -168,80 +163,6 @@
     gap: clamp(32px, 5vw, 68px);
 
     align-items: start;
-}
-
-.mediaStage {
-    position: relative;
-
-    min-width: 0;
-
-    padding-bottom: 46px;
-}
-
-.mediaPlaceholder {
-    aspect-ratio: 16 / 10;
-
-    display: grid;
-    place-items: center;
-    align-content: center;
-
-    gap: 6px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,0.72),
-            rgba(255,255,255,0.3)
-        );
-
-    border: 2px solid var(--ink);
-
-    box-shadow: 8px 8px 0 var(--project-accent);
-
-    transform: rotate(-1deg);
-
-    font-family: var(--font-mono, monospace);
-    font-size: 12px;
-    font-weight: 900;
-
-    letter-spacing: 0.08em;
-    animation: primaryFloat 6s ease-in-out infinite;
-
-transition:
-    translate 220ms ease,
-    transform 220ms ease,
-    box-shadow 220ms ease;
-}
-
-.mediaPlaceholder small {
-    font-size: 9px;
-    opacity: 0.35;
-}
-
-.secondaryPlaceholder {
-    position: absolute;
-
-    left: 7%;
-    bottom: 2px;
-
-    width: 30%;
-    aspect-ratio: 16 / 10;
-
-    display: grid;
-    place-items: center;
-
-    color: var(--project-accent);
-    background: #fffdf9;
-
-    border: 2px solid var(--ink);
-
-    box-shadow: 5px 5px 0 rgba(26, 23, 20, 0.14);
-
-    transform: rotate(3deg);
-
-    font-family: var(--font-mono, monospace);
-    font-size: 11px;
-    font-weight: 900;
 }
 
 .overview {
@@ -301,8 +222,9 @@ transition:
     flex-wrap: wrap;
 
     gap: 7px;
-}
 
+    min-width: 0;
+}
 
 /* =========================================================
    WHAT I BUILT
@@ -336,12 +258,12 @@ transition:
     font-family: var(--font-mono, monospace);
     font-size: 9px;
     font-weight: 900;
-
     letter-spacing: 0.12em;
 }
 
 .bulletGrid {
     display: grid;
+
     grid-template-columns: repeat(2, minmax(0, 1fr));
 
     gap: 12px 28px;
@@ -366,14 +288,16 @@ transition:
 }
 
 .bullet p {
+    min-width: 0;
     margin: 0;
 
     font-size: 14px;
     line-height: 1.55;
 
+    overflow-wrap: anywhere;
+
     opacity: 0.78;
 }
-
 
 /* =========================================================
    FOOTER
@@ -412,11 +336,16 @@ transition:
     font-family: var(--font-mono, monospace);
     font-size: 10px;
     font-weight: 900;
-
     letter-spacing: 0.06em;
+
     text-decoration: none;
 
     cursor: pointer;
+
+    transition:
+        transform 130ms ease,
+        box-shadow 130ms ease,
+        background 130ms ease;
 }
 
 .detailButton,
@@ -426,204 +355,10 @@ transition:
 }
 
 .primaryAction {
-    color: white;
+    color: #ffffff;
     background: var(--ink);
 
     box-shadow: 4px 4px 0 var(--project-accent);
-}
-
-.expanded {
-    margin-top: 18px;
-
-    padding: 20px;
-
-    background: rgba(255, 255, 255, 0.5);
-
-    border-left: 4px solid var(--project-accent);
-}
-
-.expanded p {
-    margin: 0;
-
-    max-width: 80ch;
-
-    font-size: 14px;
-    line-height: 1.7;
-
-    opacity: 0.72;
-}
-
-
-/* =========================================================
-   TABLET / MOBILE
-   ========================================================= */
-
-@media (max-width: 760px) {
-
-    .backdrop {
-        padding: 10px;
-    }
-
-    .modal {
-        width: 100%;
-        max-height: calc(100dvh - 20px);
-
-        padding: 22px 20px;
-
-        box-shadow: 5px 5px 0 var(--project-accent);
-    }
-
-    .hero {
-        grid-template-columns: minmax(0, 1fr);
-
-        gap: 26px;
-    }
-
-    .mediaStage {
-        padding-bottom: 36px;
-    }
-
-    .secondaryPlaceholder {
-        width: 38%;
-    }
-
-    .bulletGrid {
-        grid-template-columns: minmax(0, 1fr);
-    }
-
-    .footer {
-        align-items: stretch;
-        flex-direction: column;
-    }
-
-    .actions {
-        width: 100%;
-    }
-
-    .primaryAction,
-    .secondaryAction {
-        flex: 1;
-    }
-}
-
-
-/* =========================================================
-   SMALL PHONE
-   ========================================================= */
-
-@media (max-width: 420px) {
-
-    .title {
-        font-size: 40px;
-    }
-
-    .projectCode span:last-child {
-        display: none;
-    }
-
-    .secondaryPlaceholder {
-        width: 42%;
-    }
-
-    .stack {
-        gap: 6px;
-    }
-}
-
-
-/* =========================================================
-   ACCESSIBILITY
-   ========================================================= */
-
-.closeButton:focus-visible,
-.detailButton:focus-visible,
-.primaryAction:focus-visible,
-.secondaryAction:focus-visible {
-    outline: 3px solid var(--project-accent);
-    outline-offset: 3px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-
-    .mediaPlaceholder,
-    .secondaryPlaceholder {
-        animation: none;
-    }
-
-    .closeButton,
-    .detailButton,
-    .primaryAction,
-    .secondaryAction,
-    .mediaPlaceholder,
-    .secondaryPlaceholder {
-        transition: none;
-    }
-}
-
-/* =========================================================
-   MEDIA MOTION
-   ========================================================= */
-
-@keyframes primaryFloat {
-    0%, 100% {
-        translate: 0 0;
-    }
-
-    50% {
-        translate: 0 -6px;
-    }
-}
-
-@keyframes secondaryFloat {
-    0%, 100% {
-        translate: 0 0;
-    }
-
-    50% {
-        translate: 3px -9px;
-    }
-}
-
-.secondaryPlaceholder {
-    /* existing styles */
-
-    transform: rotate(3deg);
-
-    animation: secondaryFloat 5.2s ease-in-out infinite;
-    animation-delay: -1.7s;
-
-    transition:
-        translate 220ms ease,
-        transform 220ms ease,
-        box-shadow 220ms ease;
-}
-
-.mediaStage:hover .mediaPlaceholder {
-    translate: 0 -7px;
-    transform: rotate(-1.6deg);
-
-    box-shadow:
-        11px 13px 0 var(--project-accent),
-        16px 20px 28px rgba(26, 23, 20, 0.09);
-}
-
-.mediaStage:hover .secondaryPlaceholder {
-    translate: -4px -11px;
-    transform: rotate(4.2deg);
-
-    box-shadow:
-        7px 9px 0 rgba(26, 23, 20, 0.15);
-}
-
-.detailButton,
-.primaryAction,
-.secondaryAction {
-    /* all your existing stuff */
-
-    transition:
-        transform 130ms ease,
-        box-shadow 130ms ease,
-        background 130ms ease;
 }
 
 .detailButton:hover,
@@ -654,4 +389,158 @@ transition:
     box-shadow: 0 0 0 var(--project-accent);
 
     transition-duration: 55ms;
+}
+
+/* =========================================================
+   EXPANDED DETAILS
+   ========================================================= */
+
+.expanded {
+    margin-top: 18px;
+
+    padding: 20px;
+
+    background: rgba(255, 255, 255, 0.5);
+
+    border-left: 4px solid var(--project-accent);
+}
+
+.expanded p {
+    margin: 0;
+
+    max-width: 80ch;
+
+    font-size: 14px;
+    line-height: 1.7;
+
+    opacity: 0.72;
+}
+
+/* =========================================================
+   MEDIUM / TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+    .hero {
+        grid-template-columns:
+            minmax(0, 1.15fr)
+            minmax(230px, 0.85fr);
+
+        gap: 32px;
+    }
+
+    .summary {
+        font-size: 16px;
+    }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+    .backdrop {
+        padding: 10px;
+    }
+
+    .modal {
+        width: 100%;
+        max-height: calc(100dvh - 20px);
+
+        padding: 22px 20px;
+
+        box-shadow: 5px 5px 0 var(--project-accent);
+    }
+
+    .hero {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 28px;
+    }
+
+    .overview {
+        gap: 22px;
+    }
+
+    .summary {
+        max-width: none;
+    }
+
+    .bulletGrid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .actions {
+        width: 100%;
+    }
+
+    .primaryAction,
+    .secondaryAction {
+        flex: 1 1 0;
+    }
+}
+
+/* =========================================================
+   SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 420px) {
+    .backdrop {
+        padding: 6px;
+    }
+
+    .modal {
+        max-height: calc(100dvh - 12px);
+        padding: 19px 16px;
+    }
+
+    .topBar {
+        margin-bottom: 22px;
+    }
+
+    .title {
+        font-size: 40px;
+    }
+
+    .projectCode span:last-child {
+        display: none;
+    }
+
+    .stack {
+        gap: 6px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .primaryAction,
+    .secondaryAction {
+        width: 100%;
+    }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+.closeButton:focus-visible,
+.detailButton:focus-visible,
+.primaryAction:focus-visible,
+.secondaryAction:focus-visible {
+    outline: 3px solid var(--project-accent);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .closeButton,
+    .detailButton,
+    .primaryAction,
+    .secondaryAction {
+        transition: none;
+    }
 }

@@ -1,0 +1,341 @@
+.stage {
+    position: relative;
+    min-width: 0;
+
+    padding:
+        10px
+        clamp(18px, 3vw, 34px)
+        58px
+        8px;
+}
+
+
+/* =========================================================
+   MEDIA BASE
+   ========================================================= */
+
+.media {
+    position: relative;
+
+    background: #fffdf9;
+    border: 2px solid #1a1714;
+
+    /*
+     * Project-specific rotation + scale live here.
+     * Floating uses the separate "translate" property,
+     * so the two don't fight each other.
+     */
+    transform:
+        rotate(var(--media-rotation))
+        scale(var(--media-scale));
+
+    transform-origin: center;
+
+    translate: 0 0;
+
+    will-change: transform, translate;
+
+    transition:
+        transform 220ms ease,
+        box-shadow 220ms ease;
+}
+
+
+/* =========================================================
+   PRIMARY MEDIA
+   ========================================================= */
+
+.primaryMedia {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+
+    z-index: 1;
+
+    box-shadow:
+        9px 9px 0 var(--media-accent);
+
+    animation:
+        primaryFloat
+        5.5s
+        ease-in-out
+        infinite;
+}
+
+
+/* =========================================================
+   SECONDARY MEDIA
+   ========================================================= */
+
+.secondaryMedia {
+    position: absolute;
+
+    z-index: 3;
+
+    right: 0;
+    bottom: 8px;
+
+    width: clamp(130px, 34%, 210px);
+    aspect-ratio: 16 / 10;
+
+    box-shadow:
+        6px 6px 0 rgba(26, 23, 20, 0.16);
+
+    animation:
+        secondaryFloat
+        4.7s
+        ease-in-out
+        infinite;
+
+    animation-delay: -1.9s;
+}
+
+
+/* =========================================================
+   IMAGE
+   ========================================================= */
+
+.imageViewport {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: #eeeae4;
+}
+
+.imageViewport img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    user-select: none;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   BROWSER FRAME
+   ========================================================= */
+
+.browser {
+    display: flex;
+    flex-direction: column;
+}
+
+.browser .imageViewport {
+    flex: 1;
+    min-height: 0;
+}
+
+.browserBar {
+    height: 22px;
+
+    flex: 0 0 auto;
+
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 0 8px;
+
+    background: #fffdf9;
+
+    border-bottom: 1.5px solid #1a1714;
+}
+
+.browserBar span {
+    width: 6px;
+    height: 6px;
+
+    border: 1px solid #1a1714;
+    border-radius: 50%;
+
+    opacity: 0.6;
+}
+
+
+/* =========================================================
+   PHONE FRAME
+   ========================================================= */
+
+.phone {
+    aspect-ratio: 9 / 18;
+
+    padding: 7px;
+
+    border-radius: 14px;
+}
+
+.phone .imageViewport {
+    border-radius: 8px;
+}
+
+
+/* =========================================================
+   PLAIN FRAME
+   ========================================================= */
+
+.plain .imageViewport {
+    height: 100%;
+}
+
+
+/* =========================================================
+   FLOATING
+   ========================================================= */
+
+@keyframes primaryFloat {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -8px;
+    }
+}
+
+@keyframes secondaryFloat {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -13px;
+    }
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.stage:hover .primaryMedia {
+    transform:
+        rotate(calc(var(--media-rotation) - 0.7deg))
+        scale(calc(var(--media-scale) * 1.015));
+
+    box-shadow:
+        12px 14px 0 var(--media-accent),
+        18px 22px 30px rgba(26, 23, 20, 0.09);
+}
+
+.stage:hover .secondaryMedia {
+    transform:
+        rotate(calc(var(--media-rotation) + 1deg))
+        scale(calc(var(--media-scale) * 1.025));
+
+    box-shadow:
+        8px 10px 0 rgba(26, 23, 20, 0.16);
+}
+
+
+/* =========================================================
+   PLACEHOLDERS
+   ========================================================= */
+
+.primaryPlaceholder {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+
+    display: grid;
+    place-items: center;
+    align-content: center;
+
+    gap: 6px;
+
+    background: rgba(255, 255, 255, 0.48);
+
+    border: 2px solid #1a1714;
+
+    box-shadow:
+        9px 9px 0 var(--media-accent);
+
+    transform: rotate(-1deg);
+
+    font-family: var(--font-mono, monospace);
+    font-size: 12px;
+    font-weight: 900;
+
+    letter-spacing: 0.08em;
+}
+
+.primaryPlaceholder small {
+    font-size: 9px;
+    opacity: 0.35;
+}
+
+.secondaryPlaceholder {
+    position: absolute;
+
+    right: 0;
+    bottom: 8px;
+
+    width: 30%;
+    aspect-ratio: 16 / 10;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--media-accent);
+    background: #fffdf9;
+
+    border: 2px solid #1a1714;
+
+    box-shadow:
+        5px 5px 0 rgba(26, 23, 20, 0.14);
+
+    transform: rotate(3deg);
+
+    font-family: var(--font-mono, monospace);
+    font-size: 11px;
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 760px) {
+    .stage {
+        padding:
+            8px
+            24px
+            48px
+            5px;
+    }
+
+    .secondaryMedia,
+    .secondaryPlaceholder {
+        width: 36%;
+    }
+}
+
+@media (max-width: 420px) {
+    .stage {
+        padding-right: 18px;
+        padding-bottom: 42px;
+    }
+
+    .secondaryMedia,
+    .secondaryPlaceholder {
+        width: 40%;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    .primaryMedia,
+    .secondaryMedia {
+        animation: none;
+        transition: none;
+    }
+}

@@ -103,11 +103,32 @@ export const projects: Project[] = [
     title: "La Concheria",
     sub: "SHOPIFY E-COMMERCE · SEAFOOD BRAND",
     summary:
-  "A custom Shopify commerce experience built around La Concheria's brand, products, and day-to-day e-commerce operations.",
+      "A custom Shopify commerce experience built around La Concheria's brand, products, and day-to-day e-commerce operations.",
 
-media: [],
+    media: [
+      {
+        src: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1400&q=80",
+        alt: "Temporary ecommerce preview",
+        slot: "primary",
+        frame: "browser",
+        fit: "cover",
+        position: "center",
+        rotation: -1.5,
+        scale: 0.98,
+      },
+      {
+        src: "https://images.unsplash.com/photo-1556742111-a301076d9d18?auto=format&fit=crop&w=900&q=80",
+        alt: "Temporary mobile commerce preview",
+        slot: "secondary",
+        frame: "browser",
+        fit: "cover",
+        position: "center",
+        rotation: 3,
+        scale: 1,
+      },
+    ],
 
-links: {},
+    links: {},
 
     role: "Lead Developer",
     roleDetail: "Full build · brand to launch",
@@ -145,12 +166,32 @@ links: {},
 
     title: "PianoTeacher​Link",
     sub: "DRUPAL MARKETPLACE · MUSIC EDUCATION",
-summary:
-  "A Drupal marketplace prototype designed to connect piano students with instructors through structured profiles and discovery.",
+    summary:
+      "A Drupal marketplace prototype designed to connect piano students with instructors through structured profiles and discovery.",
 
-media: [],
+    media: [
+      {
+        src: "/images/projects/ezcalcs/main.png",
+        alt: "EZCalcs engineering calculator platform",
+        slot: "primary",
+        frame: "browser",
+        fit: "cover",
+        position: "top",
+        rotation: -1.4,
+      },
+      {
+        src: "/images/projects/ezcalcs/calculator.png",
+        alt: "EZCalcs calculator interface",
+        slot: "secondary",
+        frame: "browser",
+        fit: "cover",
+        position: "top",
+        rotation: 3.2,
+        scale: 0.96,
+      },
+    ],
 
-links: {},
+    links: {},
     role: "Full-Stack Developer",
     roleDetail: "Architecture + full build",
 

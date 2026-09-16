@@ -19,8 +19,9 @@ const projectPreviews = {
 };
 export default function ProjectCarousel() {
   const w = useWindowWidth();
-  const [testModalOpen, setTestModalOpen] = useState(true);
-  const mobile = w < 640;
+  const [openProjectId, setOpenProjectId] = useState<
+    (typeof projects)[number]["id"] | null
+  >(null); const mobile = w < 640;
 
   const railRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -41,6 +42,8 @@ export default function ProjectCarousel() {
   const nextIndex =
     (activeProject + 1) % projects.length;
 
+  const openProject =
+    projects.find((project) => project.id === openProjectId) ?? null;
   const goToProject = (index: number) => {
     const rail = railRef.current;
     const card = cardRefs.current[index];
@@ -86,6 +89,16 @@ export default function ProjectCarousel() {
     setTitleDirection(index === nextIndex ? "left" : "right");
 
     goToProject(index);
+  };
+
+  const handleCardClick = (index: number) => {
+    if (index !== activeProject) {
+      setTitleDirection(index > activeProject ? "left" : "right");
+      goToProject(index);
+      return;
+    }
+
+    setOpenProjectId(projects[index].id);
   };
 
   useEffect(() => {
@@ -215,22 +228,33 @@ export default function ProjectCarousel() {
               }}
               className={styles.cardSlot}
             >
-              <FloatingCard
-                id={project.id}
-                title={project.title}
-                sub={project.sub}
-                accent={project.accent}
-                rotation={
-                  project.id === "ezc"
-                    ? -2.8
-                    : project.id === "lca"
-                      ? 2.2
-                      : -1.8
+              <button
+                type="button"
+                className={styles.cardButton}
+                onClick={() => handleCardClick(index)}
+                aria-label={
+                  index === activeProject
+                    ? `Open ${project.title} project`
+                    : `Select ${project.title} project`
                 }
-                content={projectPreviews[project.id]}
-                cardW={cardW}
-                cardH={cardH}
-              />
+              >
+                <FloatingCard
+                  id={project.id}
+                  title={project.title}
+                  sub={project.sub}
+                  accent={project.accent}
+                  rotation={
+                    project.id === "ezc"
+                      ? -2.8
+                      : project.id === "lca"
+                        ? 2.2
+                        : -1.8
+                  }
+                  content={projectPreviews[project.id]}
+                  cardW={cardW}
+                  cardH={cardH}
+                />
+              </button>
             </div>
           ))}
 
@@ -244,8 +268,8 @@ export default function ProjectCarousel() {
         </div>
       </div>
       <ProjectModal
-        project={testModalOpen ? projects[0] : null}
-        onClose={() => setTestModalOpen(false)}
+        project={openProject}
+        onClose={() => setOpenProjectId(null)}
       />
     </section>
   );
