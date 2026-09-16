@@ -3,8 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { useWindowWidth } from "@/hooks/useWindowWidth";
-import { colors } from "@/lib/theme";
-
+import { projects } from "@/data/projects";
 import FloatingCard from "./FloatingCard";
 import styles from "./ProjectCarousel.module.css";
 
@@ -12,9 +11,15 @@ import EZCalcsPreview from "@/components/previews/EZCalcsPreview";
 import LaConcheriaPreview from "@/components/previews/LaConcheriaPreview";
 import PianoTeacherLinkPreview from "@/components/previews/PianoTeacherLinkPreview";
 
+import ProjectModal from "@/components/projects/ProjectModal";
+const projectPreviews = {
+  ezc: <EZCalcsPreview />,
+  lca: <LaConcheriaPreview />,
+  ptl: <PianoTeacherLinkPreview />,
+};
 export default function ProjectCarousel() {
   const w = useWindowWidth();
-
+  const [testModalOpen, setTestModalOpen] = useState(true);
   const mobile = w < 640;
 
   const railRef = useRef<HTMLDivElement>(null);
@@ -23,33 +28,6 @@ export default function ProjectCarousel() {
   const [activeProject, setActiveProject] = useState(1);
   const [titleDirection, setTitleDirection] =
     useState<"left" | "right">("left");
-
-  const projects = [
-    {
-      id: "ezc",
-      title: "EZCalcs",
-      sub: "Engineering Platform",
-      rotation: -2.8,
-      accent: colors.projects.ezcalcs,
-      content: <EZCalcsPreview />,
-    },
-    {
-      id: "lca",
-      title: "La Concheria",
-      sub: "Shopify E-Commerce",
-      rotation: 2.2,
-      accent: colors.projects.laConcheria,
-      content: <LaConcheriaPreview />,
-    },
-    {
-      id: "ptl",
-      title: "PianoTeacherLink",
-      sub: "Drupal Marketplace",
-      rotation: -1.8,
-      accent: colors.projects.pianoTeacherLink,
-      content: <PianoTeacherLinkPreview />,
-    },
-  ];
 
   const cardW = mobile
     ? Math.min(w - 40, 320)
@@ -165,11 +143,10 @@ export default function ProjectCarousel() {
 
         <div
           key={activeProject}
-          className={`${styles.projectTitles} ${
-            titleDirection === "left"
-              ? styles.titlesFromRight
-              : styles.titlesFromLeft
-          }`}
+          className={`${styles.projectTitles} ${titleDirection === "left"
+            ? styles.titlesFromRight
+            : styles.titlesFromLeft
+            }`}
         >
           {[prevIndex, activeProject, nextIndex].map(
             (index, position) => {
@@ -181,9 +158,8 @@ export default function ProjectCarousel() {
                   type="button"
                   key={`${project.id}-${position}`}
                   onClick={() => selectProject(index)}
-                  className={`${styles.projectTitle} ${
-                    active ? styles.projectTitleActive : ""
-                  }`}
+                  className={`${styles.projectTitle} ${active ? styles.projectTitleActive : ""
+                    }`}
                   aria-current={active ? "true" : undefined}
                 >
                   {project.title}
@@ -240,7 +216,18 @@ export default function ProjectCarousel() {
               className={styles.cardSlot}
             >
               <FloatingCard
-                {...project}
+                id={project.id}
+                title={project.title}
+                sub={project.sub}
+                accent={project.accent}
+                rotation={
+                  project.id === "ezc"
+                    ? -2.8
+                    : project.id === "lca"
+                      ? 2.2
+                      : -1.8
+                }
+                content={projectPreviews[project.id]}
                 cardW={cardW}
                 cardH={cardH}
               />
@@ -256,7 +243,10 @@ export default function ProjectCarousel() {
           />
         </div>
       </div>
-
+      <ProjectModal
+        project={testModalOpen ? projects[0] : null}
+        onClose={() => setTestModalOpen(false)}
+      />
     </section>
   );
 }

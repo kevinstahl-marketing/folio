@@ -547,3 +547,46 @@
         transition: none;
     }
 }
+
+.mediaPlaceholder {
+    transition:
+        transform 220ms ease,
+        box-shadow 220ms ease;
+}
+
+.mediaStage:hover .mediaPlaceholder {
+    transform: translateY(-5px) rotate(-1.4deg);
+    box-shadow:
+        11px 13px 0 var(--project-accent),
+        16px 18px 24px rgba(26, 23, 20, 0.08);
+}
+
+.secondaryPlaceholder {
+    transition:
+        transform 260ms ease,
+        box-shadow 260ms ease;
+}
+
+.mediaStage:hover .secondaryPlaceholder {
+    transform: translate(-3px, -7px) rotate(4deg);
+    box-shadow: 7px 9px 0 rgba(26, 23, 20, 0.14);
+}
+
+@keyframes mediaFloat {
+    0%, 100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -6px;
+    }
+}
+
+.primaryMedia {
+    animation: mediaFloat 6s ease-in-out infinite;
+}
+
+.secondaryMedia {
+    animation: mediaFloat 5s ease-in-out infinite;
+    animation-delay: -2s;
+}

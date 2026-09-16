@@ -1,5 +1,25 @@
 export type ProjectId = "ezc" | "lca" | "ptl";
 
+export type ProjectMedia = {
+  src: string;
+  alt: string;
+
+  slot: "primary" | "secondary";
+
+  fit?: "cover" | "contain";
+  position?: string;
+
+  rotation?: number;
+  scale?: number;
+
+  frame?: "browser" | "phone" | "plain";
+};
+
+export type ProjectLinks = {
+  live?: string;
+  github?: string;
+};
+
 export type Project = {
   id: ProjectId;
   num: string;
@@ -7,6 +27,11 @@ export type Project = {
   bg: string;
   title: string;
   sub: string;
+
+  // NEW
+  summary: string;
+  media: ProjectMedia[];
+  links?: ProjectLinks;
 
   role: string;
   roleDetail: string;
@@ -37,6 +62,12 @@ export const projects: Project[] = [
 
     role: "Sole Developer",
     roleDetail: "8 months · concept to production",
+    summary:
+      "A formula-driven engineering calculation platform built around reusable formulas, unit-aware inputs, and symbolic computation.",
+
+    media: [],
+
+    links: {},
 
     result: "40+ active engineers",
     resultDetail: "Deployed to production",
@@ -71,6 +102,12 @@ export const projects: Project[] = [
 
     title: "La Concheria",
     sub: "SHOPIFY E-COMMERCE · SEAFOOD BRAND",
+    summary:
+  "A custom Shopify commerce experience built around La Concheria's brand, products, and day-to-day e-commerce operations.",
+
+media: [],
+
+links: {},
 
     role: "Lead Developer",
     roleDetail: "Full build · brand to launch",
@@ -108,7 +145,12 @@ export const projects: Project[] = [
 
     title: "PianoTeacher​Link",
     sub: "DRUPAL MARKETPLACE · MUSIC EDUCATION",
+summary:
+  "A Drupal marketplace prototype designed to connect piano students with instructors through structured profiles and discovery.",
 
+media: [],
+
+links: {},
     role: "Full-Stack Developer",
     roleDetail: "Architecture + full build",
 
