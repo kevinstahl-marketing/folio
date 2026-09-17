@@ -859,68 +859,153 @@
    PHONE
    ========================================================= */
 
+/* =========================================================
+   PHONE
+   Mobile becomes a clean single-page resume.
+   Keep the pop-up personality, remove the desktop spread.
+   ========================================================= */
+
 @media (max-width: 640px) {
+
+    /* =====================================================
+       OUTER SECTION
+       ===================================================== */
 
     .section {
         padding:
-            54px
-            9px
-            74px;
+            48px
+            12px
+            68px;
+
+        overflow: hidden;
     }
 
+
+    /* =====================================================
+       PAPER
+
+       More usable internal width.
+       Smaller backing-sheet spread so nothing feels like
+       it is falling outside the page.
+       ===================================================== */
+
     .paper {
+        width: 100%;
+
         padding:
-            30px
-            18px
-            34px;
+            28px
+            20px
+            32px;
 
         border-width: 2px;
 
         box-shadow:
-            6px
-            6px
-            0
-            var(--ink),
-            11px
-            11px
-            0
-            rgba(26, 23, 20, 0.09);
+            5px 5px 0 var(--ink),
+            9px 9px 0 rgba(26, 23, 20, 0.08);
     }
 
     .paper::before {
         inset:
-            7px
+            6px
+            -4px
             -6px
-            -8px
-            6px;
+            4px;
 
         border-width: 2px;
+
+        transform: rotate(0.2deg);
     }
 
     .paper::after {
-        width: 80px;
-        height: 55px;
+        width: 72px;
+        height: 46px;
 
-        top: -12px;
+        top: -11px;
+        right: 12%;
 
         border-width: 2px;
+
+        transform: rotate(4deg);
+    }
+
+
+    /* =====================================================
+       HEADER
+
+       Mobile stops behaving like a desktop editorial spread.
+       Everything gets a clear vertical reading order.
+       ===================================================== */
+
+    .header {
+        display: flex;
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 22px;
     }
 
     .eyebrow {
-        font-size: 10px;
+        margin-bottom: 15px;
+
+        font-size: 9px;
+
+        letter-spacing: 0.12em;
     }
 
     .title {
-        font-size: clamp(43px, 13vw, 62px);
+        max-width: 100%;
+
+        margin:
+            0
+            0
+            20px;
+
+        /*
+         * 13vw was getting enormous and wrapping awkwardly.
+         * Still dramatic, just controlled.
+         */
+        font-size: clamp(39px, 11.5vw, 52px);
+
+        line-height: 0.92;
+
+        letter-spacing: -0.035em;
+
+        overflow-wrap: normal;
+        word-break: normal;
     }
 
     .intro {
-        font-size: 16px;
+        max-width: 100%;
 
-        line-height: 1.65;
+        margin: 0;
+
+        font-size: 15px;
+
+        line-height: 1.58;
+
+        opacity: 0.72;
     }
 
+
+    /* =====================================================
+       DOCUMENT CODE
+
+       Treat it like a little physical note rather than
+       another column in the header.
+       ===================================================== */
+
     .documentCode {
+        width: fit-content;
+
+        align-items: flex-start;
+
+        gap: 5px;
+
+        padding:
+            9px
+            11px;
+
         border-width: 1.5px;
 
         box-shadow:
@@ -928,137 +1013,446 @@
             3px
             0
             var(--ink);
+
+        font-size: 8px;
+
+        transform: rotate(1deg);
     }
+
+
+    /* =====================================================
+       DIVIDER
+       ===================================================== */
 
     .rule {
+        height: 2px;
+
         margin:
-            34px
+            30px
             0
-            42px;
+            36px;
     }
 
+
+    /* =====================================================
+       MAIN LAYOUT
+       ===================================================== */
+
     .layout {
-        gap: 58px;
+        display: block;
     }
+
+    .history {
+        width: 100%;
+        min-width: 0;
+    }
+
+
+    /* =====================================================
+       SECTION LABEL
+       ===================================================== */
 
     .sectionTab,
     .cardLabel {
-        font-size: 9px;
+        padding:
+            7px
+            10px;
+
+        border-width: 1.5px;
+
+        box-shadow:
+            3px
+            3px
+            0
+            var(--accent);
+
+        font-size: 8px;
+
+        letter-spacing: 0.09em;
     }
+
+    .sectionTab {
+        margin-bottom: 34px;
+    }
+
+
+    /* =====================================================
+       WORK HISTORY
+
+       Key mobile change:
+       index and content now share the first row instead of
+       putting the number on its own giant line.
+       ===================================================== */
 
     .job {
-        grid-template-columns: 1fr;
+        position: relative;
 
-        gap: 16px;
+        display: grid;
 
-        padding-bottom: 36px;
-        margin-bottom: 36px;
+        grid-template-columns:
+            34px
+            minmax(0, 1fr);
+
+        column-gap: 13px;
+
+        row-gap: 0;
+
+        width: 100%;
+
+        padding:
+            0
+            0
+            34px;
+
+        margin-bottom: 34px;
     }
+
+    .job:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+
+    /* NUMBER */
 
     .jobIndex {
-        width: 36px;
-        height: 36px;
+        width: 32px;
+        height: 32px;
 
-        font-size: 9px;
+        margin-top: 1px;
+
+        border-width: 1.5px;
+
+        box-shadow:
+            2px
+            2px
+            0
+            var(--ink);
+
+        font-size: 8px;
+
+        transform: rotate(-2deg);
     }
+
+    .job:nth-child(odd) .jobIndex {
+        transform: rotate(1.5deg);
+    }
+
+
+    /* JOB BODY */
+
+    .jobContent {
+        min-width: 0;
+
+        width: 100%;
+    }
+
+
+    /* =====================================================
+       META
+       ===================================================== */
 
     .jobMeta {
+        display: flex;
         flex-direction: column;
 
-        gap: 4px;
+        align-items: flex-start;
 
-        font-size: 10px;
+        gap: 3px;
+
+        margin-bottom: 10px;
+
+        font-size: 8px;
+
+        line-height: 1.4;
+
+        letter-spacing: 0.045em;
     }
 
-    .jobRole {
-        font-size: 28px;
 
-        line-height: 1.05;
+    /* =====================================================
+       JOB TITLE
+       ===================================================== */
+
+    .jobRole {
+        max-width: 100%;
+
+        margin:
+            0
+            0
+            6px;
+
+        /*
+         * This is the big screenshot problem.
+         * 28px beside a separate index column was just
+         * barely too aggressive.
+         */
+        font-size: clamp(23px, 7.1vw, 29px);
+
+        line-height: 1;
+
+        letter-spacing: -0.02em;
+
+        overflow-wrap: normal;
+        word-break: normal;
+        hyphens: none;
     }
 
     .organization {
-        font-size: 15px;
+        margin-bottom: 14px;
+
+        font-size: 14px;
+
+        line-height: 1.4;
     }
+
+
+    /* =====================================================
+       BODY COPY
+       ===================================================== */
 
     .description {
-        font-size: 15.5px;
+        max-width: 100%;
 
-        line-height: 1.68;
-    }
+        margin:
+            0
+            0
+            18px;
 
-    .highlights {
-        gap: 10px;
-    }
-
-    .highlights li {
-        padding-left: 22px;
-
-        font-size: 14.5px;
+        font-size: 14px;
 
         line-height: 1.62;
     }
 
-    .tag {
-        font-size: 9px;
+    .highlights {
+        gap: 9px;
+
+        margin-bottom: 19px;
     }
 
+    .highlights li {
+        padding-left: 19px;
+
+        font-size: 13.5px;
+
+        line-height: 1.58;
+    }
+
+    .highlights li::before {
+        font-size: 11px;
+    }
+
+
+    /* =====================================================
+       TAGS
+       ===================================================== */
+
+    .tags {
+        gap: 6px;
+    }
+
+    .tag {
+        padding:
+            5px
+            7px;
+
+        font-size: 8px;
+
+        letter-spacing: 0.025em;
+    }
+
+
+    /* =====================================================
+       SIDEBAR
+
+       On mobile this isn't really a sidebar anymore.
+       It becomes the second half of the document.
+       ===================================================== */
+
     .sidebar {
-        gap: 40px;
+        display: flex;
+        flex-direction: column;
+
+        width: 100%;
+
+        gap: 34px;
+
+        margin-top: 58px;
     }
 
     .sideCard {
+        width: 100%;
+
         padding:
-            36px
-            19px
-            24px;
+            34px
+            17px
+            22px;
+
+        border-width: 1.5px;
+
+        box-shadow:
+            4px
+            4px
+            0
+            rgba(26, 23, 20, 0.16);
+    }
+
+    .cardLabel {
+        top: -14px;
+        left: 14px;
+    }
+
+    .projectsCard,
+    .educationCard {
+        transform: none;
+    }
+
+
+    /* =====================================================
+       SKILLS
+       ===================================================== */
+
+    .skillGroup {
+        padding-bottom: 14px;
+
+        margin-bottom: 14px;
     }
 
     .skillLabel {
-        font-size: 10px;
+        margin-bottom: 6px;
+
+        font-size: 9px;
     }
 
     .skillValues {
-        font-size: 14px;
+        font-size: 13.5px;
+
+        line-height: 1.58;
+    }
+
+
+    /* =====================================================
+       SELECTED BUILDS
+       ===================================================== */
+
+    .project {
+        grid-template-columns:
+            28px
+            minmax(0, 1fr);
+
+        gap: 10px;
+
+        padding-bottom: 18px;
+
+        margin-bottom: 18px;
+    }
+
+    .projectCode {
+        font-size: 9px;
     }
 
     .projectName {
-        font-size: 21px;
+        font-size: 20px;
     }
 
     .projectType {
-        font-size: 9px;
+        margin-top: 5px;
+
+        font-size: 8px;
+
+        letter-spacing: 0.045em;
     }
 
     .projectDescription {
-        font-size: 13.5px;
+        margin-top: 8px;
+
+        font-size: 13px;
+
+        line-height: 1.55;
     }
 
+
+    /* =====================================================
+       EDUCATION
+       ===================================================== */
+
     .degree {
-        font-size: 27px;
+        font-size: 25px;
     }
 
     .school {
-        font-size: 14.5px;
+        margin-top: 9px;
+
+        font-size: 14px;
     }
 
     .educationDetail {
-        font-size: 9px;
+        margin-top: 12px;
+
+        font-size: 8px;
+
+        line-height: 1.55;
     }
 
+
+    /* =====================================================
+       NOTE
+       ===================================================== */
+
     .noteCard {
-        font-size: 9px;
+        align-self: flex-start;
+
+        max-width: calc(100% - 5px);
+
+        gap: 9px;
+
+        padding:
+            9px
+            11px;
+
+        border-width: 1.5px;
+
+        box-shadow:
+            3px
+            3px
+            0
+            var(--ink);
+
+        font-size: 8px;
+
+        line-height: 1.45;
+
+        transform: rotate(1deg);
     }
+
+    .noteMark {
+        font-size: 18px;
+    }
+
+
+    /* =====================================================
+       FOOTER
+       ===================================================== */
 
     .footer {
         align-items: flex-start;
         flex-direction: column;
 
-        gap: 8px;
+        gap: 7px;
 
-        font-size: 9px;
+        margin-top: 46px;
+
+        padding-top: 14px;
+
+        border-top-width: 2px;
+
+        font-size: 8px;
+
+        line-height: 1.5;
+
+        letter-spacing: 0.055em;
     }
 }
-
 
 /* =========================================================
    REDUCED MOTION

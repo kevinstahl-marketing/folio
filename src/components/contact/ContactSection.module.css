@@ -788,98 +788,486 @@
    PHONE
    ========================================================= */
 
+/* =========================================================
+   PHONE
+   Compact final-page composition
+   ========================================================= */
+
 @media (max-width: 640px) {
+
+    /* =====================================================
+       SECTION / PAGE STACK
+       ===================================================== */
 
     .section {
         padding:
-            60px
-            9px
-            80px;
+            48px
+            12px
+            64px;
+
+        overflow: hidden;
     }
 
     .backSheet {
-        width: calc(100% - 20px);
+        width: calc(100% - 18px);
+        height: calc(100% - 92px);
 
-        top: 67px;
+        top: 53px;
 
         border-width: 2px;
+
+        transform:
+            translateX(-50%)
+            rotate(-0.45deg);
     }
 
     .paper {
+        width: 100%;
+
         padding:
-            27px
-            18px
-            30px;
+            24px
+            20px
+            28px;
 
         border-width: 2px;
 
         box-shadow:
-            6px
-            6px
-            0
-            #0d1016,
-            10px
-            10px
-            0
-            rgba(100, 127, 188, 0.22);
+            5px 5px 0 #0d1016,
+            9px 9px 0 rgba(100, 127, 188, 0.2);
     }
 
+
+    /* =====================================================
+       TOP BAR
+       ===================================================== */
+
     .topBar {
-        align-items: flex-start;
+        align-items: center;
+
+        gap: 12px;
+
+        padding-bottom: 14px;
+
+        border-bottom-width: 2px;
     }
 
     .sectionLabel {
-        font-size: 9px;
+        padding:
+            7px
+            9px;
+
+        border-width: 1.5px;
+
+        box-shadow:
+            3px
+            3px
+            0
+            var(--accent);
+
+        font-size: 8px;
+
+        letter-spacing: 0.075em;
+
+        white-space: nowrap;
     }
 
     .code {
-        font-size: 8px;
+        flex: 0 0 auto;
+
+        font-size: 7px;
+
+        letter-spacing: 0.05em;
     }
 
+
+    /* =====================================================
+       MAIN CONTENT
+       ===================================================== */
+
     .content {
-        gap: 48px;
+        display: block;
 
         padding:
-            60px
+            44px
             0
-            56px;
+            46px;
+    }
+
+
+    /* =====================================================
+       COPY
+       ===================================================== */
+
+    .copy {
+        width: 100%;
+        max-width: none;
     }
 
     .kicker {
-        font-size: 10px;
+        gap: 8px;
+
+        margin-bottom: 16px;
+
+        font-size: 8px;
+
+        letter-spacing: 0.13em;
+    }
+
+    .kicker::before {
+        width: 19px;
+        height: 2px;
     }
 
     .title {
-        font-size: clamp(58px, 18vw, 82px);
+        max-width: 100%;
+
+        margin:
+            0
+            0
+            26px;
+
+        /*
+         * Still huge and editorial, but no longer
+         * trying to escape the page.
+         */
+        font-size: clamp(47px, 14vw, 62px);
 
         line-height: 0.82;
+
+        letter-spacing: -0.045em;
+
+        overflow-wrap: normal;
+        word-break: normal;
+    }
+
+    .title em {
+        display: inline-block;
     }
 
     .description {
-        font-size: 17px;
+        max-width: 100%;
+
+        margin-bottom: 16px;
+
+        font-size: 15px;
+
+        line-height: 1.58;
     }
 
     .subcopy {
-        font-size: 14px;
+        max-width: 100%;
+
+        font-size: 13.5px;
+
+        line-height: 1.58;
     }
 
+
+    /* =====================================================
+       ACTION AREA
+       ===================================================== */
+
+    .actions {
+        width: 100%;
+        max-width: none;
+
+        gap: 18px;
+
+        margin-top: 42px;
+    }
+
+
+    /* =====================================================
+       EMAIL CARD
+       ===================================================== */
+
     .contactCard {
+        width: 100%;
+
         padding:
-            22px
-            20px
-            24px;
+            19px
+            18px
+            21px;
+
+        border-width: 2px;
+    }
+
+    .primaryCard {
+        box-shadow:
+            5px
+            5px
+            0
+            var(--accent);
+
+        transform: rotate(0.4deg);
+    }
+
+    .primaryCard:hover {
+        transform:
+            translate(-2px, -3px)
+            rotate(-0.3deg);
+
+        box-shadow:
+            8px
+            8px
+            0
+            var(--accent);
+    }
+
+    .primaryCard:active {
+        transform:
+            translate(2px, 2px);
+
+        box-shadow:
+            2px
+            2px
+            0
+            var(--accent);
+    }
+
+    .cardTop {
+        gap: 12px;
+
+        margin-bottom: 21px;
+
+        font-size: 8px;
+
+        letter-spacing: 0.06em;
     }
 
     .cardTitle {
-        font-size: 34px;
+        margin-bottom: 7px;
+
+        font-size: 31px;
     }
 
     .cardValue {
-        font-size: 14px;
+        padding-right: 34px;
+
+        font-size: 13px;
+
+        line-height: 1.4;
+    }
+
+    .arrow {
+        right: 17px;
+        bottom: 18px;
+
+        font-size: 25px;
+    }
+
+
+    /* =====================================================
+       LINKEDIN / GITHUB
+       ===================================================== */
+
+    .secondaryActions {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 10px;
+    }
+
+    .smallCard {
+        /*
+         * Stack the little index above the content so
+         * two cards can comfortably stay side-by-side.
+         */
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 10px;
+
+        min-width: 0;
+
+        padding:
+            14px
+            13px;
+
+        border-width: 1.5px;
+
+        box-shadow:
+            3px
+            3px
+            0
+            var(--ink);
+    }
+
+    .smallCard:first-child {
+        transform: rotate(-0.5deg);
+    }
+
+    .smallCard:last-child {
+        transform: rotate(0.5deg);
+    }
+
+    .smallCard:hover {
+        transform:
+            translate(-2px, -2px)
+            rotate(0deg);
+
+        box-shadow:
+            5px
+            5px
+            0
+            var(--accent);
+    }
+
+    .smallNumber {
+        font-size: 8px;
+    }
+
+    .smallCard strong {
+        margin-bottom: 5px;
+
+        font-size: 18px;
+    }
+
+    .smallCard div span {
+        font-size: 7px;
+
+        letter-spacing: 0.035em;
+    }
+
+
+    /* =====================================================
+       AVAILABILITY
+       ===================================================== */
+
+    .availability {
+        align-items: flex-start;
+
+        gap: 11px;
+
+        padding:
+            12px
+            13px;
+
+        border-width: 1.5px;
+    }
+
+    .statusDot {
+        width: 9px;
+        height: 9px;
+
+        margin-top: 2px;
+
+        border-width: 1.5px;
+    }
+
+    .statusDot::after {
+        inset: -5px;
+    }
+
+    .availability strong {
+        margin-bottom: 4px;
+
+        font-size: 8px;
+
+        letter-spacing: 0.055em;
+    }
+
+    .availability div span {
+        font-size: 11px;
+
+        line-height: 1.45;
+    }
+
+
+    /* =====================================================
+       DECORATIONS
+       ===================================================== */
+
+    .star {
+        display: none;
+    }
+
+    .plus {
+        display: none;
+    }
+
+
+    /* =====================================================
+       FOOTER
+       ===================================================== */
+
+    .footer {
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+
+        gap: 12px;
+
+        padding-top: 15px;
+
+        border-top-width: 2px;
+
+        font-size: 8px;
+
+        letter-spacing: 0.055em;
+    }
+
+    .footer > div {
+        gap: 3px;
+    }
+
+    .footer > div span {
+        font-size: 7px;
+    }
+
+    .backToTop {
+        flex: 0 0 auto;
+
+        padding:
+            7px
+            8px;
+
+        font-size: 7px;
+
+        letter-spacing: 0.045em;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+    .section {
+        padding-inline: 9px;
+    }
+
+    .paper {
+        padding-inline: 16px;
+    }
+
+    .sectionLabel {
+        font-size: 7px;
+    }
+
+    .code {
+        font-size: 6px;
+    }
+
+    .title {
+        font-size: clamp(43px, 13.5vw, 53px);
     }
 
     .secondaryActions {
         grid-template-columns: 1fr;
+    }
+
+    .smallCard {
+        display: grid;
+
+        grid-template-columns:
+            auto
+            minmax(0, 1fr);
+
+        align-items: center;
 
         gap: 12px;
     }
@@ -889,22 +1277,13 @@
         transform: none;
     }
 
-    .availability {
-        align-items: flex-start;
-    }
-
     .footer {
         align-items: flex-start;
         flex-direction: column;
 
-        gap: 20px;
-    }
-
-    .star {
-        display: none;
+        gap: 14px;
     }
 }
-
 
 /* =========================================================
    REDUCED MOTION

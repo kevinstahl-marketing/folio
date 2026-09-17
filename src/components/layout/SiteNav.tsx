@@ -84,7 +84,6 @@ export default function SiteNav() {
         >
           {[
             ["Work", "carousel"],
-            ["EZCalcs", "ezc"],
             ["Experience", "exp"],
             ["Contact", "contact"],
           ].map(([label, id]) => (

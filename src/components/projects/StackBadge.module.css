@@ -1,6 +1,4 @@
 .badge {
-    position: relative;
-
     display: inline-flex;
     align-items: center;
 
@@ -11,127 +9,25 @@
     padding: 7px 10px;
 
     color: #1a1714;
-    background: #fffaf2;
+    background: #fffdf9;
 
-    border: 2px solid #1a1714;
-    border-radius: 1px;
+    border: 1.5px solid currentColor;
+    border-radius: 2px;
 
-    box-shadow:
-        3px 3px 0 #1a1714;
+    box-shadow: 3px 3px 0 rgba(26, 23, 20, 0.09);
 
-    font-family: var(--font-mono, monospace);
-    font-size: 10px;
-    font-weight: 850;
+    font-family: var(--font-sans, sans-serif);
+    font-size: 12px;
+    font-weight: 700;
     line-height: 1;
-
-    letter-spacing: 0.025em;
-
-    cursor: default;
-
-    transition:
-        transform 150ms cubic-bezier(0.34, 1.56, 0.64, 1),
-        box-shadow 150ms ease,
-        background 150ms ease;
 }
-
-
-/* =========================================================
-   ICON
-   Keep inline tech color from StackBadge.tsx
-   ========================================================= */
 
 .icon {
     flex: 0 0 auto;
-
-    width: 17px;
-    height: 17px;
-
-    stroke-width: 2.2;
 }
-
-
-/* =========================================================
-   LABEL
-   ========================================================= */
 
 .badge span {
     min-width: 0;
 
     white-space: nowrap;
-}
-
-
-/* =========================================================
-   PHYSICAL HOVER
-   Tiny cardstock / sticker lift
-   ========================================================= */
-
-.badge:hover {
-    background: #ffffff;
-
-    transform:
-        translate(-2px, -2px)
-        rotate(-0.6deg);
-
-    box-shadow:
-        5px 5px 0 #1a1714;
-}
-
-
-/* alternate direction keeps a group of badges
-   from feeling mechanically identical */
-
-.badge:nth-child(even):hover {
-    transform:
-        translate(-2px, -2px)
-        rotate(0.6deg);
-}
-
-
-/* =========================================================
-   LITTLE PRINT MARK
-   ========================================================= */
-
-.badge::after {
-    content: "";
-
-    width: 4px;
-    height: 4px;
-
-    flex: 0 0 auto;
-
-    margin-left: 1px;
-
-    background: #1a1714;
-
-    opacity: 0.22;
-
-    transform: rotate(3deg);
-
-    transition:
-        opacity 150ms ease,
-        transform 150ms ease;
-}
-
-.badge:hover::after {
-    opacity: 0.5;
-
-    transform: rotate(45deg);
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-    .badge,
-    .badge::after {
-        transition: none;
-    }
-
-    .badge:hover,
-    .badge:nth-child(even):hover {
-        transform: none;
-    }
 }
