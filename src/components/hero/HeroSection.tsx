@@ -540,9 +540,9 @@ export default function HeroSection() {
 
 
                 {/* =================================================
-                    RIGHT — SKILLS
-                    All grid sizing now belongs to CSS.
-                    ================================================= */}
+    RIGHT — SKILLS
+    Printed technical index / pop-up cards
+    ================================================= */}
 
                 <div className={styles.skillsGrid}>
                     {skillGroups.map((group, index) => {
@@ -553,100 +553,79 @@ export default function HeroSection() {
                                 key={group.label}
                                 className={styles.skillCard}
                                 style={{
-                                    position: "relative",
-                                    border: `2px solid ${colors.ink}`,
-                                    borderRadius: 4,
-                                    background:
-                                        "rgba(250, 247, 241, 0.88)",
-                                    boxShadow:
-                                        index % 2 === 0
-                                            ? "5px 5px 0 rgba(26,23,20,0.12)"
-                                            : "3px 5px 0 rgba(58,94,200,0.11)",
-                                    transform: `rotate(${group.rotate})`,
-                                }}
+                                    "--skill-rotation": group.rotate,
+                                } as React.CSSProperties}
                             >
-                                {/* Card heading */}
-
+                                {/* push pin */}
                                 <div
-                                    style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        gap: 9,
-                                        marginBottom: 16,
-                                        minWidth: 0,
-                                    }}
+                                    className={styles.skillPin}
+                                    aria-hidden="true"
                                 >
-                                    <div
-                                        style={{
-                                            width: 30,
-                                            height: 30,
-                                            flex: "0 0 30px",
-                                            display: "grid",
-                                            placeItems: "center",
-                                            border: `1.5px solid ${colors.ink}`,
-                                            borderRadius: 3,
-                                            background:
-                                                index % 2 === 0
-                                                    ? "rgba(205,185,130,0.22)"
-                                                    : "rgba(58,94,200,0.08)",
-                                        }}
-                                    >
-                                        <GroupIcon
-                                            size={16}
-                                            aria-hidden="true"
-                                        />
-                                    </div>
-
-                                    <h3
-                                        style={{
-                                            minWidth: 0,
-                                            margin: 0,
-                                            fontFamily: fonts.mono,
-                                            fontSize: 12,
-                                            fontWeight: 800,
-                                            letterSpacing: "0.09em",
-                                            textTransform: "uppercase",
-                                            lineHeight: 1.2,
-                                            color: colors.ink,
-                                        }}
-                                    >
-                                        {group.label}
-                                    </h3>
+                                    <Pin
+                                        size={27}
+                                        strokeWidth={1.5}
+                                        fill="currentColor"
+                                    />
                                 </div>
 
+                                {/* paper */}
+                                <div className={styles.skillPaper}>
+                                    <header className={styles.skillHeader}>
+                                        <div className={styles.skillIcon}>
+                                            <GroupIcon
+                                                size={16}
+                                                strokeWidth={1.8}
+                                                aria-hidden="true"
+                                            />
+                                        </div>
 
-                                {/* Technologies */}
+                                        <h3 className={styles.skillTitle}>
+                                            {group.label}
+                                        </h3>
 
-                                <div className={styles.techGrid}>
-                                    {group.items.map((item) => {
-                                        const TechIcon = item.icon;
+                                        <span
+                                            className={styles.skillMark}
+                                            aria-hidden="true"
+                                        >
+                                            +
+                                        </span>
+                                    </header>
 
-                                        return (
-                                            <div
-                                                className={styles.techItem}
-                                                key={item.name}
-                                                style={{
-                                                    display: "flex",
-                                                    alignItems: "center",
-                                                    fontFamily: fonts.sans,
-                                                    fontSize: 15,
-                                                    fontWeight: 700,
-                                                    lineHeight: 1.25,
-                                                    color: colors.ink,
-                                                }}
-                                            >
-                                                <TechIcon
-                                                    size={20}
-                                                    aria-hidden="true"
-                                                    style={{
-                                                        color: item.color,
-                                                    }}
-                                                />
+                                    <div className={styles.skillRule} />
 
-                                                <span>{item.name}</span>
-                                            </div>
-                                        );
-                                    })}
+                                    <div className={styles.techGrid}>
+                                        {group.items.map((item) => {
+                                            const TechIcon = item.icon;
+
+                                            return (
+                                                <div
+                                                    className={styles.techItem}
+                                                    key={item.name}
+                                                >
+                                                    <TechIcon
+                                                        className={styles.techIcon}
+                                                        size={19}
+                                                        aria-hidden="true"
+                                                        style={{
+                                                            color: item.color,
+                                                        }}
+                                                    />
+
+                                                    <span>{item.name}</span>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+
+                                    <div
+                                        className={styles.skillFooter}
+                                        aria-hidden="true"
+                                    >
+                                        <span>K.STAHL</span>
+                                        <span>
+                                            {String(index + 1).padStart(2, "0")}
+                                        </span>
+                                    </div>
                                 </div>
                             </section>
                         );

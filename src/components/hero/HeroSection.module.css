@@ -1,17 +1,5 @@
 /* =========================================================
    HERO
-   Layout + responsiveness + interactions.
-
-   BREAKPOINT MODEL
-   > 1280px  : 3-column hero
-   1280-901  : identity + statement, skills full-width below
-   900-681   : single-column hero, skills 2-up
-   <= 680px  : single-column hero, skills 1-up
-   ========================================================= */
-
-
-/* =========================================================
-   BASE / WIDE DESKTOP
    ========================================================= */
 
 .hero {
@@ -30,17 +18,15 @@
         minmax(620px, 1fr);
 
     gap: clamp(32px, 3.5vw, 56px) !important;
+
     align-items: center;
 }
-
-
-/* Everything participating in a grid/flex layout must
-   actually be allowed to shrink. */
 
 .identity,
 .portraitWrapper,
 .skillsGrid,
 .skillCard,
+.skillPaper,
 .techGrid,
 .techItem {
     min-width: 0;
@@ -54,173 +40,6 @@
 .portraitWrapper {
     width: 100%;
     max-width: 300px;
-}
-
-
-/* =========================================================
-   SKILL CARD GRID
-   ========================================================= */
-
-.skillsGrid {
-    width: 100%;
-    min-width: 0;
-
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
-        column-gap: 24px;
-    row-gap: 24px;
-    /*
-     * TSX currently supplies gap: 18px.
-     * Keep that value; no need to fight it here.
-     */
-}
-
-
-/* =========================================================
-   SKILL CARD
-   ========================================================= */
-
-.skillCard {
-    width: 100%;
-    min-width: 0;
-    max-width: 100%;
-
-    /*
-     * Override the larger inline padding.
-     * More usable width for skill names.
-     */
-    padding: 22px 20px 21px !important;
-
-    box-sizing: border-box;
-
-    /*
-     * Do not clip the rotated card/shadow.
-     */
-    overflow: visible;
-
-    animation: folioFloat 8s ease-in-out infinite;
-
-    transition:
-        translate 220ms ease,
-        scale 220ms ease,
-        box-shadow 220ms ease,
-        border-color 220ms ease;
-
-    will-change: translate, scale;
-}
-
-.skillCard > * {
-    min-width: 0;
-    max-width: 100%;
-}
-
-
-/* =========================================================
-   TECH GRID
-   Two columns inside each skill card.
-
-   Important:
-   We NEVER split a single word merely to preserve columns.
-   The outer card layout changes before that becomes necessary.
-   ========================================================= */
-
-.techGrid {
-    width: 100%;
-    min-width: 0;
-
-    display: grid;
-    grid-template-columns: repeat(2, minmax(125px, 1fr));
-
-    column-gap: 20px;
-    row-gap: 16px;
-}
-
-
-/* =========================================================
-   TECH ITEM
-   ========================================================= */
-
-.techItem {
-    width: 100%;
-    min-width: 0;
-
-    /*
-     * TSX supplies gap: 9px.
-     * Tighten it slightly.
-     */
-    gap: 9px !important;
-}
-
-.techItem svg {
-    width: 20px;
-    height: 20px;
-
-    /*
-     * Icons never shrink to make text fit.
-     */
-    flex: 0 0 20px;
-
-    transition:
-        transform 180ms ease,
-        filter 180ms ease;
-}
-
-.techItem span {
-    min-width: 0;
-
-    /*
-     * Normal language wrapping:
-     *
-     * "Shopify POS"       may wrap between words.
-     * "Excel Automation"  may wrap between words.
-     *
-     * "JavaScript"        MUST NOT become JavaScrip / t.
-     * "Squarespace"       MUST NOT become Squaresp / ace.
-     */
-    overflow-wrap: normal;
-    word-break: normal;
-    hyphens: none;
-}
-
-.techItem:hover svg {
-    transform: scale(1.22) rotate(-4deg);
-    filter: saturate(1.15);
-}
-
-
-/* =========================================================
-   CARD MOTION
-   ========================================================= */
-
-.skillCard:hover {
-    translate: 0 -7px;
-    scale: 1.025;
-
-    box-shadow:
-        8px 10px 0 rgba(26, 23, 20, 0.14) !important;
-
-    z-index: 5;
-}
-
-.skillCard:nth-child(2) {
-    animation-delay: -1.6s;
-}
-
-.skillCard:nth-child(3) {
-    animation-delay: -3.2s;
-}
-
-.skillCard:nth-child(4) {
-    animation-delay: -4.8s;
-}
-
-.skillCard:nth-child(5) {
-    animation-delay: -6.4s;
-}
-
-.skillCard:nth-child(6) {
-    animation-delay: -8s;
 }
 
 
@@ -243,17 +62,784 @@
 
 
 /* =========================================================
+   SKILLS GRID
+   ========================================================= */
+
+.skillsGrid {
+    width: 100%;
+    min-width: 0;
+
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap:
+        clamp(27px, 2.2vw, 36px)
+        clamp(24px, 2vw, 32px);
+
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   PINNED CARD
+
+   IMPORTANT:
+   --paper   = cream FRONT paper
+   --backing = colored sheet BEHIND it
+
+   The content never receives --backing.
+   ========================================================= */
+
+.skillCard {
+    --skill-rotation: 0deg;
+
+    --paper: #fffaf0;
+    --backing: #c7b875;
+    --pin: #7b665d;
+
+    position: relative;
+
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+
+    padding: 0 !important;
+
+    box-sizing: border-box;
+
+    isolation: isolate;
+    overflow: visible;
+
+    transform: rotate(var(--skill-rotation));
+    transform-origin: 50% 8px;
+
+    transition:
+        transform 340ms cubic-bezier(0.22, 1, 0.36, 1);
+
+    will-change: transform;
+}
+
+
+/* =========================================================
+   BACKING PAPER COLORS
+
+   These colors ONLY appear on the sheet behind the
+   cream content card.
+   ========================================================= */
+
+.skillCard:nth-child(1) {
+    --backing: #c9b66f;
+    --pin: #78655e;
+}
+
+.skillCard:nth-child(2) {
+    --backing: #9eb0b4;
+    --pin: #617176;
+}
+
+.skillCard:nth-child(3) {
+    --backing: #afb08b;
+    --pin: #6e705f;
+}
+
+.skillCard:nth-child(4) {
+    --backing: #b99d93;
+    --pin: #78645f;
+}
+
+.skillCard:nth-child(5) {
+    --backing: #9eae9d;
+    --pin: #607268;
+}
+
+.skillCard:nth-child(6) {
+    --backing: #aa9eaf;
+    --pin: #6f6575;
+}
+
+
+/* =========================================================
+   COLORED BACKING SHEET
+
+   This belongs to the CARD, not the cream paper.
+
+   That's the key difference.
+
+   Because it is ::before on .skillCard instead of
+   .skillPaper, it sits physically behind the entire
+   front card rather than tinting/covering the content.
+   ========================================================= */
+
+.skillCard::before {
+    content: "";
+
+    position: absolute;
+    z-index: 0;
+
+    top: 8px;
+    right: -8px;
+    bottom: -9px;
+    left: 8px;
+
+    background: var(--backing);
+
+    border: 2px solid #1a1714;
+
+    box-shadow:
+        4px 5px 0 rgba(26, 23, 20, 0.10);
+
+    transform: rotate(1.25deg);
+    transform-origin: 50% 12px;
+
+    pointer-events: none;
+
+    transition:
+        transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 320ms ease;
+}
+
+.skillCard:nth-child(even)::before {
+    right: 8px;
+    left: -8px;
+
+    transform: rotate(-1.25deg);
+}
+
+
+/* =========================================================
+   FRONT PAPER
+
+   ALWAYS CREAM.
+   This is the actual readable Post-it / index sheet.
+   ========================================================= */
+
+.skillPaper {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    padding:
+        21px
+        20px
+        14px;
+
+    box-sizing: border-box;
+
+    color: #1a1714;
+
+    background:
+        radial-gradient(
+            circle at 1px 1px,
+            rgba(26, 23, 20, 0.035) 1px,
+            transparent 1.15px
+        ),
+        var(--paper);
+
+    background-size:
+        16px 16px,
+        auto;
+
+    border: 2px solid #1a1714;
+
+    box-shadow:
+        4px 5px 0 rgba(26, 23, 20, 0.10);
+
+    transform-origin: 50% 7px;
+
+    transition:
+        transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 320ms ease;
+
+    will-change: transform;
+}
+
+
+/* Very subtle paper light / texture */
+
+.skillPaper::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 5;
+
+    pointer-events: none;
+
+    opacity: 0.09;
+
+    background:
+        linear-gradient(
+            105deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.36) 48%,
+            transparent 53%
+        );
+}
+
+
+/* =========================================================
+   PUSH PIN
+   ========================================================= */
+
+.skillPin {
+    position: absolute;
+    z-index: 10;
+
+    top: -15px;
+    left: 50%;
+
+    width: 32px;
+    height: 36px;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--pin);
+
+    pointer-events: none;
+
+    transform:
+        translateX(-50%)
+        rotate(-9deg);
+
+    transform-origin: 50% 85%;
+
+    filter:
+        drop-shadow(
+            2px
+            4px
+            0
+            rgba(26, 23, 20, 0.18)
+        );
+
+    transition:
+        transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
+        filter 320ms ease;
+
+    will-change: transform;
+}
+
+
+/* Slightly imperfect pin placement */
+
+.skillCard:nth-child(2) .skillPin {
+    left: 57%;
+
+    transform:
+        translateX(-50%)
+        rotate(11deg);
+}
+
+.skillCard:nth-child(3) .skillPin {
+    left: 43%;
+
+    transform:
+        translateX(-50%)
+        rotate(-5deg);
+}
+
+.skillCard:nth-child(4) .skillPin {
+    left: 54%;
+
+    transform:
+        translateX(-50%)
+        rotate(8deg);
+}
+
+.skillCard:nth-child(5) .skillPin {
+    left: 46%;
+
+    transform:
+        translateX(-50%)
+        rotate(-11deg);
+}
+
+.skillCard:nth-child(6) .skillPin {
+    left: 59%;
+
+    transform:
+        translateX(-50%)
+        rotate(6deg);
+}
+
+
+/* =========================================================
+   CARD HEADER
+   ========================================================= */
+
+.skillHeader {
+    min-width: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        34px
+        minmax(0, 1fr)
+        auto;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+/* Black printed category stamp */
+
+.skillIcon {
+    width: 34px;
+    height: 34px;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--paper);
+    background: #1a1714;
+
+    border: 2px solid #1a1714;
+
+    transform: rotate(-2deg);
+
+    transition:
+        transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.skillCard:nth-child(even) .skillIcon {
+    transform: rotate(2deg);
+}
+
+
+/* =========================================================
+   CARD TITLE
+
+   Larger than before.
+   This should read as a heading, not micro metadata.
+   ========================================================= */
+
+.skillTitle {
+    min-width: 0;
+
+    margin: 0;
+
+    font-family:
+        var(--font-mono, monospace);
+
+    font-size: clamp(12px, 0.82vw, 14px);
+    font-weight: 900;
+
+    line-height: 1.15;
+
+    letter-spacing: 0.035em;
+
+    text-transform: uppercase;
+
+    color: #1a1714;
+
+    white-space: normal;
+}
+
+
+/* Printed "+" registration mark */
+
+.skillMark {
+    font-family:
+        var(--font-mono, monospace);
+
+    font-size: 20px;
+    font-weight: 500;
+
+    line-height: 1;
+
+    color: #1a1714;
+
+    opacity: 0.22;
+
+    transform: rotate(7deg);
+
+    transition:
+        transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 220ms ease;
+}
+
+
+/* =========================================================
+   HEADER RULE
+   ========================================================= */
+
+.skillRule {
+    width: 100%;
+    height: 2px;
+
+    margin:
+        14px
+        0
+        15px;
+
+    background: #1a1714;
+
+    opacity: 0.16;
+}
+
+
+/* =========================================================
+   TECH GRID
+   ========================================================= */
+
+.techGrid {
+    width: 100%;
+    min-width: 0;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    column-gap: 14px;
+    row-gap: 11px;
+
+    flex: 1;
+}
+
+
+/* =========================================================
+   TECH ITEM
+
+   Brand icon colors come from TSX.
+   CSS intentionally DOES NOT override color.
+   ========================================================= */
+
+.techItem {
+    position: relative;
+
+    width: 100%;
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px !important;
+
+    padding:
+        5px
+        4px;
+
+    box-sizing: border-box;
+
+    font-family:
+        var(--font-sans, sans-serif);
+
+    font-size: 13px;
+    font-weight: 750;
+
+    line-height: 1.2;
+
+    color: #1a1714;
+
+    transition:
+        transform 160ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        background 160ms ease;
+}
+
+.techIcon,
+.techItem svg {
+    width: 19px;
+    height: 19px;
+
+    flex:
+        0
+        0
+        19px;
+
+    transition:
+        transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        filter 180ms ease;
+}
+
+.techItem span {
+    min-width: 0;
+
+    overflow-wrap: normal;
+    word-break: normal;
+
+    hyphens: none;
+}
+
+
+/* =========================================================
+   CARD FOOTER
+   ========================================================= */
+
+.skillFooter {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-top: 14px;
+    padding-top: 9px;
+
+    border-top:
+        1px
+        solid
+        rgba(26, 23, 20, 0.14);
+
+    font-family:
+        var(--font-mono, monospace);
+
+    font-size: 7px;
+    font-weight: 900;
+
+    letter-spacing: 0.12em;
+
+    color: #1a1714;
+
+    opacity: 0.28;
+}
+
+
+/* =========================================================
+   POP-UP / PIN RELEASE
+
+   1. pin comes out
+   2. cream front paper lifts
+   3. colored backing stays behind and becomes visible
+
+   Much more literal physical interaction.
+   ========================================================= */
+
+.skillCard:hover {
+    z-index: 20;
+
+    transform:
+        translateY(-4px)
+        rotate(0deg);
+}
+
+
+/* Pull pin */
+
+.skillCard:hover .skillPin {
+    transform:
+        translate(-50%, -22px)
+        rotate(-27deg)
+        scale(1.2);
+
+    filter:
+        drop-shadow(
+            6px
+            10px
+            2px
+            rgba(26, 23, 20, 0.18)
+        );
+}
+
+.skillCard:nth-child(even):hover .skillPin {
+    transform:
+        translate(-50%, -22px)
+        rotate(28deg)
+        scale(1.2);
+}
+
+.skillCard:nth-child(3n):hover .skillPin {
+    transform:
+        translate(-50%, -24px)
+        rotate(-18deg)
+        scale(1.22);
+}
+
+
+/* Cream front lifts */
+
+.skillCard:hover .skillPaper {
+    transform:
+        translate(-3px, -8px)
+        rotate(0.55deg)
+        scale(1.01);
+
+    box-shadow:
+        10px
+        13px
+        0
+        rgba(26, 23, 20, 0.11);
+}
+
+.skillCard:nth-child(even):hover .skillPaper {
+    transform:
+        translate(3px, -8px)
+        rotate(-0.55deg)
+        scale(1.01);
+}
+
+.skillCard:nth-child(3n):hover .skillPaper {
+    transform:
+        translate(-2px, -9px)
+        rotate(0.3deg)
+        scale(1.01);
+}
+
+
+/* Backing stays behind, just shifts slightly */
+
+.skillCard:hover::before {
+    transform:
+        translate(3px, 3px)
+        rotate(1.8deg);
+
+    box-shadow:
+        6px
+        7px
+        0
+        rgba(26, 23, 20, 0.10);
+}
+
+.skillCard:nth-child(even):hover::before {
+    transform:
+        translate(-3px, 3px)
+        rotate(-1.8deg);
+}
+
+
+/* Header reaction */
+
+.skillCard:hover .skillIcon {
+    transform:
+        rotate(-5deg)
+        scale(1.04);
+}
+
+.skillCard:nth-child(even):hover .skillIcon {
+    transform:
+        rotate(5deg)
+        scale(1.04);
+}
+
+.skillCard:hover .skillMark {
+    opacity: 0.5;
+
+    transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   TECH HOVER
+   ========================================================= */
+
+.techItem:hover {
+    background:
+        rgba(26, 23, 20, 0.045);
+
+    transform:
+        translateX(3px)
+        rotate(-0.3deg);
+}
+
+.techItem:hover .techIcon,
+.techItem:hover svg {
+    transform:
+        scale(1.2)
+        rotate(-6deg);
+
+    filter:
+        saturate(1.12);
+}
+
+
+/* =========================================================
+   BUTTON INTERACTIONS
+   ========================================================= */
+
+.primaryButton,
+.secondaryButton {
+    transition:
+        translate 160ms ease,
+        scale 160ms ease,
+        box-shadow 160ms ease,
+        background-color 160ms ease;
+}
+
+.primaryButton:hover {
+    translate: -2px -3px;
+    scale: 1.02;
+
+    box-shadow:
+        7px
+        7px
+        0
+        rgba(26, 23, 20, 0.16) !important;
+}
+
+.primaryButton:active {
+    translate: 3px 3px;
+    scale: 0.98;
+
+    box-shadow:
+        1px
+        1px
+        0
+        rgba(26, 23, 20, 0.16) !important;
+}
+
+.secondaryButton:hover {
+    translate: -2px -3px;
+
+    background: #fff !important;
+
+    box-shadow:
+        6px
+        6px
+        0
+        rgba(26, 23, 20, 0.14);
+}
+
+.secondaryButton:active {
+    translate: 2px 2px;
+    scale: 0.98;
+
+    box-shadow:
+        1px
+        1px
+        0
+        rgba(26, 23, 20, 0.12);
+}
+
+
+/* =========================================================
+   CONTACT LINKS
+   ========================================================= */
+
+.contactLink {
+    width: fit-content;
+
+    transition:
+        translate 160ms ease,
+        opacity 160ms ease;
+}
+
+.contactLink:hover {
+    translate: 5px 0;
+}
+
+.contactLink svg {
+    transition:
+        transform 160ms ease;
+}
+
+.contactLink:hover svg {
+    transform:
+        rotate(-8deg)
+        scale(1.12);
+}
+
+
+/* =========================================================
    MEDIUM DESKTOP / LAPTOP
-   1280px and below
-
-   Row 1:
-   [ identity ][ statement ]
-
-   Row 2:
-   [       skills        ]
-
-   The important change is that the skill cards receive the
-   FULL hero width before their text becomes cramped.
    ========================================================= */
 
 @media (max-width: 1180px) {
@@ -273,6 +859,7 @@
             minmax(0, 1fr);
 
         gap: 48px !important;
+
         align-items: start !important;
     }
 
@@ -286,46 +873,38 @@
     }
 
     .skillsGrid {
-        /*
-         * THIS was missing/broken in the janky version.
-         * Skills explicitly occupy the whole second row.
-         */
         grid-column: 1 / -1;
+
+        width: 100%;
 
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
-
-        width: 100%;
     }
 
-    /*
-     * Because these cards are now much wider, their internal
-     * two-column skill layout has plenty of room.
-     */
     .techGrid {
         grid-template-columns:
             repeat(2, minmax(130px, 1fr));
+    }
+
+    .skillTitle {
+        font-size: 13px;
     }
 }
 
 
 /* =========================================================
-   TABLET / SMALL LAPTOP
-   900px and below
-
-   Hero becomes editorial single-column.
-
-   Skill cards can remain 2-up because the entire viewport
-   width is now available to them.
+   TABLET
    ========================================================= */
 
 @media (max-width: 900px) {
 
     .hero {
         padding:
-            72px
+            84px
             clamp(26px, 5vw, 40px)
             56px !important;
+
+        align-items: flex-start !important;
     }
 
     .heroGrid {
@@ -333,6 +912,14 @@
             minmax(0, 1fr);
 
         gap: 40px !important;
+
+        align-items: start !important;
+    }
+
+    .identity {
+        min-width: 0;
+
+        align-items: flex-start !important;
     }
 
     .portraitWrapper {
@@ -343,26 +930,25 @@
     .skillsGrid {
         grid-column: auto;
 
+        width: 100%;
+
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
 
-        width: 100%;
+        gap:
+            30px
+            24px !important;
     }
 
-    /*
-     * Cards are narrower here.
-     * Reduce internal typography slightly rather than
-     * allowing individual words to break.
-     */
-    .techItem {
-        font-size: 14px !important;
-        gap: 6px !important;
+    .skillPaper {
+        padding:
+            20px
+            18px
+            14px;
     }
 
-    .techItem svg {
-        width: 18px;
-        height: 18px;
-        flex-basis: 18px;
+    .skillTitle {
+        font-size: 13px;
     }
 
     .techGrid {
@@ -370,40 +956,54 @@
             repeat(2, minmax(105px, 1fr));
 
         column-gap: 10px;
-        row-gap: 13px;
+        row-gap: 12px;
     }
 
-    .skillCard {
-        padding:
-            20px 18px 19px !important;
+    .techItem {
+        gap: 7px !important;
+
+        font-size: 13px !important;
+    }
+
+    .techIcon,
+    .techItem svg {
+        width: 18px;
+        height: 18px;
+
+        flex: 0 0 18px;
     }
 }
 
 
 /* =========================================================
    MOBILE
-   680px and below
-
-   Everything is one column.
-
-   Each skill CARD gets the full viewport width.
-   The tech items inside each card remain two-up.
    ========================================================= */
 
 @media (max-width: 680px) {
 
     .hero {
         padding:
-            54px
+            104px
             clamp(18px, 5vw, 26px)
-            44px !important;
+            48px !important;
+
+        align-items: flex-start !important;
     }
 
     .heroGrid {
         grid-template-columns:
             minmax(0, 1fr);
 
-        gap: 32px !important;
+        gap: 34px !important;
+
+        align-items: start !important;
+    }
+
+    .identity {
+        width: 100%;
+        min-width: 0;
+
+        align-items: flex-start !important;
     }
 
     .portraitWrapper {
@@ -411,120 +1011,319 @@
         max-width: 220px;
     }
 
+
+    /* One big readable card per row */
+
     .skillsGrid {
+        grid-column: auto;
+
+        width: 100%;
+
         grid-template-columns:
             minmax(0, 1fr);
 
-        gap: 18px !important;
+        gap: 32px !important;
+
+        padding:
+            8px
+            5px
+            12px;
+
+        box-sizing: border-box;
     }
 
     .skillCard {
         width: 100%;
-        min-width: 0;
 
-          padding: 24px 24px 23px !important;
+        transform:
+            rotate(
+                calc(
+                    var(--skill-rotation) * 0.35
+                )
+            );
     }
 
-    .techGrid {
+
+    /* Keep backing safely inside viewport */
+
+    .skillCard::before {
+        top: 7px;
+        right: -4px;
+        bottom: -8px;
+        left: 7px;
+    }
+
+    .skillCard:nth-child(even)::before {
+        right: 7px;
+        left: -4px;
+    }
+
+
+    /* More generous readable front */
+
+    .skillPaper {
+        padding:
+            21px
+            18px
+            15px;
+
+        box-shadow:
+            4px
+            5px
+            0
+            rgba(26, 23, 20, 0.11);
+    }
+
+    .skillPin {
+        top: -14px;
+    }
+
+    .skillHeader {
         grid-template-columns:
-            repeat(2, minmax(110px, 1fr));
+            34px
+            minmax(0, 1fr)
+            auto;
 
-        column-gap: 14px;
-        row-gap: 14px;
+        gap: 11px;
     }
 
-    .techItem {
-        font-size: 15px !important;
-        gap: 8px !important;
+    .skillIcon {
+        width: 34px;
+        height: 34px;
     }
 
-    .techItem svg {
-        width: 20px;
-        height: 20px;
-        flex-basis: 20px;
-    }
-}
-
-
-/* =========================================================
-   SMALL PHONE
-   420px and below
-
-   Still preserve two tech columns where possible.
-   Slightly reduce card padding + type.
-
-   We do NOT use word-break/overflow-wrap hacks.
-   ========================================================= */
-
-@media (max-width: 420px) {
-
-    .hero {
-        padding:
-            48px
-            16px
-            40px !important;
+    .skillTitle {
+        font-size: 13px;
+        letter-spacing: 0.025em;
     }
 
-    .skillCard {
-        padding:
-            20px 16px 19px !important;
+    .skillRule {
+        margin:
+            14px
+            0
+            15px;
     }
 
     .techGrid {
         grid-template-columns:
             repeat(2, minmax(0, 1fr));
 
-        column-gap: 10px;
-        row-gap: 13px;
+        column-gap: 14px;
+        row-gap: 11px;
     }
 
     .techItem {
-        font-size: 14px !important;
-        gap: 6px !important;
+        gap: 8px !important;
+
+        padding:
+            6px
+            3px;
+
+        font-size: 13px !important;
     }
 
+    .techIcon,
     .techItem svg {
-        width: 18px;
-        height: 18px;
-        flex-basis: 18px;
+        width: 19px;
+        height: 19px;
+
+        flex: 0 0 19px;
+    }
+
+
+    /* Smaller physical movement on touch widths */
+
+    .skillCard:hover {
+        transform:
+            translateY(-2px)
+            rotate(0deg);
+    }
+
+    .skillCard:hover .skillPaper,
+    .skillCard:nth-child(even):hover .skillPaper,
+    .skillCard:nth-child(3n):hover .skillPaper {
+        transform:
+            translateY(-4px)
+            rotate(0.2deg)
+            scale(1.004);
+
+        box-shadow:
+            7px
+            8px
+            0
+            rgba(26, 23, 20, 0.11);
+    }
+
+    .skillCard:hover .skillPin,
+    .skillCard:nth-child(even):hover .skillPin,
+    .skillCard:nth-child(3n):hover .skillPin {
+        transform:
+            translate(-50%, -13px)
+            rotate(-18deg)
+            scale(1.12);
+    }
+
+    .skillCard:hover::before {
+        transform:
+            translate(2px, 2px)
+            rotate(1.5deg);
+    }
+
+    .skillCard:nth-child(even):hover::before {
+        transform:
+            translate(-2px, 2px)
+            rotate(-1.5deg);
+    }
+}
+
+
+/* =========================================================
+   SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .hero {
+        padding:
+            104px
+            16px
+            42px !important;
+    }
+
+    .heroGrid {
+        gap: 30px !important;
+    }
+
+    .portraitWrapper {
+        width: min(205px, 68vw);
+        max-width: 205px;
+    }
+
+    .skillsGrid {
+        gap: 30px !important;
+
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .skillPaper {
+        padding:
+            19px
+            15px
+            14px;
+    }
+
+    .skillHeader {
+        grid-template-columns:
+            32px
+            minmax(0, 1fr)
+            auto;
+
+        gap: 9px;
+    }
+
+    .skillIcon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .skillTitle {
+        font-size: 12px;
+        line-height: 1.2;
+    }
+
+    .techGrid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        column-gap: 9px;
+        row-gap: 10px;
+    }
+
+    .techItem {
+        gap: 6px !important;
+
+        padding:
+            5px
+            2px;
+
+        font-size: 12px !important;
+    }
+
+    .techIcon,
+    .techItem svg {
+        width: 17px;
+        height: 17px;
+
+        flex: 0 0 17px;
     }
 }
 
 
 /* =========================================================
    VERY SMALL PHONE
-   At this point preserving readable words matters more
-   than keeping the internal 2-column presentation.
+
+   Stop trying to squeeze two technical columns once
+   the device is genuinely tiny.
    ========================================================= */
 
-@media (max-width: 340px) {
+@media (max-width: 350px) {
+
+    .hero {
+        padding:
+            100px
+            14px
+            40px !important;
+    }
+
+    .portraitWrapper {
+        width: min(190px, 70vw);
+        max-width: 190px;
+    }
+
+    .skillPaper {
+        padding:
+            19px
+            15px
+            14px;
+    }
+
+    .skillTitle {
+        font-size: 12px;
+    }
 
     .techGrid {
         grid-template-columns:
             minmax(0, 1fr);
+
+        row-gap: 8px;
     }
 
     .techItem {
-        font-size: 14px !important;
+        font-size: 13px !important;
     }
+}
+
+
+/* =========================================================
+   KEYBOARD ACCESSIBILITY
+   ========================================================= */
+
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible,
+.contactLink:focus-visible {
+    outline:
+        3px
+        solid
+        currentColor;
+
+    outline-offset: 4px;
 }
 
 
 /* =========================================================
    ANIMATIONS
    ========================================================= */
-
-@keyframes folioFloat {
-
-    0%,
-    100% {
-        translate: 0 0;
-    }
-
-    50% {
-        translate: 0 -4px;
-    }
-}
 
 @keyframes folioDrift {
 
@@ -559,101 +1358,26 @@
 
 
 /* =========================================================
-   INTERACTIONS
-   ========================================================= */
-
-.primaryButton,
-.secondaryButton {
-    transition:
-        translate 160ms ease,
-        scale 160ms ease,
-        box-shadow 160ms ease,
-        background-color 160ms ease;
-}
-
-.primaryButton:hover {
-    translate: -2px -3px;
-    scale: 1.02;
-
-    box-shadow:
-        7px 7px 0 rgba(26, 23, 20, 0.16) !important;
-}
-
-.primaryButton:active {
-    translate: 3px 3px;
-    scale: 0.98;
-
-    box-shadow:
-        1px 1px 0 rgba(26, 23, 20, 0.16) !important;
-}
-
-.secondaryButton:hover {
-    translate: -2px -3px;
-
-    background: #fff !important;
-
-    box-shadow:
-        6px 6px 0 rgba(26, 23, 20, 0.14);
-}
-
-.secondaryButton:active {
-    translate: 2px 2px;
-    scale: 0.98;
-
-    box-shadow:
-        1px 1px 0 rgba(26, 23, 20, 0.12);
-}
-
-
-/* =========================================================
-   CONTACT LINKS
-   ========================================================= */
-
-.contactLink {
-    width: fit-content;
-
-    transition:
-        translate 160ms ease,
-        opacity 160ms ease;
-}
-
-.contactLink:hover {
-    translate: 5px 0;
-}
-
-.contactLink svg {
-    transition:
-        transform 160ms ease;
-}
-
-.contactLink:hover svg {
-    transform:
-        rotate(-8deg)
-        scale(1.12);
-}
-
-
-/* =========================================================
-   KEYBOARD ACCESSIBILITY
-   ========================================================= */
-
-.primaryButton:focus-visible,
-.secondaryButton:focus-visible,
-.contactLink:focus-visible {
-    outline:
-        3px solid currentColor;
-
-    outline-offset: 4px;
-}
-
-
-/* =========================================================
    REDUCED MOTION
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
 
     .skillCard,
+    .skillCard::before,
+    .skillPaper,
+    .skillPin,
+    .skillIcon,
+    .skillMark,
+    .techItem,
+    .techIcon,
+    .techItem svg,
+    .primaryButton,
+    .secondaryButton,
+    .contactLink {
+        transition: none !important;
+    }
+
     .driftOne,
     .driftTwo,
     .accentFloat {
@@ -661,7 +1385,18 @@
     }
 
     .skillCard:hover {
-        translate: 0 -4px;
-        scale: 1;
+        transform: rotate(0deg);
+    }
+
+    .skillCard:hover .skillPaper {
+        transform: none;
+    }
+
+    .skillCard:hover::before {
+        transform: rotate(1.25deg);
+    }
+
+    .skillCard:hover .skillPin {
+        transform: translateX(-50%);
     }
 }

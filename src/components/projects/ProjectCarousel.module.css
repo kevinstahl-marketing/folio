@@ -17,9 +17,7 @@
     min-width: 0;
 
     padding:
-        clamp(44px, 6vw, 82px)
-        clamp(18px, 4vw, 52px)
-        clamp(64px, 7vw, 100px);
+        clamp(44px, 6vw, 82px) clamp(18px, 4vw, 52px) clamp(64px, 7vw, 100px);
 
     overflow: hidden;
 }
@@ -60,10 +58,7 @@
     z-index: -2;
 
     inset:
-        12px
-        -13px
-        -14px
-        12px;
+        12px -13px -14px 12px;
 
     background: var(--paper-dark);
 
@@ -111,19 +106,14 @@
     gap: 20px;
 
     padding:
-        8px
-        16px
-        8px
-        22px;
+        8px 16px 8px 22px;
 
     background:
-        repeating-linear-gradient(
-            -45deg,
+        repeating-linear-gradient(-45deg,
             rgba(26, 23, 20, 0.025) 0,
             rgba(26, 23, 20, 0.025) 2px,
             transparent 2px,
-            transparent 7px
-        ),
+            transparent 7px),
         rgba(255, 255, 255, 0.3);
 
     border-bottom: 3px solid var(--ink);
@@ -145,18 +135,14 @@
     gap: 9px;
 
     padding:
-        8px
-        13px;
+        8px 13px;
 
     background: var(--paper-light);
 
     border: 2px solid var(--ink);
 
     box-shadow:
-        4px
-        4px
-        0
-        var(--ink);
+        4px 4px 0 var(--ink);
 
     transform: rotate(-1.5deg);
 }
@@ -173,10 +159,7 @@
     border-radius: 50%;
 
     animation:
-        statusPulse
-        2.8s
-        ease-in-out
-        infinite;
+        statusPulse 2.8s ease-in-out infinite;
 }
 
 .windowMeta {
@@ -217,9 +200,7 @@
     gap: 18px;
 
     padding:
-        clamp(30px, 4vw, 52px)
-        clamp(28px, 5vw, 68px)
-        0;
+        clamp(30px, 4vw, 52px) clamp(28px, 5vw, 68px) 0;
 }
 
 .sectionLabel {
@@ -228,8 +209,7 @@
     flex: 0 0 auto;
 
     padding:
-        8px
-        12px;
+        8px 12px;
 
     color: var(--paper-light);
     background: var(--ink);
@@ -237,10 +217,7 @@
     border: 2px solid var(--ink);
 
     box-shadow:
-        4px
-        4px
-        0
-        var(--yellow);
+        4px 4px 0 var(--yellow);
 
     font-family:
         var(--font-mono, monospace);
@@ -309,9 +286,7 @@
         clamp(20px, 3vw, 46px);
 
     padding:
-        clamp(28px, 3vw, 42px)
-        clamp(24px, 4vw, 64px)
-        clamp(26px, 3vw, 38px);
+        clamp(28px, 3vw, 42px) clamp(24px, 4vw, 64px) clamp(26px, 3vw, 38px);
 }
 
 
@@ -324,9 +299,7 @@
     height: 54px;
 
     flex:
-        0
-        0
-        54px;
+        0 0 54px;
 
     display: grid;
     place-items: center;
@@ -340,10 +313,7 @@
     border-radius: 0;
 
     box-shadow:
-        6px
-        6px
-        0
-        var(--ink);
+        6px 6px 0 var(--ink);
 
     font: inherit;
 
@@ -353,21 +323,15 @@
     cursor: pointer;
 
     transition:
-        transform
-        150ms
-        cubic-bezier(0.34, 1.56, 0.64, 1),
-        box-shadow
-        150ms
-        ease;
+        transform 150ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 150ms ease;
 }
 
 .arrowButton span {
     display: block;
 
     transition:
-        transform
-        180ms
-        cubic-bezier(0.34, 1.56, 0.64, 1);
+        transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .arrowPrevious {
@@ -383,14 +347,10 @@
 
 .arrowPrevious:hover {
     transform:
-        rotate(-6deg)
-        translate(-3px, -3px);
+        rotate(-6deg) translate(-3px, -3px);
 
     box-shadow:
-        9px
-        9px
-        0
-        var(--ink);
+        9px 9px 0 var(--ink);
 }
 
 .arrowPrevious:hover span {
@@ -400,14 +360,10 @@
 
 .arrowNext:hover {
     transform:
-        rotate(6deg)
-        translate(3px, -3px);
+        rotate(6deg) translate(3px, -3px);
 
     box-shadow:
-        9px
-        9px
-        0
-        rgba(26, 23, 20, 0.28);
+        9px 9px 0 rgba(26, 23, 20, 0.28);
 }
 
 .arrowNext:hover span {
@@ -420,10 +376,7 @@
         translate(4px, 4px);
 
     box-shadow:
-        1px
-        1px
-        0
-        var(--ink);
+        1px 1px 0 var(--ink);
 
     transition-duration: 60ms;
 }
@@ -442,9 +395,7 @@
     display: grid;
 
     grid-template-columns:
-        minmax(120px, 1fr)
-        minmax(190px, 1.35fr)
-        minmax(120px, 1fr);
+        minmax(120px, 1fr) minmax(190px, 1.35fr) minmax(120px, 1fr);
 
     align-items: center;
 
@@ -458,8 +409,7 @@
     min-width: 0;
 
     padding:
-        13px
-        7px;
+        13px 7px;
 
     color: inherit;
     background: transparent;
@@ -488,12 +438,8 @@
 
     transition:
         opacity 160ms ease,
-        transform
-        160ms
-        cubic-bezier(0.34, 1.56, 0.64, 1),
-        box-shadow
-        160ms
-        ease;
+        transform 160ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 160ms ease;
 }
 
 .projectNumber {
@@ -513,22 +459,16 @@
 
 .projectTitleActive {
     padding:
-        12px
-        13px;
+        12px 13px;
 
     background:
         var(--paper-light);
 
     border:
-        2px
-        solid
-        var(--ink);
+        2px solid var(--ink);
 
     box-shadow:
-        4px
-        4px
-        0
-        var(--ink);
+        4px 4px 0 var(--ink);
 
     font-size: 11px;
     font-weight: 950;
@@ -536,22 +476,17 @@
     opacity: 1;
 
     transform:
-        rotate(-1deg)
-        translateY(-3px);
+        rotate(-1deg) translateY(-3px);
 }
 
 .projectTitleActive:hover {
     opacity: 1;
 
     transform:
-        rotate(1deg)
-        translate(-2px, -5px);
+        rotate(1deg) translate(-2px, -5px);
 
     box-shadow:
-        6px
-        6px
-        0
-        var(--ink);
+        6px 6px 0 var(--ink);
 }
 
 
@@ -573,17 +508,13 @@
     background: var(--yellow);
 
     border:
-        2px
-        solid
-        var(--ink);
+        2px solid var(--ink);
 
     transform:
         rotate(-1deg);
 
     animation:
-        projectUnderlineIn
-        360ms
-        cubic-bezier(0.22, 1, 0.36, 1);
+        projectUnderlineIn 360ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 
@@ -595,9 +526,7 @@
     position: relative;
 
     margin:
-        0
-        clamp(18px, 2.5vw, 36px)
-        clamp(20px, 3vw, 38px);
+        0 clamp(18px, 2.5vw, 36px) clamp(20px, 3vw, 38px);
 
     /*
      * Stage remains clipped horizontally.
@@ -608,34 +537,21 @@
     overflow: hidden;
 
     background:
-        radial-gradient(
-            circle at 1px 1px,
+        radial-gradient(circle at 1px 1px,
             rgba(26, 23, 20, 0.1) 1px,
-            transparent 1.5px
-        ),
+            transparent 1.5px),
         rgba(255, 255, 255, 0.23);
 
     background-size:
-        22px
-        22px,
+        22px 22px,
         auto;
 
     border:
-        3px
-        solid
-        var(--ink);
+        3px solid var(--ink);
 
     box-shadow:
-        inset
-        0
-        0
-        0
-        5px
-        rgba(255, 255, 255, 0.18),
-        7px
-        7px
-        0
-        rgba(26, 23, 20, 0.11);
+        inset 0 0 0 5px rgba(255, 255, 255, 0.18),
+        7px 7px 0 rgba(26, 23, 20, 0.11);
 }
 
 
@@ -700,16 +616,13 @@
     gap: 20px;
 
     padding:
-        11px
-        15px;
+        11px 15px;
 
     background:
         rgba(255, 250, 242, 0.55);
 
     border-bottom:
-        2px
-        solid
-        var(--ink);
+        2px solid var(--ink);
 
     font-family:
         var(--font-mono, monospace);
@@ -811,9 +724,7 @@
      * inside the scroll container when lifted.
      */
     padding:
-        clamp(58px, 6vw, 82px)
-        0
-        clamp(62px, 7vw, 90px);
+        clamp(58px, 6vw, 82px) 0 clamp(62px, 7vw, 90px);
 
     overflow-x: auto;
 
@@ -855,23 +766,16 @@
 
 .cardSlot {
     flex:
-        0
-        0
-        auto;
+        0 0 auto;
 
     position: relative;
 
     transform-origin:
-        center
-        bottom;
+        center bottom;
 
     transition:
-        transform
-        360ms
-        cubic-bezier(0.22, 1, 0.36, 1),
-        opacity
-        260ms
-        ease;
+        transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 260ms ease;
 }
 
 
@@ -883,14 +787,12 @@
     opacity: 0.4;
 
     transform:
-        translateY(24px)
-        rotate(-1.4deg);
+        translateY(24px) rotate(-1.4deg);
 }
 
 .cardSlotInactive:nth-of-type(even) {
     transform:
-        translateY(24px)
-        rotate(1.4deg);
+        translateY(24px) rotate(1.4deg);
 }
 
 
@@ -909,10 +811,7 @@
         translateY(-8px);
 
     animation:
-        cardPopFloat
-        5s
-        ease-in-out
-        infinite;
+        cardPopFloat 5s ease-in-out infinite;
 }
 
 
@@ -937,16 +836,13 @@
         rgba(26, 23, 20, 0.12);
 
     clip-path:
-        polygon(
-            7% 100%,
+        polygon(7% 100%,
             24% 0,
             76% 0,
-            93% 100%
-        );
+            93% 100%);
 
     transform:
-        perspective(200px)
-        rotateX(55deg);
+        perspective(200px) rotateX(55deg);
 
     transform-origin: top;
 
@@ -1011,25 +907,20 @@
     display: grid;
 
     grid-template-columns:
-        1fr
-        auto
-        1fr;
+        1fr auto 1fr;
 
     align-items: center;
 
     gap: 18px;
 
     padding:
-        9px
-        14px;
+        9px 14px;
 
     background:
         rgba(255, 250, 242, 0.48);
 
     border-top:
-        2px
-        solid
-        var(--ink);
+        2px solid var(--ink);
 
     font-family:
         var(--font-mono, monospace);
@@ -1044,7 +935,7 @@
     opacity: 0.62;
 }
 
-.stageFooter > :last-child {
+.stageFooter> :last-child {
     text-align: right;
 }
 
@@ -1076,16 +967,12 @@
 
 .titlesFromRight {
     animation:
-        projectTitlesLeft
-        320ms
-        cubic-bezier(0.22, 1, 0.36, 1);
+        projectTitlesLeft 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .titlesFromLeft {
     animation:
-        projectTitlesRight
-        320ms
-        cubic-bezier(0.22, 1, 0.36, 1);
+        projectTitlesRight 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 
@@ -1098,16 +985,14 @@
         opacity: 0;
 
         transform:
-            translateX(24px)
-            rotate(1deg);
+            translateX(24px) rotate(1deg);
     }
 
     to {
         opacity: 1;
 
         transform:
-            translateX(0)
-            rotate(0);
+            translateX(0) rotate(0);
     }
 }
 
@@ -1116,16 +1001,14 @@
         opacity: 0;
 
         transform:
-            translateX(-24px)
-            rotate(-1deg);
+            translateX(-24px) rotate(-1deg);
     }
 
     to {
         opacity: 1;
 
         transform:
-            translateX(0)
-            rotate(0);
+            translateX(0) rotate(0);
     }
 }
 
@@ -1154,21 +1037,21 @@
  */
 
 @keyframes cardPopFloat {
+
     0%,
     100% {
         translate:
-            0
-            0;
+            0 0;
     }
 
     50% {
         translate:
-            0
-            -4px;
+            0 -4px;
     }
 }
 
 @keyframes statusPulse {
+
     0%,
     100% {
         opacity: 1;
@@ -1188,40 +1071,27 @@
 
     .carousel {
         padding:
-            38px
-            14px
-            64px;
+            38px 14px 64px;
     }
 
     .archiveWindow {
         box-shadow:
-            7px
-            7px
-            0
-            var(--ink),
-            14px
-            14px
-            0
-            rgba(26, 23, 20, 0.1);
+            7px 7px 0 var(--ink),
+            14px 14px 0 rgba(26, 23, 20, 0.1);
     }
 
     .archiveWindow::before {
         inset:
-            9px
-            -8px
-            -10px
-            8px;
+            9px -8px -10px 8px;
     }
 
-    .windowMeta > span:nth-child(2) {
+    .windowMeta>span:nth-child(2) {
         display: none;
     }
 
     .sectionMarker {
         padding:
-            28px
-            22px
-            0;
+            28px 22px 0;
     }
 
     .sectionCode {
@@ -1245,17 +1115,12 @@
         font-size: 19px;
 
         box-shadow:
-            4px
-            4px
-            0
-            var(--ink);
+            4px 4px 0 var(--ink);
     }
 
     .projectTitles {
         grid-template-columns:
-            minmax(0, 0.8fr)
-            minmax(0, 1.35fr)
-            minmax(0, 0.8fr);
+            minmax(0, 0.8fr) minmax(0, 1.35fr) minmax(0, 0.8fr);
 
         gap: 8px;
     }
@@ -1282,9 +1147,7 @@
         gap: 26px;
 
         padding:
-            54px
-            0
-            70px;
+            54px 0 70px;
     }
 
     .cardSlotInactive {
@@ -1306,304 +1169,338 @@
 
 /* =========================================================
    PHONE
+   560px and below
    ========================================================= */
 
 @media (max-width: 560px) {
 
+    /* =====================================================
+       OUTER SECTION
+       ===================================================== */
+
     .carousel {
         padding:
-            30px
-            8px
-            52px;
+            28px 10px 46px;
     }
 
+
+    /* =====================================================
+       BOOK / PAPER
+       ===================================================== */
+
     .archiveWindow {
+        width: 100%;
+
         border-width: 2px;
 
         box-shadow:
-            5px
-            5px
-            0
-            var(--ink),
-            10px
-            10px
-            0
-            rgba(26, 23, 20, 0.1);
+            5px 5px 0 var(--ink),
+            8px 8px 0 rgba(26, 23, 20, 0.09);
 
         transform: none;
     }
 
     .archiveWindow::before {
         inset:
-            6px
-            -5px
-            -7px
-            5px;
+            5px -4px -6px 4px;
 
         border-width: 2px;
+
+        transform: rotate(0.25deg);
     }
 
     .archiveWindow::after {
-        width: 74px;
-        height: 54px;
+        width: 70px;
+        height: 43px;
 
-        top: -12px;
+        top: -11px;
+        right: 9%;
 
         border-width: 2px;
+
+        transform: rotate(4deg);
     }
 
-    .windowBar {
-        min-height: 38px;
 
-        padding:
-            6px
-            9px;
-
-        border-bottom-width: 2px;
-    }
-
-    .windowIdentity {
-        padding:
-            6px
-            9px;
-
-        border-width: 1.5px;
-
-        box-shadow:
-            3px
-            3px
-            0
-            var(--ink);
-
-        font-size: 7px;
-    }
-
-    .statusDot {
-        width: 7px;
-        height: 7px;
-    }
-
-    .windowMeta {
-        gap: 4px;
-    }
-
-    .windowMeta > span:not(.windowControl) {
-        display: none;
-    }
-
-    .windowControl {
-        width: 17px;
-        height: 19px;
-
-        border-width: 1px;
-
-        font-size: 9px;
-    }
+    /* =====================================================
+       SECTION MARKER
+       ===================================================== */
 
     .sectionMarker {
+        align-items: center;
+
+        gap: 10px;
+
         padding:
-            20px
-            15px
-            0;
+            18px 14px 0;
     }
 
     .sectionLabel {
         padding:
-            6px
-            8px;
+            6px 8px;
 
         border-width: 1.5px;
 
         box-shadow:
-            3px
-            3px
-            0
-            var(--yellow);
+            3px 3px 0 var(--yellow);
 
-        font-size: 9px;
+        font-size: 8px;
     }
 
     .sectionLabel span {
-        font-size: 6px;
+        margin-top: 4px;
+
+        font-size: 5.5px;
     }
 
+    .sectionRule {
+        height: 2px;
+
+        margin-bottom: 0;
+    }
+
+    .sectionCode {
+        display: none;
+    }
+
+
+    /* =====================================================
+       PROJECT NAVIGATION
+       ===================================================== */
+
     .projectNav {
-        gap: 7px;
+        gap: 8px;
 
         padding:
-            19px
-            9px
-            21px;
+            20px 10px 19px;
     }
 
     .arrowButton {
-        width: 34px;
-        height: 34px;
+        width: 35px;
+        height: 35px;
 
-        flex-basis: 34px;
+        flex:
+            0 0 35px;
 
         border-width: 1.5px;
 
         box-shadow:
-            3px
-            3px
-            0
-            var(--ink);
+            3px 3px 0 var(--ink);
 
         font-size: 16px;
     }
 
+    .arrowPrevious {
+        transform: rotate(-2deg);
+    }
+
+    .arrowNext {
+        transform: rotate(2deg);
+    }
+
+
+    /* =====================================================
+       PROJECT TITLES
+
+       On phone the active project is the information that
+       matters. Neighbor titles become little edge hints.
+       ===================================================== */
+
     .projectTitles {
+        min-width: 0;
+
         grid-template-columns:
-            minmax(0, 0.62fr)
-            minmax(0, 1.7fr)
-            minmax(0, 0.62fr);
+            minmax(0, 0.35fr) minmax(110px, 2.3fr) minmax(0, 0.35fr);
 
         gap: 3px;
     }
 
     .projectTitle {
+        min-width: 0;
+
         padding:
-            9px
-            2px;
+            8px 1px;
 
-        font-size: 7px;
+        font-size: 6px;
 
-        letter-spacing: 0.015em;
+        letter-spacing: 0;
+
+        opacity: 0.16;
+    }
+
+    .projectTitle:not(.projectTitleActive) {
+        color: transparent;
     }
 
     .projectTitleActive {
         padding:
-            8px
-            5px;
+            8px 6px;
+
+        color: var(--ink);
 
         border-width: 1.5px;
 
         box-shadow:
-            3px
-            3px
-            0
-            var(--ink);
+            3px 3px 0 var(--ink);
 
         font-size: 8px;
+
+        opacity: 1;
+    }
+
+    .projectNumber {
+        display: none;
     }
 
     .activeUnderline {
-        bottom: -6px;
+        bottom: -5px;
 
         height: 4px;
 
         border-width: 1px;
     }
 
+
+    /* =====================================================
+       PROJECT STAGE
+
+       Almost full book width now.
+       ===================================================== */
+
     .projectStage {
         margin:
-            0
-            7px
-            8px;
+            0 8px 8px;
+
+        overflow: hidden;
 
         border-width: 2px;
 
         box-shadow:
-            4px
-            4px
-            0
-            rgba(26, 23, 20, 0.1);
+            3px 3px 0 rgba(26, 23, 20, 0.1);
 
         background-size:
-            18px
-            18px,
+            18px 18px,
             auto;
     }
 
     .stageLabel {
         padding:
-            8px
-            10px;
+            8px 10px;
 
         border-bottom-width: 1.5px;
 
-        font-size: 7px;
+        font-size: 6.5px;
     }
 
     .stageLabel span:last-child {
         display: none;
     }
 
-    .registrationMark {
-        display: none;
-    }
-
+    .registrationMark,
     .projectStage::before,
     .projectStage::after {
         display: none;
     }
 
 
-    /*
-     * Still leave hover/lift room on phones.
-     * It also prevents rotated card corners being clipped.
-     */
+    /* =====================================================
+       CARD VIEWPORT
+
+       Desktop needs giant lift room because hover exists.
+       Phones do not.
+       ===================================================== */
 
     .railViewport {
-        padding-top: 24px;
+        padding-top: 8px;
 
-        margin-top: -12px;
+        margin-top: 0;
+
+        overflow: hidden;
     }
 
     .rail {
-        gap: 20px;
+        align-items: center;
+
+        gap: 18px;
 
         padding:
-            42px
-            0
-            52px;
+            22px 0 28px;
+
+        overflow-x: auto;
+        overflow-y: hidden;
+
+        scroll-snap-type: x proximity;
+    }
+
+    .railSpacer {
+        flex-shrink: 0;
+    }
+
+
+    /* =====================================================
+       CARDS
+       ===================================================== */
+
+    .cardSlot {
+        scroll-snap-align: center;
     }
 
     .cardSlotInactive {
-        opacity: 0.38;
+        opacity: 0.28;
 
         transform:
-            translateY(10px);
+            translateY(8px);
     }
 
     .cardSlotInactive:nth-of-type(even) {
         transform:
-            translateY(10px);
+            translateY(8px);
     }
 
     .cardSlotActive {
+        opacity: 1;
+
         transform:
-            translateY(-4px);
+            translateY(0);
 
         animation: none;
     }
 
     .cardSlotActive::before {
-        bottom: -14px;
+        bottom: -10px;
 
-        height: 30px;
+        height: 22px;
     }
 
+
+    /* =====================================================
+       STAGE FOOTER
+       ===================================================== */
+
     .stageFooter {
-        min-height: 32px;
+        min-height: 30px;
+
+        gap: 8px;
 
         padding:
-            7px
-            9px;
+            6px 8px;
 
         border-top-width: 1.5px;
 
-        font-size: 7px;
+        font-size: 6px;
     }
 
-    .stageFooter > :first-child,
-    .stageFooter > :last-child {
-        opacity: 0.55;
+    .stageFooter> :first-child,
+    .stageFooter> :last-child {
+        opacity: 0.42;
+    }
+
+    .stageProgress {
+        gap: 6px;
     }
 
     .stageProgress i {
-        width: 27px;
+        width: 24px;
         height: 2px;
     }
 }
@@ -1611,35 +1508,86 @@
 
 /* =========================================================
    VERY SMALL PHONE
+   390px and below
    ========================================================= */
 
 @media (max-width: 390px) {
 
-    .sectionRule {
-        display: none;
+    .carousel {
+        padding:
+            24px 7px 42px;
+    }
+
+    .archiveWindow::before {
+        inset:
+            4px -3px -5px 3px;
     }
 
     .sectionMarker {
-        justify-content:
-            space-between;
+        padding-inline: 12px;
+    }
+
+    .sectionRule {
+        display: block;
     }
 
     .projectNav {
-        padding-inline: 6px;
+        gap: 6px;
+
+        padding:
+            18px 7px 17px;
+    }
+
+    .arrowButton {
+        width: 32px;
+        height: 32px;
+
+        flex-basis: 32px;
+
+        font-size: 14px;
     }
 
     .projectTitles {
         grid-template-columns:
-            minmax(0, 0.45fr)
-            minmax(0, 2fr)
-            minmax(0, 0.45fr);
+            10px minmax(0, 1fr) 10px;
+
+        gap: 2px;
     }
 
     .projectTitle:not(.projectTitleActive) {
-        opacity: 0.18;
+        overflow: hidden;
+
+        padding-inline: 0;
+
+        color: transparent;
+
+        border: 0;
+    }
+
+    .projectTitleActive {
+        font-size: 7.5px;
+    }
+
+    .projectStage {
+        margin:
+            0 6px 7px;
+    }
+
+    .rail {
+        gap: 14px;
+
+        padding:
+            18px 0 24px;
+    }
+
+    .stageFooter {
+        font-size: 5.5px;
+    }
+
+    .stageProgress i {
+        width: 19px;
     }
 }
-
 
 /* =========================================================
    FOCUS
@@ -1649,9 +1597,7 @@
 .projectTitle:focus-visible,
 .cardButton:focus-visible {
     outline:
-        3px
-        solid
-        var(--ink);
+        3px solid var(--ink);
 
     outline-offset: 4px;
 }

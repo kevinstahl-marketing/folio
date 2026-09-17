@@ -21,7 +21,7 @@ const projectPreviews = {
 
 export default function ProjectCarousel() {
   const w = useWindowWidth();
-  const mobile = w < 640;
+  const mobile = w < 560;
 
   const railRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -35,11 +35,12 @@ export default function ProjectCarousel() {
   >(null);
 
   const cardW = mobile
-    ? Math.min(w - 40, 320)
-    : Math.min(Math.round(w * 0.34), 480);
+  ? Math.min(w - 72, 300)
+  : Math.min(Math.round(w * 0.34), 480);
 
-  const cardH = Math.round(cardW * 1.22);
-
+const cardH = mobile
+  ? Math.round(cardW * 1.08)
+  : Math.round(cardW * 1.22);
   const prevIndex =
     (activeProject - 1 + projects.length) % projects.length;
 
