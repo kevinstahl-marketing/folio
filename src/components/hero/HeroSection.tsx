@@ -169,7 +169,11 @@ export default function HeroSection() {
             .getElementById("carousel")
             ?.scrollIntoView({ behavior: "smooth" });
     };
-
+const scrollToResume = () => {
+    document
+        .getElementById("resume")
+        ?.scrollIntoView({ behavior: "smooth" });
+};
     return (
         <section
             className={styles.hero}
@@ -402,29 +406,27 @@ export default function HeroSection() {
                             <ArrowRight size={15} aria-hidden="true" />
                         </button>
 
-                        <a
-                            className={styles.secondaryButton}
-                            href="/resume.pdf"
-                            target="_blank"
-                            rel="noreferrer"
-                            style={{
-                                fontFamily: fonts.sans,
-                                fontWeight: 700,
-                                fontSize: 14,
-                                color: colors.ink,
-                                textDecoration: "none",
-                                border: `2px solid ${colors.ink}`,
-                                borderRadius: 3,
-                                padding: "10px 16px",
-                                display: "inline-flex",
-                                alignItems: "center",
-                                gap: 8,
-                                background: "rgba(255,255,255,0.56)",
-                            }}
-                        >
-                            Résumé
-                            <ExternalLink size={14} aria-hidden="true" />
-                        </a>
+                        <button
+    className={styles.secondaryButton}
+    onClick={scrollToResume}
+    style={{
+        fontFamily: fonts.sans,
+        fontWeight: 700,
+        fontSize: 14,
+        color: colors.ink,
+        border: `2px solid ${colors.ink}`,
+        borderRadius: 3,
+        padding: "10px 16px",
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 8,
+        background: "rgba(255,255,255,0.56)",
+        cursor: "pointer",
+    }}
+>
+    Résumé
+    <ArrowRight size={14} aria-hidden="true" />
+</button>
                     </div>
 
 
@@ -440,7 +442,7 @@ export default function HeroSection() {
                     >
                         <a
                             className={styles.contactLink}
-                            href="tel:+1956XXXXXXX"
+                            href="tel:+19568788083"
                             style={{
                                 display: "flex",
                                 alignItems: "center",
@@ -450,12 +452,12 @@ export default function HeroSection() {
                             }}
                         >
                             <Phone size={15} aria-hidden="true" />
-                            (956) XXX-XXXX
+                            (956) 878-8083
                         </a>
 
                         <a
                             className={styles.contactLink}
-                            href="mailto:your@email.com"
+                            href="mailto:kevin.sthl97@gmail.com"
                             style={{
                                 display: "flex",
                                 alignItems: "center",
@@ -465,7 +467,7 @@ export default function HeroSection() {
                             }}
                         >
                             <Mail size={15} aria-hidden="true" />
-                            your@email.com
+                            kevin.sthl97@gmail.com
                         </a>
                     </div>
                 </aside>
@@ -621,10 +623,7 @@ export default function HeroSection() {
                                         className={styles.skillFooter}
                                         aria-hidden="true"
                                     >
-                                        <span>K.STAHL</span>
-                                        <span>
-                                            {String(index + 1).padStart(2, "0")}
-                                        </span>
+          
                                     </div>
                                 </div>
                             </section>

@@ -69,24 +69,10 @@ export default function SiteNav() {
          * Mobile intentionally keeps the overall nav clear.
          * The name itself gets its own little floating sheet.
          */
-        background:
-          scrolled && !mobile
-            ? "rgba(245, 242, 238, 0.90)"
-            : "transparent",
-
-        backdropFilter:
-          scrolled && !mobile ? "blur(14px)" : "none",
-
-        WebkitBackdropFilter:
-          scrolled && !mobile ? "blur(14px)" : "none",
-
-        borderBottom:
-          scrolled && !mobile
-            ? "2px solid rgba(26, 23, 20, 0.10)"
-            : "2px solid transparent",
-
-        transition:
-          "background 220ms ease, border-color 220ms ease",
+        background: "transparent",
+        backdropFilter: "none",
+        WebkitBackdropFilter: "none",
+        borderBottom: "none",
       }}
     >
       {/* ===================================================
@@ -218,63 +204,64 @@ export default function SiteNav() {
             gap: 8,
           }}
         >
-          {[
-            ["Work", "carousel"],
-            ["Experience", "exp"],
-            ["Contact", "contact"],
-          ].map(([label, id]) => {
-            const hovered = hoveredNav === id;
+          {!scrolled &&
+            [
+              ["Work", "carousel"],
+              ["Experience", "exp"],
+              ["Contact", "contact"],
+            ].map(([label, id]) => {
+              const hovered = hoveredNav === id;
 
-            return (
-              <button
-                type="button"
-                key={id}
-                onClick={() => scrollTo(id)}
-                onMouseEnter={() => setHoveredNav(id)}
-                onMouseLeave={() => setHoveredNav(null)}
-                style={{
-                  position: "relative",
+              return (
+                <button
+                  type="button"
+                  key={id}
+                  onClick={() => scrollTo(id)}
+                  onMouseEnter={() => setHoveredNav(id)}
+                  onMouseLeave={() => setHoveredNav(null)}
+                  style={{
+                    position: "relative",
 
-                  padding: "8px 11px",
+                    padding: "8px 11px",
 
-                  color: colors.ink,
-                  background: hovered
-                    ? "rgba(255, 250, 242, 0.88)"
-                    : "transparent",
+                    color: colors.ink,
+                    background: hovered
+                      ? "rgba(255, 250, 242, 0.88)"
+                      : "transparent",
 
-                  border: hovered
-                    ? `1.5px solid ${colors.ink}`
-                    : "1.5px solid transparent",
+                    border: hovered
+                      ? `1.5px solid ${colors.ink}`
+                      : "1.5px solid transparent",
 
-                  borderRadius: 1,
+                    borderRadius: 1,
 
-                  boxShadow: hovered
-                    ? `3px 3px 0 ${colors.ink}`
-                    : "none",
+                    boxShadow: hovered
+                      ? `3px 3px 0 ${colors.ink}`
+                      : "none",
 
-                  fontFamily: fonts.mono,
-                  fontSize: 9,
-                  fontWeight: 850,
+                    fontFamily: fonts.mono,
+                    fontSize: 9,
+                    fontWeight: 850,
 
-                  letterSpacing: "0.075em",
-                  textTransform: "uppercase",
+                    letterSpacing: "0.075em",
+                    textTransform: "uppercase",
 
-                  opacity: hovered ? 1 : 0.56,
+                    opacity: hovered ? 1 : 0.56,
 
-                  cursor: "pointer",
+                    cursor: "pointer",
 
-                  transform: hovered
-                    ? "translate(-1px, -2px) rotate(-0.5deg)"
-                    : "translate(0, 0) rotate(0deg)",
+                    transform: hovered
+                      ? "translate(-1px, -2px) rotate(-0.5deg)"
+                      : "translate(0, 0) rotate(0deg)",
 
-                  transition:
-                    "opacity 140ms ease, transform 150ms cubic-bezier(0.34, 1.56, 0.64, 1), background 140ms ease, border-color 140ms ease, box-shadow 140ms ease",
-                }}
-              >
-                {label}
-              </button>
-            );
-          })}
+                    transition:
+                      "opacity 140ms ease, transform 150ms cubic-bezier(0.34, 1.56, 0.64, 1), background 140ms ease, border-color 140ms ease, box-shadow 140ms ease",
+                  }}
+                >
+                  {label}
+                </button>
+              );
+            })}
 
           {/* =================================================
               RESUME BUTTON
@@ -282,6 +269,7 @@ export default function SiteNav() {
 
           <button
             type="button"
+            onClick={() => scrollTo("resume")}
             onMouseEnter={() => setResumeHovered(true)}
             onMouseLeave={() => setResumeHovered(false)}
             style={{

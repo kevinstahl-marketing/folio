@@ -53,7 +53,7 @@ export default function ContactSection() {
 
           <div className={styles.actions}>
             <a
-              href="mailto:kevin@stahldev.com"
+              href="mailto:kevin.sthl97@gmail.com"
               className={`${styles.contactCard} ${styles.primaryCard}`}
             >
               <div className={styles.cardTop}>
@@ -66,7 +66,7 @@ export default function ContactSection() {
               </div>
 
               <div className={styles.cardValue}>
-                kevin@stahldev.com
+                kevin.sthl97@gmail.com
               </div>
 
               <span className={styles.arrow}>
@@ -76,7 +76,7 @@ export default function ContactSection() {
 
             <div className={styles.secondaryActions}>
               <a
-                href="#"
+                href="www.linkedin.com/in/kevin-s-5389453a2"
                 className={styles.smallCard}
                 aria-label="LinkedIn"
               >
@@ -91,7 +91,7 @@ export default function ContactSection() {
               </a>
 
               <a
-                href="#"
+                href="https://github.com/kevinstahl-marketing"
                 className={styles.smallCard}
                 aria-label="GitHub"
               >
