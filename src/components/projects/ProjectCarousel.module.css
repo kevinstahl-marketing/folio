@@ -31,9 +31,11 @@
 
 .archiveWindow {
     position: relative;
+
     isolation: isolate;
 
     width: min(1480px, 100%);
+
     margin: 0 auto;
 
     color: var(--ink);
@@ -48,7 +50,8 @@
     transform: rotate(-0.12deg);
 }
 
-/* sheet behind */
+
+/* BACK PAPER */
 
 .archiveWindow::before {
     content: "";
@@ -56,15 +59,21 @@
     position: absolute;
     z-index: -2;
 
-    inset: 12px -13px -14px 12px;
+    inset:
+        12px
+        -13px
+        -14px
+        12px;
 
     background: var(--paper-dark);
+
     border: 3px solid var(--ink);
 
     transform: rotate(0.65deg);
 }
 
-/* accent sheet peeking out */
+
+/* ACCENT TAB */
 
 .archiveWindow::after {
     content: "";
@@ -79,6 +88,7 @@
     top: -21px;
 
     background: var(--yellow);
+
     border: 3px solid var(--ink);
 
     transform: rotate(5deg);
@@ -86,8 +96,7 @@
 
 
 /* =========================================================
-   TOP STRIP
-   Keeping old TSX class names
+   LEGACY WINDOW BAR
    ========================================================= */
 
 .windowBar {
@@ -101,7 +110,11 @@
 
     gap: 20px;
 
-    padding: 8px 16px 8px 22px;
+    padding:
+        8px
+        16px
+        8px
+        22px;
 
     background:
         repeating-linear-gradient(
@@ -131,12 +144,19 @@
 
     gap: 9px;
 
-    padding: 8px 13px;
+    padding:
+        8px
+        13px;
 
     background: var(--paper-light);
+
     border: 2px solid var(--ink);
 
-    box-shadow: 4px 4px 0 var(--ink);
+    box-shadow:
+        4px
+        4px
+        0
+        var(--ink);
 
     transform: rotate(-1.5deg);
 }
@@ -152,7 +172,11 @@
     border: 1.5px solid var(--ink);
     border-radius: 50%;
 
-    animation: statusPulse 2.8s ease-in-out infinite;
+    animation:
+        statusPulse
+        2.8s
+        ease-in-out
+        infinite;
 }
 
 .windowMeta {
@@ -171,11 +195,13 @@
     display: grid;
     place-items: center;
 
-    background: rgba(255, 255, 255, 0.35);
+    background:
+        rgba(255, 255, 255, 0.35);
 
     border: 1.5px solid var(--ink);
 
     font-size: 12px;
+
     line-height: 1;
 }
 
@@ -201,22 +227,31 @@
 
     flex: 0 0 auto;
 
-    padding: 8px 12px;
+    padding:
+        8px
+        12px;
 
-    background: var(--ink);
     color: var(--paper-light);
+    background: var(--ink);
 
     border: 2px solid var(--ink);
 
-    box-shadow: 4px 4px 0 var(--yellow);
+    box-shadow:
+        4px
+        4px
+        0
+        var(--yellow);
 
-    font-family: var(--font-mono, monospace);
+    font-family:
+        var(--font-mono, monospace);
+
     font-size: 12px;
     font-weight: 950;
 
     line-height: 1.05;
 
     letter-spacing: 0.08em;
+
     text-transform: uppercase;
 
     transform: rotate(-1deg);
@@ -236,6 +271,7 @@
     flex: 1;
 
     height: 3px;
+
     margin-bottom: 5px;
 
     background: var(--ink);
@@ -248,7 +284,9 @@
 
     margin-bottom: 1px;
 
-    font-family: var(--font-mono, monospace);
+    font-family:
+        var(--font-mono, monospace);
+
     font-size: 9px;
     font-weight: 900;
 
@@ -267,7 +305,8 @@
     align-items: center;
     justify-content: center;
 
-    gap: clamp(20px, 3vw, 46px);
+    gap:
+        clamp(20px, 3vw, 46px);
 
     padding:
         clamp(28px, 3vw, 42px)
@@ -277,14 +316,17 @@
 
 
 /* =========================================================
-   CARTOON ARROWS
+   ARROWS
    ========================================================= */
 
 .arrowButton {
     width: 54px;
     height: 54px;
 
-    flex: 0 0 54px;
+    flex:
+        0
+        0
+        54px;
 
     display: grid;
     place-items: center;
@@ -297,24 +339,35 @@
     border: 3px solid var(--ink);
     border-radius: 0;
 
-    box-shadow: 6px 6px 0 var(--ink);
+    box-shadow:
+        6px
+        6px
+        0
+        var(--ink);
 
     font: inherit;
+
     font-size: 25px;
     font-weight: 950;
 
     cursor: pointer;
 
     transition:
-        transform 150ms cubic-bezier(0.34, 1.56, 0.64, 1),
-        box-shadow 150ms ease;
+        transform
+        150ms
+        cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow
+        150ms
+        ease;
 }
 
 .arrowButton span {
     display: block;
 
     transition:
-        transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
+        transform
+        180ms
+        cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .arrowPrevious {
@@ -331,35 +384,46 @@
 .arrowPrevious:hover {
     transform:
         rotate(-6deg)
-        translate(-3px, -3px)
-        scale(1.04);
+        translate(-3px, -3px);
 
-    box-shadow: 9px 9px 0 var(--ink);
+    box-shadow:
+        9px
+        9px
+        0
+        var(--ink);
 }
 
 .arrowPrevious:hover span {
-    transform: translateX(-4px);
+    transform:
+        translateX(-4px);
 }
 
 .arrowNext:hover {
     transform:
         rotate(6deg)
-        translate(3px, -3px)
-        scale(1.04);
+        translate(3px, -3px);
 
-    box-shadow: 9px 9px 0 rgba(26, 23, 20, 0.28);
+    box-shadow:
+        9px
+        9px
+        0
+        rgba(26, 23, 20, 0.28);
 }
 
 .arrowNext:hover span {
-    transform: translateX(4px);
+    transform:
+        translateX(4px);
 }
 
 .arrowButton:active {
     transform:
-        translate(5px, 5px)
-        scale(0.95);
+        translate(4px, 4px);
 
-    box-shadow: 1px 1px 0 var(--ink);
+    box-shadow:
+        1px
+        1px
+        0
+        var(--ink);
 
     transition-duration: 60ms;
 }
@@ -370,7 +434,9 @@
    ========================================================= */
 
 .projectTitles {
-    width: min(780px, 100%);
+    width:
+        min(780px, 100%);
+
     min-width: 0;
 
     display: grid;
@@ -382,7 +448,8 @@
 
     align-items: center;
 
-    gap: clamp(12px, 2vw, 28px);
+    gap:
+        clamp(12px, 2vw, 28px);
 }
 
 .projectTitle {
@@ -390,22 +457,29 @@
 
     min-width: 0;
 
-    padding: 13px 7px;
+    padding:
+        13px
+        7px;
 
     color: inherit;
     background: transparent;
 
     border: 0;
 
-    font-family: var(--font-mono, monospace);
+    font-family:
+        var(--font-mono, monospace);
+
     font-size: 10px;
     font-weight: 800;
 
     letter-spacing: 0.055em;
+
     text-transform: uppercase;
 
     white-space: nowrap;
+
     overflow: hidden;
+
     text-overflow: ellipsis;
 
     opacity: 0.28;
@@ -414,8 +488,12 @@
 
     transition:
         opacity 160ms ease,
-        transform 160ms cubic-bezier(0.34, 1.56, 0.64, 1),
-        box-shadow 160ms ease;
+        transform
+        160ms
+        cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow
+        160ms
+        ease;
 }
 
 .projectNumber {
@@ -429,17 +507,28 @@
 .projectTitle:hover {
     opacity: 0.68;
 
-    transform: translateY(-2px);
+    transform:
+        translateY(-2px);
 }
 
 .projectTitleActive {
-    padding: 12px 13px;
+    padding:
+        12px
+        13px;
 
-    background: var(--paper-light);
+    background:
+        var(--paper-light);
 
-    border: 2px solid var(--ink);
+    border:
+        2px
+        solid
+        var(--ink);
 
-    box-shadow: 4px 4px 0 var(--ink);
+    box-shadow:
+        4px
+        4px
+        0
+        var(--ink);
 
     font-size: 11px;
     font-weight: 950;
@@ -458,7 +547,11 @@
         rotate(1deg)
         translate(-2px, -5px);
 
-    box-shadow: 6px 6px 0 var(--ink);
+    box-shadow:
+        6px
+        6px
+        0
+        var(--ink);
 }
 
 
@@ -474,13 +567,18 @@
 
     width: 80%;
     max-width: 150px;
+
     height: 6px;
 
     background: var(--yellow);
 
-    border: 2px solid var(--ink);
+    border:
+        2px
+        solid
+        var(--ink);
 
-    transform: rotate(-1deg);
+    transform:
+        rotate(-1deg);
 
     animation:
         projectUnderlineIn
@@ -501,6 +599,12 @@
         clamp(18px, 2.5vw, 36px)
         clamp(20px, 3vw, 38px);
 
+    /*
+     * Stage remains clipped horizontally.
+     *
+     * Lift room is created INSIDE the stage rather than
+     * letting cards leak outside the book.
+     */
     overflow: hidden;
 
     background:
@@ -512,17 +616,30 @@
         rgba(255, 255, 255, 0.23);
 
     background-size:
-        22px 22px,
+        22px
+        22px,
         auto;
 
-    border: 3px solid var(--ink);
+    border:
+        3px
+        solid
+        var(--ink);
 
     box-shadow:
-        inset 0 0 0 5px rgba(255, 255, 255, 0.18),
-        7px 7px 0 rgba(26, 23, 20, 0.11);
+        inset
+        0
+        0
+        0
+        5px
+        rgba(255, 255, 255, 0.18),
+        7px
+        7px
+        0
+        rgba(26, 23, 20, 0.11);
 }
 
-/* cartoon decorative mark */
+
+/* CARTOON MARKS */
 
 .projectStage::before {
     content: "✦";
@@ -538,7 +655,8 @@
 
     opacity: 0.13;
 
-    transform: rotate(-14deg);
+    transform:
+        rotate(-14deg);
 
     pointer-events: none;
 }
@@ -552,13 +670,16 @@
     right: 24px;
     top: 57px;
 
-    font-family: var(--font-mono, monospace);
+    font-family:
+        var(--font-mono, monospace);
+
     font-size: 44px;
     font-weight: 300;
 
     opacity: 0.13;
 
-    transform: rotate(9deg);
+    transform:
+        rotate(9deg);
 
     pointer-events: none;
 }
@@ -578,17 +699,26 @@
 
     gap: 20px;
 
-    padding: 11px 15px;
+    padding:
+        11px
+        15px;
 
-    background: rgba(255, 250, 242, 0.55);
+    background:
+        rgba(255, 250, 242, 0.55);
 
-    border-bottom: 2px solid var(--ink);
+    border-bottom:
+        2px
+        solid
+        var(--ink);
 
-    font-family: var(--font-mono, monospace);
+    font-family:
+        var(--font-mono, monospace);
+
     font-size: 8px;
     font-weight: 900;
 
     letter-spacing: 0.1em;
+
     text-transform: uppercase;
 
     opacity: 0.65;
@@ -596,14 +726,16 @@
 
 
 /* =========================================================
-   REGISTRATION / PRINT MARKS
+   REGISTRATION MARKS
    ========================================================= */
 
 .registrationMark {
     position: absolute;
     z-index: 4;
 
-    font-family: var(--font-mono, monospace);
+    font-family:
+        var(--font-mono, monospace);
+
     font-size: 22px;
     font-weight: 500;
 
@@ -616,14 +748,47 @@
     top: 49px;
     left: 11px;
 
-    transform: rotate(-8deg);
+    transform:
+        rotate(-8deg);
 }
 
 .markTR {
     top: 49px;
     right: 11px;
 
-    transform: rotate(7deg);
+    transform:
+        rotate(7deg);
+}
+
+
+/* =========================================================
+   RAIL VIEWPORT
+
+   IMPORTANT:
+   This is where the extra hover/lift room lives.
+   ========================================================= */
+
+.railViewport {
+    position: relative;
+
+    width: 100%;
+    min-width: 0;
+
+    /*
+     * FloatingCard lifts 12px.
+     * Active slot also sits slightly above baseline.
+     *
+     * 34px gives the physical card plenty of room.
+     */
+    padding-top: 34px;
+
+    /*
+     * Pull the added space upward so we don't create
+     * an ugly giant gap beneath the stage label.
+     */
+    margin-top: -18px;
+
+    overflow: hidden;
 }
 
 
@@ -631,27 +796,32 @@
    CARD RAIL
    ========================================================= */
 
-.railViewport {
-    position: relative;
-
-    width: 100%;
-
-    overflow: hidden;
-}
-
 .rail {
     display: flex;
     align-items: center;
 
-    gap: clamp(30px, 3.5vw, 50px);
+    gap:
+        clamp(30px, 3.5vw, 50px);
 
+    /*
+     * LARGE INTERNAL VERTICAL SAFE AREA.
+     *
+     * This is intentional.
+     * Floating cards, backing sheets and shadows all remain
+     * inside the scroll container when lifted.
+     */
     padding:
-        clamp(48px, 5vw, 68px)
+        clamp(58px, 6vw, 82px)
         0
-        clamp(56px, 6vw, 82px);
+        clamp(62px, 7vw, 90px);
 
     overflow-x: auto;
-    overflow-y: visible;
+
+    /*
+     * Keep the vertical area controlled.
+     * We already created enough internal room above.
+     */
+    overflow-y: hidden;
 
     scrollbar-width: none;
 
@@ -673,51 +843,70 @@
 
 
 /* =========================================================
-   PROJECT CARD — POP-UP EFFECT
+   PROJECT CARD SLOTS
+
+   IMPORTANT:
+   NO SCALE.
+   NO FILTER.
+
+   Scaling DOM screenshots was one source of softness.
+   Depth now comes from position + opacity.
    ========================================================= */
 
 .cardSlot {
-    flex: 0 0 auto;
+    flex:
+        0
+        0
+        auto;
 
-    transform-origin: center bottom;
+    position: relative;
+
+    transform-origin:
+        center
+        bottom;
 
     transition:
-        transform 430ms cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 300ms ease,
-        filter 300ms ease;
+        transform
+        360ms
+        cubic-bezier(0.22, 1, 0.36, 1),
+        opacity
+        260ms
+        ease;
 }
 
+
+/* INACTIVE CARDS */
+
 .cardSlotInactive {
-    opacity: 0.42;
+    z-index: 1;
+
+    opacity: 0.4;
 
     transform:
-        translateY(19px)
-        scale(0.84)
-        rotate(-1.5deg);
-
-    filter:
-        saturate(0.68)
-        contrast(0.92);
+        translateY(24px)
+        rotate(-1.4deg);
 }
 
 .cardSlotInactive:nth-of-type(even) {
     transform:
-        translateY(19px)
-        scale(0.84)
-        rotate(1.5deg);
+        translateY(24px)
+        rotate(1.4deg);
 }
 
+
+/* ACTIVE CARD */
+
 .cardSlotActive {
-    position: relative;
     z-index: 5;
 
     opacity: 1;
 
+    /*
+     * NO SCALE.
+     * Keep preview pixels sharp.
+     */
     transform:
-        translateY(-11px)
-        scale(1.04);
-
-    filter: none;
+        translateY(-8px);
 
     animation:
         cardPopFloat
@@ -727,7 +916,9 @@
 }
 
 
-/* little paper support under active card */
+/* =========================================================
+   PAPER SUPPORT UNDER ACTIVE CARD
+   ========================================================= */
 
 .cardSlotActive::before {
     content: "";
@@ -737,20 +928,25 @@
 
     left: 12%;
     right: 12%;
+
     bottom: -21px;
 
     height: 44px;
 
-    background: rgba(26, 23, 20, 0.12);
+    background:
+        rgba(26, 23, 20, 0.12);
 
-    clip-path: polygon(
-        7% 100%,
-        24% 0,
-        76% 0,
-        93% 100%
-    );
+    clip-path:
+        polygon(
+            7% 100%,
+            24% 0,
+            76% 0,
+            93% 100%
+        );
 
-    transform: perspective(200px) rotateX(55deg);
+    transform:
+        perspective(200px)
+        rotateX(55deg);
 
     transform-origin: top;
 
@@ -779,27 +975,26 @@
     cursor: pointer;
 }
 
+
+/*
+ * Keep shadows on the physical card.
+ * No filter/drop-shadow here because filters can force
+ * rasterization of the entire subtree.
+ */
+
 .cardSlotActive .cardButton {
-    filter:
-        drop-shadow(
-            8px
-            9px
-            0
-            rgba(26, 23, 20, 0.15)
-        )
-        drop-shadow(
-            15px
-            17px
-            0
-            rgba(26, 23, 20, 0.055)
-        );
+    position: relative;
 }
 
+
+/*
+ * FloatingCard itself handles the hover lift now.
+ *
+ * DO NOT scale the slot again here.
+ */
+
 .cardSlotActive:hover {
-    transform:
-        translateY(-17px)
-        scale(1.055)
-        rotate(0.4deg);
+    z-index: 8;
 }
 
 
@@ -824,17 +1019,26 @@
 
     gap: 18px;
 
-    padding: 9px 14px;
+    padding:
+        9px
+        14px;
 
-    background: rgba(255, 250, 242, 0.48);
+    background:
+        rgba(255, 250, 242, 0.48);
 
-    border-top: 2px solid var(--ink);
+    border-top:
+        2px
+        solid
+        var(--ink);
 
-    font-family: var(--font-mono, monospace);
+    font-family:
+        var(--font-mono, monospace);
+
     font-size: 8px;
     font-weight: 900;
 
     letter-spacing: 0.09em;
+
     text-transform: uppercase;
 
     opacity: 0.62;
@@ -861,7 +1065,8 @@
 
     opacity: 0.45;
 
-    transform: rotate(-1deg);
+    transform:
+        rotate(-1deg);
 }
 
 
@@ -927,23 +1132,39 @@
 @keyframes projectUnderlineIn {
     from {
         opacity: 0;
-        scale: 0 1;
+
+        clip-path:
+            inset(0 100% 0 0);
     }
 
     to {
         opacity: 1;
-        scale: 1 1;
+
+        clip-path:
+            inset(0 0 0 0);
     }
 }
+
+
+/*
+ * Tiny vertical movement only.
+ *
+ * No scale.
+ * No filter.
+ */
 
 @keyframes cardPopFloat {
     0%,
     100% {
-        translate: 0 0;
+        translate:
+            0
+            0;
     }
 
     50% {
-        translate: 0 -8px;
+        translate:
+            0
+            -4px;
     }
 }
 
@@ -951,12 +1172,10 @@
     0%,
     100% {
         opacity: 1;
-        transform: scale(1);
     }
 
     50% {
         opacity: 0.45;
-        transform: scale(0.78);
     }
 }
 
@@ -976,8 +1195,14 @@
 
     .archiveWindow {
         box-shadow:
-            7px 7px 0 var(--ink),
-            14px 14px 0 rgba(26, 23, 20, 0.1);
+            7px
+            7px
+            0
+            var(--ink),
+            14px
+            14px
+            0
+            rgba(26, 23, 20, 0.1);
     }
 
     .archiveWindow::before {
@@ -1019,7 +1244,11 @@
 
         font-size: 19px;
 
-        box-shadow: 4px 4px 0 var(--ink);
+        box-shadow:
+            4px
+            4px
+            0
+            var(--ink);
     }
 
     .projectTitles {
@@ -1043,25 +1272,34 @@
         display: none;
     }
 
+    .railViewport {
+        padding-top: 30px;
+
+        margin-top: -16px;
+    }
+
     .rail {
         gap: 26px;
 
         padding:
-            42px
+            54px
             0
-            62px;
+            70px;
     }
 
     .cardSlotInactive {
         transform:
-            translateY(15px)
-            scale(0.87);
+            translateY(18px);
+    }
+
+    .cardSlotInactive:nth-of-type(even) {
+        transform:
+            translateY(18px);
     }
 
     .cardSlotActive {
         transform:
-            translateY(-8px)
-            scale(1.02);
+            translateY(-6px);
     }
 }
 
@@ -1083,8 +1321,14 @@
         border-width: 2px;
 
         box-shadow:
-            5px 5px 0 var(--ink),
-            10px 10px 0 rgba(26, 23, 20, 0.1);
+            5px
+            5px
+            0
+            var(--ink),
+            10px
+            10px
+            0
+            rgba(26, 23, 20, 0.1);
 
         transform: none;
     }
@@ -1267,7 +1511,8 @@
             rgba(26, 23, 20, 0.1);
 
         background-size:
-            18px 18px,
+            18px
+            18px,
             auto;
     }
 
@@ -1294,45 +1539,50 @@
         display: none;
     }
 
+
+    /*
+     * Still leave hover/lift room on phones.
+     * It also prevents rotated card corners being clipped.
+     */
+
+    .railViewport {
+        padding-top: 24px;
+
+        margin-top: -12px;
+    }
+
     .rail {
         gap: 20px;
 
         padding:
-            34px
+            42px
             0
-            48px;
+            52px;
     }
 
     .cardSlotInactive {
         opacity: 0.38;
 
         transform:
-            translateY(10px)
-            scale(0.9);
+            translateY(10px);
     }
 
     .cardSlotInactive:nth-of-type(even) {
         transform:
-            translateY(10px)
-            scale(0.9);
+            translateY(10px);
     }
 
     .cardSlotActive {
         transform:
-            translateY(-5px)
-            scale(1);
+            translateY(-4px);
+
+        animation: none;
     }
 
     .cardSlotActive::before {
         bottom: -14px;
 
         height: 30px;
-    }
-
-    .cardSlotActive:hover {
-        transform:
-            translateY(-8px)
-            scale(1.015);
     }
 
     .stageFooter {
@@ -1370,7 +1620,8 @@
     }
 
     .sectionMarker {
-        justify-content: space-between;
+        justify-content:
+            space-between;
     }
 
     .projectNav {
@@ -1397,7 +1648,11 @@
 .arrowButton:focus-visible,
 .projectTitle:focus-visible,
 .cardButton:focus-visible {
-    outline: 3px solid var(--ink);
+    outline:
+        3px
+        solid
+        var(--ink);
+
     outline-offset: 4px;
 }
 
