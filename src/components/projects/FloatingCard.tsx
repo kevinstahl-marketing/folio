@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { colors, fonts } from "@/lib/theme";
+import { fonts } from "@/lib/theme";
 
 type FloatingCardProps = {
   id: string;
@@ -15,7 +15,6 @@ type FloatingCardProps = {
 };
 
 export default function FloatingCard({
-  id,
   title,
   sub,
   rotation,
@@ -24,152 +23,222 @@ export default function FloatingCard({
   cardW,
   cardH,
 }: FloatingCardProps) {
-  const [hov, setHov] = useState(false);
-
-  const scrollTo = () =>
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const [hovered, setHovered] = useState(false);
 
   return (
     <div
-      onClick={scrollTo}
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
+        "--card-accent": accent,
         width: cardW,
         height: cardH,
         flexShrink: 0,
-        borderRadius: 10,
-        border: "2px solid rgba(26,23,20,0.13)",
-        overflow: "hidden",
-        cursor: "pointer",
         position: "relative",
-        transform: `rotate(${hov ? 0 : rotation}deg) scale(${
-          hov ? 1.04 : 1
-        }) translateY(${hov ? -8 : 0}px)`,
+        cursor: "pointer",
+        transform: `
+          rotate(${hovered ? rotation * 0.2 : rotation}deg)
+          translateY(${hovered ? -5 : 0}px)
+        `,
         transition:
-          "transform 0.42s cubic-bezier(0.22,0.87,0.52,1), box-shadow 0.3s",
-        boxShadow: hov
-          ? `0 36px 80px rgba(0,0,0,0.2), 0 8px 0 ${accent}44`
-          : "0 16px 48px rgba(0,0,0,0.14), 6px 6px 0 rgba(26,23,20,0.1)",
+          "transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1)",
         willChange: "transform",
-      }}
+      } as React.CSSProperties}
     >
+      {/* Accent sheet behind the card */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          zIndex: 0,
+          inset: "10px -9px -10px 10px",
+          background: accent,
+          border: "3px solid #1a1714",
+          transform: "rotate(1.5deg)",
+          transition:
+            "transform 220ms cubic-bezier(0.34, 1.56, 0.64, 1)",
+          ...(hovered
+            ? {
+                transform:
+                  "translate(3px, 3px) rotate(2.5deg)",
+              }
+            : {}),
+        }}
+      />
+
+      {/* Black shadow sheet */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          zIndex: 1,
+          inset: "7px -6px -7px 7px",
+          background: "#1a1714",
+          transform: "rotate(-0.4deg)",
+        }}
+      />
+
+      {/* Main card */}
       <div
         style={{
+          position: "relative",
+          zIndex: 2,
+
           width: "100%",
           height: "100%",
-          pointerEvents: "none",
+
+          display: "grid",
+          gridTemplateRows: "1fr auto",
+
           overflow: "hidden",
-        }}
-      >
-        {content}
-      </div>
 
-      <div
-        style={{
-          position: "absolute",
-          top: 12,
-          left: 14,
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
+          color: "#1a1714",
+          background: "#f7f2e9",
+
+          border: "3px solid #1a1714",
         }}
       >
+        {/* Screenshot */}
+<div
+  style={{
+    position: "relative",
+    minHeight: 0,
+    overflow: "hidden",
+    background: "#ded8cf",
+    borderBottom: "3px solid #1a1714",
+  }}
+>
+  <div
+    style={{
+      position: "absolute",
+      inset: 0,
+      overflow: "hidden",
+      pointerEvents: "none",
+    }}
+  >
+    {content}
+  </div>
+</div>
+
+        {/* Project caption */}
         <div
           style={{
-            background: accent,
-            borderRadius: 2,
-            padding: "3px 10px",
-            fontFamily: fonts.mono,
-            fontSize: 9,
-            color: "white",
-            letterSpacing: "0.1em",
-            backdropFilter: "blur(8px)",
+            position: "relative",
+
+            minHeight: Math.max(
+              88,
+              Math.round(cardH * 0.18)
+            ),
+
+            display: "grid",
+            gridTemplateColumns: "1fr auto",
+            alignItems: "center",
+
+            gap: 16,
+
+            padding:
+              "clamp(15px, 3vw, 21px) clamp(16px, 3vw, 22px)",
+
+            background: "#fffaf2",
           }}
         >
-          {title}
-        </div>
-
-        <div
-          style={{
-            fontFamily: fonts.mono,
-            fontSize: 8,
-            color: "white",
-            opacity: 0.6,
-            letterSpacing: "0.06em",
-            background: "rgba(26,23,20,0.4)",
-            borderRadius: 2,
-            padding: "3px 8px",
-          }}
-        >
-          {sub}
-        </div>
-      </div>
-
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(to top, rgba(10,10,20,0.68) 0%, rgba(10,10,20,0.1) 45%, transparent 65%)",
-          opacity: hov ? 1 : 0,
-          transition: "opacity 0.28s",
-          display: "flex",
-          alignItems: "flex-end",
-          padding: 24,
-        }}
-      >
-        <div>
           <div
             style={{
-              fontFamily: fonts.display,
-              fontStyle: "italic",
-              fontSize: 24,
-              color: "white",
-              lineHeight: 1.1,
-              marginBottom: 6,
+              minWidth: 0,
             }}
           >
-            {title}
-          </div>
-
-          <div
-            style={{
-              fontFamily: fonts.sans,
-              fontSize: 14,
-              color: "white",
-              opacity: 0.75,
-              marginBottom: 14,
-            }}
-          >
-            {sub}
-          </div>
-
-          <div
-            style={{
-              fontFamily: fonts.sans,
-              fontWeight: 700,
-              fontSize: 15,
-              color: "white",
-              display: "flex",
-              alignItems: "center",
-              gap: 8,
-            }}
-          >
-            Explore{" "}
-            <span
+            <div
               style={{
-                color:
-                  accent === colors.projects.ezcalcs
-                    ? "#7da4ff"
-                    : accent === colors.projects.laConcheria
-                    ? "#f0a880"
-                    : "#b0a0ff",
+                marginBottom: 7,
+
+                fontFamily: fonts.display,
+                fontSize:
+                  "clamp(20px, 2.1vw, 28px)",
+                fontStyle: "italic",
+                fontWeight: 700,
+
+                lineHeight: 0.95,
+
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
               }}
             >
-              →
-            </span>
+              {title}
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 8,
+
+                fontFamily: fonts.mono,
+                fontSize: 8,
+                fontWeight: 800,
+
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+
+                opacity: 0.52,
+              }}
+            >
+              <span
+                style={{
+                  width: 20,
+                  height: 3,
+
+                  flex: "0 0 auto",
+
+                  background: accent,
+                  border: "1px solid #1a1714",
+                }}
+              />
+
+              {sub}
+            </div>
           </div>
+
+          {/* Decorative registration mark */}
+          <div
+            aria-hidden="true"
+            style={{
+              alignSelf: "end",
+
+              fontFamily: fonts.mono,
+              fontSize: 18,
+              fontWeight: 400,
+
+              lineHeight: 1,
+
+              opacity: 0.24,
+
+              transform: "rotate(8deg)",
+            }}
+          >
+            +
+          </div>
+
+          {/* Tiny accent strip */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+
+              left: 0,
+              bottom: 0,
+
+              width: hovered ? "42%" : "18%",
+              height: 6,
+
+              background: accent,
+              borderTop: "2px solid #1a1714",
+              borderRight: "2px solid #1a1714",
+
+              transition:
+                "width 280ms cubic-bezier(0.22, 1, 0.36, 1)",
+            }}
+          />
         </div>
       </div>
     </div>

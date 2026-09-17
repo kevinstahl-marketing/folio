@@ -1,15 +1,182 @@
 /* =========================================================
    PROJECT CAROUSEL
+   POP-UP BOOK / CARTOON BRUTALISM
    ========================================================= */
 
 .carousel {
+    --ink: #1a1714;
+    --paper: #f1ece4;
+    --paper-light: #fffaf2;
+    --paper-dark: #d8d0c4;
+    --yellow: #f0c94d;
+
     position: relative;
     z-index: 4;
 
     width: 100%;
     min-width: 0;
 
+    padding:
+        clamp(44px, 6vw, 82px)
+        clamp(18px, 4vw, 52px)
+        clamp(64px, 7vw, 100px);
+
     overflow: hidden;
+}
+
+
+/* =========================================================
+   POP-UP BOOK SHEET
+   ========================================================= */
+
+.archiveWindow {
+    position: relative;
+    isolation: isolate;
+
+    width: min(1480px, 100%);
+    margin: 0 auto;
+
+    color: var(--ink);
+    background: var(--paper);
+
+    border: 3px solid var(--ink);
+
+    box-shadow:
+        10px 10px 0 var(--ink),
+        20px 20px 0 rgba(26, 23, 20, 0.12);
+
+    transform: rotate(-0.12deg);
+}
+
+/* sheet behind */
+
+.archiveWindow::before {
+    content: "";
+
+    position: absolute;
+    z-index: -2;
+
+    inset: 12px -13px -14px 12px;
+
+    background: var(--paper-dark);
+    border: 3px solid var(--ink);
+
+    transform: rotate(0.65deg);
+}
+
+/* accent sheet peeking out */
+
+.archiveWindow::after {
+    content: "";
+
+    position: absolute;
+    z-index: -3;
+
+    width: 130px;
+    height: 82px;
+
+    right: 7%;
+    top: -21px;
+
+    background: var(--yellow);
+    border: 3px solid var(--ink);
+
+    transform: rotate(5deg);
+}
+
+
+/* =========================================================
+   TOP STRIP
+   Keeping old TSX class names
+   ========================================================= */
+
+.windowBar {
+    position: relative;
+
+    min-height: 46px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 8px 16px 8px 22px;
+
+    background:
+        repeating-linear-gradient(
+            -45deg,
+            rgba(26, 23, 20, 0.025) 0,
+            rgba(26, 23, 20, 0.025) 2px,
+            transparent 2px,
+            transparent 7px
+        ),
+        rgba(255, 255, 255, 0.3);
+
+    border-bottom: 3px solid var(--ink);
+
+    font-family: var(--font-mono, monospace);
+    font-size: 9px;
+    font-weight: 900;
+
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+}
+
+.windowIdentity {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 8px 13px;
+
+    background: var(--paper-light);
+    border: 2px solid var(--ink);
+
+    box-shadow: 4px 4px 0 var(--ink);
+
+    transform: rotate(-1.5deg);
+}
+
+.statusDot {
+    width: 9px;
+    height: 9px;
+
+    flex: 0 0 auto;
+
+    background: var(--yellow);
+
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+
+    animation: statusPulse 2.8s ease-in-out infinite;
+}
+
+.windowMeta {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    opacity: 0.52;
+}
+
+.windowControl {
+    width: 25px;
+    height: 25px;
+
+    display: grid;
+    place-items: center;
+
+    background: rgba(255, 255, 255, 0.35);
+
+    border: 1.5px solid var(--ink);
+
+    font-size: 12px;
+    line-height: 1;
 }
 
 
@@ -20,58 +187,79 @@
 .sectionMarker {
     display: flex;
     align-items: flex-end;
+
     gap: 18px;
 
-    padding: 10px clamp(28px, 5vw, 80px) 0;
+    padding:
+        clamp(30px, 4vw, 52px)
+        clamp(28px, 5vw, 68px)
+        0;
 }
 
 .sectionLabel {
+    position: relative;
+
     flex: 0 0 auto;
+
+    padding: 8px 12px;
+
+    background: var(--ink);
+    color: var(--paper-light);
+
+    border: 2px solid var(--ink);
+
+    box-shadow: 4px 4px 0 var(--yellow);
 
     font-family: var(--font-mono, monospace);
     font-size: 12px;
-    font-weight: 900;
-    line-height: 1.1;
+    font-weight: 950;
+
+    line-height: 1.05;
 
     letter-spacing: 0.08em;
     text-transform: uppercase;
+
+    transform: rotate(-1deg);
 }
 
 .sectionLabel span {
     display: block;
 
-    margin-top: 4px;
+    margin-top: 5px;
 
-    opacity: 0.32;
+    font-size: 8px;
+
+    opacity: 0.58;
 }
 
 .sectionRule {
     flex: 1;
 
-    height: 2px;
-    margin-bottom: 3px;
+    height: 3px;
+    margin-bottom: 5px;
 
-    background: currentColor;
-    opacity: 0.15;
+    background: var(--ink);
+
+    opacity: 0.18;
 }
 
 .sectionCode {
     flex: 0 0 auto;
 
-    margin-bottom: -1px;
+    margin-bottom: 1px;
 
     font-family: var(--font-mono, monospace);
-    font-size: 10px;
-    font-weight: 800;
+    font-size: 9px;
+    font-weight: 900;
 
     letter-spacing: 0.08em;
 
-    opacity: 0.25;
+    opacity: 0.34;
 }
 
 
 /* =========================================================
-   NAVIGATION
+   PROJECT NAVIGATION
    ========================================================= */
 
 .projectNav {
@@ -79,106 +267,101 @@
     align-items: center;
     justify-content: center;
 
-    gap: clamp(16px, 3vw, 42px);
+    gap: clamp(20px, 3vw, 46px);
 
     padding:
-        clamp(14px, 2vw, 26px)
-        clamp(20px, 4vw, 72px)
-        0;
+        clamp(28px, 3vw, 42px)
+        clamp(24px, 4vw, 64px)
+        clamp(26px, 3vw, 38px);
 }
 
 
 /* =========================================================
-   ARROWS
+   CARTOON ARROWS
    ========================================================= */
 
 .arrowButton {
-    width: 46px;
-    height: 46px;
+    width: 54px;
+    height: 54px;
 
-    flex: 0 0 46px;
+    flex: 0 0 54px;
 
     display: grid;
     place-items: center;
 
     padding: 0;
 
-    border: 2px solid currentColor;
+    color: var(--ink);
+    background: var(--paper-light);
+
+    border: 3px solid var(--ink);
     border-radius: 0;
 
+    box-shadow: 6px 6px 0 var(--ink);
+
     font: inherit;
-    font-size: 21px;
+    font-size: 25px;
+    font-weight: 950;
 
     cursor: pointer;
 
     transition:
-        transform 150ms ease,
-        box-shadow 150ms ease,
-        background-color 150ms ease;
+        transform 150ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 150ms ease;
 }
 
 .arrowButton span {
     display: block;
 
-    transition: transform 180ms
-        cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+        transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-
-/* LEFT */
-
 .arrowPrevious {
-    background: rgba(255, 255, 255, 0.22);
+    transform: rotate(-3deg);
+}
 
-    box-shadow:
-        -4px 4px 0 rgba(26, 23, 20, 0.13);
+.arrowNext {
+    color: var(--paper-light);
+    background: var(--ink);
+
+    transform: rotate(3deg);
 }
 
 .arrowPrevious:hover {
-    transform: translate(-2px, -2px);
+    transform:
+        rotate(-6deg)
+        translate(-3px, -3px)
+        scale(1.04);
 
-    box-shadow:
-        -6px 6px 0 rgba(26, 23, 20, 0.16);
+    box-shadow: 9px 9px 0 var(--ink);
 }
 
 .arrowPrevious:hover span {
-    transform: translateX(-3px);
-}
-
-.arrowPrevious:active {
-    transform: translate(-4px, 3px) scale(0.94);
-
-    box-shadow:
-        -1px 1px 0 rgba(26, 23, 20, 0.14);
-}
-
-
-/* RIGHT */
-
-.arrowNext {
-    color: #f5f2ee;
-    background: #1a1714;
-
-    box-shadow:
-        4px 4px 0 rgba(26, 23, 20, 0.16);
+    transform: translateX(-4px);
 }
 
 .arrowNext:hover {
-    transform: translate(2px, -2px);
+    transform:
+        rotate(6deg)
+        translate(3px, -3px)
+        scale(1.04);
 
-    box-shadow:
-        6px 6px 0 rgba(26, 23, 20, 0.18);
+    box-shadow: 9px 9px 0 rgba(26, 23, 20, 0.28);
 }
 
 .arrowNext:hover span {
-    transform: translateX(3px);
+    transform: translateX(4px);
 }
 
-.arrowNext:active {
-    transform: translate(4px, 3px) scale(0.94);
+.arrowButton:active {
+    transform:
+        translate(5px, 5px)
+        scale(0.95);
 
-    box-shadow:
-        1px 1px 0 rgba(26, 23, 20, 0.12);
+    box-shadow: 1px 1px 0 var(--ink);
+
+    transition-duration: 60ms;
 }
 
 
@@ -187,95 +370,117 @@
    ========================================================= */
 
 .projectTitles {
+    width: min(780px, 100%);
+    min-width: 0;
+
     display: grid;
 
     grid-template-columns:
         minmax(120px, 1fr)
-        minmax(170px, 1.3fr)
+        minmax(190px, 1.35fr)
         minmax(120px, 1fr);
 
     align-items: center;
 
     gap: clamp(12px, 2vw, 28px);
-
-    width: min(720px, 100%);
-    min-width: 0;
 }
-
-.titlesFromRight {
-    animation:
-        projectTitlesLeft
-        320ms
-        cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.titlesFromLeft {
-    animation:
-        projectTitlesRight
-        320ms
-        cubic-bezier(0.22, 1, 0.36, 1);
-}
-
 
 .projectTitle {
     position: relative;
 
     min-width: 0;
 
-    padding: 12px 4px;
+    padding: 13px 7px;
 
-    border: 0;
+    color: inherit;
     background: transparent;
 
-    font-family: var(--font-mono, monospace);
-    font-size: 12px;
-    font-weight: 650;
+    border: 0;
 
-    letter-spacing: 0.08em;
+    font-family: var(--font-mono, monospace);
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 0.055em;
     text-transform: uppercase;
 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 
-    opacity: 0.3;
+    opacity: 0.28;
 
     cursor: pointer;
 
     transition:
         opacity 160ms ease,
-        transform 160ms ease;
+        transform 160ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 160ms ease;
+}
+
+.projectNumber {
+    margin-right: 8px;
+
+    font-size: 8px;
+
+    opacity: 0.48;
 }
 
 .projectTitle:hover {
-    opacity: 0.65;
+    opacity: 0.68;
+
     transform: translateY(-2px);
 }
 
 .projectTitleActive {
-    font-weight: 900;
+    padding: 12px 13px;
+
+    background: var(--paper-light);
+
+    border: 2px solid var(--ink);
+
+    box-shadow: 4px 4px 0 var(--ink);
+
+    font-size: 11px;
+    font-weight: 950;
 
     opacity: 1;
 
-    transform: translateY(-2px);
+    transform:
+        rotate(-1deg)
+        translateY(-3px);
 }
 
 .projectTitleActive:hover {
     opacity: 1;
+
+    transform:
+        rotate(1deg)
+        translate(-2px, -5px);
+
+    box-shadow: 6px 6px 0 var(--ink);
 }
 
+
+/* =========================================================
+   ACTIVE TITLE MARK
+   ========================================================= */
 
 .activeUnderline {
     position: absolute;
 
-    left: 50%;
-    bottom: 2px;
+    left: 10%;
+    bottom: -8px;
 
-    width: 70%;
-    max-width: 120px;
-    height: 3px;
+    width: 80%;
+    max-width: 150px;
+    height: 6px;
 
-    transform: translateX(-50%);
+    background: var(--yellow);
+
+    border: 2px solid var(--ink);
+
+    transform: rotate(-1deg);
 
     animation:
         projectUnderlineIn
@@ -285,10 +490,150 @@
 
 
 /* =========================================================
+   POP-UP STAGE
+   ========================================================= */
+
+.projectStage {
+    position: relative;
+
+    margin:
+        0
+        clamp(18px, 2.5vw, 36px)
+        clamp(20px, 3vw, 38px);
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 1px 1px,
+            rgba(26, 23, 20, 0.1) 1px,
+            transparent 1.5px
+        ),
+        rgba(255, 255, 255, 0.23);
+
+    background-size:
+        22px 22px,
+        auto;
+
+    border: 3px solid var(--ink);
+
+    box-shadow:
+        inset 0 0 0 5px rgba(255, 255, 255, 0.18),
+        7px 7px 0 rgba(26, 23, 20, 0.11);
+}
+
+/* cartoon decorative mark */
+
+.projectStage::before {
+    content: "✦";
+
+    position: absolute;
+    z-index: 1;
+
+    left: 20px;
+    bottom: 46px;
+
+    font-size: 34px;
+    font-weight: 950;
+
+    opacity: 0.13;
+
+    transform: rotate(-14deg);
+
+    pointer-events: none;
+}
+
+.projectStage::after {
+    content: "+";
+
+    position: absolute;
+    z-index: 1;
+
+    right: 24px;
+    top: 57px;
+
+    font-family: var(--font-mono, monospace);
+    font-size: 44px;
+    font-weight: 300;
+
+    opacity: 0.13;
+
+    transform: rotate(9deg);
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   STAGE HEADER
+   ========================================================= */
+
+.stageLabel {
+    position: relative;
+    z-index: 3;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 11px 15px;
+
+    background: rgba(255, 250, 242, 0.55);
+
+    border-bottom: 2px solid var(--ink);
+
+    font-family: var(--font-mono, monospace);
+    font-size: 8px;
+    font-weight: 900;
+
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   REGISTRATION / PRINT MARKS
+   ========================================================= */
+
+.registrationMark {
+    position: absolute;
+    z-index: 4;
+
+    font-family: var(--font-mono, monospace);
+    font-size: 22px;
+    font-weight: 500;
+
+    opacity: 0.24;
+
+    pointer-events: none;
+}
+
+.markTL {
+    top: 49px;
+    left: 11px;
+
+    transform: rotate(-8deg);
+}
+
+.markTR {
+    top: 49px;
+    right: 11px;
+
+    transform: rotate(7deg);
+}
+
+
+/* =========================================================
    CARD RAIL
    ========================================================= */
 
 .railViewport {
+    position: relative;
+
     width: 100%;
 
     overflow: hidden;
@@ -298,12 +643,12 @@
     display: flex;
     align-items: center;
 
-    gap: clamp(20px, 2.5vw, 32px);
+    gap: clamp(30px, 3.5vw, 50px);
 
     padding:
-        clamp(24px, 3vw, 34px)
+        clamp(48px, 5vw, 68px)
         0
-        clamp(44px, 5vw, 64px);
+        clamp(56px, 6vw, 82px);
 
     overflow-x: auto;
     overflow-y: visible;
@@ -326,228 +671,96 @@
     flex-shrink: 0;
 }
 
+
+/* =========================================================
+   PROJECT CARD — POP-UP EFFECT
+   ========================================================= */
+
 .cardSlot {
     flex: 0 0 auto;
 
+    transform-origin: center bottom;
+
     transition:
-        transform 220ms ease,
-        opacity 220ms ease;
+        transform 430ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 300ms ease,
+        filter 300ms ease;
+}
+
+.cardSlotInactive {
+    opacity: 0.42;
+
+    transform:
+        translateY(19px)
+        scale(0.84)
+        rotate(-1.5deg);
+
+    filter:
+        saturate(0.68)
+        contrast(0.92);
+}
+
+.cardSlotInactive:nth-of-type(even) {
+    transform:
+        translateY(19px)
+        scale(0.84)
+        rotate(1.5deg);
+}
+
+.cardSlotActive {
+    position: relative;
+    z-index: 5;
+
+    opacity: 1;
+
+    transform:
+        translateY(-11px)
+        scale(1.04);
+
+    filter: none;
+
+    animation:
+        cardPopFloat
+        5s
+        ease-in-out
+        infinite;
+}
+
+
+/* little paper support under active card */
+
+.cardSlotActive::before {
+    content: "";
+
+    position: absolute;
+    z-index: -1;
+
+    left: 12%;
+    right: 12%;
+    bottom: -21px;
+
+    height: 44px;
+
+    background: rgba(26, 23, 20, 0.12);
+
+    clip-path: polygon(
+        7% 100%,
+        24% 0,
+        76% 0,
+        93% 100%
+    );
+
+    transform: perspective(200px) rotateX(55deg);
+
+    transform-origin: top;
+
+    pointer-events: none;
 }
 
 
 /* =========================================================
-   TABLET
+   CARD BUTTON
    ========================================================= */
-
-@media (max-width: 800px) {
-
-    .sectionMarker {
-        gap: 12px;
-
-        padding:
-            8px
-            24px
-            0;
-    }
-
-    .sectionCode {
-        display: none;
-    }
-
-    .projectNav {
-        gap: 14px;
-
-        padding:
-            16px
-            18px
-            0;
-    }
-
-    .arrowButton {
-        width: 40px;
-        height: 40px;
-
-        flex-basis: 40px;
-
-        font-size: 18px;
-    }
-
-    .projectTitles {
-        grid-template-columns:
-            minmax(0, 0.8fr)
-            minmax(0, 1.35fr)
-            minmax(0, 0.8fr);
-
-        gap: 10px;
-    }
-
-    .projectTitle {
-        font-size: 10px;
-        letter-spacing: 0.05em;
-    }
-
-    .rail {
-        gap: 22px;
-
-        padding:
-            24px
-            0
-            48px;
-    }
-}
-
-
-/* =========================================================
-   PHONE
-   ========================================================= */
-
-@media (max-width: 560px) {
-
-    .sectionMarker {
-        padding:
-            6px
-            20px
-            0;
-    }
-
-    .sectionLabel {
-        font-size: 10px;
-    }
-
-    .projectNav {
-        gap: 8px;
-
-        padding:
-            14px
-            12px
-            0;
-    }
-
-    .arrowButton {
-        width: 36px;
-        height: 36px;
-
-        flex-basis: 36px;
-
-        border-width: 1.5px;
-
-        font-size: 17px;
-    }
-
-    .projectTitles {
-        grid-template-columns:
-            minmax(0, 0.7fr)
-            minmax(0, 1.5fr)
-            minmax(0, 0.7fr);
-
-        gap: 5px;
-    }
-
-    .projectTitle {
-        padding:
-            10px
-            2px;
-
-        font-size: 8px;
-
-        letter-spacing: 0.03em;
-    }
-
-    .activeUnderline {
-        width: 76%;
-        height: 2px;
-    }
-
-    .rail {
-        gap: 20px;
-
-        padding:
-            20px
-            0
-            42px;
-    }
-}
-
-
-/* =========================================================
-   FOCUS
-   ========================================================= */
-
-.arrowButton:focus-visible,
-.projectTitle:focus-visible {
-    outline: 3px solid currentColor;
-    outline-offset: 4px;
-}
-
-
-/* =========================================================
-   ANIMATION
-   ========================================================= */
-
-@keyframes projectTitlesLeft {
-
-    from {
-        opacity: 0;
-        transform: translateX(22px);
-        filter: blur(3px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-        filter: blur(0);
-    }
-}
-
-@keyframes projectTitlesRight {
-
-    from {
-        opacity: 0;
-        transform: translateX(-22px);
-        filter: blur(3px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-        filter: blur(0);
-    }
-}
-
-@keyframes projectUnderlineIn {
-
-    from {
-        opacity: 0;
-        scale: 0 1;
-    }
-
-    to {
-        opacity: 1;
-        scale: 1 1;
-    }
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    .titlesFromRight,
-    .titlesFromLeft,
-    .activeUnderline {
-        animation: none;
-    }
-
-    .arrowButton,
-    .arrowButton span,
-    .projectTitle,
-    .cardSlot {
-        transition: none;
-    }
-}
-
 
 .cardButton {
     display: block;
@@ -566,7 +779,647 @@
     cursor: pointer;
 }
 
+.cardSlotActive .cardButton {
+    filter:
+        drop-shadow(
+            8px
+            9px
+            0
+            rgba(26, 23, 20, 0.15)
+        )
+        drop-shadow(
+            15px
+            17px
+            0
+            rgba(26, 23, 20, 0.055)
+        );
+}
+
+.cardSlotActive:hover {
+    transform:
+        translateY(-17px)
+        scale(1.055)
+        rotate(0.4deg);
+}
+
+
+/* =========================================================
+   STAGE FOOTER
+   ========================================================= */
+
+.stageFooter {
+    position: relative;
+    z-index: 3;
+
+    min-height: 38px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        auto
+        1fr;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 9px 14px;
+
+    background: rgba(255, 250, 242, 0.48);
+
+    border-top: 2px solid var(--ink);
+
+    font-family: var(--font-mono, monospace);
+    font-size: 8px;
+    font-weight: 900;
+
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+
+    opacity: 0.62;
+}
+
+.stageFooter > :last-child {
+    text-align: right;
+}
+
+.stageProgress {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+.stageProgress i {
+    display: block;
+
+    width: 48px;
+    height: 3px;
+
+    background: var(--ink);
+
+    opacity: 0.45;
+
+    transform: rotate(-1deg);
+}
+
+
+/* =========================================================
+   TITLE ANIMATIONS
+   ========================================================= */
+
+.titlesFromRight {
+    animation:
+        projectTitlesLeft
+        320ms
+        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.titlesFromLeft {
+    animation:
+        projectTitlesRight
+        320ms
+        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   KEYFRAMES
+   ========================================================= */
+
+@keyframes projectTitlesLeft {
+    from {
+        opacity: 0;
+
+        transform:
+            translateX(24px)
+            rotate(1deg);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateX(0)
+            rotate(0);
+    }
+}
+
+@keyframes projectTitlesRight {
+    from {
+        opacity: 0;
+
+        transform:
+            translateX(-24px)
+            rotate(-1deg);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateX(0)
+            rotate(0);
+    }
+}
+
+@keyframes projectUnderlineIn {
+    from {
+        opacity: 0;
+        scale: 0 1;
+    }
+
+    to {
+        opacity: 1;
+        scale: 1 1;
+    }
+}
+
+@keyframes cardPopFloat {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -8px;
+    }
+}
+
+@keyframes statusPulse {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.45;
+        transform: scale(0.78);
+    }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .carousel {
+        padding:
+            38px
+            14px
+            64px;
+    }
+
+    .archiveWindow {
+        box-shadow:
+            7px 7px 0 var(--ink),
+            14px 14px 0 rgba(26, 23, 20, 0.1);
+    }
+
+    .archiveWindow::before {
+        inset:
+            9px
+            -8px
+            -10px
+            8px;
+    }
+
+    .windowMeta > span:nth-child(2) {
+        display: none;
+    }
+
+    .sectionMarker {
+        padding:
+            28px
+            22px
+            0;
+    }
+
+    .sectionCode {
+        display: none;
+    }
+
+    .projectNav {
+        gap: 12px;
+
+        padding-inline: 16px;
+    }
+
+    .arrowButton {
+        width: 43px;
+        height: 43px;
+
+        flex-basis: 43px;
+
+        border-width: 2px;
+
+        font-size: 19px;
+
+        box-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .projectTitles {
+        grid-template-columns:
+            minmax(0, 0.8fr)
+            minmax(0, 1.35fr)
+            minmax(0, 0.8fr);
+
+        gap: 8px;
+    }
+
+    .projectTitle {
+        font-size: 9px;
+    }
+
+    .projectTitleActive {
+        font-size: 10px;
+    }
+
+    .projectNumber {
+        display: none;
+    }
+
+    .rail {
+        gap: 26px;
+
+        padding:
+            42px
+            0
+            62px;
+    }
+
+    .cardSlotInactive {
+        transform:
+            translateY(15px)
+            scale(0.87);
+    }
+
+    .cardSlotActive {
+        transform:
+            translateY(-8px)
+            scale(1.02);
+    }
+}
+
+
+/* =========================================================
+   PHONE
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+    .carousel {
+        padding:
+            30px
+            8px
+            52px;
+    }
+
+    .archiveWindow {
+        border-width: 2px;
+
+        box-shadow:
+            5px 5px 0 var(--ink),
+            10px 10px 0 rgba(26, 23, 20, 0.1);
+
+        transform: none;
+    }
+
+    .archiveWindow::before {
+        inset:
+            6px
+            -5px
+            -7px
+            5px;
+
+        border-width: 2px;
+    }
+
+    .archiveWindow::after {
+        width: 74px;
+        height: 54px;
+
+        top: -12px;
+
+        border-width: 2px;
+    }
+
+    .windowBar {
+        min-height: 38px;
+
+        padding:
+            6px
+            9px;
+
+        border-bottom-width: 2px;
+    }
+
+    .windowIdentity {
+        padding:
+            6px
+            9px;
+
+        border-width: 1.5px;
+
+        box-shadow:
+            3px
+            3px
+            0
+            var(--ink);
+
+        font-size: 7px;
+    }
+
+    .statusDot {
+        width: 7px;
+        height: 7px;
+    }
+
+    .windowMeta {
+        gap: 4px;
+    }
+
+    .windowMeta > span:not(.windowControl) {
+        display: none;
+    }
+
+    .windowControl {
+        width: 17px;
+        height: 19px;
+
+        border-width: 1px;
+
+        font-size: 9px;
+    }
+
+    .sectionMarker {
+        padding:
+            20px
+            15px
+            0;
+    }
+
+    .sectionLabel {
+        padding:
+            6px
+            8px;
+
+        border-width: 1.5px;
+
+        box-shadow:
+            3px
+            3px
+            0
+            var(--yellow);
+
+        font-size: 9px;
+    }
+
+    .sectionLabel span {
+        font-size: 6px;
+    }
+
+    .projectNav {
+        gap: 7px;
+
+        padding:
+            19px
+            9px
+            21px;
+    }
+
+    .arrowButton {
+        width: 34px;
+        height: 34px;
+
+        flex-basis: 34px;
+
+        border-width: 1.5px;
+
+        box-shadow:
+            3px
+            3px
+            0
+            var(--ink);
+
+        font-size: 16px;
+    }
+
+    .projectTitles {
+        grid-template-columns:
+            minmax(0, 0.62fr)
+            minmax(0, 1.7fr)
+            minmax(0, 0.62fr);
+
+        gap: 3px;
+    }
+
+    .projectTitle {
+        padding:
+            9px
+            2px;
+
+        font-size: 7px;
+
+        letter-spacing: 0.015em;
+    }
+
+    .projectTitleActive {
+        padding:
+            8px
+            5px;
+
+        border-width: 1.5px;
+
+        box-shadow:
+            3px
+            3px
+            0
+            var(--ink);
+
+        font-size: 8px;
+    }
+
+    .activeUnderline {
+        bottom: -6px;
+
+        height: 4px;
+
+        border-width: 1px;
+    }
+
+    .projectStage {
+        margin:
+            0
+            7px
+            8px;
+
+        border-width: 2px;
+
+        box-shadow:
+            4px
+            4px
+            0
+            rgba(26, 23, 20, 0.1);
+
+        background-size:
+            18px 18px,
+            auto;
+    }
+
+    .stageLabel {
+        padding:
+            8px
+            10px;
+
+        border-bottom-width: 1.5px;
+
+        font-size: 7px;
+    }
+
+    .stageLabel span:last-child {
+        display: none;
+    }
+
+    .registrationMark {
+        display: none;
+    }
+
+    .projectStage::before,
+    .projectStage::after {
+        display: none;
+    }
+
+    .rail {
+        gap: 20px;
+
+        padding:
+            34px
+            0
+            48px;
+    }
+
+    .cardSlotInactive {
+        opacity: 0.38;
+
+        transform:
+            translateY(10px)
+            scale(0.9);
+    }
+
+    .cardSlotInactive:nth-of-type(even) {
+        transform:
+            translateY(10px)
+            scale(0.9);
+    }
+
+    .cardSlotActive {
+        transform:
+            translateY(-5px)
+            scale(1);
+    }
+
+    .cardSlotActive::before {
+        bottom: -14px;
+
+        height: 30px;
+    }
+
+    .cardSlotActive:hover {
+        transform:
+            translateY(-8px)
+            scale(1.015);
+    }
+
+    .stageFooter {
+        min-height: 32px;
+
+        padding:
+            7px
+            9px;
+
+        border-top-width: 1.5px;
+
+        font-size: 7px;
+    }
+
+    .stageFooter > :first-child,
+    .stageFooter > :last-child {
+        opacity: 0.55;
+    }
+
+    .stageProgress i {
+        width: 27px;
+        height: 2px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONE
+   ========================================================= */
+
+@media (max-width: 390px) {
+
+    .sectionRule {
+        display: none;
+    }
+
+    .sectionMarker {
+        justify-content: space-between;
+    }
+
+    .projectNav {
+        padding-inline: 6px;
+    }
+
+    .projectTitles {
+        grid-template-columns:
+            minmax(0, 0.45fr)
+            minmax(0, 2fr)
+            minmax(0, 0.45fr);
+    }
+
+    .projectTitle:not(.projectTitleActive) {
+        opacity: 0.18;
+    }
+}
+
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+.arrowButton:focus-visible,
+.projectTitle:focus-visible,
 .cardButton:focus-visible {
-    outline: 3px solid currentColor;
-    outline-offset: 8px;
+    outline: 3px solid var(--ink);
+    outline-offset: 4px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .titlesFromRight,
+    .titlesFromLeft,
+    .activeUnderline,
+    .cardSlotActive,
+    .statusDot {
+        animation: none;
+    }
+
+    .arrowButton,
+    .arrowButton span,
+    .projectTitle,
+    .cardSlot {
+        transition: none;
+    }
 }

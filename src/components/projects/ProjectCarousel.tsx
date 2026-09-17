@@ -4,24 +4,24 @@ import { useEffect, useRef, useState } from "react";
 
 import { useWindowWidth } from "@/hooks/useWindowWidth";
 import { projects } from "@/data/projects";
-import FloatingCard from "./FloatingCard";
-import styles from "./ProjectCarousel.module.css";
 
 import EZCalcsPreview from "@/components/previews/EZCalcsPreview";
 import LaConcheriaPreview from "@/components/previews/LaConcheriaPreview";
 import PianoTeacherLinkPreview from "@/components/previews/PianoTeacherLinkPreview";
-
 import ProjectModal from "@/components/projects/ProjectModal";
+
+import FloatingCard from "./FloatingCard";
+import styles from "./ProjectCarousel.module.css";
+
 const projectPreviews = {
   ezc: <EZCalcsPreview />,
   lca: <LaConcheriaPreview />,
   ptl: <PianoTeacherLinkPreview />,
 };
+
 export default function ProjectCarousel() {
   const w = useWindowWidth();
-  const [openProjectId, setOpenProjectId] = useState<
-    (typeof projects)[number]["id"] | null
-  >(null); const mobile = w < 640;
+  const mobile = w < 640;
 
   const railRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -29,6 +29,10 @@ export default function ProjectCarousel() {
   const [activeProject, setActiveProject] = useState(1);
   const [titleDirection, setTitleDirection] =
     useState<"left" | "right">("left");
+
+  const [openProjectId, setOpenProjectId] = useState<
+    (typeof projects)[number]["id"] | null
+  >(null);
 
   const cardW = mobile
     ? Math.min(w - 40, 320)
@@ -44,6 +48,7 @@ export default function ProjectCarousel() {
 
   const openProject =
     projects.find((project) => project.id === openProjectId) ?? null;
+
   const goToProject = (index: number) => {
     const rail = railRef.current;
     const card = cardRefs.current[index];
@@ -86,14 +91,19 @@ export default function ProjectCarousel() {
   const selectProject = (index: number) => {
     if (index === activeProject) return;
 
-    setTitleDirection(index === nextIndex ? "left" : "right");
+    setTitleDirection(
+      index === nextIndex ? "left" : "right"
+    );
 
     goToProject(index);
   };
 
   const handleCardClick = (index: number) => {
     if (index !== activeProject) {
-      setTitleDirection(index > activeProject ? "left" : "right");
+      setTitleDirection(
+        index > activeProject ? "left" : "right"
+      );
+
       goToProject(index);
       return;
     }
@@ -116,157 +126,210 @@ export default function ProjectCarousel() {
   }, [cardW]);
 
   return (
-    <section id="carousel" className={styles.carousel}>
+    <section
+      id="carousel"
+      className={styles.carousel}
+    >
+      <div className={styles.archiveWindow}>
+        {/* Book header */}
 
-      {/* =====================================================
-          SECTION MARKER
-          ===================================================== */}
+        {/* Section marker */}
+        <header className={styles.sectionMarker}>
+          <div className={styles.sectionLabel}>
+            PROJECTS
+            <span>// SHIPPED WORK</span>
+          </div>
 
-      <header className={styles.sectionMarker}>
-        <div className={styles.sectionLabel}>
-          PROJECTS
-          <span>// SHIPPED</span>
-        </div>
+          <div className={styles.sectionRule} />
 
-        <div className={styles.sectionRule} />
+          <div className={styles.sectionCode}>
+            K.STAHL / 03
+          </div>
+        </header>
 
-        <div className={styles.sectionCode}>
-          K.STAHL / 03
-        </div>
-      </header>
-
-
-      {/* =====================================================
-          PROJECT NAVIGATION
-          ===================================================== */}
-
-      <nav
-        className={styles.projectNav}
-        aria-label="Project navigation"
-      >
-        <button
-          type="button"
-          onClick={previousProject}
-          className={`${styles.arrowButton} ${styles.arrowPrevious}`}
-          aria-label="Previous project"
+        {/* Project navigation */}
+        <nav
+          className={styles.projectNav}
+          aria-label="Project navigation"
         >
-          <span>←</span>
-        </button>
+          <button
+            type="button"
+            className={`${styles.arrowButton} ${styles.arrowPrevious}`}
+            onClick={previousProject}
+            aria-label="Previous project"
+          >
+            <span aria-hidden="true">←</span>
+          </button>
 
-
-        <div
-          key={activeProject}
-          className={`${styles.projectTitles} ${titleDirection === "left"
-            ? styles.titlesFromRight
-            : styles.titlesFromLeft
+          <div
+            key={activeProject}
+            className={`${styles.projectTitles} ${
+              titleDirection === "left"
+                ? styles.titlesFromRight
+                : styles.titlesFromLeft
             }`}
-        >
-          {[prevIndex, activeProject, nextIndex].map(
-            (index, position) => {
-              const project = projects[index];
-              const active = position === 1;
+          >
+            {[prevIndex, activeProject, nextIndex].map(
+              (index, position) => {
+                const project = projects[index];
+                const active = position === 1;
 
-              return (
-                <button
-                  type="button"
-                  key={`${project.id}-${position}`}
-                  onClick={() => selectProject(index)}
-                  className={`${styles.projectTitle} ${active ? styles.projectTitleActive : ""
+                return (
+                  <button
+                    type="button"
+                    key={`${project.id}-${position}`}
+                    className={`${styles.projectTitle} ${
+                      active
+                        ? styles.projectTitleActive
+                        : ""
                     }`}
-                  aria-current={active ? "true" : undefined}
-                >
-                  {project.title}
+                    onClick={() => selectProject(index)}
+                    aria-current={
+                      active ? "true" : undefined
+                    }
+                  >
+                    <span className={styles.projectNumber}>
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
 
-                  {active && (
-                    <span
-                      className={styles.activeUnderline}
-                      style={{
-                        background: project.accent,
-                      }}
-                    />
-                  )}
-                </button>
-              );
-            }
-          )}
-        </div>
+                    {project.title}
 
+                    {active && (
+                      <span
+                        className={styles.activeUnderline}
+                        style={{
+                          background: project.accent,
+                        }}
+                        aria-hidden="true"
+                      />
+                    )}
+                  </button>
+                );
+              }
+            )}
+          </div>
 
-        <button
-          type="button"
-          onClick={nextProject}
-          className={`${styles.arrowButton} ${styles.arrowNext}`}
-          aria-label="Next project"
-        >
-          <span>→</span>
-        </button>
-      </nav>
+          <button
+            type="button"
+            className={`${styles.arrowButton} ${styles.arrowNext}`}
+            onClick={nextProject}
+            aria-label="Next project"
+          >
+            <span aria-hidden="true">→</span>
+          </button>
+        </nav>
 
-
-      {/* =====================================================
-          CARDS
-          ===================================================== */}
-
-      <div className={styles.railViewport}>
-        <div
-          ref={railRef}
-          className={styles.rail}
-        >
-          <div
+        {/* Project stage */}
+        <div className={styles.projectStage}>
+          <span
+            className={`${styles.registrationMark} ${styles.markTL}`}
             aria-hidden="true"
-            className={styles.railSpacer}
-            style={{
-              flexBasis: `calc(50vw - ${cardW / 2}px)`,
-            }}
-          />
+          >
+            +
+          </span>
 
-          {projects.map((project, index) => (
+          <span
+            className={`${styles.registrationMark} ${styles.markTR}`}
+            aria-hidden="true"
+          >
+            +
+          </span>
+
+          <div className={styles.stageLabel}>
+            <span>SELECTED WORK</span>
+            <span>SCROLL / CLICK TO INSPECT</span>
+          </div>
+
+          <div className={styles.railViewport}>
             <div
-              key={project.id}
-              ref={(element) => {
-                cardRefs.current[index] = element;
-              }}
-              className={styles.cardSlot}
+              ref={railRef}
+              className={styles.rail}
             >
-              <button
-                type="button"
-                className={styles.cardButton}
-                onClick={() => handleCardClick(index)}
-                aria-label={
-                  index === activeProject
-                    ? `Open ${project.title} project`
-                    : `Select ${project.title} project`
-                }
-              >
-                <FloatingCard
-                  id={project.id}
-                  title={project.title}
-                  sub={project.sub}
-                  accent={project.accent}
-                  rotation={
-                    project.id === "ezc"
-                      ? -2.8
-                      : project.id === "lca"
-                        ? 2.2
-                        : -1.8
-                  }
-                  content={projectPreviews[project.id]}
-                  cardW={cardW}
-                  cardH={cardH}
-                />
-              </button>
-            </div>
-          ))}
+              <div
+                className={styles.railSpacer}
+                style={{
+                  flexBasis: `calc(50% - ${cardW / 2}px)`,
+                }}
+                aria-hidden="true"
+              />
 
-          <div
-            aria-hidden="true"
-            className={styles.railSpacer}
-            style={{
-              flexBasis: `calc(50vw - ${cardW / 2}px)`,
-            }}
-          />
+              {projects.map((project, index) => {
+                const active =
+                  index === activeProject;
+
+                return (
+                  <div
+                    key={project.id}
+                    ref={(element) => {
+                      cardRefs.current[index] = element;
+                    }}
+                    className={`${styles.cardSlot} ${
+                      active
+                        ? styles.cardSlotActive
+                        : styles.cardSlotInactive
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      className={styles.cardButton}
+                      onClick={() =>
+                        handleCardClick(index)
+                      }
+                      aria-label={
+                        active
+                          ? `Open ${project.title} project`
+                          : `Select ${project.title} project`
+                      }
+                    >
+                      <FloatingCard
+                        id={project.id}
+                        title={project.title}
+                        sub={project.sub}
+                        accent={project.accent}
+                        rotation={
+                          project.id === "ezc"
+                            ? -2.8
+                            : project.id === "lca"
+                              ? 2.2
+                              : -1.8
+                        }
+                        content={
+                          projectPreviews[project.id]
+                        }
+                        cardW={cardW}
+                        cardH={cardH}
+                      />
+                    </button>
+                  </div>
+                );
+              })}
+
+              <div
+                className={styles.railSpacer}
+                style={{
+                  flexBasis: `calc(50% - ${cardW / 2}px)`,
+                }}
+                aria-hidden="true"
+              />
+            </div>
+          </div>
+
+          <div className={styles.stageFooter}>
+            <span>← PREV</span>
+
+            <span className={styles.stageProgress}>
+              {String(activeProject + 1).padStart(2, "0")}
+
+              <i aria-hidden="true" />
+
+              {String(projects.length).padStart(2, "0")}
+            </span>
+
+            <span>NEXT →</span>
+          </div>
         </div>
       </div>
+
       <ProjectModal
         project={openProject}
         onClose={() => setOpenProjectId(null)}
