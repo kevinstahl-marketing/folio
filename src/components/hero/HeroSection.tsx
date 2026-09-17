@@ -533,10 +533,8 @@ export default function HeroSection() {
                             maxWidth: 470,
                         }}
                     >
-                        I design and build full-stack web applications,
-                        commerce experiences, and custom systems — from
-                        database architecture and application logic through
-                        deployment and customer-facing interfaces.
+                        I build websites, apps, and commerce systems that help businesses actually run and grow. That includes full stack development, Shopify and e-commerce, POS systems, online marketplaces, digital ads, analytics, and the custom tools that connect it all.
+
                     </p>
                 </div>
 
