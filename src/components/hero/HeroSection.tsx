@@ -287,7 +287,7 @@ const scrollToResume = () => {
                             }}
                         >
                             <img
-                                src="/images/kevin-portrait.jpg"
+                                src="/images/hero/kevin.jpg"
                                 alt="Portrait of Kevin Stahl"
                                 style={{
                                     width: "100%",

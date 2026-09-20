@@ -85,6 +85,8 @@ function MediaFrame({ media, variant }: MediaFrameProps) {
           style={{
             objectFit: media.fit ?? "cover",
             objectPosition: media.position ?? "center",
+            transform: `scale(${media.imageScale ?? 1})`,
+            transformOrigin: media.position ?? "center",
           }}
         />
       </div>

@@ -1,0 +1,1003 @@
+/* =========================================================
+   FLOATING CARD
+   PHYSICAL POP-UP / PINNED PAPER
+   ========================================================= */
+
+.card {
+    --ink: #1a1714;
+    --paper: #fffaf2;
+    --paper-muted: #ded8cf;
+
+    position: relative;
+    flex-shrink: 0;
+    isolation: isolate;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   PAPER STACK — SHARED
+   ========================================================= */
+
+.darkSheet,
+.accentSheet,
+.mainSheet {
+    position: absolute;
+    border: 3px solid var(--ink);
+}
+
+
+/* =========================================================
+   DARK BACK SHEET
+   ========================================================= */
+
+.darkSheet {
+    z-index: 0;
+
+    inset: 8px -8px -8px 8px;
+
+    background: var(--ink);
+
+    transform:
+        rotate(var(--dark-rotation));
+
+    transform-origin: center;
+
+    transition:
+        transform 340ms
+        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   ACCENT BACK SHEET
+   ========================================================= */
+
+.accentSheet {
+    z-index: 1;
+
+    inset: 10px -10px -10px 10px;
+
+    background: var(--accent);
+
+    transform:
+        rotate(var(--accent-rotation));
+
+    transform-origin: center;
+
+    transition:
+        transform 320ms
+        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   MAIN / FRONT PAPER
+
+   This is the whole physical front sheet:
+   image + caption + pin.
+   ========================================================= */
+
+.mainSheet {
+    z-index: 2;
+
+    inset: 0;
+
+    display: grid;
+
+    grid-template-rows:
+        minmax(0, 1fr)
+        minmax(108px, auto);
+
+    color: #171411;
+
+    background: var(--paper);
+
+    /*
+     * Visible so the pin can sit above
+     * the physical sheet.
+     */
+    overflow: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    transform-origin: center;
+
+    transition:
+        transform 340ms
+        cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 340ms ease;
+}
+
+
+/* =========================================================
+   POP-UP INTERACTION
+
+   Front sheet comes forward.
+   Back sheets fan behind it.
+   ========================================================= */
+
+.card:hover .mainSheet {
+    transform:
+        translateY(-4px)
+        scale(1.025);
+
+    box-shadow:
+        7px 9px 0
+        rgba(26, 23, 20, 0.13);
+}
+
+
+.card:hover .accentSheet {
+    transform:
+        translate(12px, 5px)
+        rotate(3deg);
+}
+
+
+.card:hover .darkSheet {
+    transform:
+        translate(-9px, 10px)
+        rotate(-2.7deg);
+}
+
+
+/* =========================================================
+   LUCIDE PIN
+   ========================================================= */
+
+.pinWrap {
+    position: absolute;
+
+    z-index: 40;
+
+    top: -17px;
+    left: 50%;
+
+    width: 34px;
+    height: 42px;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--pin-color);
+
+    transform:
+        translateX(-50%)
+        rotate(-12deg);
+
+    transform-origin:
+        50% 85%;
+
+    filter:
+        drop-shadow(
+            2px 3px 0
+            rgba(26, 23, 20, 0.2)
+        );
+
+    pointer-events: none;
+
+    transition:
+        transform 300ms
+        cubic-bezier(0.34, 1.56, 0.64, 1),
+        filter 220ms ease;
+}
+
+
+/*
+ * SOLID Lucide pin.
+ * No ::before.
+ * No fake blob.
+ */
+
+.pin {
+    width: 29px;
+    height: 29px;
+
+    color: var(--pin-color);
+
+    fill: var(--pin-color);
+    stroke: var(--ink);
+
+    stroke-width: 2.2;
+}
+
+
+/* Pull pin slightly out as sheet lifts */
+
+.card:hover .pinWrap {
+    transform:
+        translateX(-50%)
+        translateY(-13px)
+        translateX(4px)
+        rotate(15deg);
+
+    filter:
+        drop-shadow(
+            4px 6px 0
+            rgba(26, 23, 20, 0.16)
+        );
+}
+
+
+/* =========================================================
+   MEDIA
+   ========================================================= */
+
+.media {
+    position: relative;
+
+    min-width: 0;
+    min-height: 0;
+
+    overflow: hidden;
+
+    background: #d8d2c9;
+
+    border-bottom:
+        3px solid var(--ink);
+}
+
+
+/* =========================================================
+   PRIMARY SCREENSHOT
+
+   IMPORTANT:
+   This does NOT animate independently.
+   It moves only because .mainSheet moves.
+   ========================================================= */
+
+.mediaInner {
+    position: absolute;
+
+    inset: -7px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    transform:
+        rotate(var(--image-rotation))
+        scale(1.025);
+
+    transform-origin: center;
+
+    pointer-events: none;
+}
+
+
+.mediaInner > * {
+    width: 100%;
+    height: 100%;
+}
+
+
+.mediaInner img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-position:
+        center center;
+}
+
+
+/* =========================================================
+   SECONDARY SCREENSHOT
+   ========================================================= */
+
+.secondaryCard {
+    position: absolute;
+
+    z-index: 20;
+
+    right:
+        clamp(13px, 4%, 22px);
+
+    bottom:
+        clamp(14px, 4%, 23px);
+
+    width:
+        clamp(82px, 25%, 124px);
+
+    aspect-ratio: 0.66;
+
+    padding: 6px;
+
+    overflow: visible;
+
+    background: var(--paper);
+
+    border:
+        3px solid var(--ink);
+
+    box-shadow:
+        6px 6px 0 var(--accent),
+        10px 10px 0
+        rgba(26, 23, 20, 0.18);
+
+    transform:
+        translateY(0)
+        rotate(var(--secondary-rotation));
+
+    transform-origin:
+        50% 80%;
+
+    pointer-events: none;
+
+    transition:
+        transform 300ms
+        cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 260ms ease;
+}
+
+
+/* =========================================================
+   SECONDARY HOVER
+   ========================================================= */
+
+.card:hover .secondaryCard {
+    transform:
+        translateY(-12px)
+        rotate(0deg);
+
+    box-shadow:
+        9px 12px 0 var(--accent),
+        14px 17px 0
+        rgba(26, 23, 20, 0.14);
+}
+
+
+/* =========================================================
+   SECONDARY TAPE
+   ========================================================= */
+
+.secondaryTape {
+    position: absolute;
+
+    z-index: 5;
+
+    top: -9px;
+    left: 50%;
+
+    width: 42%;
+    height: 15px;
+
+    transform:
+        translateX(-50%)
+        rotate(-2deg);
+
+    background:
+        rgba(255, 250, 242, 0.88);
+
+    border:
+        2px solid var(--ink);
+
+    opacity: 0.92;
+}
+
+
+/* =========================================================
+   SECONDARY SCREEN
+   ========================================================= */
+
+.secondaryScreen {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background:
+        var(--paper-muted);
+
+    border:
+        2px solid var(--ink);
+}
+
+
+.secondaryScreen > * {
+    width: 100%;
+    height: 100%;
+}
+
+
+.secondaryScreen img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-position:
+        center center;
+}
+
+
+/* =========================================================
+   SECONDARY REGISTRATION MARK
+   ========================================================= */
+
+.secondaryRegistration {
+    position: absolute;
+
+    z-index: 6;
+
+    right: -9px;
+    bottom: -9px;
+
+    width: 20px;
+    height: 20px;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--paper);
+
+    background: var(--ink);
+
+    border:
+        2px solid var(--ink);
+}
+
+
+/* =========================================================
+   RESTING CORNER MARK
+   ========================================================= */
+
+.cornerMark {
+    position: absolute;
+
+    z-index: 25;
+
+    right: 14px;
+    top: 14px;
+
+    width: 16px;
+    height: 16px;
+
+    background:
+        var(--accent);
+
+    border:
+        2px solid var(--ink);
+
+    pointer-events: none;
+
+    transition:
+        opacity 130ms ease;
+}
+
+
+.card:hover .cornerMark {
+    opacity: 0;
+}
+
+
+/* =========================================================
+   OPEN INDICATOR
+   ========================================================= */
+
+.openMark {
+    position: absolute;
+
+    z-index: 26;
+
+    right: 15px;
+    top: 15px;
+
+    width: 46px;
+    height: 46px;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--paper);
+
+    background: var(--ink);
+
+    border:
+        3px solid var(--ink);
+
+    box-shadow:
+        4px 4px 0
+        var(--accent);
+
+    opacity: 0;
+
+    transform:
+        rotate(4deg)
+        scale(0.82);
+
+    pointer-events: none;
+
+    transition:
+        opacity 140ms ease,
+        transform 200ms
+        cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+
+.card:hover .openMark {
+    opacity: 1;
+
+    transform:
+        rotate(0deg)
+        scale(1);
+}
+
+
+/* =========================================================
+   MEDIA REGISTRATION MARK
+   ========================================================= */
+
+.mediaRegistration {
+    position: absolute;
+
+    z-index: 8;
+
+    left: 13px;
+    bottom: 11px;
+
+    font-family:
+        var(--font-mono, monospace);
+
+    font-size: 18px;
+    font-weight: 900;
+
+    line-height: 1;
+
+    color: var(--paper);
+
+    text-shadow:
+        1px 1px 0
+        var(--ink);
+
+    opacity: 0.48;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   CAPTION
+   ========================================================= */
+
+.caption {
+    position: relative;
+
+    z-index: 5;
+
+    min-width: 0;
+    min-height: 108px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        auto;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding:
+        clamp(16px, 3vw, 22px)
+        clamp(17px, 3vw, 24px);
+
+    overflow: hidden;
+
+    background:
+        var(--paper);
+
+    transition:
+        background 160ms ease;
+}
+
+
+.card:hover .caption {
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   COPY
+   ========================================================= */
+
+.copy {
+    min-width: 0;
+}
+
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+
+.title {
+    margin:
+        0 0 9px;
+
+    font-size:
+        clamp(22px, 2.2vw, 30px);
+
+    font-style: italic;
+    font-weight: 700;
+
+    line-height: 1;
+
+    letter-spacing:
+        -0.015em;
+
+    color: #171411;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   SUBTITLE
+   ========================================================= */
+
+.subtitle {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    min-width: 0;
+
+    font-size:
+        clamp(11px, 0.9vw, 13px);
+
+    font-weight: 800;
+
+    line-height: 1.35;
+
+    letter-spacing:
+        0.025em;
+
+    text-transform:
+        uppercase;
+
+    color: #211d19;
+}
+
+
+.subtitleDash {
+    width: 21px;
+    height: 4px;
+
+    margin-top: 5px;
+
+    flex: 0 0 auto;
+
+    background:
+        var(--accent);
+
+    border:
+        1px solid var(--ink);
+
+    transition:
+        width 220ms
+        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.card:hover .subtitleDash {
+    width: 29px;
+}
+
+
+.subtitleText {
+    min-width: 0;
+
+    display: -webkit-box;
+
+    -webkit-box-orient:
+        vertical;
+
+    -webkit-line-clamp: 2;
+
+    overflow: hidden;
+
+    white-space: normal;
+
+    overflow-wrap:
+        break-word;
+}
+
+
+/* =========================================================
+   REGISTRATION
+   ========================================================= */
+
+.registration {
+    align-self: end;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--ink);
+
+    opacity: 0.28;
+
+    pointer-events: none;
+
+    transition:
+        opacity 160ms ease,
+        transform 200ms
+        cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+
+.card:hover .registration {
+    opacity: 0.58;
+
+    transform:
+        rotate(90deg);
+}
+
+
+/* =========================================================
+   BOTTOM ACCENT
+   ========================================================= */
+
+.bottomAccent {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 20%;
+    height: 6px;
+
+    background:
+        var(--accent);
+
+    border-top:
+        2px solid var(--ink);
+
+    border-right:
+        2px solid var(--ink);
+
+    pointer-events: none;
+
+    transition:
+        width 260ms
+        cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.card:hover .bottomAccent {
+    width: 48%;
+}
+
+
+/* =========================================================
+   MOBILE
+
+   More of the card is devoted to the image.
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+    .mainSheet {
+        grid-template-rows:
+            minmax(0, 1fr)
+            88px;
+    }
+
+
+    /*
+     * Slightly gentler front-sheet lift.
+     */
+
+    .card:hover .mainSheet {
+        transform:
+            translateY(-3px)
+            scale(1.018);
+
+        box-shadow:
+            5px 7px 0
+            rgba(26, 23, 20, 0.12);
+    }
+
+
+    .card:hover .accentSheet {
+        transform:
+            translate(7px, 4px)
+            rotate(2.3deg);
+    }
+
+
+    .card:hover .darkSheet {
+        transform:
+            translate(-6px, 7px)
+            rotate(-2.2deg);
+    }
+
+
+    /*
+     * Primary image is slightly larger
+     * and centered on small cards.
+     */
+
+    .mediaInner {
+        inset: -4px;
+
+        transform:
+            rotate(var(--image-rotation))
+            scale(1.04);
+    }
+
+
+    .mediaInner img {
+        object-position:
+            center center;
+    }
+
+
+    /*
+     * Pin
+     */
+
+    .pinWrap {
+        top: -14px;
+
+        width: 30px;
+        height: 36px;
+
+        transform:
+            translateX(-50%)
+            rotate(-10deg);
+    }
+
+
+    .pin {
+        width: 26px;
+        height: 26px;
+    }
+
+
+    .card:hover .pinWrap {
+        transform:
+            translateX(-50%)
+            translateY(-10px)
+            translateX(3px)
+            rotate(14deg);
+    }
+
+
+    /*
+     * Secondary image
+     */
+
+    .secondaryCard {
+        right: 10px;
+        bottom: 10px;
+
+        width:
+            clamp(70px, 25%, 92px);
+
+        padding: 5px;
+
+        border-width: 2px;
+
+        box-shadow:
+            4px 4px 0
+            var(--accent),
+            7px 7px 0
+            rgba(26, 23, 20, 0.16);
+    }
+
+
+    .card:hover .secondaryCard {
+        transform:
+            translateY(-7px)
+            rotate(0deg);
+
+        box-shadow:
+            6px 7px 0
+            var(--accent),
+            9px 10px 0
+            rgba(26, 23, 20, 0.14);
+    }
+
+
+    /*
+     * Shorter caption = more image.
+     */
+
+    .caption {
+        min-height: 88px;
+
+        padding:
+            12px 15px;
+    }
+
+
+    .title {
+        margin-bottom: 6px;
+
+        font-size:
+            clamp(20px, 7vw, 25px);
+    }
+
+
+    .subtitle {
+        gap: 7px;
+
+        font-size:
+            clamp(9px, 2.8vw, 11px);
+
+        line-height: 1.25;
+    }
+
+
+    .openMark {
+        width: 39px;
+        height: 39px;
+    }
+
+
+    .openMark svg {
+        width: 21px;
+        height: 21px;
+    }
+}
+
+
+/* =========================================================
+   TOUCH DEVICES
+
+   No hover required for composition.
+   ========================================================= */
+
+@media (hover: none) {
+
+    .secondaryCard {
+        transform:
+            translateY(-4px)
+            rotate(var(--secondary-rotation));
+    }
+
+
+    .pinWrap {
+        transform:
+            translateX(-50%)
+            rotate(-10deg);
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .darkSheet,
+    .accentSheet,
+    .mainSheet,
+    .pinWrap,
+    .secondaryCard,
+    .cornerMark,
+    .openMark,
+    .subtitleDash,
+    .registration,
+    .bottomAccent,
+    .caption {
+        transition: none;
+    }
+}
