@@ -6,7 +6,6 @@ import {
   useState,
 } from "react";
 
-import { useWindowWidth } from "@/hooks/useWindowWidth";
 import type { Project } from "@/data/projects";
 
 import ProjectModal from "@/components/projects/ProjectModal";
@@ -49,8 +48,19 @@ export default function ProjectCarousel({
 
   id = "carousel",
 }: ProjectCarouselProps) {
-  const w = useWindowWidth();
-  const mobile = w < 560;
+  const stageRef = useRef<HTMLDivElement>(null);
+  const [stageWidth, setStageWidth] = useState(0);
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    const measure = () => setStageWidth(stage.clientWidth);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(stage);
+    return () => observer.disconnect();
+  }, []);
+
 
   const railRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -72,19 +82,56 @@ export default function ProjectCarousel({
     useState<Project["id"] | null>(null);
 
 
+
   /* =========================================================
-     CARD DIMENSIONS
+     RESPONSIVE CARD DIMENSIONS
      ========================================================= */
 
-  const cardW = mobile
-    ? Math.min(w - 72, 300)
-    : Math.min(Math.round(w * 0.34), 480);
+  const [viewportHeight, setViewportHeight] = useState(900);
 
-  const cardH = mobile
-    ? Math.round(cardW * 1.08)
-    : Math.round(cardW * 1.22);
+  useEffect(() => {
+    const updateHeight = () => {
+      setViewportHeight(window.innerHeight);
+    };
 
+    updateHeight();
 
+    window.addEventListener("resize", updateHeight);
+
+    return () => {
+      window.removeEventListener("resize", updateHeight);
+    };
+  }, []);
+
+const mobile = stageWidth < 560;
+const tablet = stageWidth >= 560 && stageWidth <= 900;
+const w = stageWidth;
+
+  // Available width inside the book and stage.
+  const availableWidth = Math.max(0, w - (mobile ? 70 : tablet ? 110 : 180));
+
+  // Maximum card height relative to the screen.
+  const maxCardHeight = mobile
+    ? viewportHeight * 0.48
+    : tablet
+      ? viewportHeight * 0.52
+      : viewportHeight * 0.58;
+
+  // Preserve the original card proportions.
+  const aspectRatio = mobile ? 1.08 : 1.22;
+
+  const cardW = Math.max(
+    0,
+    Math.floor(
+      Math.min(
+        mobile ? 300 : tablet ? 360 : 480,
+        availableWidth * (mobile ? 0.88 : tablet ? 0.68 : 0.44),
+        maxCardHeight / aspectRatio
+      )
+    )
+  );
+
+  const cardH = Math.round(cardW * aspectRatio);
   /* =========================================================
      SAFETY
      ========================================================= */
@@ -257,11 +304,10 @@ export default function ProjectCarousel({
 
           <div
             key={activeProject}
-            className={`${styles.projectTitles} ${
-              titleDirection === "left"
+            className={`${styles.projectTitles} ${titleDirection === "left"
                 ? styles.titlesFromRight
                 : styles.titlesFromLeft
-            }`}
+              }`}
           >
             {[
               prevIndex,
@@ -278,11 +324,10 @@ export default function ProjectCarousel({
                 <button
                   type="button"
                   key={`${project.id}-${position}`}
-                  className={`${styles.projectTitle} ${
-                    active
+                  className={`${styles.projectTitle} ${active
                       ? styles.projectTitleActive
                       : ""
-                  }`}
+                    }`}
                   onClick={() =>
                     selectProject(index)
                   }
@@ -340,7 +385,7 @@ export default function ProjectCarousel({
             PROJECT STAGE
             =================================================== */}
 
-        <div className={styles.projectStage}>
+        <div ref={stageRef} className={styles.projectStage}>
           <span
             className={`${styles.registrationMark} ${styles.markTL}`}
             aria-hidden="true"
@@ -379,9 +424,8 @@ export default function ProjectCarousel({
               <div
                 className={styles.railSpacer}
                 style={{
-                  flexBasis: `calc(50% - ${
-                    cardW / 2
-                  }px)`,
+                  flexBasis: `calc(50% - ${cardW / 2
+                    }px)`,
                 }}
                 aria-hidden="true"
               />
@@ -409,89 +453,89 @@ export default function ProjectCarousel({
                             ? -2.1
                             : 2.1;
 
-             /* =============================================
-   PRIMARY / MAIN PREVIEW
-   ============================================= */
+                  /* =============================================
+        PRIMARY / MAIN PREVIEW
+        ============================================= */
 
-const previewSlot =
-  project.preview.media ?? "primary";
+                  const previewSlot =
+                    project.preview.media ?? "primary";
 
-const previewMedia =
-  project.media.find(
-    (media) => media.slot === previewSlot
-  ) ??
-  project.media.find(
-    (media) => media.slot === "primary"
-  ) ??
-  project.media[0] ??
-  null;
+                  const previewMedia =
+                    project.media.find(
+                      (media) => media.slot === previewSlot
+                    ) ??
+                    project.media.find(
+                      (media) => media.slot === "primary"
+                    ) ??
+                    project.media[0] ??
+                    null;
 
-/* =============================================
-   SECONDARY PREVIEW
-   ============================================= */
+                  /* =============================================
+                     SECONDARY PREVIEW
+                     ============================================= */
 
-const secondaryMedia =
-  project.media.find(
-    (media) => media.slot === "secondary"
-  ) ?? null;
+                  const secondaryMedia =
+                    project.media.find(
+                      (media) => media.slot === "secondary"
+                    ) ?? null;
 
-/* =============================================
-   PRIMARY CONTENT
-   ============================================= */
+                  /* =============================================
+                     PRIMARY CONTENT
+                     ============================================= */
 
-const previewContent =
-  previewMedia ? (
-    <img
-      src={previewMedia.src}
-      alt={previewMedia.alt}
-      draggable={false}
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "block",
+                  const previewContent =
+                    previewMedia ? (
+                      <img
+                        src={previewMedia.src}
+                        alt={previewMedia.alt}
+                        draggable={false}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          display: "block",
 
-        objectFit:
-          project.preview.fit ??
-          previewMedia.fit ??
-          "cover",
+                          objectFit:
+                            project.preview.fit ??
+                            previewMedia.fit ??
+                            "cover",
 
-        objectPosition:
-          project.preview.position ??
-          previewMedia.position ??
-          "center",
+                          objectPosition:
+                            project.preview.position ??
+                            previewMedia.position ??
+                            "center",
 
-        userSelect: "none",
-      }}
-    />
-  ) : null;
+                          userSelect: "none",
+                        }}
+                      />
+                    ) : null;
 
-/* =============================================
-   SECONDARY CONTENT
-   ============================================= */
+                  /* =============================================
+                     SECONDARY CONTENT
+                     ============================================= */
 
-const secondaryContent =
-  secondaryMedia ? (
-    <img
-      src={secondaryMedia.src}
-      alt={secondaryMedia.alt}
-      draggable={false}
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "block",
+                  const secondaryContent =
+                    secondaryMedia ? (
+                      <img
+                        src={secondaryMedia.src}
+                        alt={secondaryMedia.alt}
+                        draggable={false}
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          display: "block",
 
-        objectFit:
-          secondaryMedia.fit ??
-          "cover",
+                          objectFit:
+                            secondaryMedia.fit ??
+                            "cover",
 
-        objectPosition:
-          secondaryMedia.position ??
-          "center",
+                          objectPosition:
+                            secondaryMedia.position ??
+                            "center",
 
-        userSelect: "none",
-      }}
-    />
-  ) : null;
+                          userSelect: "none",
+                        }}
+                      />
+                    ) : null;
                   return (
                     <div
                       key={project.id}
@@ -500,11 +544,10 @@ const secondaryContent =
                           index
                         ] = element;
                       }}
-                      className={`${styles.cardSlot} ${
-                        active
+                      className={`${styles.cardSlot} ${active
                           ? styles.cardSlotActive
                           : styles.cardSlotInactive
-                      }`}
+                        }`}
                     >
                       <button
                         type="button"
@@ -537,6 +580,7 @@ const secondaryContent =
                           content={
                             previewContent
                           }
+                          secondaryContent={secondaryContent}
                           cardW={cardW}
                           cardH={cardH}
                         />
@@ -550,9 +594,8 @@ const secondaryContent =
               <div
                 className={styles.railSpacer}
                 style={{
-                  flexBasis: `calc(50% - ${
-                    cardW / 2
-                  }px)`,
+                  flexBasis: `calc(50% - ${cardW / 2
+                    }px)`,
                 }}
                 aria-hidden="true"
               />

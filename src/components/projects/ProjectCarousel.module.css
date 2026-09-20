@@ -1642,3 +1642,70 @@
         transition: none;
     }
 }
+
+/* =========================================================
+   FINAL RESPONSIVE LAYOUT — original paper design preserved
+   ========================================================= */
+.carousel { overflow: visible; padding-top: clamp(38px, 4vw, 64px); }
+.archiveWindow { overflow: visible; }
+.projectNav { min-width: 0; gap: clamp(18px, 2.5vw, 34px); }
+.projectTitles { flex: 1 1 auto; min-width: 0; gap: clamp(10px, 1.5vw, 22px); }
+.projectTitle { font-size: clamp(11px, 0.95vw, 14px); }
+.projectTitleActive { font-size: clamp(14px, 1.25vw, 19px); white-space: normal; overflow-wrap: anywhere; line-height: 1.18; text-overflow: clip; }
+.sectionLabel { font-size: clamp(12px, 1vw, 15px); }
+.sectionLabel span { font-size: clamp(9px, 0.7vw, 11px); }
+.stageLabel, .stageFooter { font-size: clamp(9px, 0.75vw, 11px); }
+/* Stage clips sideways neighbors, but rail gets enough internal room for pin and hover. */
+.railViewport { padding-top: 18px; margin-top: 0; overflow: hidden; }
+.rail { padding-top: 44px; padding-bottom: 48px; gap: clamp(34px, 4vw, 64px); }
+.cardSlotActive::before { content: ""; }
+@media (min-width: 901px) and (max-height: 800px) {
+  .carousel { padding-top: 38px; padding-bottom: 26px; }
+  .sectionMarker { padding-top: 18px; }
+  .projectNav { padding-top: 16px; padding-bottom: 18px; }
+  .railViewport { padding-top: 14px; }
+  .rail { padding-top: 34px; padding-bottom: 40px; }
+  .projectStage { margin-bottom: 16px; }
+}
+@media (max-width: 900px) {
+  .carousel { padding: 40px 18px 38px; }
+  .archiveWindow { transform: none; }
+  .sectionMarker { padding: 24px 22px 0; }
+  .projectNav { gap: 14px; padding: 22px 20px 24px; }
+  .projectTitles { grid-template-columns: minmax(0, .8fr) minmax(0, 1.7fr) minmax(0, .8fr); gap: 9px; }
+  .projectTitle { font-size: 10px; }
+  .projectTitleActive { font-size: clamp(13px, 1.9vw, 17px); }
+  .railViewport { padding-top: 18px; margin-top: 0; }
+  .rail { gap: 34px; padding-top: 42px; padding-bottom: 46px; }
+  .cardSlotInactive, .cardSlotInactive:nth-of-type(even), .cardSlotActive { transform: none; }
+}
+@media (max-width: 560px) {
+  /* Extra top space keeps the yellow book tab visible. */
+  .carousel { padding: 42px 12px 30px; }
+  .archiveWindow { overflow: visible; }
+  .archiveWindow::after { top: -14px; right: 8%; width: 82px; height: 52px; }
+  .sectionMarker { padding: 23px 14px 0; gap: 9px; }
+  .sectionLabel { font-size: 11px; padding: 8px 10px; }
+  .sectionLabel span { font-size: 8px; margin-top: 5px; }
+  .projectNav { display: grid; grid-template-columns: 36px minmax(0,1fr) 36px; gap: 9px; padding: 20px 12px 24px; }
+  .arrowButton { width: 36px; height: 36px; min-width: 0; font-size: 17px; }
+  .projectTitles { width: 100%; grid-template-columns: minmax(0,1fr); gap: 0; }
+  .projectTitle:not(.projectTitleActive) { display: none; }
+  .projectTitleActive { display: block; width: 100%; min-width: 0; padding: 10px 8px; font-size: clamp(12px, 3.5vw, 16px); line-height: 1.18; letter-spacing: 0; white-space: normal; overflow-wrap: anywhere; overflow: visible; text-overflow: clip; }
+  .projectStage { margin: 0 9px 12px; overflow: hidden; }
+  .stageLabel { padding: 9px 10px; font-size: 9px; }
+  .railViewport { padding-top: 12px; margin-top: 0; overflow: hidden; }
+  /* Keep the top of the pin inside the scrolling/clipped stage. */
+  .rail { gap: 26px; padding-top: 39px; padding-bottom: 40px; }
+  .cardSlotInactive, .cardSlotInactive:nth-of-type(even), .cardSlotActive { transform: none; }
+  .stageFooter { font-size: 9px; padding: 8px; }
+  .stageProgress i { width: 24px; }
+}
+@media (max-width: 390px) {
+  .carousel { padding: 40px 9px 28px; }
+  .projectNav { grid-template-columns: 34px minmax(0,1fr) 34px; gap: 7px; padding: 18px 9px 22px; }
+  .arrowButton { width: 34px; height: 34px; }
+  .projectTitleActive { font-size: clamp(11px, 3.5vw, 14px); padding: 9px 5px; }
+  .rail { gap: 22px; padding-top: 37px; padding-bottom: 38px; }
+  .stageFooter { font-size: 8px; }
+}
