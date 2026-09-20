@@ -1,15 +1,11 @@
+
 /* =========================================================
-   CONTACT / FINAL PAGE
-
-   Final visual reset:
-   deep blue-black + cool paper + restrained electric blue.
-
-   The color is concentrated around interactive elements.
+   CONTACT SECTION
+   Responsive editorial / brutalist paper design
    ========================================================= */
 
 .section {
     --ink: #17191d;
-
     --paper: #f0eee9;
     --paper-light: #faf9f6;
     --paper-dark: #c8ccd2;
@@ -21,13 +17,12 @@
     --accent-soft: #aebbd7;
 
     position: relative;
-
     width: 100%;
+    min-width: 0;
 
     padding:
-        clamp(80px, 9vw, 140px)
-        clamp(18px, 4vw, 52px)
-        clamp(90px, 10vw, 150px);
+        clamp(48px, 7vh, 110px)
+        clamp(16px, 4vw, 52px);
 
     overflow: hidden;
 
@@ -47,46 +42,75 @@
         var(--night);
 }
 
+/* =========================================================
+   SHARED LAYOUT SAFETY
+   ========================================================= */
+
+.section,
+.section *,
+.section *::before,
+.section *::after {
+    box-sizing: border-box;
+}
+
+.dossier,
+.paper,
+.content,
+.copy,
+.actions,
+.contactCard,
+.secondaryActions,
+.smallCard,
+.smallContent,
+.smallHeading {
+    min-width: 0;
+}
 
 /* =========================================================
-   BACK SHEET
-
-   Cool gray-blue instead of colored construction paper.
+   DOSSIER / BACKING PAPER
    ========================================================= */
+
+.dossier {
+    position: relative;
+
+    width: 100%;
+    max-width: 1380px;
+
+    margin-inline: auto;
+}
 
 .backSheet {
     position: absolute;
+    z-index: 0;
 
-    width: min(1350px, calc(100% - 60px));
-    height: calc(100% - 150px);
-
-    top: 92px;
-    left: 50%;
+    inset: 14px 8px -12px;
 
     background: #596170;
 
     border: 3px solid #0d1016;
 
-    transform:
-        translateX(-50%)
-        rotate(-1.2deg);
+    transform: rotate(-0.8deg);
+
+    transform-origin: center;
 
     opacity: 0.9;
+
+    pointer-events: none;
 }
 
-
 /* =========================================================
-   PAPER
+   MAIN PAPER
    ========================================================= */
 
 .paper {
     position: relative;
+    z-index: 1;
 
-    width: min(1380px, 100%);
-    margin: 0 auto;
+    isolation: isolate;
 
-    padding:
-        clamp(32px, 5vw, 68px);
+    width: 100%;
+
+    padding: clamp(28px, 4vw, 68px);
 
     background:
         linear-gradient(
@@ -98,14 +122,9 @@
     border: 3px solid var(--ink);
 
     box-shadow:
-        11px 11px 0 #0d1016,
-        19px 19px 0 rgba(100, 127, 188, 0.24);
+        10px 10px 0 #0d1016,
+        18px 18px 0 rgba(100, 127, 188, 0.24);
 }
-
-
-/* =========================================================
-   SUBTLE PAPER ATMOSPHERE
-   ========================================================= */
 
 .paper::before {
     content: "";
@@ -126,23 +145,29 @@
     opacity: 0.7;
 }
 
-
 /* =========================================================
-   DECORATIONS
+   DECORATIVE MARKS
    ========================================================= */
 
-.star {
+.star,
+.plus {
     position: absolute;
+    z-index: 0;
 
+    pointer-events: none;
+
+    font-family: var(--font-mono, monospace);
+
+    color: var(--accent);
+}
+
+.star {
     top: 28%;
     right: 4%;
 
-    font-family: var(--font-mono, monospace);
     font-size: clamp(40px, 5vw, 72px);
 
     line-height: 1;
-
-    color: var(--accent);
 
     opacity: 0.13;
 
@@ -150,21 +175,15 @@
 }
 
 .plus {
-    position: absolute;
-
     left: 3%;
     bottom: 20%;
 
-    font-family: var(--font-mono, monospace);
     font-size: 44px;
-
-    color: var(--accent);
 
     opacity: 0.12;
 
     transform: rotate(-10deg);
 }
-
 
 /* =========================================================
    TOP BAR
@@ -178,32 +197,28 @@
     align-items: center;
     justify-content: space-between;
 
-    gap: 24px;
+    gap: 20px;
 
-    padding-bottom: 18px;
+    padding-bottom: 16px;
 
     border-bottom: 3px solid var(--ink);
 }
 
 .sectionLabel {
-    padding:
-        8px
-        12px;
+    flex: 0 1 auto;
+
+    padding: 8px 12px;
 
     color: var(--paper-light);
     background: var(--ink);
 
     border: 2px solid var(--ink);
 
-    box-shadow:
-        4px
-        4px
-        0
-        var(--accent);
+    box-shadow: 4px 4px 0 var(--accent);
 
     font-family: var(--font-mono, monospace);
     font-size: 10px;
-    font-weight: 950;
+    font-weight: 900;
 
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -212,6 +227,8 @@
 }
 
 .code {
+    flex: 0 0 auto;
+
     font-family: var(--font-mono, monospace);
     font-size: 10px;
     font-weight: 900;
@@ -219,11 +236,12 @@
     letter-spacing: 0.08em;
 
     opacity: 0.45;
+
+    white-space: nowrap;
 }
 
-
 /* =========================================================
-   CONTENT
+   MAIN CONTENT
    ========================================================= */
 
 .content {
@@ -234,26 +252,22 @@
 
     grid-template-columns:
         minmax(0, 1.1fr)
-        minmax(360px, 0.9fr);
+        minmax(0, 0.9fr);
 
     align-items: center;
 
-    gap: clamp(60px, 8vw, 120px);
+    gap: clamp(32px, 4vw, 90px);
 
-    padding:
-        clamp(70px, 8vw, 120px)
-        0
-        clamp(64px, 7vw, 100px);
+    padding-block: clamp(48px, 6vh, 100px);
 }
 
-
 /* =========================================================
-   COPY
+   EDITORIAL COPY
    ========================================================= */
 
 .copy {
     position: relative;
-    z-index: 1;
+    width: 100%;
 }
 
 .kicker {
@@ -262,11 +276,11 @@
 
     gap: 10px;
 
-    margin-bottom: 22px;
+    margin-bottom: clamp(14px, 2vh, 22px);
 
     font-family: var(--font-mono, monospace);
     font-size: 11px;
-    font-weight: 950;
+    font-weight: 900;
 
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -286,47 +300,37 @@
 }
 
 .title {
-    margin:
-        0
-        0
-        34px;
+    margin: 0 0 clamp(22px, 3vh, 34px);
 
     font-family: var(--font-display, Georgia, serif);
-    font-size: clamp(68px, 8vw, 126px);
+
+    font-size: clamp(48px, 6.2vw, 116px);
     font-weight: 700;
 
-    line-height: 0.78;
+    line-height: 0.88;
     letter-spacing: -0.045em;
 }
 
 .title em {
-    position: relative;
-
     display: inline-block;
+
+    max-width: 100%;
 
     color: var(--ink);
 
     font-style: italic;
 }
 
-/*
-   Intentionally NO ::after underline.
-   "something." stays completely clean.
-*/
-
-
 .description {
     max-width: 620px;
 
-    margin:
-        0
-        0
-        19px;
+    margin: 0 0 16px;
 
     font-family: var(--font-sans, system-ui, sans-serif);
-    font-size: clamp(17px, 1.5vw, 21px);
 
-    line-height: 1.65;
+    font-size: clamp(16px, 1.35vw, 20px);
+
+    line-height: 1.55;
 
     opacity: 0.78;
 }
@@ -337,16 +341,16 @@
     margin: 0;
 
     font-family: var(--font-sans, system-ui, sans-serif);
-    font-size: 15px;
 
-    line-height: 1.65;
+    font-size: 14px;
+
+    line-height: 1.6;
 
     opacity: 0.52;
 }
 
-
 /* =========================================================
-   ACTION AREA
+   CONTACT ACTIONS
    ========================================================= */
 
 .actions {
@@ -355,15 +359,13 @@
     display: flex;
     flex-direction: column;
 
-    gap: 22px;
+    width: 100%;
+
+    gap: clamp(14px, 1.6vw, 22px);
 }
 
-
 /* =========================================================
-   PRIMARY CONTACT CARD
-
-   This is the visual target.
-   Accent becomes strongest around the actual CTA.
+   PRIMARY EMAIL CARD
    ========================================================= */
 
 .contactCard {
@@ -371,10 +373,9 @@
 
     display: block;
 
-    padding:
-        26px
-        28px
-        29px;
+    width: 100%;
+
+    padding: clamp(20px, 2vw, 28px);
 
     color: var(--ink);
     text-decoration: none;
@@ -390,13 +391,9 @@
 }
 
 .primaryCard {
-    box-shadow:
-        8px
-        8px
-        0
-        var(--accent);
+    box-shadow: 8px 8px 0 var(--accent);
 
-    transform: rotate(1deg);
+    transform: rotate(0.7deg);
 }
 
 .primaryCard:hover {
@@ -406,32 +403,23 @@
         translate(-4px, -5px)
         rotate(-0.5deg);
 
-    box-shadow:
-        12px
-        13px
-        0
-        var(--accent);
+    box-shadow: 12px 13px 0 var(--accent);
 }
 
 .primaryCard:active {
-    transform:
-        translate(3px, 3px)
-        rotate(0deg);
+    transform: translate(3px, 3px);
 
-    box-shadow:
-        3px
-        3px
-        0
-        var(--accent);
+    box-shadow: 3px 3px 0 var(--accent);
 }
 
 .cardTop {
     display: flex;
+    align-items: center;
     justify-content: space-between;
 
-    gap: 20px;
+    gap: 16px;
 
-    margin-bottom: 28px;
+    margin-bottom: clamp(16px, 2vw, 28px);
 
     font-family: var(--font-mono, monospace);
     font-size: 10px;
@@ -439,20 +427,21 @@
 
     letter-spacing: 0.08em;
 
-    opacity: 0.45;
+    opacity: 0.55;
 }
 
-.cardTop span:last-child {
-    color: #4e68a2;
+.cardTop svg {
+    flex: 0 0 auto;
 
-    opacity: 1;
+    color: #4e68a2;
 }
 
 .cardTitle {
     margin-bottom: 8px;
 
     font-family: var(--font-display, Georgia, serif);
-    font-size: clamp(34px, 3vw, 46px);
+
+    font-size: clamp(30px, 3vw, 46px);
     font-style: italic;
     font-weight: 700;
 
@@ -460,13 +449,16 @@
 }
 
 .cardValue {
-    padding-right: 42px;
+    padding-right: 36px;
 
     overflow-wrap: anywhere;
 
     font-family: var(--font-sans, system-ui, sans-serif);
-    font-size: 15px;
+
+    font-size: clamp(12px, 1.1vw, 15px);
     font-weight: 650;
+
+    line-height: 1.45;
 
     opacity: 0.62;
 }
@@ -474,12 +466,8 @@
 .arrow {
     position: absolute;
 
-    right: 24px;
-    bottom: 23px;
-
-    font-family: var(--font-mono, monospace);
-    font-size: 30px;
-    font-weight: 900;
+    right: 20px;
+    bottom: 20px;
 
     color: #4e68a2;
 
@@ -490,7 +478,6 @@
 .primaryCard:hover .arrow {
     transform: translateX(7px);
 }
-
 
 /* =========================================================
    SECONDARY ACTIONS
@@ -506,21 +493,18 @@
 }
 
 .smallCard {
+    position: relative;
+
     display: grid;
 
     grid-template-columns:
-        auto
-        minmax(0, 1fr);
+        auto minmax(0, 1fr) auto;
 
     align-items: center;
 
-    gap: 15px;
+    gap: 12px;
 
-    min-width: 0;
-
-    padding:
-        18px
-        17px;
+    padding: 17px 15px;
 
     color: var(--ink);
     text-decoration: none;
@@ -529,11 +513,7 @@
 
     border: 2px solid var(--ink);
 
-    box-shadow:
-        4px
-        4px
-        0
-        var(--ink);
+    box-shadow: 4px 4px 0 var(--ink);
 
     transition:
         transform 160ms cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -542,11 +522,11 @@
 }
 
 .smallCard:first-child {
-    transform: rotate(-1deg);
+    transform: rotate(-0.7deg);
 }
 
 .smallCard:last-child {
-    transform: rotate(1deg);
+    transform: rotate(0.7deg);
 }
 
 .smallCard:hover {
@@ -556,24 +536,18 @@
         translate(-2px, -3px)
         rotate(0deg);
 
-    box-shadow:
-        6px
-        7px
-        0
-        var(--accent);
+    box-shadow: 6px 7px 0 var(--accent);
 }
 
 .smallCard:active {
     transform: translate(2px, 2px);
 
-    box-shadow:
-        2px
-        2px
-        0
-        var(--ink);
+    box-shadow: 2px 2px 0 var(--ink);
 }
 
 .smallNumber {
+    align-self: start;
+
     font-family: var(--font-mono, monospace);
     font-size: 9px;
     font-weight: 900;
@@ -583,22 +557,43 @@
     opacity: 0.75;
 }
 
-.smallCard strong {
-    display: block;
-
-    margin-bottom: 4px;
-
-    font-family: var(--font-display, Georgia, serif);
-    font-size: 20px;
-    font-style: italic;
-
-    line-height: 1;
+.smallContent {
+    width: 100%;
 }
 
-.smallCard div span {
+.smallHeading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 8px;
+
+    margin-bottom: 5px;
+}
+
+.smallHeading strong {
+    display: block;
+
+    font-family: var(--font-display, Georgia, serif);
+
+    font-size: clamp(16px, 1.5vw, 20px);
+    font-style: italic;
+    font-weight: 700;
+
+    line-height: 1.1;
+}
+
+.smallHeading svg {
+    flex: 0 0 auto;
+
+    color: #4e68a2;
+}
+
+.smallDescription {
     display: block;
 
     font-family: var(--font-mono, monospace);
+
     font-size: 9px;
     font-weight: 800;
 
@@ -608,6 +603,18 @@
     opacity: 0.47;
 }
 
+.smallArrow {
+    align-self: end;
+    flex-shrink: 0;
+
+    color: #4e68a2;
+
+    transition: transform 160ms ease;
+}
+
+.smallCard:hover .smallArrow {
+    transform: translate(2px, -2px);
+}
 
 /* =========================================================
    AVAILABILITY
@@ -619,17 +626,15 @@
 
     gap: 13px;
 
-    padding:
-        14px
-        16px;
+    padding: 13px 16px;
 
-    background:
-        rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.18);
 
-    border:
-        2px
-        dashed
-        rgba(23, 25, 29, 0.28);
+    border: 2px dashed rgba(23, 25, 29, 0.28);
+}
+
+.availability > div {
+    min-width: 0;
 }
 
 .statusDot {
@@ -643,7 +648,6 @@
     background: var(--accent);
 
     border: 2px solid var(--ink);
-
     border-radius: 50%;
 }
 
@@ -654,22 +658,19 @@
 
     inset: -6px;
 
-    border:
-        1px
-        solid
-        rgba(100, 127, 188, 0.35);
-
+    border: 1px solid rgba(100, 127, 188, 0.35);
     border-radius: 50%;
 }
 
 .availability strong {
     display: block;
 
-    margin-bottom: 3px;
+    margin-bottom: 4px;
 
     font-family: var(--font-mono, monospace);
+
     font-size: 10px;
-    font-weight: 950;
+    font-weight: 900;
 
     letter-spacing: 0.07em;
 }
@@ -678,11 +679,13 @@
     display: block;
 
     font-family: var(--font-sans, system-ui, sans-serif);
+
     font-size: 12px;
+
+    line-height: 1.45;
 
     opacity: 0.52;
 }
-
 
 /* =========================================================
    FOOTER
@@ -693,39 +696,50 @@
     z-index: 1;
 
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
 
-    gap: 30px;
+    gap: 24px;
 
-    padding-top: 20px;
+    padding-top: 18px;
 
     border-top: 3px solid var(--ink);
 
     font-family: var(--font-mono, monospace);
+
     font-size: 10px;
     font-weight: 900;
 
     letter-spacing: 0.08em;
 }
 
-.footer > div {
+.footerIdentity {
     display: flex;
     flex-direction: column;
 
     gap: 4px;
 }
 
-.footer > div span {
+.footerIdentity strong {
+    font-weight: 900;
+}
+
+.footerIdentity span {
     font-size: 9px;
 
     opacity: 0.4;
 }
 
 .backToTop {
-    padding:
-        9px
-        12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    flex: 0 0 auto;
+
+    padding: 9px 12px;
 
     color: var(--ink);
     background: transparent;
@@ -733,10 +747,13 @@
     border: 2px solid transparent;
 
     font-family: var(--font-mono, monospace);
+
     font-size: 10px;
     font-weight: 900;
 
     letter-spacing: 0.07em;
+
+    white-space: nowrap;
 
     cursor: pointer;
 
@@ -754,80 +771,275 @@
 
     transform: translate(-2px, -2px);
 
-    box-shadow:
-        3px
-        3px
-        0
-        var(--accent);
+    box-shadow: 3px 3px 0 var(--accent);
 }
 
-
 /* =========================================================
-   TABLET
+   KEYBOARD FOCUS
    ========================================================= */
 
-@media (max-width: 900px) {
+.contactCard:focus-visible,
+.smallCard:focus-visible,
+.backToTop:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 5px;
+}
 
-    .content {
-        grid-template-columns: 1fr;
+/* =========================================================
+   LARGE / TALL DESKTOP
+   ========================================================= */
 
-        gap: 60px;
+@media (min-width: 1500px) and (min-height: 950px) {
+
+    .section {
+        padding-block: clamp(80px, 8vh, 140px);
     }
 
-    .copy {
-        max-width: 760px;
+    .content {
+        gap: clamp(70px, 5vw, 110px);
+
+        padding-block: clamp(70px, 8vh, 120px);
+    }
+
+    .title {
+        font-size: clamp(90px, 6.5vw, 126px);
+    }
+
+    .description {
+        font-size: clamp(18px, 1.3vw, 21px);
+    }
+}
+
+/* =========================================================
+   SHORT DESKTOP / LAPTOP
+   Height-aware layout
+   ========================================================= */
+
+@media (min-width: 901px) and (max-height: 900px) {
+
+    .section {
+        padding-block: clamp(28px, 4vh, 52px);
+    }
+
+    .paper {
+        padding:
+            clamp(24px, 3vh, 38px)
+            clamp(28px, 3vw, 52px);
+    }
+
+    .content {
+        gap: clamp(28px, 3.5vw, 60px);
+
+        padding-block: clamp(28px, 4vh, 52px);
+    }
+
+    .kicker {
+        margin-bottom: 14px;
+    }
+
+    .title {
+        font-size: clamp(52px, 5.4vw, 88px);
+
+        line-height: 0.9;
+
+        margin-bottom: 22px;
+    }
+
+    .description {
+        font-size: clamp(15px, 1.15vw, 18px);
+
+        line-height: 1.5;
+
+        margin-bottom: 12px;
+    }
+
+    .subcopy {
+        font-size: 13px;
+
+        line-height: 1.5;
     }
 
     .actions {
-        max-width: 680px;
+        gap: 14px;
+    }
+
+    .contactCard {
+        padding: 20px 22px 22px;
+    }
+
+    .cardTop {
+        margin-bottom: 18px;
+    }
+
+    .cardTitle {
+        font-size: clamp(30px, 2.7vw, 40px);
+    }
+
+    .smallCard {
+        gap: 10px;
+
+        padding: 13px 12px;
+    }
+
+    .smallHeading strong {
+        font-size: 18px;
+    }
+
+    .availability {
+        padding: 10px 13px;
+    }
+
+    .footer {
+        padding-top: 14px;
     }
 }
 
-
 /* =========================================================
-   PHONE
+   COMPACT LAPTOP
+   901px – 1199px
    ========================================================= */
 
+@media (min-width: 901px) and (max-width: 1199px) {
+
+    .section {
+        padding-inline: 22px;
+    }
+
+    .paper {
+        padding-inline: clamp(24px, 3vw, 38px);
+    }
+
+    .content {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 0.95fr);
+
+        gap: clamp(24px, 3vw, 42px);
+    }
+
+    .title {
+        font-size: clamp(48px, 5.2vw, 72px);
+    }
+
+    .description {
+        font-size: 16px;
+    }
+
+    .secondaryActions {
+        gap: 10px;
+    }
+
+    .smallCard {
+        grid-template-columns: minmax(0, 1fr);
+
+        gap: 8px;
+    }
+
+    .smallNumber {
+        align-self: auto;
+    }
+
+    .smallArrow {
+        justify-self: end;
+    }
+
+    .smallHeading strong {
+        font-size: 17px;
+    }
+
+    .cardValue {
+        font-size: 13px;
+    }
+}
+
+/* =========================================================
+   TABLET / NARROW WINDOWS
+   641px – 900px
+   ========================================================= */
+
+@media (min-width: 641px) and (max-width: 900px) {
+
+    .section {
+        padding: 48px 24px 64px;
+    }
+
+    .paper {
+        padding: clamp(28px, 5vw, 48px);
+    }
+
+    .content {
+        grid-template-columns: minmax(0, 1fr);
+
+        gap: 38px;
+
+        padding-block: 48px;
+    }
+
+    .copy,
+    .actions {
+        max-width: 100%;
+    }
+
+    .title {
+        font-size: clamp(64px, 9vw, 94px);
+
+        margin-bottom: 28px;
+    }
+
+    .description {
+        max-width: 620px;
+
+        font-size: 17px;
+    }
+
+    .actions {
+        gap: 16px;
+    }
+
+    .contactCard {
+        padding: 24px;
+    }
+
+    .secondaryActions {
+        gap: 14px;
+    }
+
+    .smallCard {
+        grid-template-columns:
+            auto minmax(0, 1fr) auto;
+
+        padding: 18px;
+    }
+
+    .smallHeading strong {
+        font-size: 20px;
+    }
+}
+
 /* =========================================================
    PHONE
-   Compact final-page composition
+   391px – 640px
    ========================================================= */
 
 @media (max-width: 640px) {
 
-    /* =====================================================
-       SECTION / PAGE STACK
-       ===================================================== */
-
     .section {
-        padding:
-            48px
-            12px
-            64px;
-
-        overflow: hidden;
+        padding: 40px 12px 56px;
     }
 
     .backSheet {
-        width: calc(100% - 18px);
-        height: calc(100% - 92px);
-
-        top: 53px;
+        inset: 8px 4px -7px;
 
         border-width: 2px;
 
-        transform:
-            translateX(-50%)
-            rotate(-0.45deg);
+        transform: rotate(-0.4deg);
     }
 
     .paper {
-        width: 100%;
-
         padding:
-            24px
-            20px
-            28px;
+            22px
+            clamp(14px, 4vw, 20px)
+            26px;
 
         border-width: 2px;
 
@@ -836,15 +1048,15 @@
             9px 9px 0 rgba(100, 127, 188, 0.2);
     }
 
+    .star,
+    .plus {
+        display: none;
+    }
 
-    /* =====================================================
-       TOP BAR
-       ===================================================== */
+    /* TOP BAR */
 
     .topBar {
-        align-items: center;
-
-        gap: 12px;
+        gap: 10px;
 
         padding-bottom: 14px;
 
@@ -852,55 +1064,31 @@
     }
 
     .sectionLabel {
-        padding:
-            7px
-            9px;
+        padding: 7px 9px;
 
-        border-width: 1.5px;
+        border-width: 1px;
 
-        box-shadow:
-            3px
-            3px
-            0
-            var(--accent);
+        box-shadow: 3px 3px 0 var(--accent);
 
         font-size: 8px;
 
-        letter-spacing: 0.075em;
+        letter-spacing: 0.06em;
 
         white-space: nowrap;
     }
 
     .code {
-        flex: 0 0 auto;
+        font-size: 8px;
 
-        font-size: 7px;
-
-        letter-spacing: 0.05em;
+        letter-spacing: 0.04em;
     }
 
-
-    /* =====================================================
-       MAIN CONTENT
-       ===================================================== */
+    /* CONTENT */
 
     .content {
         display: block;
 
-        padding:
-            44px
-            0
-            46px;
-    }
-
-
-    /* =====================================================
-       COPY
-       ===================================================== */
-
-    .copy {
-        width: 100%;
-        max-width: none;
+        padding-block: 40px;
     }
 
     .kicker {
@@ -908,9 +1096,7 @@
 
         margin-bottom: 16px;
 
-        font-size: 8px;
-
-        letter-spacing: 0.13em;
+        font-size: 9px;
     }
 
     .kicker::before {
@@ -919,85 +1105,43 @@
     }
 
     .title {
-        max-width: 100%;
+        font-size: clamp(43px, 12.5vw, 62px);
 
-        margin:
-            0
-            0
-            26px;
+        line-height: 0.9;
 
-        /*
-         * Still huge and editorial, but no longer
-         * trying to escape the page.
-         */
-        font-size: clamp(47px, 14vw, 62px);
-
-        line-height: 0.82;
-
-        letter-spacing: -0.045em;
-
-        overflow-wrap: normal;
-        word-break: normal;
-    }
-
-    .title em {
-        display: inline-block;
+        margin-bottom: 24px;
     }
 
     .description {
-        max-width: 100%;
-
-        margin-bottom: 16px;
-
         font-size: 15px;
 
-        line-height: 1.58;
+        line-height: 1.55;
+
+        margin-bottom: 16px;
     }
 
     .subcopy {
-        max-width: 100%;
+        font-size: 13px;
 
-        font-size: 13.5px;
-
-        line-height: 1.58;
+        line-height: 1.55;
     }
 
-
-    /* =====================================================
-       ACTION AREA
-       ===================================================== */
+    /* ACTIONS */
 
     .actions {
-        width: 100%;
-        max-width: none;
+        margin-top: 34px;
 
-        gap: 18px;
-
-        margin-top: 42px;
+        gap: 16px;
     }
 
-
-    /* =====================================================
-       EMAIL CARD
-       ===================================================== */
-
     .contactCard {
-        width: 100%;
-
-        padding:
-            19px
-            18px
-            21px;
+        padding: 19px 16px 22px;
 
         border-width: 2px;
     }
 
     .primaryCard {
-        box-shadow:
-            5px
-            5px
-            0
-            var(--accent);
+        box-shadow: 5px 5px 0 var(--accent);
 
         transform: rotate(0.4deg);
     }
@@ -1007,22 +1151,7 @@
             translate(-2px, -3px)
             rotate(-0.3deg);
 
-        box-shadow:
-            8px
-            8px
-            0
-            var(--accent);
-    }
-
-    .primaryCard:active {
-        transform:
-            translate(2px, 2px);
-
-        box-shadow:
-            2px
-            2px
-            0
-            var(--accent);
+        box-shadow: 8px 8px 0 var(--accent);
     }
 
     .cardTop {
@@ -1031,35 +1160,24 @@
         margin-bottom: 21px;
 
         font-size: 8px;
-
-        letter-spacing: 0.06em;
     }
 
     .cardTitle {
-        margin-bottom: 7px;
-
         font-size: 31px;
     }
 
     .cardValue {
-        padding-right: 34px;
+        padding-right: 32px;
 
-        font-size: 13px;
-
-        line-height: 1.4;
+        font-size: clamp(11px, 3.2vw, 13px);
     }
 
     .arrow {
-        right: 17px;
-        bottom: 18px;
-
-        font-size: 25px;
+        right: 15px;
+        bottom: 17px;
     }
 
-
-    /* =====================================================
-       LINKEDIN / GITHUB
-       ===================================================== */
+    /* SOCIAL CARDS */
 
     .secondaryActions {
         grid-template-columns:
@@ -1069,29 +1187,17 @@
     }
 
     .smallCard {
-        /*
-         * Stack the little index above the content so
-         * two cards can comfortably stay side-by-side.
-         */
         display: flex;
         flex-direction: column;
         align-items: flex-start;
 
         gap: 10px;
 
-        min-width: 0;
-
-        padding:
-            14px
-            13px;
+        padding: 13px 11px;
 
         border-width: 1.5px;
 
-        box-shadow:
-            3px
-            3px
-            0
-            var(--ink);
+        box-shadow: 3px 3px 0 var(--ink);
     }
 
     .smallCard:first-child {
@@ -1102,47 +1208,39 @@
         transform: rotate(0.5deg);
     }
 
-    .smallCard:hover {
-        transform:
-            translate(-2px, -2px)
-            rotate(0deg);
-
-        box-shadow:
-            5px
-            5px
-            0
-            var(--accent);
-    }
-
     .smallNumber {
         font-size: 8px;
     }
 
-    .smallCard strong {
-        margin-bottom: 5px;
-
-        font-size: 18px;
+    .smallHeading {
+        gap: 6px;
     }
 
-    .smallCard div span {
-        font-size: 7px;
-
-        letter-spacing: 0.035em;
+    .smallHeading strong {
+        font-size: clamp(15px, 4vw, 18px);
     }
 
+    .smallHeading svg {
+        width: 17px;
+        height: 17px;
+    }
 
-    /* =====================================================
-       AVAILABILITY
-       ===================================================== */
+    .smallDescription {
+        font-size: 8px;
+    }
+
+    .smallArrow {
+        align-self: flex-end;
+    }
+
+    /* AVAILABILITY */
 
     .availability {
         align-items: flex-start;
 
         gap: 11px;
 
-        padding:
-            12px
-            13px;
+        padding: 12px 13px;
 
         border-width: 1.5px;
     }
@@ -1156,82 +1254,47 @@
         border-width: 1.5px;
     }
 
-    .statusDot::after {
-        inset: -5px;
-    }
-
     .availability strong {
-        margin-bottom: 4px;
-
-        font-size: 8px;
-
-        letter-spacing: 0.055em;
+        font-size: 9px;
     }
 
     .availability div span {
         font-size: 11px;
-
-        line-height: 1.45;
     }
 
-
-    /* =====================================================
-       DECORATIONS
-       ===================================================== */
-
-    .star {
-        display: none;
-    }
-
-    .plus {
-        display: none;
-    }
-
-
-    /* =====================================================
-       FOOTER
-       ===================================================== */
+    /* FOOTER */
 
     .footer {
-        align-items: center;
-        flex-direction: row;
-        justify-content: space-between;
-
-        gap: 12px;
+        gap: 10px;
 
         padding-top: 15px;
 
         border-top-width: 2px;
 
         font-size: 8px;
-
-        letter-spacing: 0.055em;
     }
 
-    .footer > div {
-        gap: 3px;
-    }
-
-    .footer > div span {
+    .footerIdentity span {
         font-size: 7px;
     }
 
     .backToTop {
-        flex: 0 0 auto;
+        gap: 5px;
 
-        padding:
-            7px
-            8px;
+        padding: 7px 8px;
 
-        font-size: 7px;
+        font-size: 8px;
+    }
 
-        letter-spacing: 0.045em;
+    .backToTop svg {
+        width: 15px;
+        height: 15px;
     }
 }
 
-
 /* =========================================================
    VERY SMALL PHONE
+   390px and below
    ========================================================= */
 
 @media (max-width: 390px) {
@@ -1241,7 +1304,7 @@
     }
 
     .paper {
-        padding-inline: 16px;
+        padding-inline: 14px;
     }
 
     .sectionLabel {
@@ -1249,23 +1312,22 @@
     }
 
     .code {
-        font-size: 6px;
+        font-size: 7px;
     }
 
     .title {
-        font-size: clamp(43px, 13.5vw, 53px);
+        font-size: clamp(40px, 12vw, 48px);
     }
 
     .secondaryActions {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .smallCard {
         display: grid;
 
         grid-template-columns:
-            auto
-            minmax(0, 1fr);
+            auto minmax(0, 1fr) auto;
 
         align-items: center;
 
@@ -1277,11 +1339,34 @@
         transform: none;
     }
 
-    .footer {
-        align-items: flex-start;
-        flex-direction: column;
+    .smallArrow {
+        align-self: end;
+    }
 
-        gap: 14px;
+    .footer {
+        flex-direction: column;
+        align-items: flex-start;
+
+        gap: 12px;
+    }
+}
+
+/* =========================================================
+   SHORT MOBILE LANDSCAPE
+   ========================================================= */
+
+@media (max-height: 500px) and (orientation: landscape) {
+
+    .section {
+        padding-block: 24px;
+    }
+
+    .content {
+        padding-block: 28px;
+    }
+
+    .title {
+        margin-bottom: 18px;
     }
 }
 
@@ -1294,6 +1379,7 @@
     .contactCard,
     .smallCard,
     .arrow,
+    .smallArrow,
     .backToTop {
         transition: none;
     }
