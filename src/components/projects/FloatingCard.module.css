@@ -1,6 +1,7 @@
 /* =========================================================
-   FLOATING CARD
-   PHYSICAL POP-UP / PINNED PAPER
+   FLOATING CARD — PINNED POP-UP PAPER
+   Master screenshot: 16:10, matching ProjectMediaStage.
+   Secondary screenshot: anchored inside the media viewport.
    ========================================================= */
 
 .card {
@@ -11,15 +12,15 @@
     position: relative;
     flex-shrink: 0;
     isolation: isolate;
-
     cursor: pointer;
 }
 
+.card,
+.card * {
+    box-sizing: border-box;
+}
 
-/* =========================================================
-   PAPER STACK — SHARED
-   ========================================================= */
-
+/* PAPER STACK */
 .darkSheet,
 .accentSheet,
 .mainSheet {
@@ -27,1105 +28,382 @@
     border: 3px solid var(--ink);
 }
 
-
-/* =========================================================
-   DARK BACK SHEET
-   ========================================================= */
-
 .darkSheet {
     z-index: 0;
-
     inset: 8px -8px -8px 8px;
-
     background: var(--ink);
-
-    transform:
-        rotate(var(--dark-rotation));
-
-    transform-origin: center;
-
-    transition:
-        transform 340ms
-        cubic-bezier(0.22, 1, 0.36, 1);
+    transform: rotate(var(--dark-rotation, 0deg));
+    transition: transform 340ms cubic-bezier(.22, 1, .36, 1);
 }
-
-
-/* =========================================================
-   ACCENT BACK SHEET
-   ========================================================= */
 
 .accentSheet {
     z-index: 1;
-
     inset: 10px -10px -10px 10px;
-
     background: var(--accent);
-
-    transform:
-        rotate(var(--accent-rotation));
-
-    transform-origin: center;
-
-    transition:
-        transform 320ms
-        cubic-bezier(0.22, 1, 0.36, 1);
+    transform: rotate(var(--accent-rotation, 0deg));
+    transition: transform 340ms cubic-bezier(.22, 1, .36, 1);
 }
-
-
-/* =========================================================
-   MAIN / FRONT PAPER
-
-   This is the whole physical front sheet:
-   image + caption + pin.
-   ========================================================= */
 
 .mainSheet {
     z-index: 2;
-
     inset: 0;
-
-    display: grid;
-
-    grid-template-rows:
-        minmax(0, 1fr)
-        minmax(108px, auto);
-
-    color: #171411;
-
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    color: var(--ink);
     background: var(--paper);
-
-    /*
-     * Visible so the pin can sit above
-     * the physical sheet.
-     */
     overflow: visible;
-
-    transform:
-        translateY(0)
-        scale(1);
-
-    transform-origin: center;
-
-    transition:
-        transform 340ms
-        cubic-bezier(0.22, 1, 0.36, 1),
-        box-shadow 340ms ease;
+    transform: translateY(0) scale(1);
+    transition: transform 340ms cubic-bezier(.22, 1, .36, 1), box-shadow 340ms ease;
 }
 
-
-/* =========================================================
-   POP-UP INTERACTION
-
-   Front sheet comes forward.
-   Back sheets fan behind it.
-   ========================================================= */
-
-.card:hover .mainSheet {
-    transform:
-        translateY(-4px)
-        scale(1.025);
-
-    box-shadow:
-        7px 9px 0
-        rgba(26, 23, 20, 0.13);
-}
-
-
-.card:hover .accentSheet {
-    transform:
-        translate(12px, 5px)
-        rotate(3deg);
-}
-
-
-.card:hover .darkSheet {
-    transform:
-        translate(-9px, 10px)
-        rotate(-2.7deg);
-}
-
-
-/* =========================================================
-   LUCIDE PIN
-   ========================================================= */
-
+/* PIN */
 .pinWrap {
     position: absolute;
-
     z-index: 40;
-
     top: -17px;
     left: 50%;
-
     width: 34px;
     height: 42px;
-
     display: grid;
     place-items: center;
-
     color: var(--pin-color);
-
-    transform:
-        translateX(-50%)
-        rotate(-12deg);
-
-    transform-origin:
-        50% 85%;
-
-    filter:
-        drop-shadow(
-            2px 3px 0
-            rgba(26, 23, 20, 0.2)
-        );
-
+    transform: translateX(-50%) rotate(-12deg);
+    transform-origin: 50% 85%;
+    filter: drop-shadow(2px 3px 0 rgba(26, 23, 20, .2));
     pointer-events: none;
-
-    transition:
-        transform 300ms
-        cubic-bezier(0.34, 1.56, 0.64, 1),
-        filter 220ms ease;
+    transition: transform 300ms cubic-bezier(.34, 1.56, .64, 1), filter 220ms ease;
 }
-
-
-/*
- * SOLID Lucide pin.
- * No ::before.
- * No fake blob.
- */
 
 .pin {
     width: 29px;
     height: 29px;
-
     color: var(--pin-color);
-
     fill: var(--pin-color);
     stroke: var(--ink);
-
     stroke-width: 2.2;
 }
 
-
-/* Pull pin slightly out as sheet lifts */
-
-.card:hover .pinWrap {
-    transform:
-        translateX(-50%)
-        translateY(-13px)
-        translateX(4px)
-        rotate(15deg);
-
-    filter:
-        drop-shadow(
-            4px 6px 0
-            rgba(26, 23, 20, 0.16)
-        );
-}
-
-
-/* =========================================================
-   MEDIA
-   ========================================================= */
-
+/* MEDIA — the media area fills the space ABOVE the caption.
+   The actual master screenshot is a centered 16:10 window. */
 .media {
     position: relative;
-
+    flex: 1 1 auto;
     min-width: 0;
     min-height: 0;
-
     overflow: hidden;
-
+    display: grid;
+    place-items: center;
     background: #d8d2c9;
-
-    border-bottom:
-        3px solid var(--ink);
+    border-bottom: 3px solid var(--ink);
 }
-
-
-/* =========================================================
-   PRIMARY SCREENSHOT
-
-   IMPORTANT:
-   This does NOT animate independently.
-   It moves only because .mainSheet moves.
-   ========================================================= */
 
 .mediaInner {
-    position: absolute;
-
-    inset: -7px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+    position: relative;
+    width: 100%;
+    max-height: 100%;
+    aspect-ratio: 16 / 10;
+    min-width: 0;
+    min-height: 0;
     overflow: hidden;
-
-    transform:
-        rotate(var(--image-rotation))
-        scale(1.025);
-
-    transform-origin: center;
-
+    display: grid;
+    place-items: center;
     pointer-events: none;
 }
 
-
-.mediaInner > * {
-    width: 100%;
-    height: 100%;
+/* The component normally receives a masterImage wrapper, but
+   direct img / preview children work too. */
+.masterImage {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
 }
 
-
-.mediaInner img {
-    width: 100%;
-    height: 100%;
-
+.masterImage > *,
+.mediaInner > img,
+.mediaInner > picture,
+.mediaInner > div {
     display: block;
-
-    object-position:
-        center center;
+    width: 100%;
+    height: 100%;
 }
 
+.masterImage img,
+.mediaInner > img,
+.mediaInner > picture img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
 
-/* =========================================================
-   SECONDARY SCREENSHOT
-   ========================================================= */
-
+/* SECONDARY IMAGE — deliberately positioned relative to .media,
+   not to the whole card or the caption. */
 .secondaryCard {
     position: absolute;
-
-    z-index: 20;
-
-    right:
-        clamp(13px, 4%, 22px);
-
-    bottom:
-        clamp(14px, 4%, 23px);
-
-    width:
-        clamp(82px, 25%, 124px);
-
-    aspect-ratio: 0.66;
-
-    padding: 6px;
-
-    overflow: visible;
-
+    z-index: 12;
+    right: clamp(8px, 3%, 16px);
+    bottom: clamp(8px, 3%, 16px);
+    width: clamp(68px, 28%, 138px);
+    aspect-ratio: 9 / 16;
+    padding: 5px;
     background: var(--paper);
-
-    border:
-        3px solid var(--ink);
-
-    box-shadow:
-        6px 6px 0 var(--accent),
-        10px 10px 0
-        rgba(26, 23, 20, 0.18);
-
-    transform:
-        translateY(0)
-        rotate(var(--secondary-rotation));
-
-    transform-origin:
-        50% 80%;
-
-    pointer-events: none;
-
-    transition:
-        transform 300ms
-        cubic-bezier(0.34, 1.56, 0.64, 1),
-        box-shadow 260ms ease;
+    border: 2px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--accent), 8px 8px 0 rgba(26, 23, 20, .16);
+    transform: rotate(var(--secondary-rotation, 2deg));
+    transform-origin: center bottom;
+    transition: transform 300ms cubic-bezier(.22, 1, .36, 1), box-shadow 300ms ease;
 }
-
-
-/* =========================================================
-   SECONDARY HOVER
-   ========================================================= */
-
-.card:hover .secondaryCard {
-    transform:
-        translateY(-12px)
-        rotate(0deg);
-
-    box-shadow:
-        9px 12px 0 var(--accent),
-        14px 17px 0
-        rgba(26, 23, 20, 0.14);
-}
-
-
-/* =========================================================
-   SECONDARY TAPE
-   ========================================================= */
 
 .secondaryTape {
     position: absolute;
-
     z-index: 5;
-
-    top: -9px;
+    top: -8px;
     left: 50%;
-
     width: 42%;
-    height: 15px;
-
-    transform:
-        translateX(-50%)
-        rotate(-2deg);
-
-    background:
-        rgba(255, 250, 242, 0.88);
-
-    border:
-        2px solid var(--ink);
-
-    opacity: 0.92;
+    height: 13px;
+    background: rgba(255, 250, 242, .88);
+    border: 2px solid var(--ink);
+    transform: translateX(-50%) rotate(-2deg);
+    pointer-events: none;
 }
-
-
-/* =========================================================
-   SECONDARY SCREEN
-   ========================================================= */
 
 .secondaryScreen {
     position: relative;
-
     width: 100%;
     height: 100%;
-
     overflow: hidden;
-
-    background:
-        var(--paper-muted);
-
-    border:
-        2px solid var(--ink);
+    background: var(--paper-muted);
+    border: 1px solid var(--ink);
 }
-
 
 .secondaryScreen > * {
+    display: block;
     width: 100%;
     height: 100%;
 }
-
 
 .secondaryScreen img {
+    display: block;
     width: 100%;
     height: 100%;
-
-    display: block;
-
-    object-position:
-        center center;
+    object-fit: contain;
+    object-position: center;
 }
-
-
-/* =========================================================
-   SECONDARY REGISTRATION MARK
-   ========================================================= */
 
 .secondaryRegistration {
     position: absolute;
-
     z-index: 6;
-
-    right: -9px;
-    bottom: -9px;
-
-    width: 20px;
-    height: 20px;
-
+    right: -8px;
+    bottom: -8px;
+    width: 18px;
+    height: 18px;
     display: grid;
     place-items: center;
-
     color: var(--paper);
-
     background: var(--ink);
-
-    border:
-        2px solid var(--ink);
+    border: 2px solid var(--ink);
 }
 
-
-/* =========================================================
-   RESTING CORNER MARK
-   ========================================================= */
-
+/* MEDIA MARKS */
 .cornerMark {
     position: absolute;
-
-    z-index: 25;
-
-    right: 14px;
-    top: 14px;
-
+    z-index: 20;
+    right: 12px;
+    top: 12px;
     width: 16px;
     height: 16px;
-
-    background:
-        var(--accent);
-
-    border:
-        2px solid var(--ink);
-
+    background: var(--accent);
+    border: 2px solid var(--ink);
     pointer-events: none;
-
-    transition:
-        opacity 130ms ease;
+    transition: opacity 130ms ease;
 }
-
-
-.card:hover .cornerMark {
-    opacity: 0;
-}
-
-
-/* =========================================================
-   OPEN INDICATOR
-   ========================================================= */
 
 .openMark {
     position: absolute;
-
-    z-index: 26;
-
-    right: 15px;
-    top: 15px;
-
-    width: 46px;
-    height: 46px;
-
+    z-index: 21;
+    right: 12px;
+    top: 12px;
+    width: 42px;
+    height: 42px;
     display: grid;
     place-items: center;
-
     color: var(--paper);
-
     background: var(--ink);
-
-    border:
-        3px solid var(--ink);
-
-    box-shadow:
-        4px 4px 0
-        var(--accent);
-
+    border: 3px solid var(--ink);
+    box-shadow: 4px 4px 0 var(--accent);
     opacity: 0;
-
-    transform:
-        rotate(4deg)
-        scale(0.82);
-
+    transform: rotate(4deg) scale(.82);
     pointer-events: none;
-
-    transition:
-        opacity 140ms ease,
-        transform 200ms
-        cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: opacity 140ms ease, transform 200ms cubic-bezier(.34, 1.56, .64, 1);
 }
-
-
-.card:hover .openMark {
-    opacity: 1;
-
-    transform:
-        rotate(0deg)
-        scale(1);
-}
-
-
-/* =========================================================
-   MEDIA REGISTRATION MARK
-   ========================================================= */
 
 .mediaRegistration {
     position: absolute;
-
     z-index: 8;
-
-    left: 13px;
-    bottom: 11px;
-
-    font-family:
-        var(--font-mono, monospace);
-
+    left: 12px;
+    bottom: 10px;
+    color: var(--paper);
+    font-family: var(--font-mono, monospace);
     font-size: 18px;
     font-weight: 900;
-
     line-height: 1;
-
-    color: var(--paper);
-
-    text-shadow:
-        1px 1px 0
-        var(--ink);
-
-    opacity: 0.48;
-
+    text-shadow: 1px 1px 0 var(--ink);
+    opacity: .48;
     pointer-events: none;
 }
 
-
-/* =========================================================
-   CAPTION
-   ========================================================= */
-
+/* CAPTION — never participates in secondary-image positioning. */
 .caption {
     position: relative;
-
     z-index: 5;
-
+    flex: 0 0 auto;
     min-width: 0;
-    min-height: 108px;
-
     display: grid;
-
-    grid-template-columns:
-        minmax(0, 1fr)
-        auto;
-
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-
-    gap: 14px;
-
-    padding:
-        clamp(16px, 3vw, 22px)
-        clamp(17px, 3vw, 24px);
-
+    gap: 10px;
+    padding: clamp(11px, 2vw, 20px) clamp(12px, 2vw, 22px);
+    background: var(--paper);
     overflow: hidden;
-
-    background:
-        var(--paper);
-
-    transition:
-        background 160ms ease;
+    transition: background 160ms ease;
 }
 
-
-.card:hover .caption {
-    background: #ffffff;
-}
-
-
-/* =========================================================
-   COPY
-   ========================================================= */
-
-.copy {
-    min-width: 0;
-}
-
-
-/* =========================================================
-   TITLE
-   ========================================================= */
+.copy { min-width: 0; }
 
 .title {
-    margin:
-        0 0 9px;
-
-    font-size:
-        clamp(22px, 2.2vw, 30px);
-
+    margin: 0 0 7px;
+    color: #171411;
+    font-size: clamp(17px, 2.1vw, 30px);
     font-style: italic;
     font-weight: 700;
-
-    line-height: 1;
-
-    letter-spacing:
-        -0.015em;
-
-    color: #171411;
-
-    white-space: nowrap;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
+    line-height: 1.08;
+    letter-spacing: -.015em;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
-
-
-/* =========================================================
-   SUBTITLE
-   ========================================================= */
 
 .subtitle {
     display: flex;
-
     align-items: flex-start;
-
-    gap: 9px;
-
+    gap: 8px;
     min-width: 0;
-
-    font-size:
-        clamp(11px, 0.9vw, 13px);
-
-    font-weight: 800;
-
-    line-height: 1.35;
-
-    letter-spacing:
-        0.025em;
-
-    text-transform:
-        uppercase;
-
     color: #211d19;
+    font-size: clamp(9px, .85vw, 12px);
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: .025em;
+    text-transform: uppercase;
 }
-
 
 .subtitleDash {
+    flex: 0 0 auto;
     width: 21px;
     height: 4px;
-
     margin-top: 5px;
-
-    flex: 0 0 auto;
-
-    background:
-        var(--accent);
-
-    border:
-        1px solid var(--ink);
-
-    transition:
-        width 220ms
-        cubic-bezier(0.22, 1, 0.36, 1);
+    background: var(--accent);
+    border: 1px solid var(--ink);
+    transition: width 220ms cubic-bezier(.22, 1, .36, 1);
 }
-
-
-.card:hover .subtitleDash {
-    width: 29px;
-}
-
 
 .subtitleText {
     min-width: 0;
-
     display: -webkit-box;
-
-    -webkit-box-orient:
-        vertical;
-
+    -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
-
     overflow: hidden;
-
-    white-space: normal;
-
-    overflow-wrap:
-        break-word;
+    overflow-wrap: break-word;
 }
-
-
-/* =========================================================
-   REGISTRATION
-   ========================================================= */
 
 .registration {
     align-self: end;
-
     display: grid;
     place-items: center;
-
     color: var(--ink);
-
-    opacity: 0.28;
-
+    opacity: .28;
     pointer-events: none;
-
-    transition:
-        opacity 160ms ease,
-        transform 200ms
-        cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: opacity 160ms ease, transform 200ms cubic-bezier(.34, 1.56, .64, 1);
 }
-
-
-.card:hover .registration {
-    opacity: 0.58;
-
-    transform:
-        rotate(90deg);
-}
-
-
-/* =========================================================
-   BOTTOM ACCENT
-   ========================================================= */
 
 .bottomAccent {
     position: absolute;
-
     left: 0;
     bottom: 0;
-
     width: 20%;
     height: 6px;
-
-    background:
-        var(--accent);
-
-    border-top:
-        2px solid var(--ink);
-
-    border-right:
-        2px solid var(--ink);
-
+    background: var(--accent);
+    border-top: 2px solid var(--ink);
+    border-right: 2px solid var(--ink);
     pointer-events: none;
-
-    transition:
-        width 260ms
-        cubic-bezier(0.22, 1, 0.36, 1);
+    transition: width 260ms cubic-bezier(.22, 1, .36, 1);
 }
 
-
-.card:hover .bottomAccent {
-    width: 48%;
-}
-
-
-/* =========================================================
-   MOBILE
-
-   More of the card is devoted to the image.
-   ========================================================= */
-
-@media (max-width: 560px) {
-
-    .mainSheet {
-        grid-template-rows:
-            minmax(0, 1fr)
-            88px;
-    }
-
-
-    /*
-     * Slightly gentler front-sheet lift.
-     */
-
+/* POP-UP INTERACTIONS */
+@media (hover: hover) {
     .card:hover .mainSheet {
-        transform:
-            translateY(-3px)
-            scale(1.018);
-
-        box-shadow:
-            5px 7px 0
-            rgba(26, 23, 20, 0.12);
+        transform: translateY(-4px) scale(1.025);
+        box-shadow: 7px 9px 0 rgba(26, 23, 20, .13);
     }
-
 
     .card:hover .accentSheet {
-        transform:
-            translate(7px, 4px)
-            rotate(2.3deg);
+        transform: translate(12px, 5px) rotate(3deg);
     }
-
 
     .card:hover .darkSheet {
-        transform:
-            translate(-6px, 7px)
-            rotate(-2.2deg);
+        transform: translate(-9px, 10px) rotate(-2.7deg);
     }
-
-
-    /*
-     * Primary image is slightly larger
-     * and centered on small cards.
-     */
-
-    .mediaInner {
-        inset: -4px;
-
-        transform:
-            rotate(var(--image-rotation))
-            scale(1.04);
-    }
-
-
-    .mediaInner img {
-        object-position:
-            center center;
-    }
-
-
-    /*
-     * Pin
-     */
-
-    .pinWrap {
-        top: -14px;
-
-        width: 30px;
-        height: 36px;
-
-        transform:
-            translateX(-50%)
-            rotate(-10deg);
-    }
-
-
-    .pin {
-        width: 26px;
-        height: 26px;
-    }
-
 
     .card:hover .pinWrap {
-        transform:
-            translateX(-50%)
-            translateY(-10px)
-            translateX(3px)
-            rotate(14deg);
+        transform: translateX(-50%) translateY(-13px) translateX(4px) rotate(15deg);
+        filter: drop-shadow(4px 6px 0 rgba(26, 23, 20, .16));
     }
-
-
-    /*
-     * Secondary image
-     */
-
-    .secondaryCard {
-        right: 10px;
-        bottom: 10px;
-
-        width:
-            clamp(70px, 25%, 92px);
-
-        padding: 5px;
-
-        border-width: 2px;
-
-        box-shadow:
-            4px 4px 0
-            var(--accent),
-            7px 7px 0
-            rgba(26, 23, 20, 0.16);
-    }
-
 
     .card:hover .secondaryCard {
-        transform:
-            translateY(-7px)
-            rotate(0deg);
-
-        box-shadow:
-            6px 7px 0
-            var(--accent),
-            9px 10px 0
-            rgba(26, 23, 20, 0.14);
+        transform: translateY(-8px) rotate(0deg);
+        box-shadow: 8px 10px 0 var(--accent), 12px 14px 0 rgba(26, 23, 20, .14);
     }
 
-
-    /*
-     * Shorter caption = more image.
-     */
-
-    .caption {
-        min-height: 88px;
-
-        padding:
-            12px 15px;
-    }
-
-
-    .title {
-        margin-bottom: 6px;
-
-        font-size:
-            clamp(20px, 7vw, 25px);
-    }
-
-
-    .subtitle {
-        gap: 7px;
-
-        font-size:
-            clamp(9px, 2.8vw, 11px);
-
-        line-height: 1.25;
-    }
-
-
-    .openMark {
-        width: 39px;
-        height: 39px;
-    }
-
-
-    .openMark svg {
-        width: 21px;
-        height: 21px;
-    }
+    .card:hover .cornerMark { opacity: 0; }
+    .card:hover .openMark { opacity: 1; transform: rotate(0deg) scale(1); }
+    .card:hover .caption { background: #fff; }
+    .card:hover .subtitleDash { width: 29px; }
+    .card:hover .registration { opacity: .58; transform: rotate(90deg); }
+    .card:hover .bottomAccent { width: 48%; }
 }
 
+/* SMALL CARDS */
+@media (max-width: 900px) {
+    .caption { padding: 12px 13px; }
+    .title { font-size: clamp(17px, 2.6vw, 25px); }
+    .subtitle { font-size: 10px; }
+}
 
-/* =========================================================
-   TOUCH DEVICES
+@media (max-width: 560px) {
+    .pinWrap { top: -14px; width: 30px; height: 36px; }
+    .pin { width: 26px; height: 26px; }
 
-   No hover required for composition.
-   ========================================================= */
-
-@media (hover: none) {
+    .caption { gap: 5px; padding: 10px 11px 12px; }
+    .title { font-size: clamp(15px, 4.4vw, 21px); margin-bottom: 5px; }
+    .subtitle { font-size: clamp(8px, 2.5vw, 10px); gap: 5px; line-height: 1.2; }
+    .subtitleDash { width: 12px; height: 3px; margin-top: 4px; }
+    .registration { display: none; }
 
     .secondaryCard {
-        transform:
-            translateY(-4px)
-            rotate(var(--secondary-rotation));
+        right: 8px;
+        bottom: 8px;
+        width: clamp(54px, 24%, 88px);
+        padding: 3px;
+        box-shadow: 4px 4px 0 var(--accent), 7px 7px 0 rgba(26, 23, 20, .16);
     }
 
-
-    .pinWrap {
-        transform:
-            translateX(-50%)
-            rotate(-10deg);
-    }
+    .secondaryTape { top: -6px; height: 10px; }
+    .openMark { width: 36px; height: 36px; }
+    .openMark svg { width: 20px; height: 20px; }
 }
-
-
-/* =========================================================
-   REDUCED MOTION
-   ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
-    .darkSheet,
-    .accentSheet,
-    .mainSheet,
-    .pinWrap,
-    .secondaryCard,
-    .cornerMark,
-    .openMark,
-    .subtitleDash,
-    .registration,
-    .bottomAccent,
-    .caption {
-        transition: none;
-    }
-}
-
-
-/* =========================================================
-   COMPACT SCREENS — RESPONSIVE DIMENSIONS
-   Preserves original pop-up book styling.
-   ========================================================= */
-
-/* Short laptops: 1280×720, 1366×768 */
-
-@media (min-width: 901px) and (max-height: 850px) {
-
-    .carousel {
-        padding-top: 24px;
-        padding-bottom: 38px;
-    }
-
-    .sectionMarker {
-        padding-top: 22px;
-    }
-
-    .projectNav {
-        padding-top: 18px;
-        padding-bottom: 18px;
-    }
-
-    .railViewport {
-        padding-top: 20px;
-        margin-top: -10px;
-    }
-
-    .rail {
-        padding-top: 36px;
-        padding-bottom: 42px;
-    }
-
-    .projectStage {
-        margin-bottom: 18px;
-    }
-}
-
-/* Tablets and small laptops */
-
-@media (min-width: 561px) and (max-width: 900px) {
-
-    .carousel {
-        padding: 26px 14px 42px;
-    }
-
-    .sectionMarker {
-        padding-top: 20px;
-    }
-
-    .projectNav {
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
-
-    .railViewport {
-        padding-top: 20px;
-        margin-top: -10px;
-    }
-
-    .rail {
-        padding-top: 38px;
-        padding-bottom: 46px;
-    }
-}
-
-/* Phones */
-
-@media (max-width: 560px) {
-
-    .carousel {
-        padding: 20px 10px 32px;
-    }
-
-    .projectNav {
-        padding-top: 14px;
-        padding-bottom: 14px;
-    }
-
-    .railViewport {
-        padding-top: 12px;
-        margin-top: 0;
-    }
-
-    .rail {
-        padding-top: 24px;
-        padding-bottom: 32px;
-    }
-}
-
-/* Short phones */
-
-@media (max-width: 560px) and (max-height: 700px) {
-
-    .rail {
-        padding-top: 18px;
-        padding-bottom: 24px;
-    }
-
-    .projectNav {
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-}
-/* =========================================================
-   RESPONSIVE TYPE / CAPTION — keep original physical paper
-   ========================================================= */
-.mainSheet { grid-template-rows: minmax(0, 1fr) minmax(0, auto); }
-.caption { min-height: 0; padding: clamp(11px, 2vw, 20px) clamp(12px, 2vw, 22px); gap: 8px; }
-.title { font-size: clamp(17px, 2.1vw, 30px); line-height: 1.08; white-space: normal; overflow: visible; text-overflow: clip; overflow-wrap: anywhere; margin-bottom: 7px; }
-.subtitle { font-size: clamp(9px, .85vw, 12px); line-height: 1.3; }
-.copy { min-width: 0; }
-@media (max-width: 900px) {
-  .caption { padding: 12px 13px; }
-  .title { font-size: clamp(17px, 2.6vw, 25px); }
-  .subtitle { font-size: 10px; }
-}
-@media (max-width: 560px) {
-  .mainSheet { grid-template-rows: minmax(0, 1fr) minmax(0, auto); }
-  .caption { min-height: 0; padding: 10px 11px 12px; gap: 5px; }
-  .title { font-size: clamp(15px, 4.4vw, 21px); line-height: 1.08; margin-bottom: 5px; }
-  .subtitle { font-size: clamp(8px, 2.5vw, 10px); gap: 5px; line-height: 1.2; }
-  .subtitleDash { width: 12px; height: 3px; margin-top: 4px; }
-  .registration { display: none; }
-  .secondaryCard { width: clamp(58px, 24%, 88px); }
+    .darkSheet, .accentSheet, .mainSheet, .pinWrap,
+    .secondaryCard, .cornerMark, .openMark, .subtitleDash,
+    .registration, .bottomAccent, .caption { transition: none; }
 }

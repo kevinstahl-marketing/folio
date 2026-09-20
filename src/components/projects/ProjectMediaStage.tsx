@@ -1,3 +1,4 @@
+
 import type { CSSProperties } from "react";
 
 import type { ProjectMedia } from "@/data/projects";
@@ -13,12 +14,24 @@ export default function ProjectMediaStage({
   media,
   accent,
 }: ProjectMediaStageProps) {
-  const primary = media.find((item) => item.slot === "primary");
-  const secondary = media.find((item) => item.slot === "secondary");
+  const primary = media.find(
+    (item) => item.slot === "primary"
+  );
+
+  const secondary = media.find(
+    (item) => item.slot === "secondary"
+  );
+
+  const hasSecondary = Boolean(secondary);
 
   return (
     <div
-      className={styles.stage}
+      className={[
+        styles.stage,
+        hasSecondary
+          ? styles.withSecondary
+          : styles.singleMedia,
+      ].join(" ")}
       style={
         {
           "--media-accent": accent,
@@ -26,7 +39,10 @@ export default function ProjectMediaStage({
       }
     >
       {primary ? (
-        <MediaFrame media={primary} variant="primary" />
+        <MediaFrame
+          media={primary}
+          variant="primary"
+        />
       ) : (
         <div className={styles.primaryPlaceholder}>
           <span>PROJECT MEDIA</span>
@@ -34,12 +50,11 @@ export default function ProjectMediaStage({
         </div>
       )}
 
-      {secondary ? (
-        <MediaFrame media={secondary} variant="secondary" />
-      ) : (
-        <div className={styles.secondaryPlaceholder}>
-          <span>02</span>
-        </div>
+      {secondary && (
+        <MediaFrame
+          media={secondary}
+          variant="secondary"
+        />
       )}
     </div>
   );
@@ -50,7 +65,10 @@ type MediaFrameProps = {
   variant: "primary" | "secondary";
 };
 
-function MediaFrame({ media, variant }: MediaFrameProps) {
+function MediaFrame({
+  media,
+  variant,
+}: MediaFrameProps) {
   const frame = media.frame ?? "browser";
 
   return (
@@ -64,13 +82,19 @@ function MediaFrame({ media, variant }: MediaFrameProps) {
       ].join(" ")}
       style={
         {
-          "--media-rotation": `${media.rotation ?? 0}deg`,
-          "--media-scale": media.scale ?? 1,
+          "--media-rotation":
+            `${media.rotation ?? 0}deg`,
+
+          "--media-scale":
+            media.scale ?? 1,
         } as CSSProperties
       }
     >
       {frame === "browser" && (
-        <div className={styles.browserBar}>
+        <div
+          className={styles.browserBar}
+          aria-hidden="true"
+        >
           <span />
           <span />
           <span />
@@ -82,11 +106,18 @@ function MediaFrame({ media, variant }: MediaFrameProps) {
           src={media.src}
           alt={media.alt}
           draggable={false}
+          loading="lazy"
           style={{
-            objectFit: media.fit ?? "cover",
-            objectPosition: media.position ?? "center",
-            transform: `scale(${media.imageScale ?? 1})`,
-            transformOrigin: media.position ?? "center",
+            objectFit: media.fit ?? "contain",
+
+            objectPosition:
+              media.position ?? "center",
+
+            transform:
+              `scale(${media.imageScale ?? 1})`,
+
+            transformOrigin:
+              media.position ?? "center",
           }}
         />
       </div>

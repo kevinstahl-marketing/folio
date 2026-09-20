@@ -1,12 +1,15 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
+import type { CSSProperties } from "react";
+
 import type { Project } from "@/data/projects";
 import StackBadge from "./StackBadge";
+import ProjectMediaStage from "./ProjectMediaStage";
 
 import styles from "./ProjectModal.module.css";
-import ProjectMediaStage from "./ProjectMediaStage";
 
 type ProjectModalProps = {
     project: Project | null;
@@ -60,12 +63,23 @@ export default function ProjectModal({
                     {
                         "--project-accent": project.accent,
                         "--project-bg": project.bg,
-                    } as React.CSSProperties
+                    } as CSSProperties
                 }
                 role="dialog"
                 aria-modal="true"
                 aria-labelledby={`project-${project.id}-title`}
             >
+                {/* FLOATING CLOSE BUTTON */}
+
+                <button
+                    type="button"
+                    className={styles.closeButton}
+                    onClick={onClose}
+                    aria-label="Close project"
+                >
+                    ×
+                </button>
+
                 {/* TOP BAR */}
 
                 <header className={styles.topBar}>
@@ -74,18 +88,9 @@ export default function ProjectModal({
                         <span>/</span>
                         <span>FEATURED PROJECT</span>
                     </div>
-
-                    <button
-                        type="button"
-                        className={styles.closeButton}
-                        onClick={onClose}
-                        aria-label="Close project"
-                    >
-                        ×
-                    </button>
                 </header>
 
-                {/* IDENTITY */}
+                {/* PROJECT IDENTITY */}
 
                 <div className={styles.identity}>
                     <h2
@@ -95,12 +100,14 @@ export default function ProjectModal({
                         {project.title}
                     </h2>
 
-                    <div className={styles.sub}>{project.sub}</div>
+                    <div className={styles.sub}>
+                        {project.sub}
+                    </div>
 
                     <div className={styles.accentRule} />
                 </div>
 
-                {/* HERO */}
+                {/* PROJECT HERO */}
 
                 <div className={styles.hero}>
                     <ProjectMediaStage
@@ -110,7 +117,9 @@ export default function ProjectModal({
 
                     <div className={styles.overview}>
                         <section className={styles.infoSection}>
-                            <div className={styles.eyebrow}>ROLE</div>
+                            <div className={styles.eyebrow}>
+                                ROLE
+                            </div>
 
                             <div className={styles.infoPrimary}>
                                 {project.role}
@@ -122,7 +131,9 @@ export default function ProjectModal({
                         </section>
 
                         <section className={styles.infoSection}>
-                            <div className={styles.eyebrow}>WHAT IT IS</div>
+                            <div className={styles.eyebrow}>
+                                WHAT IT IS
+                            </div>
 
                             <p className={styles.summary}>
                                 {project.summary}
@@ -130,7 +141,9 @@ export default function ProjectModal({
                         </section>
 
                         <section className={styles.infoSection}>
-                            <div className={styles.eyebrow}>STACK</div>
+                            <div className={styles.eyebrow}>
+                                STACK
+                            </div>
 
                             <div className={styles.stack}>
                                 {project.stack.map((name) => (
@@ -145,7 +158,7 @@ export default function ProjectModal({
                     </div>
                 </div>
 
-                {/* BUILT */}
+                {/* WHAT I BUILT */}
 
                 <section className={styles.built}>
                     <div className={styles.builtLabel}>
@@ -154,7 +167,10 @@ export default function ProjectModal({
 
                     <div className={styles.bulletGrid}>
                         {project.bullets.map((bullet) => (
-                            <div key={bullet} className={styles.bullet}>
+                            <div
+                                key={bullet}
+                                className={styles.bullet}
+                            >
                                 <span>→</span>
                                 <p>{bullet}</p>
                             </div>
@@ -165,11 +181,44 @@ export default function ProjectModal({
                 {/* FOOTER */}
 
                 <footer className={styles.footer}>
-                    <div>
-                        {project.extra && (
+                    {/* EXTERNAL LINKS FIRST */}
+
+                    {(project.links?.github ||
+                        project.links?.live) && (
+                            <div className={styles.actions}>
+                                {project.links?.github && (
+                                    <a
+                                        href={project.links.github}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={styles.secondaryAction}
+                                    >
+                                        GITHUB ↗
+                                    </a>
+                                )}
+
+                                {project.links?.live && (
+                                    <a
+                                        href={project.links.live}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={styles.primaryAction}
+                                    >
+                                        VISIT SITE ↗
+                                    </a>
+                                )}
+                            </div>
+                        )}
+
+                    {/* EXPANDABLE DETAILS */}
+
+                    {project.extra && (
+                        <div className={styles.detailGroup}>
                             <button
                                 type="button"
                                 className={styles.detailButton}
+                                aria-expanded={expanded}
+                                aria-controls={`project-${project.id}-details`}
                                 onClick={() =>
                                     setExpanded((current) => !current)
                                 }
@@ -178,45 +227,22 @@ export default function ProjectModal({
                                     ? "CLOSE DETAILS ↑"
                                     : `${project.extra.label.toUpperCase()} ↓`}
                             </button>
-                        )}
-                    </div>
 
-                    {(project.links?.github || project.links?.live) && (
-                        <div className={styles.actions}>
-                            {project.links?.github && (
-                                <a
-                                    href={project.links.github}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className={styles.secondaryAction}
+                            {expanded && (
+                                <div
+                                    id={`project-${project.id}-details`}
+                                    className={styles.expanded}
                                 >
-                                    GITHUB ↗
-                                </a>
-                            )}
+                                    <div className={styles.eyebrow}>
+                                        {project.extra.label}
+                                    </div>
 
-                            {project.links?.live && (
-                                <a
-                                    href={project.links.live}
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className={styles.primaryAction}
-                                >
-                                    VISIT SITE ↗
-                                </a>
+                                    <p>{project.extra.body}</p>
+                                </div>
                             )}
                         </div>
                     )}
                 </footer>
-
-                {expanded && project.extra && (
-                    <div className={styles.expanded}>
-                        <div className={styles.eyebrow}>
-                            {project.extra.label}
-                        </div>
-
-                        <p>{project.extra.body}</p>
-                    </div>
-                )}
             </article>
         </div>,
         document.body

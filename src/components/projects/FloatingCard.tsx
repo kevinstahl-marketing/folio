@@ -144,9 +144,11 @@ export default function FloatingCard({
               PRIMARY IMAGE
               ------------------------------------------------- */}
 
-          <div className={styles.mediaInner}>
-            {content}
-          </div>
+        <div className={styles.mediaInner}>
+  <div className={styles.masterImage}>
+    {content}
+  </div>
+</div>
 
           {/* -------------------------------------------------
               SECONDARY IMAGE
