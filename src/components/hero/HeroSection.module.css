@@ -1,24 +1,19 @@
-/* =========================================================
-   HERO
-   ========================================================= */
-
+/* FOLIO HERO — fluid desktop, laptop, tablet and mobile */
 .hero {
     width: 100%;
     min-width: 0;
-    overflow: hidden;
+    box-sizing: border-box;
+    overflow-x: clip;
+    overflow-y: visible;
+    min-height: 100svh;
+    padding: clamp(30px, 5vh, 72px) clamp(22px, 4vw, 88px) !important;
 }
 
 .heroGrid {
     width: 100%;
     min-width: 0;
-
-    grid-template-columns:
-        minmax(210px, 260px)
-        minmax(300px, 410px)
-        minmax(620px, 1fr);
-
-    gap: clamp(32px, 3.5vw, 56px) !important;
-
+    grid-template-columns: minmax(180px, .8fr) minmax(270px, 1.15fr) minmax(480px, 2fr);
+    gap: clamp(22px, 2.5vw, 48px) !important;
     align-items: center;
 }
 
@@ -32,20 +27,10 @@
     min-width: 0;
 }
 
-
-/* =========================================================
-   PORTRAIT
-   ========================================================= */
-
 .portraitWrapper {
     width: 100%;
-    max-width: 300px;
+    max-width: 270px;
 }
-
-
-/* =========================================================
-   ATMOSPHERE
-   ========================================================= */
 
 .driftOne {
     animation: folioDrift 32s ease-in-out infinite;
@@ -58,27 +43,16 @@
 .accentFloat {
     animation: pinWiggle 8s ease-in-out infinite;
     transform-origin: 50% 80%;
+    flex-shrink: 0;
 }
-
-
-/* =========================================================
-   SKILLS GRID
-   ========================================================= */
 
 .skillsGrid {
     width: 100%;
-    min-width: 0;
-
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-
-    gap:
-        clamp(27px, 2.2vw, 36px)
-        clamp(24px, 2vw, 32px);
-
+    gap: clamp(20px, 2vw, 32px) clamp(16px, 1.5vw, 28px);
     align-items: stretch;
 }
-
 
 /* =========================================================
    PINNED CARD
@@ -224,20 +198,16 @@
     flex-direction: column;
 
     padding:
-        21px
-        20px
-        14px;
+        21px 20px 14px;
 
     box-sizing: border-box;
 
     color: #1a1714;
 
     background:
-        radial-gradient(
-            circle at 1px 1px,
+        radial-gradient(circle at 1px 1px,
             rgba(26, 23, 20, 0.035) 1px,
-            transparent 1.15px
-        ),
+            transparent 1.15px),
         var(--paper);
 
     background-size:
@@ -274,12 +244,10 @@
     opacity: 0.09;
 
     background:
-        linear-gradient(
-            105deg,
+        linear-gradient(105deg,
             transparent 0%,
             rgba(255, 255, 255, 0.36) 48%,
-            transparent 53%
-        );
+            transparent 53%);
 }
 
 
@@ -305,18 +273,12 @@
     pointer-events: none;
 
     transform:
-        translateX(-50%)
-        rotate(-9deg);
+        translateX(-50%) rotate(-9deg);
 
     transform-origin: 50% 85%;
 
     filter:
-        drop-shadow(
-            2px
-            4px
-            0
-            rgba(26, 23, 20, 0.18)
-        );
+        drop-shadow(2px 4px 0 rgba(26, 23, 20, 0.18));
 
     transition:
         transform 380ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -332,40 +294,35 @@
     left: 57%;
 
     transform:
-        translateX(-50%)
-        rotate(11deg);
+        translateX(-50%) rotate(11deg);
 }
 
 .skillCard:nth-child(3) .skillPin {
     left: 43%;
 
     transform:
-        translateX(-50%)
-        rotate(-5deg);
+        translateX(-50%) rotate(-5deg);
 }
 
 .skillCard:nth-child(4) .skillPin {
     left: 54%;
 
     transform:
-        translateX(-50%)
-        rotate(8deg);
+        translateX(-50%) rotate(8deg);
 }
 
 .skillCard:nth-child(5) .skillPin {
     left: 46%;
 
     transform:
-        translateX(-50%)
-        rotate(-11deg);
+        translateX(-50%) rotate(-11deg);
 }
 
 .skillCard:nth-child(6) .skillPin {
     left: 59%;
 
     transform:
-        translateX(-50%)
-        rotate(6deg);
+        translateX(-50%) rotate(6deg);
 }
 
 
@@ -379,9 +336,7 @@
     display: grid;
 
     grid-template-columns:
-        34px
-        minmax(0, 1fr)
-        auto;
+        34px minmax(0, 1fr) auto;
 
     align-items: center;
 
@@ -476,9 +431,7 @@
     height: 2px;
 
     margin:
-        14px
-        0
-        15px;
+        14px 0 15px;
 
     background: #1a1714;
 
@@ -525,8 +478,7 @@
     gap: 8px !important;
 
     padding:
-        5px
-        4px;
+        5px 4px;
 
     box-sizing: border-box;
 
@@ -551,9 +503,7 @@
     height: 19px;
 
     flex:
-        0
-        0
-        19px;
+        0 0 19px;
 
     transition:
         transform 180ms cubic-bezier(0.34, 1.56, 0.64, 1),
@@ -586,9 +536,7 @@
     padding-top: 9px;
 
     border-top:
-        1px
-        solid
-        rgba(26, 23, 20, 0.14);
+        1px solid rgba(26, 23, 20, 0.14);
 
     font-family:
         var(--font-mono, monospace);
@@ -618,8 +566,7 @@
     z-index: 20;
 
     transform:
-        translateY(-4px)
-        rotate(0deg);
+        translateY(-4px) rotate(0deg);
 }
 
 
@@ -627,31 +574,20 @@
 
 .skillCard:hover .skillPin {
     transform:
-        translate(-50%, -22px)
-        rotate(-27deg)
-        scale(1.2);
+        translate(-50%, -22px) rotate(-27deg) scale(1.2);
 
     filter:
-        drop-shadow(
-            6px
-            10px
-            2px
-            rgba(26, 23, 20, 0.18)
-        );
+        drop-shadow(6px 10px 2px rgba(26, 23, 20, 0.18));
 }
 
 .skillCard:nth-child(even):hover .skillPin {
     transform:
-        translate(-50%, -22px)
-        rotate(28deg)
-        scale(1.2);
+        translate(-50%, -22px) rotate(28deg) scale(1.2);
 }
 
 .skillCard:nth-child(3n):hover .skillPin {
     transform:
-        translate(-50%, -24px)
-        rotate(-18deg)
-        scale(1.22);
+        translate(-50%, -24px) rotate(-18deg) scale(1.22);
 }
 
 
@@ -659,29 +595,20 @@
 
 .skillCard:hover .skillPaper {
     transform:
-        translate(-3px, -8px)
-        rotate(0.55deg)
-        scale(1.01);
+        translate(-3px, -8px) rotate(0.55deg) scale(1.01);
 
     box-shadow:
-        10px
-        13px
-        0
-        rgba(26, 23, 20, 0.11);
+        10px 13px 0 rgba(26, 23, 20, 0.11);
 }
 
 .skillCard:nth-child(even):hover .skillPaper {
     transform:
-        translate(3px, -8px)
-        rotate(-0.55deg)
-        scale(1.01);
+        translate(3px, -8px) rotate(-0.55deg) scale(1.01);
 }
 
 .skillCard:nth-child(3n):hover .skillPaper {
     transform:
-        translate(-2px, -9px)
-        rotate(0.3deg)
-        scale(1.01);
+        translate(-2px, -9px) rotate(0.3deg) scale(1.01);
 }
 
 
@@ -689,20 +616,15 @@
 
 .skillCard:hover::before {
     transform:
-        translate(3px, 3px)
-        rotate(1.8deg);
+        translate(3px, 3px) rotate(1.8deg);
 
     box-shadow:
-        6px
-        7px
-        0
-        rgba(26, 23, 20, 0.10);
+        6px 7px 0 rgba(26, 23, 20, 0.10);
 }
 
 .skillCard:nth-child(even):hover::before {
     transform:
-        translate(-3px, 3px)
-        rotate(-1.8deg);
+        translate(-3px, 3px) rotate(-1.8deg);
 }
 
 
@@ -710,14 +632,12 @@
 
 .skillCard:hover .skillIcon {
     transform:
-        rotate(-5deg)
-        scale(1.04);
+        rotate(-5deg) scale(1.04);
 }
 
 .skillCard:nth-child(even):hover .skillIcon {
     transform:
-        rotate(5deg)
-        scale(1.04);
+        rotate(5deg) scale(1.04);
 }
 
 .skillCard:hover .skillMark {
@@ -736,15 +656,13 @@
         rgba(26, 23, 20, 0.045);
 
     transform:
-        translateX(3px)
-        rotate(-0.3deg);
+        translateX(3px) rotate(-0.3deg);
 }
 
 .techItem:hover .techIcon,
 .techItem:hover svg {
     transform:
-        scale(1.2)
-        rotate(-6deg);
+        scale(1.2) rotate(-6deg);
 
     filter:
         saturate(1.12);
@@ -769,10 +687,7 @@
     scale: 1.02;
 
     box-shadow:
-        7px
-        7px
-        0
-        rgba(26, 23, 20, 0.16) !important;
+        7px 7px 0 rgba(26, 23, 20, 0.16) !important;
 }
 
 .primaryButton:active {
@@ -780,10 +695,7 @@
     scale: 0.98;
 
     box-shadow:
-        1px
-        1px
-        0
-        rgba(26, 23, 20, 0.16) !important;
+        1px 1px 0 rgba(26, 23, 20, 0.16) !important;
 }
 
 .secondaryButton:hover {
@@ -792,10 +704,7 @@
     background: #fff !important;
 
     box-shadow:
-        6px
-        6px
-        0
-        rgba(26, 23, 20, 0.14);
+        6px 6px 0 rgba(26, 23, 20, 0.14);
 }
 
 .secondaryButton:active {
@@ -803,10 +712,7 @@
     scale: 0.98;
 
     box-shadow:
-        1px
-        1px
-        0
-        rgba(26, 23, 20, 0.12);
+        1px 1px 0 rgba(26, 23, 20, 0.12);
 }
 
 
@@ -833,223 +739,245 @@
 
 .contactLink:hover svg {
     transform:
-        rotate(-8deg)
-        scale(1.12);
+        rotate(-8deg) scale(1.12);
 }
 
 
-/* =========================================================
-   MEDIUM DESKTOP / LAPTOP
-   ========================================================= */
 
-@media (max-width: 1180px) {
-
+/* Compact wide screens: keep all three columns without tiny cards. */
+@media (min-width: 1450px) and (max-height: 850px) {
     .hero {
-        padding:
-            clamp(72px, 8vw, 100px)
-            clamp(32px, 5vw, 60px)
-            64px !important;
-
-        align-items: flex-start !important;
-    }
-
-    .heroGrid {
-        grid-template-columns:
-            minmax(210px, 280px)
-            minmax(0, 1fr);
-
-        gap: 48px !important;
-
-        align-items: start !important;
+        padding-block: 22px !important;
     }
 
     .portraitWrapper {
-        width: 100%;
-        max-width: 260px;
-    }
-
-    .identity {
-        align-items: flex-start !important;
+        max-width: min(210px, 28vh);
+        margin-bottom: 16px !important;
     }
 
     .skillsGrid {
-        grid-column: 1 / -1;
-
-        width: 100%;
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-    .techGrid {
-        grid-template-columns:
-            repeat(2, minmax(130px, 1fr));
-    }
-
-    .skillTitle {
-        font-size: 13px;
-    }
-}
-
-
-/* =========================================================
-   TABLET
-   ========================================================= */
-
-@media (max-width: 900px) {
-
-    .hero {
-        padding:
-            84px
-            clamp(26px, 5vw, 40px)
-            56px !important;
-
-        align-items: flex-start !important;
-    }
-
-    .heroGrid {
-        grid-template-columns:
-            minmax(0, 1fr);
-
-        gap: 40px !important;
-
-        align-items: start !important;
-    }
-
-    .identity {
-        min-width: 0;
-
-        align-items: flex-start !important;
-    }
-
-    .portraitWrapper {
-        width: min(240px, 100%);
-        max-width: 240px;
-    }
-
-    .skillsGrid {
-        grid-column: auto;
-
-        width: 100%;
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap:
-            30px
-            24px !important;
+        gap: 15px 16px !important;
     }
 
     .skillPaper {
-        padding:
-            20px
-            18px
-            14px;
+        padding: 13px 12px 9px;
     }
 
-    .skillTitle {
-        font-size: 13px;
+    .skillHeader {
+        grid-template-columns: 28px minmax(0, 1fr) auto;
+        gap: 8px;
+    }
+
+    .skillIcon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .skillRule {
+        margin: 8px 0 9px;
     }
 
     .techGrid {
-        grid-template-columns:
-            repeat(2, minmax(105px, 1fr));
-
-        column-gap: 10px;
-        row-gap: 12px;
+        gap: 5px 7px;
     }
 
     .techItem {
-        gap: 7px !important;
-
-        font-size: 13px !important;
+        padding: 3px 1px;
+        font-size: 12px;
+        gap: 5px !important;
     }
 
     .techIcon,
     .techItem svg {
-        width: 18px;
-        height: 18px;
+        width: 16px;
+        height: 16px;
+        flex: 0 0 16px;
+    }
 
-        flex: 0 0 18px;
+    .skillFooter {
+        margin-top: 7px;
+        padding-top: 5px;
     }
 }
 
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media (max-width: 680px) {
-
+/* Laptop: two readable columns, with skills across the width below.
+   A taller hero is preferable to clipping content or microscopic text. */
+@media (max-width: 1449px) {
     .hero {
-        padding:
-            104px
-            clamp(18px, 5vw, 26px)
-            48px !important;
-
+        padding: clamp(28px, 5vh, 60px) clamp(22px, 4vw, 56px) !important;
         align-items: flex-start !important;
     }
 
     .heroGrid {
-        grid-template-columns:
-            minmax(0, 1fr);
+        grid-template-columns: minmax(190px, .7fr) minmax(0, 1.3fr);
+        gap: clamp(24px, 3vw, 44px) !important;
+        align-items: center;
+    }
 
+    .portraitWrapper {
+        max-width: min(230px, 31vh);
+        margin-bottom: 18px !important;
+    }
+
+    .skillsGrid {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px 18px !important;
+    }
+
+    .skillPaper {
+        padding: 16px 14px 12px;
+    }
+
+    .skillRule {
+        margin: 10px 0 11px;
+    }
+
+    .techGrid {
+        gap: 7px 10px;
+    }
+
+    .techItem {
+        padding: 4px 2px;
+        font-size: 12px;
+    }
+
+    .skillFooter {
+        margin-top: 8px;
+        padding-top: 6px;
+    }
+}
+
+/* Short laptops: compact the identity and skills without squeezing widths. */
+@media (min-width: 901px) and (max-width: 1449px) and (max-height: 800px) {
+    .hero {
+        padding-block: 24px !important;
+    }
+
+    .heroGrid {
+        gap: 22px 30px !important;
+    }
+
+    .portraitWrapper {
+        max-width: min(180px, 25vh);
+        margin-bottom: 12px !important;
+    }
+
+    .skillsGrid {
+        gap: 15px 15px !important;
+    }
+
+    .skillPaper {
+        padding: 12px 12px 9px;
+    }
+
+    .skillHeader {
+        grid-template-columns: 28px minmax(0, 1fr) auto;
+        gap: 8px;
+    }
+
+    .skillIcon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .skillRule {
+        margin: 7px 0 8px;
+    }
+
+    .techGrid {
+        gap: 4px 8px;
+    }
+
+    .techItem {
+        padding: 2px 1px;
+        font-size: 12px;
+        gap: 5px !important;
+    }
+
+    .techIcon,
+    .techItem svg {
+        width: 16px;
+        height: 16px;
+        flex: 0 0 16px;
+    }
+
+    .skillFooter {
+        margin-top: 5px;
+        padding-top: 4px;
+    }
+}
+
+/* Tablet: single editorial column, two skill cards per row. */
+@media (max-width: 900px) {
+    .hero {
+        padding: 84px clamp(20px, 5vw, 40px) 48px !important;
+        align-items: flex-start !important;
+    }
+
+    .heroGrid {
+        grid-template-columns: minmax(0, 1fr);
         gap: 34px !important;
-
-        align-items: start !important;
     }
 
     .identity {
-        width: 100%;
-        min-width: 0;
-
         align-items: flex-start !important;
     }
 
     .portraitWrapper {
-        width: min(220px, 72vw);
-        max-width: 220px;
+        width: min(230px, 60vw);
+        max-width: 230px;
     }
-
-
-    /* One big readable card per row */
 
     .skillsGrid {
         grid-column: auto;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 28px 20px !important;
+    }
 
-        width: 100%;
+    .skillPaper {
+        padding: 18px 16px 12px;
+    }
 
-        grid-template-columns:
-            minmax(0, 1fr);
+    .techGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+    }
+}
 
+/* Phones: one full-width card per row. */
+@media (max-width: 680px) {
+    .hero {
+        padding: 96px clamp(18px, 5vw, 26px) 44px !important;
+    }
+
+    .heroGrid {
         gap: 32px !important;
+    }
 
-        padding:
-            8px
-            5px
-            12px;
+    .identity {
+        width: 100%;
+        align-items: flex-start !important;
+    }
 
+    .portraitWrapper {
+        width: min(220px, 70vw);
+        max-width: 220px;
+    }
+
+    .skillsGrid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 30px !important;
+        padding: 8px 5px 12px;
         box-sizing: border-box;
     }
 
     .skillCard {
-        width: 100%;
-
-        transform:
-            rotate(
-                calc(
-                    var(--skill-rotation) * 0.35
-                )
-            );
+        transform: rotate(calc(var(--skill-rotation) * .35));
     }
 
-
-    /* Keep backing safely inside viewport */
-
     .skillCard::before {
-        top: 7px;
         right: -4px;
-        bottom: -8px;
         left: 7px;
     }
 
@@ -1058,252 +986,78 @@
         left: -4px;
     }
 
-
-    /* More generous readable front */
-
     .skillPaper {
-        padding:
-            21px
-            18px
-            15px;
-
-        box-shadow:
-            4px
-            5px
-            0
-            rgba(26, 23, 20, 0.11);
-    }
-
-    .skillPin {
-        top: -14px;
-    }
-
-    .skillHeader {
-        grid-template-columns:
-            34px
-            minmax(0, 1fr)
-            auto;
-
-        gap: 11px;
-    }
-
-    .skillIcon {
-        width: 34px;
-        height: 34px;
+        padding: 19px 17px 13px;
     }
 
     .skillTitle {
         font-size: 13px;
-        letter-spacing: 0.025em;
-    }
-
-    .skillRule {
-        margin:
-            14px
-            0
-            15px;
     }
 
     .techGrid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        column-gap: 14px;
-        row-gap: 11px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px 12px;
     }
 
     .techItem {
-        gap: 8px !important;
-
-        padding:
-            6px
-            3px;
-
-        font-size: 13px !important;
+        font-size: 13px;
     }
-
-    .techIcon,
-    .techItem svg {
-        width: 19px;
-        height: 19px;
-
-        flex: 0 0 19px;
-    }
-
-
-    /* Smaller physical movement on touch widths */
 
     .skillCard:hover {
-        transform:
-            translateY(-2px)
-            rotate(0deg);
-    }
-
-    .skillCard:hover .skillPaper,
-    .skillCard:nth-child(even):hover .skillPaper,
-    .skillCard:nth-child(3n):hover .skillPaper {
-        transform:
-            translateY(-4px)
-            rotate(0.2deg)
-            scale(1.004);
-
-        box-shadow:
-            7px
-            8px
-            0
-            rgba(26, 23, 20, 0.11);
-    }
-
-    .skillCard:hover .skillPin,
-    .skillCard:nth-child(even):hover .skillPin,
-    .skillCard:nth-child(3n):hover .skillPin {
-        transform:
-            translate(-50%, -13px)
-            rotate(-18deg)
-            scale(1.12);
-    }
-
-    .skillCard:hover::before {
-        transform:
-            translate(2px, 2px)
-            rotate(1.5deg);
-    }
-
-    .skillCard:nth-child(even):hover::before {
-        transform:
-            translate(-2px, 2px)
-            rotate(-1.5deg);
+        transform: translateY(-2px) rotate(0deg);
     }
 }
 
-
-/* =========================================================
-   SMALL PHONE
-   ========================================================= */
-
 @media (max-width: 420px) {
-
     .hero {
-        padding:
-            104px
-            16px
-            42px !important;
-    }
-
-    .heroGrid {
-        gap: 30px !important;
+        padding: 92px 16px 40px !important;
     }
 
     .portraitWrapper {
-        width: min(205px, 68vw);
-        max-width: 205px;
-    }
-
-    .skillsGrid {
-        gap: 30px !important;
-
-        padding-left: 4px;
-        padding-right: 4px;
+        width: min(200px, 65vw);
     }
 
     .skillPaper {
-        padding:
-            19px
-            15px
-            14px;
+        padding: 17px 13px 12px;
     }
 
     .skillHeader {
-        grid-template-columns:
-            32px
-            minmax(0, 1fr)
-            auto;
-
-        gap: 9px;
+        grid-template-columns: 30px minmax(0, 1fr) auto;
+        gap: 8px;
     }
 
     .skillIcon {
-        width: 32px;
-        height: 32px;
+        width: 30px;
+        height: 30px;
     }
 
     .skillTitle {
         font-size: 12px;
-        line-height: 1.2;
     }
 
     .techGrid {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        column-gap: 9px;
-        row-gap: 10px;
+        column-gap: 8px;
     }
 
     .techItem {
-        gap: 6px !important;
-
-        padding:
-            5px
-            2px;
-
-        font-size: 12px !important;
-    }
-
-    .techIcon,
-    .techItem svg {
-        width: 17px;
-        height: 17px;
-
-        flex: 0 0 17px;
+        font-size: 12px;
+        gap: 5px !important;
     }
 }
-
-
-/* =========================================================
-   VERY SMALL PHONE
-
-   Stop trying to squeeze two technical columns once
-   the device is genuinely tiny.
-   ========================================================= */
 
 @media (max-width: 350px) {
-
     .hero {
-        padding:
-            100px
-            14px
-            40px !important;
-    }
-
-    .portraitWrapper {
-        width: min(190px, 70vw);
-        max-width: 190px;
-    }
-
-    .skillPaper {
-        padding:
-            19px
-            15px
-            14px;
-    }
-
-    .skillTitle {
-        font-size: 12px;
+        padding-inline: 14px !important;
     }
 
     .techGrid {
-        grid-template-columns:
-            minmax(0, 1fr);
-
-        row-gap: 8px;
+        grid-template-columns: minmax(0, 1fr);
     }
 
     .techItem {
-        font-size: 13px !important;
+        font-size: 13px;
     }
 }
-
 
 /* =========================================================
    KEYBOARD ACCESSIBILITY
@@ -1313,9 +1067,7 @@
 .secondaryButton:focus-visible,
 .contactLink:focus-visible {
     outline:
-        3px
-        solid
-        currentColor;
+        3px solid currentColor;
 
     outline-offset: 4px;
 }
@@ -1399,4 +1151,49 @@
     .skillCard:hover .skillPin {
         transform: translateX(-50%);
     }
+}
+
+
+
+/* =========================================================
+   SMALL SCREENS — SITENAV CLEARANCE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .hero {
+        padding-top: 110px !important;
+        align-items: flex-start !important;
+    }
+
+}
+
+/* Small phones */
+
+@media (max-width: 480px) {
+
+    .hero {
+        padding-top: 120px !important;
+    }
+
+}
+
+/* Very narrow screens */
+
+@media (max-width: 360px) {
+
+    .hero {
+        padding-top: 130px !important;
+    }
+
+}
+
+
+@media (min-width: 901px) and (max-height: 750px) {
+
+    .hero {
+        padding-top: 90px !important;
+        align-items: flex-start !important;
+    }
+
 }

@@ -169,18 +169,18 @@ export default function HeroSection() {
             .getElementById("carousel")
             ?.scrollIntoView({ behavior: "smooth" });
     };
-const scrollToResume = () => {
-    document
-        .getElementById("resume")
-        ?.scrollIntoView({ behavior: "smooth" });
-};
+    const scrollToResume = () => {
+        document
+            .getElementById("resume")
+            ?.scrollIntoView({ behavior: "smooth" });
+    };
     return (
         <section
             className={styles.hero}
             style={{
                 position: "relative",
                 minHeight: "100svh",
-                padding: "72px clamp(44px, 5vw, 88px)",
+                padding: "clamp(30px, 5vh, 72px) clamp(22px, 4vw, 88px)",
                 display: "flex",
                 alignItems: "center",
             }}
@@ -303,10 +303,11 @@ const scrollToResume = () => {
                         <div
                             className={styles.accentFloat}
                             aria-hidden="true"
+
                             style={{
                                 position: "absolute",
-                                top: -14,
-                                right: 120,
+                                top: "-12px",
+                                right: "40%",
                                 zIndex: 5,
                                 color: colors.accent,
                                 filter:
@@ -331,7 +332,7 @@ const scrollToResume = () => {
                                 margin: 0,
                                 fontFamily: fonts.display,
                                 fontStyle: "italic",
-                                fontSize: "clamp(36px, 4vw, 56px)",
+                                fontSize: "clamp(32px, min(4vw, 6vh), 56px)",
                                 lineHeight: 0.95,
                                 color: colors.ink,
                                 letterSpacing: "-0.03em",
@@ -407,26 +408,26 @@ const scrollToResume = () => {
                         </button>
 
                         <button
-    className={styles.secondaryButton}
-    onClick={scrollToResume}
-    style={{
-        fontFamily: fonts.sans,
-        fontWeight: 700,
-        fontSize: 14,
-        color: colors.ink,
-        border: `2px solid ${colors.ink}`,
-        borderRadius: 3,
-        padding: "10px 16px",
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 8,
-        background: "rgba(255,255,255,0.56)",
-        cursor: "pointer",
-    }}
->
-    Résumé
-    <ArrowRight size={14} aria-hidden="true" />
-</button>
+                            className={styles.secondaryButton}
+                            onClick={scrollToResume}
+                            style={{
+                                fontFamily: fonts.sans,
+                                fontWeight: 700,
+                                fontSize: 14,
+                                color: colors.ink,
+                                border: `2px solid ${colors.ink}`,
+                                borderRadius: 3,
+                                padding: "10px 16px",
+                                display: "inline-flex",
+                                alignItems: "center",
+                                gap: 8,
+                                background: "rgba(255,255,255,0.56)",
+                                cursor: "pointer",
+                            }}
+                        >
+                            Résumé
+                            <ArrowRight size={14} aria-hidden="true" />
+                        </button>
                     </div>
 
 
@@ -504,7 +505,7 @@ const scrollToResume = () => {
                             margin: 0,
                             fontFamily: fonts.display,
                             fontStyle: "italic",
-                            fontSize: "clamp(46px, 5.4vw, 82px)",
+                            fontSize: "clamp(38px, min(5vw, 7vh), 82px)",
                             lineHeight: 0.94,
                             letterSpacing: "-0.04em",
                             color: colors.ink,
@@ -623,7 +624,7 @@ const scrollToResume = () => {
                                         className={styles.skillFooter}
                                         aria-hidden="true"
                                     >
-          
+
                                     </div>
                                 </div>
                             </section>
