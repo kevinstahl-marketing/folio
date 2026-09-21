@@ -1197,3 +1197,52 @@
     }
 
 }
+
+/* =========================================
+   SKILL CARDS — SYMMETRICAL LAPTOP GRID
+   ========================================= */
+
+@media (min-width: 901px) and (max-width: 1449px) {
+
+    .skillsGrid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+        column-gap: 28px !important;
+        row-gap: 30px !important;
+
+        padding: 12px 10px 16px;
+
+        align-items: stretch;
+        box-sizing: border-box;
+    }
+
+    /* Perfectly aligned cards */
+
+    .skillCard {
+        height: 100%;
+        transform: none;
+    }
+
+    /* Consistent paper dimensions */
+
+    .skillPaper {
+        height: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Keep the handmade backing effect */
+
+    .skillCard::before {
+        transform: rotate(0.5deg);
+    }
+
+    .skillCard:nth-child(even)::before {
+        transform: rotate(-0.5deg);
+    }
+
+    /* Preserve the pop-up hover effect */
+
+    .skillCard:hover {
+        transform: translateY(-4px);
+    }
+}
