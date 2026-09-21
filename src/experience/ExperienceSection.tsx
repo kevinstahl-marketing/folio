@@ -146,7 +146,7 @@ const projects = [
     },
     {
         code: "03",
-        name: "PianoTeacherLink",
+        name: "Piano Teacher Link",
         type: "Drupal Marketplace",
         description:
             "Deployed marketplace prototype for connecting piano students and instructors using Drupal, PHP, MySQL, and Cloudways.",
