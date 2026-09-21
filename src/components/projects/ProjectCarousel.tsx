@@ -244,14 +244,14 @@ export default function ProjectCarousel({
 
     rail.scrollTo({
       left: target,
-      behavior: mobile ? "smooth" : "smooth",
+      behavior: mobile ? "instant" : "smooth",
     });
 
     setActiveProject(index);
 
     programmaticTimer.current = setTimeout(() => {
       programmaticScroll.current = false;
-    }, mobile ? 100 : 500);
+    }, mobile ? 550 : 500);
   };
 
   const previousProject = () => {
