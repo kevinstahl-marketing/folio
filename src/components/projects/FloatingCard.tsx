@@ -130,7 +130,7 @@ export default function FloatingCard({
   </span>
 
   <span className={styles.exploreMobile}>
-    TAP TO EXPLORE ↗
+    EXPLORE ↗
   </span>
 </div>
         {/* IMAGE STAGE */}
