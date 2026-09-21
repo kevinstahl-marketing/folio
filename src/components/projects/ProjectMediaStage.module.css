@@ -1,17 +1,26 @@
 
 /* =========================================================
    PROJECT MEDIA STAGE
-   Single master image + optional secondary
+
+   Shared screenshot proportions with FloatingCard.
+
+   Primary: 16:10
+   Secondary: 16:10
+
+   Brutalist browser frames / floating paper aesthetic.
    ========================================================= */
 
 .stage {
+    --ink: #1a1714;
+    --paper: #fffaf2;
+    --media-accent: #647fbc;
+
     position: relative;
+
     width: 100%;
     min-width: 0;
 
     padding: 12px 28px 48px 8px;
-
-    --media-accent: #647fbc;
 }
 
 .stage,
@@ -26,11 +35,17 @@
 .media {
     position: relative;
 
+    display: flex;
+    flex-direction: column;
+
     min-width: 0;
+    min-height: 0;
+
     overflow: hidden;
 
-    background: #fffdf9;
-    border: 2px solid #1a1714;
+    background: var(--paper);
+
+    border: 2px solid var(--ink);
 
     transform:
         rotate(var(--media-rotation, 0deg))
@@ -44,14 +59,15 @@
 }
 
 /* =========================================================
-   PRIMARY IMAGE
+   PRIMARY MEDIA
+
+   Same 16:10 screenshot viewport as FloatingCard.
    ========================================================= */
 
 .primaryMedia {
     z-index: 1;
 
     width: 100%;
-    aspect-ratio: 16 / 10;
 
     box-shadow:
         9px 9px 0 var(--media-accent);
@@ -60,21 +76,11 @@
         primaryFloat 5.5s ease-in-out infinite;
 }
 
-/* Give the master image a little more room
-   when there is no secondary screenshot. */
-
-.singleMedia {
-    padding: 12px 22px 22px 8px;
-}
-
-.singleMedia .primaryMedia {
-    transform:
-        rotate(var(--media-rotation, 0deg))
-        scale(var(--media-scale, 1));
-}
-
 /* =========================================================
-   SECONDARY IMAGE
+   SECONDARY MEDIA
+
+   Landscape screenshot.
+   Overlaps the bottom-right of the primary image.
    ========================================================= */
 
 .secondaryMedia {
@@ -85,7 +91,6 @@
     bottom: 8px;
 
     width: clamp(130px, 34%, 210px);
-    aspect-ratio: 16 / 10;
 
     box-shadow:
         6px 6px 0 rgba(26, 23, 20, 0.16);
@@ -97,48 +102,19 @@
 }
 
 /* =========================================================
-   IMAGE VIEWPORT
+   SINGLE IMAGE
+
+   Reduce unnecessary padding when there is
+   no secondary screenshot.
    ========================================================= */
 
-.imageViewport {
-    position: relative;
-
-    width: 100%;
-    height: 100%;
-
-    min-width: 0;
-    min-height: 0;
-
-    overflow: hidden;
-
-    background: #eeeae4;
-}
-
-.imageViewport img {
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-
-    user-select: none;
-    pointer-events: none;
+.singleMedia {
+    padding: 12px 22px 22px 8px;
 }
 
 /* =========================================================
-   BROWSER FRAME
+   BROWSER BAR
    ========================================================= */
-
-.browser {
-    display: flex;
-    flex-direction: column;
-}
-
-.browser .imageViewport {
-    flex: 1 1 auto;
-    min-height: 0;
-}
 
 .browserBar {
     display: flex;
@@ -151,80 +127,101 @@
 
     padding: 0 8px;
 
-    background: #fffdf9;
+    background: var(--paper);
 
-    border-bottom: 1.5px solid #1a1714;
+    border-bottom: 1.5px solid var(--ink);
 }
 
 .browserBar span {
     width: 6px;
     height: 6px;
 
-    border: 1px solid #1a1714;
+    border: 1px solid var(--ink);
     border-radius: 50%;
 
     opacity: 0.6;
 }
 
 /* =========================================================
-   PHONE FRAME
+   SCREENSHOT VIEWPORT
+
+   Exact 16:10 proportions.
+   No gray background or letterboxing.
    ========================================================= */
 
-.phone {
-    display: flex;
-    flex-direction: column;
+.imageViewport {
+    position: relative;
 
-    aspect-ratio: 9 / 18;
+    flex: 0 0 auto;
 
-    padding: 7px;
+    width: 100%;
+    aspect-ratio: 16 / 10;
 
-    border-radius: 14px;
+    min-width: 0;
+    min-height: 0;
 
-    background: #1a1714;
-}
+    overflow: hidden;
 
-.phone .imageViewport {
-    flex: 1 1 auto;
-
-    border-radius: 8px;
-
-    background: #fffdf9;
-}
-
-.phone .imageViewport img {
-    object-fit: contain;
-}
-
-/* Primary phone image:
-   center the portrait frame rather than stretching it. */
-
-.primaryMedia.phone {
-    width: min(48%, 260px);
-
-    margin-inline: auto;
-}
-
-/* Secondary phone image:
-   allow the phone to overlap the desktop screenshot. */
-
-.secondaryMedia.phone {
-    width: clamp(85px, 23%, 135px);
-    aspect-ratio: 9 / 18;
-
-    right: 2%;
-    bottom: 0;
+    background: var(--paper);
 }
 
 /* =========================================================
-   PLAIN FRAME
+   IMAGE
+
+   Fill the viewport completely.
    ========================================================= */
 
-.plain {
+.imageViewport img {
     display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: none;
+    max-height: none;
+
+    object-fit: cover;
+    object-position: center top;
+
+    user-select: none;
+    pointer-events: none;
 }
 
-.plain .imageViewport {
-    height: 100%;
+/* =========================================================
+   PLACEHOLDER
+   ========================================================= */
+
+.primaryPlaceholder {
+    display: grid;
+    place-items: center;
+    align-content: center;
+
+    gap: 6px;
+
+    width: 100%;
+    aspect-ratio: 16 / 10;
+
+    background: rgba(255, 255, 255, 0.48);
+
+    border: 2px solid var(--ink);
+
+    box-shadow:
+        9px 9px 0 var(--media-accent);
+
+    transform: rotate(-1deg);
+
+    font-family:
+        var(--font-mono, monospace);
+
+    font-size: 12px;
+    font-weight: 900;
+
+    letter-spacing: 0.08em;
+}
+
+.primaryPlaceholder small {
+    font-size: 9px;
+    opacity: 0.35;
 }
 
 /* =========================================================
@@ -296,41 +293,6 @@
 }
 
 /* =========================================================
-   PLACEHOLDER
-   ========================================================= */
-
-.primaryPlaceholder {
-    display: grid;
-    place-items: center;
-    align-content: center;
-
-    gap: 6px;
-
-    width: 100%;
-    aspect-ratio: 16 / 10;
-
-    background: rgba(255, 255, 255, 0.48);
-
-    border: 2px solid #1a1714;
-
-    box-shadow:
-        9px 9px 0 var(--media-accent);
-
-    transform: rotate(-1deg);
-
-    font-family: var(--font-mono, monospace);
-    font-size: 12px;
-    font-weight: 900;
-
-    letter-spacing: 0.08em;
-}
-
-.primaryPlaceholder small {
-    font-size: 9px;
-    opacity: 0.35;
-}
-
-/* =========================================================
    TABLET
    ========================================================= */
 
@@ -348,12 +310,9 @@
         width: 34%;
     }
 
-    .secondaryMedia.phone {
-        width: 23%;
-    }
-
-    .primaryMedia.phone {
-        width: min(48%, 240px);
+    .browserBar {
+        height: 18px;
+        flex-basis: 18px;
     }
 }
 
@@ -383,14 +342,6 @@
             4px 4px 0 rgba(26, 23, 20, 0.16);
     }
 
-    .secondaryMedia.phone {
-        width: 25%;
-    }
-
-    .primaryMedia.phone {
-        width: 52%;
-    }
-
     .browserBar {
         height: 16px;
         flex-basis: 16px;
@@ -416,56 +367,4 @@
         animation: none;
         transition: none;
     }
-}
-
-
-/* =========================================================
-   MASTER SCREENSHOT PROPORTIONS
-   ========================================================= */
-
-/* The browser frame grows around the screenshot. */
-
-.primaryMedia.browser {
-    width: 100%;
-    height: auto;
-    aspect-ratio: auto;
-}
-
-/* Actual screenshot stays 16:10. */
-
-.primaryMedia.browser .imageViewport {
-    flex: none;
-
-    width: 100%;
-    height: auto;
-
-    aspect-ratio: 16 / 10;
-}
-
-/* Prevent image stretching. */
-
-.primaryMedia.browser .imageViewport img {
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-    object-position: center;
-}
-
-/* Secondary landscape screenshot */
-
-.secondaryMedia.browser .imageViewport img {
-    object-fit: contain;
-}
-
-/* Mobile screenshot remains portrait. */
-
-.secondaryMedia.phone {
-    aspect-ratio: 9 / 18;
-}
-
-.secondaryMedia.phone .imageViewport img {
-    object-fit: contain;
 }

@@ -10,6 +10,16 @@ type ProjectMediaStageProps = {
   accent: string;
 };
 
+/* =========================================================
+   PROJECT MEDIA STAGE
+
+   Shared screenshot standard:
+   - Primary: 16:10
+   - Secondary: 16:10
+   - Both images fill their holders
+   - No portrait phone frames
+   ========================================================= */
+
 export default function ProjectMediaStage({
   media,
   accent,
@@ -22,13 +32,11 @@ export default function ProjectMediaStage({
     (item) => item.slot === "secondary"
   );
 
-  const hasSecondary = Boolean(secondary);
-
   return (
     <div
       className={[
         styles.stage,
-        hasSecondary
+        secondary
           ? styles.withSecondary
           : styles.singleMedia,
       ].join(" ")}
@@ -60,6 +68,10 @@ export default function ProjectMediaStage({
   );
 }
 
+/* =========================================================
+   MEDIA FRAME
+   ========================================================= */
+
 type MediaFrameProps = {
   media: ProjectMedia;
   variant: "primary" | "secondary";
@@ -69,16 +81,15 @@ function MediaFrame({
   media,
   variant,
 }: MediaFrameProps) {
-  const frame = media.frame ?? "browser";
+  const isPrimary = variant === "primary";
 
   return (
     <div
       className={[
         styles.media,
-        variant === "primary"
+        isPrimary
           ? styles.primaryMedia
           : styles.secondaryMedia,
-        styles[frame],
       ].join(" ")}
       style={
         {
@@ -90,16 +101,18 @@ function MediaFrame({
         } as CSSProperties
       }
     >
-      {frame === "browser" && (
-        <div
-          className={styles.browserBar}
-          aria-hidden="true"
-        >
-          <span />
-          <span />
-          <span />
-        </div>
-      )}
+      {/* BROWSER BAR */}
+
+      <div
+        className={styles.browserBar}
+        aria-hidden="true"
+      >
+        <span />
+        <span />
+        <span />
+      </div>
+
+      {/* SCREENSHOT */}
 
       <div className={styles.imageViewport}>
         <img
@@ -108,16 +121,16 @@ function MediaFrame({
           draggable={false}
           loading="lazy"
           style={{
-            objectFit: media.fit ?? "contain",
+            objectFit: "cover",
 
             objectPosition:
-              media.position ?? "center",
+              media.position ?? "center top",
 
             transform:
               `scale(${media.imageScale ?? 1})`,
 
             transformOrigin:
-              media.position ?? "center",
+              media.position ?? "center top",
           }}
         />
       </div>
