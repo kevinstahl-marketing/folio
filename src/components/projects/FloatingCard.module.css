@@ -978,3 +978,43 @@
     display: inline;
   }
 }
+
+
+/* =========================================================
+   MOBILE — REFINED CARD TYPOGRAPHY
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+    .caption {
+        gap: 5px;
+        padding: 11px 12px 14px;
+    }
+
+    .title {
+        font-size: 21px;
+        font-weight: 900;
+        line-height: 1.08;
+        letter-spacing: -0.025em;
+
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        font-size: 9px;
+        font-weight: 700;
+        line-height: 1.35;
+        letter-spacing: 0;
+        gap: 5px;
+    }
+
+    .subtitleDash {
+        width: 10px;
+        height: 3px;
+        margin-top: 4px;
+    }
+
+    .subtitleText {
+        -webkit-line-clamp: 2;
+    }
+}
