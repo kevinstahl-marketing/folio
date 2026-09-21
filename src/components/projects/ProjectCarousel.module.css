@@ -769,7 +769,7 @@
     transform: none;
     animation: none;
 
-    transition: opacity 180ms ease;
+    transition: opacity 650ms ease-in-out;
 }
 
 /* Inactive cards only fade. They DO NOT move. */
@@ -777,7 +777,7 @@
 .cardSlotInactive {
     z-index: 1;
 
-    opacity: 0.0;
+    opacity: 0.18;
 
     transform: none;
     animation: none;
@@ -1464,8 +1464,6 @@
     }
 
     .cardSlotInactive {
-        opacity: 0.28;
-
         transform:
             translateY(8px);
     }
@@ -1476,8 +1474,6 @@
     }
 
     .cardSlotActive {
-        opacity: 1;
-
         transform:
             translateY(0);
 
@@ -1711,28 +1707,6 @@
 }
 
 
-/* =========================================================
-   MOBILE — PROJECT SNAP
-   ========================================================= */
-
-@media (max-width: 560px) {
-
-  .rail {
-    scroll-snap-type: x mandatory;
-
-    scroll-behavior: smooth;
-
-    -webkit-overflow-scrolling: touch;
-
-    overscroll-behavior-x: contain;
-  }
-
-  .cardSlot {
-    scroll-snap-align: center;
-    scroll-snap-stop: always;
-  }
-}
-
 
 
 
@@ -1746,19 +1720,6 @@
     scroll-behavior: smooth;
 }
 
-/* Keep neighboring cards visible */
-
-.cardSlot {
-    transition: opacity 180ms ease;
-}
-
-.cardSlotInactive {
-    opacity: 0.72;
-}
-
-.cardSlotActive {
-    opacity: 1;
-}
 
 /* =========================================================
    MOBILE ONLY — INSTANT NAVIGATION / LARGER CARDS
@@ -1783,11 +1744,11 @@
         scroll-snap-align: center;
         scroll-snap-stop: always;
 
-        transition: opacity 80ms ease-out;
+        transition: opacity 650ms ease-in-out;
     }
 
     .cardSlotInactive {
-        opacity: 0.82;
+        opacity: 0.18;
     }
 
     .cardSlotActive {
@@ -1832,9 +1793,9 @@
 /* FADE INACTIVE PROJECTS */
 
 .cardSlotInactive {
-    opacity: 0.35 !important;
+    opacity: 0.18;
 }
 
 .cardSlotActive {
-    opacity: 1 !important;
+    opacity: 1;
 }
