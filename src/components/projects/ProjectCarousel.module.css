@@ -986,12 +986,12 @@
 
 .titlesFromRight {
     animation:
-        projectTitlesLeft 320ms cubic-bezier(0.22, 1, 0.36, 1);
+        projectTitlesLeft 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .titlesFromLeft {
     animation:
-        projectTitlesRight 320ms cubic-bezier(0.22, 1, 0.36, 1);
+        projectTitlesRight 300ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 
@@ -1966,8 +1966,8 @@
         opacity: 0.18; 
 
 transition:
-    opacity 450ms ease-in-out,
-    transform 450ms cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 300ms ease-in-out,
+    transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
         will-change: opacity;
     }
 
