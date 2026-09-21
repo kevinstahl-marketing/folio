@@ -120,12 +120,12 @@ export default function ProjectCarousel({
   );
 
   const maxCardHeight = mobile
-  ? viewportHeight * 0.58
-  : tablet
-    ? viewportHeight * 0.64
-    : viewportHeight * 0.72;
+    ? viewportHeight * 0.58
+    : tablet
+      ? viewportHeight * 0.64
+      : viewportHeight * 0.72;
 
-const cardRatio = mobile ? 0.90 : tablet ? 0.88 : 0.82;
+  const cardRatio = mobile ? 0.90 : tablet ? 0.88 : 0.82;
   const cardW = Math.max(
     0,
     Math.floor(
@@ -133,7 +133,7 @@ const cardRatio = mobile ? 0.90 : tablet ? 0.88 : 0.82;
         mobile ? 340 : tablet ? 440 : 580,
 
         availableWidth *
-  (mobile ? 0.92 : tablet ? 0.72 : 0.50),
+        (mobile ? 0.92 : tablet ? 0.72 : 0.50),
 
         maxCardHeight / cardRatio
       )
@@ -149,7 +149,7 @@ const cardRatio = mobile ? 0.90 : tablet ? 0.88 : 0.82;
   const prevIndex =
     projects.length > 0
       ? (activeProject - 1 + projects.length) %
-        projects.length
+      projects.length
       : 0;
 
   const nextIndex =
@@ -296,11 +296,10 @@ const cardRatio = mobile ? 0.90 : tablet ? 0.88 : 0.82;
 
           <div
             key={activeProject}
-            className={`${styles.projectTitles} ${
-              titleDirection === "left"
+            className={`${styles.projectTitles} ${titleDirection === "left"
                 ? styles.titlesFromRight
                 : styles.titlesFromLeft
-            }`}
+              }`}
           >
             {[
               prevIndex,
@@ -315,11 +314,10 @@ const cardRatio = mobile ? 0.90 : tablet ? 0.88 : 0.82;
                 <button
                   type="button"
                   key={`${project.id}-${position}`}
-                  className={`${styles.projectTitle} ${
-                    active
+                  className={`${styles.projectTitle} ${active
                       ? styles.projectTitleActive
                       : ""
-                  }`}
+                    }`}
                   onClick={() =>
                     selectProject(index)
                   }
@@ -448,7 +446,10 @@ const cardRatio = mobile ? 0.90 : tablet ? 0.88 : 0.82;
                         height: "100%",
 
                         objectFit: "cover",
-                        objectPosition: "center",
+                        objectPosition: "center top",
+
+                        transform: "scale(1.12)",
+                        transformOrigin: "center top",
 
                         userSelect: "none",
                         pointerEvents: "none",
@@ -500,11 +501,10 @@ const cardRatio = mobile ? 0.90 : tablet ? 0.88 : 0.82;
                       cardRefs.current[index] =
                         element;
                     }}
-                    className={`${styles.cardSlot} ${
-                      active
+                    className={`${styles.cardSlot} ${active
                         ? styles.cardSlotActive
                         : styles.cardSlotInactive
-                    }`}
+                      }`}
                   >
                     <button
                       type="button"
