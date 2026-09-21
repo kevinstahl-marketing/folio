@@ -244,7 +244,7 @@ export default function ProjectCarousel({
 
     rail.scrollTo({
       left: target,
-      behavior: mobile ? "instant" : "smooth",
+      behavior: mobile ? "smooth" : "smooth",
     });
 
     setActiveProject(index);
@@ -364,7 +364,7 @@ export default function ProjectCarousel({
       if (Math.abs(rail.scrollLeft - target) > 2) {
         rail.scrollTo({
           left: target,
-          behavior: mobile ? "instant" : "smooth",
+          behavior: mobile ? "smooth" : "smooth",
         });
       }
     }, mobile ? 65 : 120);
