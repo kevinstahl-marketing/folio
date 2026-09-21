@@ -32,7 +32,7 @@
     padding:
         clamp(76px, 7vw, 110px)
         clamp(20px, 4vw, 64px)
-        clamp(70px, 7vw, 110px);
+        clamp(80px, 7vw, 110px);
 
     background: #f5f2ee;
     color: var(--ink);
@@ -48,10 +48,6 @@
 
 /* =========================================================
    02 — DOSSIER / PAPER STACK
-
-   One backing sheet.
-   One yellow tab.
-   One main document.
    ========================================================= */
 
 .dossier {
@@ -64,8 +60,6 @@
 
     isolation: isolate;
 }
-
-/* Prevent old pseudo-element paper layers */
 
 .dossier::before,
 .dossier::after,
@@ -80,7 +74,6 @@
 
 .backSheet {
     position: absolute;
-
     z-index: 0;
 
     inset: 12px -8px -12px 8px;
@@ -102,7 +95,6 @@
 
 .tab {
     position: absolute;
-
     z-index: 1;
 
     top: -35px;
@@ -131,7 +123,6 @@
 
 .paper {
     position: relative;
-
     z-index: 2;
 
     width: 100%;
@@ -149,17 +140,6 @@
     transition:
         transform 350ms ease,
         box-shadow 350ms ease;
-}
-
-@media (hover: hover) {
-
-    .dossier:hover .paper {
-        transform: translateY(-3px);
-
-        box-shadow:
-            10px 12px 0 var(--ink);
-    }
-
 }
 
 
@@ -188,7 +168,6 @@
 
 .eyebrow {
     display: flex;
-
     flex-wrap: wrap;
 
     gap: 10px;
@@ -266,7 +245,6 @@
     position: relative;
 
     display: flex;
-
     flex-direction: column;
 
     gap: 9px;
@@ -288,7 +266,6 @@
         var(--font-mono, monospace);
 
     font-size: 11px;
-
     font-weight: 800;
 
     line-height: 1.5;
@@ -342,22 +319,9 @@
     transform: rotate(-3deg);
 }
 
-@media (hover: hover) {
-
-    .identity:hover {
-        transform:
-            rotate(0deg)
-            translateY(-5px);
-
-        box-shadow:
-            9px 11px 0 var(--ink);
-    }
-
-}
-
 
 /* =========================================================
-   05 — DIVIDER / DOCUMENT RULE
+   05 — DOCUMENT RULE
    ========================================================= */
 
 .rule {
@@ -377,7 +341,6 @@
     padding: 12px 0;
 
     border-top: 3px solid var(--ink);
-
     border-bottom: 1px solid var(--ink);
 
     color: var(--ink);
@@ -397,10 +360,10 @@
     display: grid;
 
     grid-template-columns:
-        minmax(0, 1.55fr)
-        minmax(270px, 0.85fr);
+        minmax(0, 1.9fr)
+        minmax(245px, 0.75fr);
 
-    gap: clamp(30px, 3.5vw, 58px);
+    gap: clamp(24px, 3vw, 44px);
 
     align-items: start;
 }
@@ -413,1744 +376,27 @@
 
 
 /* =========================================================
-   07 — SECTION HEADING
+   07 — WORK HISTORY READING SURFACE
    ========================================================= */
-
-.sectionHeading {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    flex-wrap: wrap;
-
-    gap: 16px;
-
-    margin-bottom: 38px;
-}
-
-.sectionTab,
-.cardLabel {
-    display: inline-block;
-
-    padding: 10px 14px;
-
-    background: var(--ink);
-
-    color: var(--light);
-
-    border: 2px solid var(--ink);
-
-    box-shadow:
-        4px 4px 0 var(--yellow);
-
-    font: 900 11px/1.35
-        var(--font-mono, monospace);
-
-    letter-spacing: 0.08em;
-
-    overflow-wrap: anywhere;
-}
-
-.sectionTab {
-    transform: rotate(-1deg);
-}
-
-.headingNote {
-    color: #645a50;
-
-    font: 800 10px/1.4
-        var(--font-mono, monospace);
-
-    letter-spacing: 0.07em;
-}
-
-
-/* =========================================================
-   08 — WORK HISTORY / TIMELINE
-   ========================================================= */
-
-.timeline {
-    position: relative;
-}
-
-.timeline::before {
-    content: "";
-
-    position: absolute;
-
-    top: 20px;
-    bottom: 25px;
-    left: 20px;
-
-    width: 2px;
-
-    background: rgba(26, 23, 20, 0.22);
-}
-
-
-/* INDIVIDUAL JOB */
-
-.job {
-    position: relative;
-
-    display: grid;
-
-    grid-template-columns:
-        42px minmax(0, 1fr);
-
-    gap: clamp(15px, 2vw, 26px);
-
-    padding: 0 0 38px;
-
-    margin: 0 0 38px;
-
-    border-bottom:
-        1px dashed rgba(26, 23, 20, 0.3);
-
-    transition:
-        transform 250ms ease;
-}
-
-.job:last-child {
-    padding-bottom: 0;
-
-    margin-bottom: 0;
-
-    border-bottom: 0;
-}
-
-
-/* TIMELINE INDEX */
-
-.jobIndex {
-    position: relative;
-
-    z-index: 1;
-
-    display: grid;
-
-    place-items: center;
-
-    width: 40px;
-    height: 40px;
-
-    background: var(--light);
-
-    border: 2px solid var(--ink);
-
-    box-shadow:
-        3px 3px 0 var(--ink);
-
-    font: 900 11px
-        var(--font-mono, monospace);
-
-    transform: rotate(-3deg);
-
-    transition:
-        transform 250ms ease,
-        background 250ms ease;
-}
-
-.job:nth-child(even) .jobIndex {
-    transform: rotate(3deg);
-}
-
-@media (hover: hover) {
-
-    .job:hover {
-        transform: translateX(5px);
-    }
-
-    .job:hover .jobIndex {
-        transform:
-            rotate(0deg)
-            scale(1.08);
-
-        background: var(--yellow);
-    }
-
-}
-
-
-/* JOB META */
-
-.jobMeta {
-    display: flex;
-
-    justify-content: space-between;
-
-    flex-wrap: wrap;
-
-    gap: 5px 16px;
-
-    margin-bottom: 12px;
-
-    color: #645a50;
-
-    font: 850 11px/1.5
-        var(--font-mono, monospace);
-
-    letter-spacing: 0.03em;
-}
-
-
-/* JOB TITLE */
-
-.jobRole {
-    margin: 0 0 8px;
-
-    font-family:
-        var(--font-display, Georgia, serif);
-
-    font-size: clamp(28px, 2.6vw, 40px);
-
-    font-weight: 700;
-
-    font-style: italic;
-
-    line-height: 1.08;
-
-    letter-spacing: -0.025em;
-
-    overflow-wrap: break-word;
-}
-
-
-/* ORGANIZATION */
-
-.organization {
-    margin-bottom: 15px;
-
-    font-family:
-        var(--font-sans, system-ui, sans-serif);
-
-    font-size: 16px;
-
-    font-weight: 750;
-
-    line-height: 1.4;
-
-    color: #51483f;
-}
-
-
-/* DESCRIPTION */
-
-.description {
-    margin: 0 0 18px;
-
-    font-family:
-        var(--font-sans, system-ui, sans-serif);
-
-    font-size: 15px;
-
-    line-height: 1.7;
-
-    color: #4d463f;
-}
-
-
-/* HIGHLIGHTS */
-
-.highlights {
-    display: grid;
-
-    gap: 11px;
-
-    margin: 0 0 20px;
-
-    padding: 0;
-
-    list-style: none;
-}
-
-.highlights li {
-    position: relative;
-
-    padding-left: 20px;
-
-    font-family:
-        var(--font-sans, system-ui, sans-serif);
-
-    font-size: 14px;
-
-    line-height: 1.65;
-
-    color: #51483f;
-}
-
-
-.highlights li::before {
-    content: "↗";
-    position: absolute;
-    left: 0;
-    top: 0;
-
-    color: #1a1714;
-    font-family: Arial, sans-serif;
-    font-size: 15px;
-    font-weight: 900;
-    line-height: 1.6;
-}
-
-/* SKILL TAGS */
-
-.tags {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 7px;
-}
-
-.tag {
-    padding: 6px 9px;
-
-    border:
-        1px solid rgba(26, 23, 20, 0.5);
-
-    background: rgba(255, 250, 242, 0.75);
-
-    font: 800 10px/1.3
-        var(--font-mono, monospace);
-
-    letter-spacing: 0.02em;
-
-    transition:
-        transform 180ms ease,
-        box-shadow 180ms ease;
-}
-
-@media (hover: hover) {
-
-    .tag:hover {
-        transform:
-            translate(-2px, -2px)
-            rotate(-1deg);
-
-        box-shadow:
-            3px 3px 0 var(--ink);
-    }
-
-}
-
-
-/* =========================================================
-   09 — SIDEBAR
-   ========================================================= */
-
-.sidebar {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 44px;
-
-    padding-top: 8px;
-}
-
-
-/* PHYSICAL CARDS */
-
-.sideCard {
-    position: relative;
-
-    min-width: 0;
-
-    padding: 39px 24px 27px;
-
-    background: var(--light);
-
-    border: 2px solid var(--ink);
-
-    box-shadow:
-        6px 6px 0 rgba(26, 23, 20, 0.2);
-
-    transition:
-        transform 280ms cubic-bezier(.2, .8, .2, 1),
-        box-shadow 280ms ease;
-}
-
-.skillsCard {
-    transform: rotate(-0.7deg);
-}
-
-.projectsCard {
-    transform: rotate(0.8deg);
-}
-
-.educationCard {
-    transform: rotate(-0.6deg);
-}
-
-@media (hover: hover) {
-
-    .sideCard:hover {
-        transform:
-            translate(-4px, -5px)
-            rotate(0deg);
-
-        box-shadow:
-            10px 11px 0 rgba(26, 23, 20, 0.25);
-    }
-
-}
-
-
-/* CARD LABELS */
-
-.cardLabel {
-    position: absolute;
-
-    top: -18px;
-    left: 18px;
-
-    max-width: calc(100% - 30px);
-
-    color: var(--light);
-
-    background: var(--ink);
-}
-
-
-/* =========================================================
-   10 — SKILLS
-   ========================================================= */
-
-.skillGroup {
-    padding: 0 0 16px;
-
-    margin-bottom: 16px;
-
-    border-bottom:
-        1px solid rgba(26, 23, 20, 0.17);
-}
-
-.skillGroup:last-child {
-    padding: 0;
-
-    margin: 0;
-
-    border: 0;
-}
-
-.skillLabel {
-    margin-bottom: 8px;
-
-    font: 900 11px/1.4
-        var(--font-mono, monospace);
-
-    text-transform: uppercase;
-}
-
-.skillValues {
-    font-family:
-        var(--font-sans, system-ui, sans-serif);
-
-    font-size: 15px;
-
-    line-height: 1.65;
-
-    color: #51483f;
-}
-
-
-/* =========================================================
-   11 — SELECTED PROJECTS
-   ========================================================= */
-
-.project {
-    display: grid;
-
-    grid-template-columns:
-        28px minmax(0, 1fr);
-
-    gap: 12px;
-
-    padding: 0 0 20px;
-
-    margin-bottom: 20px;
-
-    border-bottom:
-        1px solid rgba(26, 23, 20, 0.17);
-}
-
-.project:last-child {
-    padding: 0;
-
-    margin: 0;
-
-    border: 0;
-}
-
-.projectCode {
-    padding-top: 5px;
-
-    color: #74695e;
-
-    font: 900 11px
-        var(--font-mono, monospace);
-}
-
-.projectName {
-    font-family:
-        var(--font-display, Georgia, serif);
-
-    font-size: 25px;
-
-    font-weight: 700;
-
-    font-style: italic;
-
-    line-height: 1.1;
-
-    overflow-wrap: break-word;
-}
-
-.projectType {
-    margin-top: 8px;
-
-    color: #675c51;
-
-    font: 800 10px/1.5
-        var(--font-mono, monospace);
-
-    letter-spacing: 0.04em;
-
-    text-transform: uppercase;
-}
-
-.projectDescription {
-    margin: 10px 0 0;
-
-    font-family:
-        var(--font-sans, system-ui, sans-serif);
-
-    font-size: 14px;
-
-    line-height: 1.65;
-
-    color: #51483f;
-}
-
-
-/* =========================================================
-   12 — EDUCATION
-   ========================================================= */
-
-.degree {
-    font-family:
-        var(--font-display, Georgia, serif);
-
-    font-size: 30px;
-
-    font-weight: 700;
-
-    font-style: italic;
-
-    line-height: 1.1;
-}
-
-.school {
-    margin-top: 12px;
-
-    font-family:
-        var(--font-sans, system-ui, sans-serif);
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    line-height: 1.5;
-}
-
-.educationDetail {
-    margin-top: 13px;
-
-    color: #675c51;
-
-    font: 800 10px/1.6
-        var(--font-mono, monospace);
-
-    letter-spacing: 0.03em;
-}
-
-
-/* =========================================================
-   13 — YELLOW FIELD NOTE
-   ========================================================= */
-
-.noteCard {
-    align-self: flex-end;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    max-width: 100%;
-
-    padding: 15px 17px;
-
-    background: var(--yellow);
-
-    border: 2px solid var(--ink);
-
-    box-shadow:
-        4px 4px 0 var(--ink);
-
-    font: 900 11px/1.55
-        var(--font-mono, monospace);
-
-    letter-spacing: 0.03em;
-
-    transform: rotate(3deg);
-
-    transition:
-        transform 250ms ease,
-        box-shadow 250ms ease;
-}
-
-.noteMark {
-    font-size: 26px;
-}
-
-@media (hover: hover) {
-
-    .noteCard:hover {
-        transform:
-            rotate(0deg)
-            translateY(-5px);
-
-        box-shadow:
-            7px 9px 0 var(--ink);
-    }
-
-}
-
-
-/* =========================================================
-   14 — FOOTER
-   ========================================================= */
-
-.footer {
-    display: flex;
-
-    justify-content: space-between;
-
-    flex-wrap: wrap;
-
-    gap: 12px;
-
-    margin-top: clamp(42px, 5vw, 68px);
-
-    padding-top: 18px;
-
-    border-top: 3px solid var(--ink);
-
-    color: #645a50;
-
-    font: 850 11px/1.5
-        var(--font-mono, monospace);
-
-    letter-spacing: 0.06em;
-}
-
-
-/* =========================================================
-   15 — COMPACT LAPTOPS
-   ========================================================= */
-
-@media (max-width: 1280px) {
-
-    .section {
-        padding:
-            78px 28px 82px;
-    }
-
-    .paper {
-        padding: clamp(28px, 3vw, 44px);
-    }
-
-    .header {
-        grid-template-columns:
-            minmax(0, 1fr)
-            205px;
-
-        gap: 30px;
-    }
-
-    .title {
-        font-size: clamp(48px, 5vw, 70px);
-    }
-
-    .layout {
-        grid-template-columns:
-            minmax(0, 1.4fr)
-            minmax(250px, 0.85fr);
-
-        gap: 32px;
-    }
-
-    .jobRole {
-        font-size: clamp(28px, 2.7vw, 36px);
-    }
-
-    .sideCard {
-        padding:
-            38px 20px 24px;
-    }
-
-}
-
-
-/* =========================================================
-   16 — TABLET
-   ========================================================= */
-
-@media (max-width: 900px) {
-
-    .section {
-        padding:
-            78px 24px 80px;
-    }
-
-    .paper {
-        padding: 34px;
-    }
-
-    .header {
-        grid-template-columns:
-            minmax(0, 1fr)
-            190px;
-    }
-
-    .title {
-        font-size: clamp(44px, 6vw, 62px);
-    }
-
-    .intro {
-        font-size: 16px;
-    }
-
-    .layout {
-        grid-template-columns: minmax(0, 1fr);
-
-        gap: 45px;
-    }
-
-    .sidebar {
-        display: grid;
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap: 42px 25px;
-    }
-
-    .jobRole {
-        font-size: clamp(29px, 4vw, 38px);
-    }
-
-    .sideCard {
-        padding:
-            40px 22px 26px;
-    }
-
-    .noteCard {
-        justify-self: start;
-        align-self: start;
-    }
-
-}
-
-
-/* =========================================================
-   17 — MOBILE
-   ========================================================= */
-
-@media (max-width: 620px) {
-
-    .section {
-        padding:
-            70px 15px 68px;
-    }
-
-    .dossier {
-        width: 100%;
-    }
-
-    .backSheet {
-        inset:
-            7px -4px -7px 4px;
-
-        border-width: 2px;
-
-        transform: rotate(0.2deg);
-    }
-
-    .tab {
-        top: -30px;
-        right: 7%;
-
-        padding:
-            11px 14px 19px;
-
-        border-width: 2px;
-
-        font-size: 10px;
-    }
-
-    .paper {
-        padding:
-            27px 20px 30px;
-
-        border-width: 2px;
-
-        box-shadow:
-            5px 5px 0 var(--ink);
-    }
-
-    /* HEADER */
-
-    .header {
-        display: flex;
-
-        flex-direction: column;
-
-        gap: 32px;
-    }
-
-    .eyebrow {
-        margin-bottom: 17px;
-
-        font-size: 10px;
-
-        line-height: 1.5;
-
-        letter-spacing: 0.07em;
-    }
-
-    .title {
-        max-width: 100%;
-
-        margin-bottom: 22px;
-
-        font-size: clamp(42px, 10.5vw, 62px);
-
-        line-height: 1;
-
-        letter-spacing: -0.04em;
-
-        overflow-wrap: break-word;
-    }
-
-    .intro {
-        font-size: 16px;
-
-        line-height: 1.65;
-
-        color: #403931;
-    }
-
-    /* IDENTITY */
-
-    .identity {
-        width: min(100%, 290px);
-
-        align-self: flex-end;
-
-        padding:
-            24px 19px 19px;
-
-        font-size: 11px;
-
-        transform: rotate(1deg);
-    }
-
-    .identity strong {
-        font-size: 17px;
-    }
-
-    /* DOCUMENT RULE */
-
-    .rule {
-        margin:
-            35px 0 34px;
-
-        padding: 11px 0;
-
-        font-size: 10px;
-    }
-
-    .rule span:last-child {
-        display: none;
-    }
-
-    /* SECTION HEADING */
-
-    .sectionHeading {
-        margin-bottom: 34px;
-    }
-
-    .sectionTab {
-        padding: 10px 12px;
-
-        font-size: 11px;
-    }
-
-    .headingNote {
-        font-size: 10px;
-    }
-
-    /* TIMELINE */
-
-    .timeline::before {
-        left: 15px;
-    }
-
-    .job {
-        grid-template-columns:
-            32px minmax(0, 1fr);
-
-        gap: 13px;
-
-        margin-bottom: 35px;
-
-        padding-bottom: 35px;
-    }
-
-    .jobIndex {
-        width: 31px;
-        height: 31px;
-
-        font-size: 10px;
-
-        box-shadow:
-            2px 2px 0 var(--ink);
-    }
-
-    .jobMeta {
-        margin-bottom: 11px;
-
-        font-size: 10px;
-
-        line-height: 1.5;
-
-        gap: 5px 12px;
-    }
-
-    .jobRole {
-        margin-bottom: 9px;
-
-        font-size: clamp(27px, 7vw, 36px);
-
-        line-height: 1.1;
-    }
-
-    .organization {
-        margin-bottom: 14px;
-
-        font-size: 15px;
-    }
-
-    .description {
-        font-size: 15px;
-
-        line-height: 1.65;
-    }
-
-    .highlights {
-        gap: 11px;
-    }
-
-    .highlights li {
-        font-size: 14px;
-
-        line-height: 1.6;
-    }
-
-    .tag {
-        padding: 6px 8px;
-
-        font-size: 10px;
-    }
-
-    /* SIDEBAR */
-
-    .sidebar {
-        display: flex;
-
-        flex-direction: column;
-
-        gap: 43px;
-
-        margin-top: 12px;
-    }
-
-    .sideCard {
-        width: 100%;
-
-        padding:
-            42px 20px 26px;
-
-        transform: none;
-    }
-
-    .cardLabel {
-        top: -18px;
-
-        font-size: 10px;
-    }
-
-    /* SKILLS */
-
-    .skillLabel {
-        font-size: 11px;
-    }
-
-    .skillValues {
-        font-size: 15px;
-
-        line-height: 1.65;
-    }
-
-    /* PROJECTS */
-
-    .projectName {
-        font-size: 26px;
-    }
-
-    .projectType {
-        font-size: 10px;
-    }
-
-    .projectDescription {
-        font-size: 14px;
-    }
-
-    /* EDUCATION */
-
-    .degree {
-        font-size: 30px;
-    }
-
-    .school {
-        font-size: 15px;
-    }
-
-    .educationDetail {
-        font-size: 10px;
-    }
-
-    /* NOTE */
-
-    .noteCard {
-        align-self: flex-start;
-
-        font-size: 11px;
-
-        transform: rotate(2deg);
-    }
-
-    /* FOOTER */
-
-    .footer {
-        margin-top: 46px;
-
-        font-size: 10px;
-
-        line-height: 1.6;
-    }
-
-}
-
-
-/* =========================================================
-   18 — VERY SMALL PHONES
-   ========================================================= */
-
-@media (max-width: 380px) {
-
-    .section {
-        padding-inline: 12px;
-    }
-
-    .paper {
-        padding:
-            25px 16px 28px;
-    }
-
-    .title {
-        font-size: clamp(38px, 10.5vw, 43px);
-    }
-
-    .intro {
-        font-size: 15px;
-    }
-
-    .job {
-        gap: 10px;
-    }
-
-    .jobRole {
-        font-size: clamp(25px, 7.2vw, 29px);
-    }
-
-    .jobMeta {
-        font-size: 9px;
-    }
-
-    .sideCard {
-        padding:
-            40px 16px 24px;
-    }
-
-    .project {
-        grid-template-columns:
-            24px minmax(0, 1fr);
-
-        gap: 9px;
-    }
-
-    .projectName {
-        font-size: 24px;
-    }
-
-}
-
-
-/* =========================================================
-   19 — REDUCED MOTION
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    .paper,
-    .identity,
-    .job,
-    .jobIndex,
-    .sideCard,
-    .tag,
-    .noteCard {
-        transition: none;
-    }
-
-}
-
-
-/* =========================================================
-   EXPERIENCE — READING-FIRST REDESIGN
-   ========================================================= */
-
-/* Give the work history a dedicated reading surface */
 
 .history {
-    min-width: 0;
-    padding: clamp(20px, 2.5vw, 36px);
+    padding: clamp(22px, 2.5vw, 38px);
 
     background: #fffdf8;
+
     border: 1px solid rgba(26, 23, 20, 0.35);
 
-    box-shadow: 5px 5px 0 rgba(26, 23, 20, 0.08);
-}
-
-/* Give the reading column more room on laptops */
-
-@media (min-width: 901px) {
-    .layout {
-        grid-template-columns:
-            minmax(0, 1.9fr)
-            minmax(240px, 0.75fr);
-
-        gap: clamp(24px, 3vw, 44px);
-    }
-}
-
-/* Strong, recognizable job headings */
-
-.jobRole {
-    font-family: var(--font-display, Georgia, serif);
-
-    font-size: clamp(26px, 2.4vw, 35px);
-    font-style: normal;
-    font-weight: 700;
-
-    line-height: 1.2;
-    letter-spacing: -0.025em;
-
-    color: #1a1714;
-}
-
-/* Make organizations easier to distinguish */
-
-.organization {
-    margin-top: 8px;
-    margin-bottom: 18px;
-
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 1.45;
-
-    color: #66533c;
-}
-
-/* Job summary — readable, not decorative */
-
-.description {
-    max-width: 62ch;
-
-    margin-bottom: 22px;
-
-    font-family: var(--font-sans, system-ui, sans-serif);
-    font-size: 16px;
-    font-weight: 400;
-
-    line-height: 1.65;
-    letter-spacing: 0;
-
-    color: #25211d;
-}
-
-/* Clearer accomplishment hierarchy */
-
-.highlights {
-    display: grid;
-    gap: 14px;
-
-    margin-bottom: 22px;
-}
-
-.highlights li {
-    max-width: 62ch;
-
-    padding-left: 20px;
-
-    font-family: var(--font-sans, system-ui, sans-serif);
-    font-size: 15px;
-    font-weight: 400;
-
-    line-height: 1.65;
-    letter-spacing: 0;
-
-    color: #25211d;
-}
-
-/* Replace arrow glyphs with physical registration marks */
-
-.highlights li::before {
-    content: "";
-
-    position: absolute;
-    left: 0;
-    top: 0.65em;
-
-    width: 7px;
-    height: 7px;
-
-    background: #d4a94e;
-    border: 1px solid #1a1714;
-}
-
-/* Clear separation between jobs */
-
-.job {
-    padding-bottom: 34px;
-    margin-bottom: 34px;
-
-    border-bottom: 1px solid #d8d0c4;
-}
-
-.job:last-child {
-    border-bottom: 0;
-}
-
-/* Make dates readable without competing with job titles */
-
-.jobMeta {
-    margin-bottom: 10px;
-
-    font-size: 11px;
-    font-weight: 700;
-    line-height: 1.5;
-    letter-spacing: 0.02em;
-
-    color: #665b50;
-}
-
-/* More recognizable timeline markers */
-
-.jobIndex {
-    background: #d4a94e;
-    color: #1a1714;
-}
-
-/* Responsive reading surface */
-
-@media (max-width: 620px) {
-
-    .history {
-        padding: 20px 14px;
-    }
-
-    .job {
-        grid-template-columns:
-            28px minmax(0, 1fr);
-
-        gap: 10px;
-    }
-
-    .jobIndex {
-        width: 28px;
-        height: 28px;
-    }
-
-    .timeline::before {
-        left: 13px;
-    }
-
-    .jobRole {
-        font-size: clamp(24px, 6.5vw, 30px);
-        line-height: 1.2;
-    }
-
-    .description {
-        font-size: 16px;
-        line-height: 1.65;
-    }
-
-    .highlights li {
-        font-size: 15px;
-        line-height: 1.65;
-    }
-
-}
-
-/* =========================================================
-   ENGINEER'S DOSSIER
-   ExperienceSection.module.css
-
-   Editorial / Brutalist / Physical Paper
-
-   Responsive:
-   - Large desktop
-   - Compact laptop
-   - Tablet
-   - Mobile
-   ========================================================= */
-
-
-/* =========================================================
-   01 — SECTION
-   ========================================================= */
-
-.section {
-    --ink: #1a1714;
-    --paper: #e8e1d7;
-    --light: #fffaf2;
-    --yellow: #d4a94e;
-    --muted: #5c534a;
-
-    position: relative;
-
-    width: 100%;
-    min-width: 0;
-
-    padding:
-        clamp(76px, 7vw, 110px)
-        clamp(20px, 4vw, 64px)
-        clamp(70px, 7vw, 110px);
-
-    background: #f5f2ee;
-    color: var(--ink);
-
-    overflow-x: clip;
-    overflow-y: visible;
-}
-
-.section * {
-    box-sizing: border-box;
-}
-
-
-/* =========================================================
-   02 — DOSSIER / PAPER STACK
-
-   One backing sheet.
-   One yellow tab.
-   One main document.
-   ========================================================= */
-
-.dossier {
-    position: relative;
-
-    width: min(1380px, 100%);
-    min-width: 0;
-
-    margin: 0 auto;
-
-    isolation: isolate;
-}
-
-/* Prevent old pseudo-element paper layers */
-
-.dossier::before,
-.dossier::after,
-.paper::before,
-.paper::after {
-    content: none;
-    display: none;
-}
-
-
-/* BACKING PAPER */
-
-.backSheet {
-    position: absolute;
-
-    z-index: 0;
-
-    inset: 12px -8px -12px 8px;
-
-    background: #d7cfc3;
-
-    border: 3px solid var(--ink);
-
-    transform: rotate(0.3deg);
-
     box-shadow:
-        8px 8px 0 rgba(26, 23, 20, 0.12);
-
-    pointer-events: none;
+        5px 5px 0 rgba(26, 23, 20, 0.08);
 }
 
 
-/* YELLOW FOLDER TAB */
-
-.tab {
-    position: absolute;
-
-    z-index: 1;
-
-    top: -35px;
-    right: 8%;
-
-    padding: 14px 24px 22px;
-
-    background: var(--yellow);
-
-    border: 3px solid var(--ink);
-
-    color: var(--ink);
-
-    font: 900 11px/1.3
-        var(--font-mono, monospace);
-
-    letter-spacing: 0.1em;
-
-    transform: rotate(3deg);
-
-    pointer-events: none;
-}
-
-
-/* MAIN DOCUMENT */
-
-.paper {
-    position: relative;
-
-    z-index: 2;
-
-    width: 100%;
-    min-width: 0;
-
-    padding: clamp(28px, 4vw, 60px);
-
-    background: var(--paper);
-
-    border: 3px solid var(--ink);
-
-    box-shadow:
-        7px 7px 0 var(--ink);
-
-    transition:
-        transform 350ms ease,
-        box-shadow 350ms ease;
-}
-
-@media (hover: hover) {
-
-    .dossier:hover .paper {
-        transform: translateY(-3px);
-
-        box-shadow:
-            10px 12px 0 var(--ink);
-    }
-
-}
-
-
-/* =========================================================
-   03 — HEADER
-   ========================================================= */
-
-.header {
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 1fr)
-        minmax(190px, 245px);
-
-    gap: clamp(24px, 3vw, 55px);
-
-    align-items: start;
-}
-
-.headerMain {
-    min-width: 0;
-}
-
-
-/* EYEBROW */
-
-.eyebrow {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 10px;
-
-    margin-bottom: 22px;
-
-    color: #665c52;
-
-    font: 900 11px/1.4
-        var(--font-mono, monospace);
-
-    letter-spacing: 0.12em;
-
-    text-transform: uppercase;
-}
-
-.eyebrow span {
-    opacity: 0.65;
-}
-
-
-/* MAIN TITLE */
-
-.title {
-    max-width: 850px;
-
-    margin: 0 0 25px;
-
-    font-family:
-        var(--font-display, Georgia, serif);
-
-    font-size: clamp(52px, 5.8vw, 86px);
-
-    font-weight: 700;
-
-    line-height: 0.98;
-
-    letter-spacing: -0.045em;
-
-    color: var(--ink);
-
-    overflow-wrap: normal;
-}
-
-.title em {
-    font-weight: 700;
-}
-
-
-/* INTRO */
-
-.intro {
-    max-width: 740px;
-
-    margin: 0;
-
-    font-family:
-        var(--font-sans, system-ui, sans-serif);
-
-    font-size: clamp(16px, 1.2vw, 19px);
-
-    font-weight: 400;
-
-    line-height: 1.65;
-
-    color: #51483f;
-}
-
-
-/* =========================================================
-   04 — IDENTITY CARD
-   ========================================================= */
-
-.identity {
-    position: relative;
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 9px;
-
-    min-width: 0;
-
-    padding: 28px 21px 20px;
-
-    background: var(--light);
-
-    border: 2px solid var(--ink);
-
-    box-shadow:
-        6px 6px 0 var(--ink);
-
-    transform: rotate(2deg);
-
-    font-family:
-        var(--font-mono, monospace);
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    line-height: 1.5;
-
-    letter-spacing: 0.03em;
-
-    overflow-wrap: anywhere;
-
-    transition:
-        transform 300ms ease,
-        box-shadow 300ms ease;
-}
-
-.identity strong {
-    font-size: 16px;
-
-    line-height: 1.35;
-
-    letter-spacing: 0;
-}
-
-.identityLabel {
-    color: #74695e;
-}
-
-.identityPin {
-    position: absolute;
-
-    top: -16px;
-    left: 48%;
-
-    font-size: 30px;
-
-    color: #a9788d;
-
-    text-shadow:
-        2px 3px 0 var(--ink);
-}
-
-.identityStamp {
-    align-self: flex-start;
-
-    margin-top: 12px;
-
-    padding: 6px 9px;
-
-    border: 1px solid var(--ink);
-
-    color: #875c22;
-
-    transform: rotate(-3deg);
-}
-
-@media (hover: hover) {
-
-    .identity:hover {
-        transform:
-            rotate(0deg)
-            translateY(-5px);
-
-        box-shadow:
-            9px 11px 0 var(--ink);
-    }
-
-}
-
-
-/* =========================================================
-   05 — DIVIDER / DOCUMENT RULE
-   ========================================================= */
-
-.rule {
-    display: flex;
-
-    justify-content: space-between;
-
-    flex-wrap: wrap;
-
-    gap: 12px;
-
-    margin:
-        clamp(34px, 4vw, 58px)
-        0
-        clamp(32px, 4vw, 52px);
-
-    padding: 12px 0;
-
-    border-top: 3px solid var(--ink);
-
-    border-bottom: 1px solid var(--ink);
-
-    color: var(--ink);
-
-    font: 900 11px/1.4
-        var(--font-mono, monospace);
-
-    letter-spacing: 0.07em;
-}
-
-
-/* =========================================================
-   06 — MAIN LAYOUT
-   ========================================================= */
-
-.layout {
-    display: grid;
-
-    grid-template-columns:
-        minmax(0, 1.55fr)
-        minmax(270px, 0.85fr);
-
-    gap: clamp(30px, 3.5vw, 58px);
-
-    align-items: start;
-}
-
-.history,
-.sidebar,
-.jobContent {
-    min-width: 0;
-}
-
-
-/* =========================================================
-   07 — SECTION HEADING
-   ========================================================= */
+/* SECTION HEADING */
 
 .sectionHeading {
     display: flex;
 
     align-items: center;
-
     justify-content: space-between;
 
     flex-wrap: wrap;
@@ -2167,7 +413,6 @@
     padding: 10px 14px;
 
     background: var(--ink);
-
     color: var(--light);
 
     border: 2px solid var(--ink);
@@ -2232,12 +477,12 @@
 
     gap: clamp(15px, 2vw, 26px);
 
-    padding: 0 0 38px;
+    padding: 0 0 42px;
 
-    margin: 0 0 38px;
+    margin: 0 0 42px;
 
     border-bottom:
-        1px dashed rgba(26, 23, 20, 0.3);
+        1px solid #d8d0c4;
 
     transition:
         transform 250ms ease;
@@ -2245,7 +490,6 @@
 
 .job:last-child {
     padding-bottom: 0;
-
     margin-bottom: 0;
 
     border-bottom: 0;
@@ -2256,7 +500,6 @@
 
 .jobIndex {
     position: relative;
-
     z-index: 1;
 
     display: grid;
@@ -2266,7 +509,8 @@
     width: 40px;
     height: 40px;
 
-    background: var(--light);
+    background: var(--yellow);
+    color: var(--ink);
 
     border: 2px solid var(--ink);
 
@@ -2287,22 +531,6 @@
     transform: rotate(3deg);
 }
 
-@media (hover: hover) {
-
-    .job:hover {
-        transform: translateX(5px);
-    }
-
-    .job:hover .jobIndex {
-        transform:
-            rotate(0deg)
-            scale(1.08);
-
-        background: var(--yellow);
-    }
-
-}
-
 
 /* JOB META */
 
@@ -2317,12 +545,12 @@
 
     margin-bottom: 12px;
 
-    color: #645a50;
+    color: #51483f;
 
-    font: 850 11px/1.5
+    font: 800 12px/1.5
         var(--font-mono, monospace);
 
-    letter-spacing: 0.03em;
+    letter-spacing: 0.015em;
 }
 
 
@@ -2334,15 +562,16 @@
     font-family:
         var(--font-display, Georgia, serif);
 
-    font-size: clamp(28px, 2.6vw, 40px);
+    font-size: clamp(29px, 2.6vw, 39px);
 
     font-weight: 700;
+    font-style: normal;
 
-    font-style: italic;
-
-    line-height: 1.08;
+    line-height: 1.17;
 
     letter-spacing: -0.025em;
+
+    color: var(--ink);
 
     overflow-wrap: break-word;
 }
@@ -2351,45 +580,51 @@
 /* ORGANIZATION */
 
 .organization {
-    margin-bottom: 15px;
+    margin: 8px 0 18px;
 
     font-family:
         var(--font-sans, system-ui, sans-serif);
 
-    font-size: 16px;
+    font-size: 17px;
+    font-weight: 800;
 
-    font-weight: 750;
+    line-height: 1.45;
 
-    line-height: 1.4;
-
-    color: #51483f;
+    color: #55432c;
 }
 
 
 /* DESCRIPTION */
 
 .description {
-    margin: 0 0 18px;
+    max-width: 63ch;
+
+    margin: 0 0 24px;
 
     font-family:
         var(--font-sans, system-ui, sans-serif);
 
-    font-size: 15px;
+    font-size: 17px;
+    font-weight: 400;
 
-    line-height: 1.7;
+    line-height: 1.72;
 
-    color: #4d463f;
+    letter-spacing: 0;
+
+    color: #25211d;
 }
 
 
-/* HIGHLIGHTS */
+/* =========================================================
+   09 — ACCOMPLISHMENTS
+   ========================================================= */
 
 .highlights {
     display: grid;
 
-    gap: 11px;
+    gap: 16px;
 
-    margin: 0 0 20px;
+    margin: 0 0 25px;
 
     padding: 0;
 
@@ -2399,908 +634,48 @@
 .highlights li {
     position: relative;
 
-    padding-left: 20px;
+    max-width: 63ch;
+
+    padding-left: 21px;
 
     font-family:
         var(--font-sans, system-ui, sans-serif);
 
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 400;
 
-    line-height: 1.65;
+    line-height: 1.68;
 
-    color: #51483f;
+    letter-spacing: 0;
+
+    color: #25211d;
 }
 
+
+/* PHYSICAL REGISTRATION MARK */
 
 .highlights li::before {
-    content: "↗";
+    content: "";
+
     position: absolute;
+
     left: 0;
-    top: 0;
+    top: 0.72em;
 
-    color: #1a1714;
-    font-family: Arial, sans-serif;
-    font-size: 15px;
-    font-weight: 900;
-    line-height: 1.6;
-}
-
-/* SKILL TAGS */
-
-.tags {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 7px;
-}
-
-.tag {
-    padding: 6px 9px;
-
-    border:
-        1px solid rgba(26, 23, 20, 0.5);
-
-    background: rgba(255, 250, 242, 0.75);
-
-    font: 800 10px/1.3
-        var(--font-mono, monospace);
-
-    letter-spacing: 0.02em;
-
-    transition:
-        transform 180ms ease,
-        box-shadow 180ms ease;
-}
-
-@media (hover: hover) {
-
-    .tag:hover {
-        transform:
-            translate(-2px, -2px)
-            rotate(-1deg);
-
-        box-shadow:
-            3px 3px 0 var(--ink);
-    }
-
-}
-
-
-/* =========================================================
-   09 — SIDEBAR
-   ========================================================= */
-
-.sidebar {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 44px;
-
-    padding-top: 8px;
-}
-
-
-/* PHYSICAL CARDS */
-
-.sideCard {
-    position: relative;
-
-    min-width: 0;
-
-    padding: 39px 24px 27px;
-
-    background: var(--light);
-
-    border: 2px solid var(--ink);
-
-    box-shadow:
-        6px 6px 0 rgba(26, 23, 20, 0.2);
-
-    transition:
-        transform 280ms cubic-bezier(.2, .8, .2, 1),
-        box-shadow 280ms ease;
-}
-
-.skillsCard {
-    transform: rotate(-0.7deg);
-}
-
-.projectsCard {
-    transform: rotate(0.8deg);
-}
-
-.educationCard {
-    transform: rotate(-0.6deg);
-}
-
-@media (hover: hover) {
-
-    .sideCard:hover {
-        transform:
-            translate(-4px, -5px)
-            rotate(0deg);
-
-        box-shadow:
-            10px 11px 0 rgba(26, 23, 20, 0.25);
-    }
-
-}
-
-
-/* CARD LABELS */
-
-.cardLabel {
-    position: absolute;
-
-    top: -18px;
-    left: 18px;
-
-    max-width: calc(100% - 30px);
-
-    color: var(--light);
-
-    background: var(--ink);
-}
-
-
-/* =========================================================
-   10 — SKILLS
-   ========================================================= */
-
-.skillGroup {
-    padding: 0 0 16px;
-
-    margin-bottom: 16px;
-
-    border-bottom:
-        1px solid rgba(26, 23, 20, 0.17);
-}
-
-.skillGroup:last-child {
-    padding: 0;
-
-    margin: 0;
-
-    border: 0;
-}
-
-.skillLabel {
-    margin-bottom: 8px;
-
-    font: 900 11px/1.4
-        var(--font-mono, monospace);
-
-    text-transform: uppercase;
-}
-
-.skillValues {
-    font-family:
-        var(--font-sans, system-ui, sans-serif);
-
-    font-size: 15px;
-
-    line-height: 1.65;
-
-    color: #51483f;
-}
-
-
-/* =========================================================
-   11 — SELECTED PROJECTS
-   ========================================================= */
-
-.project {
-    display: grid;
-
-    grid-template-columns:
-        28px minmax(0, 1fr);
-
-    gap: 12px;
-
-    padding: 0 0 20px;
-
-    margin-bottom: 20px;
-
-    border-bottom:
-        1px solid rgba(26, 23, 20, 0.17);
-}
-
-.project:last-child {
-    padding: 0;
-
-    margin: 0;
-
-    border: 0;
-}
-
-.projectCode {
-    padding-top: 5px;
-
-    color: #74695e;
-
-    font: 900 11px
-        var(--font-mono, monospace);
-}
-
-.projectName {
-    font-family:
-        var(--font-display, Georgia, serif);
-
-    font-size: 25px;
-
-    font-weight: 700;
-
-    font-style: italic;
-
-    line-height: 1.1;
-
-    overflow-wrap: break-word;
-}
-
-.projectType {
-    margin-top: 8px;
-
-    color: #675c51;
-
-    font: 800 10px/1.5
-        var(--font-mono, monospace);
-
-    letter-spacing: 0.04em;
-
-    text-transform: uppercase;
-}
-
-.projectDescription {
-    margin: 10px 0 0;
-
-    font-family:
-        var(--font-sans, system-ui, sans-serif);
-
-    font-size: 14px;
-
-    line-height: 1.65;
-
-    color: #51483f;
-}
-
-
-/* =========================================================
-   12 — EDUCATION
-   ========================================================= */
-
-.degree {
-    font-family:
-        var(--font-display, Georgia, serif);
-
-    font-size: 30px;
-
-    font-weight: 700;
-
-    font-style: italic;
-
-    line-height: 1.1;
-}
-
-.school {
-    margin-top: 12px;
-
-    font-family:
-        var(--font-sans, system-ui, sans-serif);
-
-    font-size: 15px;
-
-    font-weight: 700;
-
-    line-height: 1.5;
-}
-
-.educationDetail {
-    margin-top: 13px;
-
-    color: #675c51;
-
-    font: 800 10px/1.6
-        var(--font-mono, monospace);
-
-    letter-spacing: 0.03em;
-}
-
-
-/* =========================================================
-   13 — YELLOW FIELD NOTE
-   ========================================================= */
-
-.noteCard {
-    align-self: flex-end;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    max-width: 100%;
-
-    padding: 15px 17px;
+    width: 8px;
+    height: 8px;
 
     background: var(--yellow);
 
-    border: 2px solid var(--ink);
-
-    box-shadow:
-        4px 4px 0 var(--ink);
-
-    font: 900 11px/1.55
-        var(--font-mono, monospace);
-
-    letter-spacing: 0.03em;
-
-    transform: rotate(3deg);
-
-    transition:
-        transform 250ms ease,
-        box-shadow 250ms ease;
-}
-
-.noteMark {
-    font-size: 26px;
-}
-
-@media (hover: hover) {
-
-    .noteCard:hover {
-        transform:
-            rotate(0deg)
-            translateY(-5px);
-
-        box-shadow:
-            7px 9px 0 var(--ink);
-    }
-
+    border: 1px solid var(--ink);
 }
 
 
-/* =========================================================
-   14 — FOOTER
-   ========================================================= */
-
-.footer {
-    display: flex;
-
-    justify-content: space-between;
-
-    flex-wrap: wrap;
-
-    gap: 12px;
-
-    margin-top: clamp(42px, 5vw, 68px);
-
-    padding-top: 18px;
-
-    border-top: 3px solid var(--ink);
-
-    color: #645a50;
-
-    font: 850 11px/1.5
-        var(--font-mono, monospace);
-
-    letter-spacing: 0.06em;
-}
-
-
-/* =========================================================
-   15 — COMPACT LAPTOPS
-   ========================================================= */
-
-@media (max-width: 1280px) {
-
-    .section {
-        padding:
-            78px 28px 82px;
-    }
-
-    .paper {
-        padding: clamp(28px, 3vw, 44px);
-    }
-
-    .header {
-        grid-template-columns:
-            minmax(0, 1fr)
-            205px;
-
-        gap: 30px;
-    }
-
-    .title {
-        font-size: clamp(48px, 5vw, 70px);
-    }
-
-    .layout {
-        grid-template-columns:
-            minmax(0, 1.4fr)
-            minmax(250px, 0.85fr);
-
-        gap: 32px;
-    }
-
-    .jobRole {
-        font-size: clamp(28px, 2.7vw, 36px);
-    }
-
-    .sideCard {
-        padding:
-            38px 20px 24px;
-    }
-
-}
-
-
-/* =========================================================
-   16 — TABLET
-   ========================================================= */
-
-@media (max-width: 900px) {
-
-    .section {
-        padding:
-            78px 24px 80px;
-    }
-
-    .paper {
-        padding: 34px;
-    }
-
-    .header {
-        grid-template-columns:
-            minmax(0, 1fr)
-            190px;
-    }
-
-    .title {
-        font-size: clamp(44px, 6vw, 62px);
-    }
-
-    .intro {
-        font-size: 16px;
-    }
-
-    .layout {
-        grid-template-columns: minmax(0, 1fr);
-
-        gap: 45px;
-    }
-
-    .sidebar {
-        display: grid;
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-        gap: 42px 25px;
-    }
-
-    .jobRole {
-        font-size: clamp(29px, 4vw, 38px);
-    }
-
-    .sideCard {
-        padding:
-            40px 22px 26px;
-    }
-
-    .noteCard {
-        justify-self: start;
-        align-self: start;
-    }
-
-}
-
-
-/* =========================================================
-   17 — MOBILE
-   ========================================================= */
-
-@media (max-width: 620px) {
-
-    .section {
-        padding:
-            70px 15px 68px;
-    }
-
-    .dossier {
-        width: 100%;
-    }
-
-    .backSheet {
-        inset:
-            7px -4px -7px 4px;
-
-        border-width: 2px;
-
-        transform: rotate(0.2deg);
-    }
-
-    .tab {
-        top: -30px;
-        right: 7%;
-
-        padding:
-            11px 14px 19px;
-
-        border-width: 2px;
-
-        font-size: 10px;
-    }
-
-    .paper {
-        padding:
-            27px 20px 30px;
-
-        border-width: 2px;
-
-        box-shadow:
-            5px 5px 0 var(--ink);
-    }
-
-    /* HEADER */
-
-    .header {
-        display: flex;
-
-        flex-direction: column;
-
-        gap: 32px;
-    }
-
-    .eyebrow {
-        margin-bottom: 17px;
-
-        font-size: 10px;
-
-        line-height: 1.5;
-
-        letter-spacing: 0.07em;
-    }
-
-    .title {
-        max-width: 100%;
-
-        margin-bottom: 22px;
-
-        font-size: clamp(42px, 10.5vw, 62px);
-
-        line-height: 1;
-
-        letter-spacing: -0.04em;
-
-        overflow-wrap: break-word;
-    }
-
-    .intro {
-        font-size: 16px;
-
-        line-height: 1.65;
-
-        color: #403931;
-    }
-
-    /* IDENTITY */
-
-    .identity {
-        width: min(100%, 290px);
-
-        align-self: flex-end;
-
-        padding:
-            24px 19px 19px;
-
-        font-size: 11px;
-
-        transform: rotate(1deg);
-    }
-
-    .identity strong {
-        font-size: 17px;
-    }
-
-    /* DOCUMENT RULE */
-
-    .rule {
-        margin:
-            35px 0 34px;
-
-        padding: 11px 0;
-
-        font-size: 10px;
-    }
-
-    .rule span:last-child {
-        display: none;
-    }
-
-    /* SECTION HEADING */
-
-    .sectionHeading {
-        margin-bottom: 34px;
-    }
-
-    .sectionTab {
-        padding: 10px 12px;
-
-        font-size: 11px;
-    }
-
-    .headingNote {
-        font-size: 10px;
-    }
-
-    /* TIMELINE */
-
-    .timeline::before {
-        left: 15px;
-    }
-
-    .job {
-        grid-template-columns:
-            32px minmax(0, 1fr);
-
-        gap: 13px;
-
-        margin-bottom: 35px;
-
-        padding-bottom: 35px;
-    }
-
-    .jobIndex {
-        width: 31px;
-        height: 31px;
-
-        font-size: 10px;
-
-        box-shadow:
-            2px 2px 0 var(--ink);
-    }
-
-    .jobMeta {
-        margin-bottom: 11px;
-
-        font-size: 10px;
-
-        line-height: 1.5;
-
-        gap: 5px 12px;
-    }
-
-    .jobRole {
-        margin-bottom: 9px;
-
-        font-size: clamp(27px, 7vw, 36px);
-
-        line-height: 1.1;
-    }
-
-    .organization {
-        margin-bottom: 14px;
-
-        font-size: 15px;
-    }
-
-    .description {
-        font-size: 15px;
-
-        line-height: 1.65;
-    }
-
-    .highlights {
-        gap: 11px;
-    }
-
-    .highlights li {
-        font-size: 14px;
-
-        line-height: 1.6;
-    }
-
-    .tag {
-        padding: 6px 8px;
-
-        font-size: 10px;
-    }
-
-    /* SIDEBAR */
-
-    .sidebar {
-        display: flex;
-
-        flex-direction: column;
-
-        gap: 43px;
-
-        margin-top: 12px;
-    }
-
-    .sideCard {
-        width: 100%;
-
-        padding:
-            42px 20px 26px;
-
-        transform: none;
-    }
-
-    .cardLabel {
-        top: -18px;
-
-        font-size: 10px;
-    }
-
-    /* SKILLS */
-
-    .skillLabel {
-        font-size: 11px;
-    }
-
-    .skillValues {
-        font-size: 15px;
-
-        line-height: 1.65;
-    }
-
-    /* PROJECTS */
-
-    .projectName {
-        font-size: 26px;
-    }
-
-    .projectType {
-        font-size: 10px;
-    }
-
-    .projectDescription {
-        font-size: 14px;
-    }
-
-    /* EDUCATION */
-
-    .degree {
-        font-size: 30px;
-    }
-
-    .school {
-        font-size: 15px;
-    }
-
-    .educationDetail {
-        font-size: 10px;
-    }
-
-    /* NOTE */
-
-    .noteCard {
-        align-self: flex-start;
-
-        font-size: 11px;
-
-        transform: rotate(2deg);
-    }
-
-    /* FOOTER */
-
-    .footer {
-        margin-top: 46px;
-
-        font-size: 10px;
-
-        line-height: 1.6;
-    }
-
-}
-
-
-/* =========================================================
-   18 — VERY SMALL PHONES
-   ========================================================= */
-
-@media (max-width: 380px) {
-
-    .section {
-        padding-inline: 12px;
-    }
-
-    .paper {
-        padding:
-            25px 16px 28px;
-    }
-
-    .title {
-        font-size: clamp(38px, 10.5vw, 43px);
-    }
-
-    .intro {
-        font-size: 15px;
-    }
-
-    .job {
-        gap: 10px;
-    }
-
-    .jobRole {
-        font-size: clamp(25px, 7.2vw, 29px);
-    }
-
-    .jobMeta {
-        font-size: 9px;
-    }
-
-    .sideCard {
-        padding:
-            40px 16px 24px;
-    }
-
-    .project {
-        grid-template-columns:
-            24px minmax(0, 1fr);
-
-        gap: 9px;
-    }
-
-    .projectName {
-        font-size: 24px;
-    }
-
-}
-
-
-/* =========================================================
-   19 — REDUCED MOTION
-   ========================================================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-    .paper,
-    .identity,
-    .job,
-    .jobIndex,
-    .sideCard,
-    .tag,
-    .noteCard {
-        transition: none;
-    }
-
-}
-
-
-/* =========================================================
-   20 — READING-FIRST EXPERIENCE / EDITORIAL EMPHASIS
-   ========================================================= */
-.history {
-    min-width: 0;
-    padding: clamp(22px, 2.5vw, 38px);
-    background: #fffdf8;
-    border: 1px solid rgba(26, 23, 20, .35);
-    box-shadow: 5px 5px 0 rgba(26, 23, 20, .08);
-}
-.layout { grid-template-columns: minmax(0, 1.9fr) minmax(245px, .75fr); gap: clamp(24px, 3vw, 44px); }
-.job { padding-bottom: 42px; margin-bottom: 42px; border-bottom: 1px solid #d8d0c4; }
-.job:last-child { padding-bottom: 0; margin-bottom: 0; border-bottom: 0; }
-.jobIndex { background: var(--yellow); color: var(--ink); }
-.jobMeta { margin-bottom: 12px; color: #51483f; font-size: 12px; font-weight: 800; letter-spacing: .015em; }
-.jobRole { margin-bottom: 8px; color: var(--ink); font-size: clamp(29px, 2.6vw, 39px); font-style: normal; line-height: 1.17; letter-spacing: -.025em; }
-.organization { margin-bottom: 18px; color: #55432c; font-size: 17px; font-weight: 800; line-height: 1.45; }
-.description { max-width: 63ch; margin-bottom: 24px; color: #25211d; font-size: 17px; font-weight: 450; line-height: 1.72; letter-spacing: 0; }
-.highlights { display: grid; gap: 16px; margin-bottom: 25px; }
-.highlights li { max-width: 63ch; padding-left: 21px; color: #25211d; font-size: 16px; line-height: 1.68; letter-spacing: 0; }
-.highlights li::before { content: ""; position: absolute; left: 0; top: .72em; width: 8px; height: 8px; background: var(--yellow); border: 1px solid var(--ink); }
-.highlightLead { font-weight: 800; color: var(--ink); }
-.highlightText { font-weight: 450; }
-/* Ads and commerce get an editorial callout, not a neon badge. */
-
-/* Featured accomplishments — no background highlighting */
+/* FEATURED ACCOMPLISHMENTS */
 
 .featuredHighlight {
     background: transparent;
+
     border: none;
     box-shadow: none;
 
@@ -3310,51 +685,922 @@
     color: inherit;
 }
 
-/* Keep the important phrases bold */
-
-.highlights strong {
+.highlights strong,
+.highlightLead {
     font-weight: 800;
-    color: #1a1714;
+
+    color: var(--ink);
 }
 
-.tag { color: var(--ink); background: #fffaf2; font-size: 11px; }
-.skillValues { color: #302a25; font-size: 16px; line-height: 1.7; }
-.projectDescription { color: #302a25; font-size: 15px; line-height: 1.7; }
+.highlightText {
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   10 — SKILL TAGS
+   ========================================================= */
+
+.tags {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+.tag {
+    padding: 6px 9px;
+
+    border:
+        1px solid rgba(26, 23, 20, 0.5);
+
+    background: var(--light);
+
+    color: var(--ink);
+
+    font: 800 11px/1.3
+        var(--font-mono, monospace);
+
+    letter-spacing: 0.02em;
+
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease;
+}
+
+
+/* =========================================================
+   11 — SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 44px;
+
+    padding-top: 8px;
+}
+
+
+/* PHYSICAL CARDS */
+
+.sideCard {
+    position: relative;
+
+    min-width: 0;
+
+    padding: 39px 24px 27px;
+
+    background: var(--light);
+
+    border: 2px solid var(--ink);
+
+    box-shadow:
+        6px 6px 0 rgba(26, 23, 20, 0.2);
+
+    transition:
+        transform 280ms cubic-bezier(.2, .8, .2, 1),
+        box-shadow 280ms ease;
+}
+
+.skillsCard {
+    transform: rotate(-0.7deg);
+}
+
+.projectsCard {
+    transform: rotate(0.8deg);
+}
+
+.educationCard {
+    transform: rotate(-0.6deg);
+}
+
+
+/* CARD LABELS */
+
+.cardLabel {
+    position: absolute;
+
+    top: -18px;
+    left: 18px;
+
+    max-width: calc(100% - 30px);
+}
+
+
+/* =========================================================
+   12 — SKILLS
+   ========================================================= */
+
+.skillGroup {
+    padding: 0 0 16px;
+
+    margin-bottom: 16px;
+
+    border-bottom:
+        1px solid rgba(26, 23, 20, 0.17);
+}
+
+.skillGroup:last-child {
+    padding: 0;
+    margin: 0;
+
+    border: 0;
+}
+
+.skillLabel {
+    margin-bottom: 8px;
+
+    font: 900 11px/1.4
+        var(--font-mono, monospace);
+
+    text-transform: uppercase;
+}
+
+.skillValues {
+    font-family:
+        var(--font-sans, system-ui, sans-serif);
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    color: #302a25;
+}
+
+
+/* =========================================================
+   13 — SELECTED PROJECTS
+   ========================================================= */
+
+.project {
+    display: grid;
+
+    grid-template-columns:
+        28px minmax(0, 1fr);
+
+    gap: 12px;
+
+    padding: 0 0 20px;
+
+    margin-bottom: 20px;
+
+    border-bottom:
+        1px solid rgba(26, 23, 20, 0.17);
+}
+
+.project:last-child {
+    padding: 0;
+    margin: 0;
+
+    border: 0;
+}
+
+.projectCode {
+    padding-top: 5px;
+
+    color: #74695e;
+
+    font: 900 11px
+        var(--font-mono, monospace);
+}
+
+.projectName {
+    font-family:
+        var(--font-display, Georgia, serif);
+
+    font-size: 25px;
+
+    font-weight: 700;
+    font-style: italic;
+
+    line-height: 1.1;
+
+    overflow-wrap: break-word;
+}
+
+.projectType {
+    margin-top: 8px;
+
+    color: #675c51;
+
+    font: 800 10px/1.5
+        var(--font-mono, monospace);
+
+    letter-spacing: 0.04em;
+
+    text-transform: uppercase;
+}
+
+.projectDescription {
+    margin: 10px 0 0;
+
+    font-family:
+        var(--font-sans, system-ui, sans-serif);
+
+    font-size: 15px;
+
+    line-height: 1.7;
+
+    color: #302a25;
+}
+
+
+/* =========================================================
+   14 — EDUCATION
+   ========================================================= */
+
+.degree {
+    font-family:
+        var(--font-display, Georgia, serif);
+
+    font-size: 30px;
+
+    font-weight: 700;
+    font-style: italic;
+
+    line-height: 1.1;
+}
+
+.school {
+    margin-top: 12px;
+
+    font-family:
+        var(--font-sans, system-ui, sans-serif);
+
+    font-size: 15px;
+    font-weight: 700;
+
+    line-height: 1.5;
+}
+
+.educationDetail {
+    margin-top: 13px;
+
+    color: #675c51;
+
+    font: 800 10px/1.6
+        var(--font-mono, monospace);
+
+    letter-spacing: 0.03em;
+}
+
+
+/* =========================================================
+   15 — YELLOW FIELD NOTE
+   ========================================================= */
+
+.noteCard {
+    align-self: flex-end;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    max-width: 100%;
+
+    padding: 15px 17px;
+
+    background: var(--yellow);
+
+    border: 2px solid var(--ink);
+
+    box-shadow:
+        4px 4px 0 var(--ink);
+
+    font: 900 11px/1.55
+        var(--font-mono, monospace);
+
+    letter-spacing: 0.03em;
+
+    transform: rotate(3deg);
+
+    transition:
+        transform 250ms ease,
+        box-shadow 250ms ease;
+}
+
+.noteMark {
+    font-size: 26px;
+}
+
+
+/* =========================================================
+   16 — FOOTER
+   ========================================================= */
+
+.footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: clamp(42px, 5vw, 68px);
+
+    padding-top: 18px;
+
+    border-top: 3px solid var(--ink);
+
+    color: #645a50;
+
+    font: 850 11px/1.5
+        var(--font-mono, monospace);
+
+    letter-spacing: 0.06em;
+}
+
+
+/* =========================================================
+   17 — DESKTOP HOVER EFFECTS
+   ========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .dossier:hover .paper {
+        transform: translateY(-3px);
+
+        box-shadow:
+            10px 12px 0 var(--ink);
+    }
+
+    .identity:hover {
+        transform:
+            rotate(0deg)
+            translateY(-5px);
+
+        box-shadow:
+            9px 11px 0 var(--ink);
+    }
+
+    .job:hover {
+        transform: translateX(5px);
+    }
+
+    .job:hover .jobIndex {
+        transform:
+            rotate(0deg)
+            scale(1.08);
+
+        background: var(--yellow);
+    }
+
+    .tag:hover {
+        transform:
+            translate(-2px, -2px)
+            rotate(-1deg);
+
+        box-shadow:
+            3px 3px 0 var(--ink);
+    }
+
+    .sideCard:hover {
+        transform:
+            translate(-4px, -5px)
+            rotate(0deg);
+
+        box-shadow:
+            10px 11px 0 rgba(26, 23, 20, 0.25);
+    }
+
+    .noteCard:hover {
+        transform:
+            rotate(0deg)
+            translateY(-5px);
+
+        box-shadow:
+            7px 9px 0 var(--ink);
+    }
+}
+
+
+/* =========================================================
+   18 — COMPACT LAPTOPS
+   ========================================================= */
+
+@media (max-width: 1280px) {
+
+    .section {
+        padding:
+            78px 28px 82px;
+    }
+
+    .paper {
+        padding: clamp(28px, 3vw, 44px);
+    }
+
+    .header {
+        grid-template-columns:
+            minmax(0, 1fr)
+            205px;
+
+        gap: 30px;
+    }
+
+    .title {
+        font-size: clamp(48px, 5vw, 70px);
+    }
+
+    .layout {
+        grid-template-columns:
+            minmax(0, 1.8fr)
+            minmax(245px, 0.75fr);
+
+        gap: 30px;
+    }
+
+    .jobRole {
+        font-size: clamp(28px, 2.7vw, 36px);
+    }
+
+    .sideCard {
+        padding:
+            38px 20px 24px;
+    }
+}
+
+
+/* =========================================================
+   19 — TABLET
+   ========================================================= */
+
 @media (max-width: 900px) {
-    .layout { grid-template-columns: minmax(0, 1fr); gap: 45px; }
+
+    .section {
+        padding:
+            78px 24px 80px;
+    }
+
+    .paper {
+        padding: 34px;
+    }
+
+    .header {
+        grid-template-columns:
+            minmax(0, 1fr)
+            190px;
+    }
+
+    .title {
+        font-size: clamp(44px, 6vw, 62px);
+    }
+
+    .intro {
+        font-size: 16px;
+    }
+
+    .layout {
+        grid-template-columns:
+            minmax(0, 1fr);
+
+        gap: 45px;
+    }
+
+    .sidebar {
+        display: grid;
+
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+
+        gap: 42px 25px;
+    }
+
+    .jobRole {
+        font-size: clamp(29px, 4vw, 38px);
+    }
+
+    .sideCard {
+        padding:
+            40px 22px 26px;
+    }
+
+    .noteCard {
+        justify-self: start;
+        align-self: start;
+    }
 }
+
+
+/* =========================================================
+   20 — MOBILE
+
+   More breathing room.
+   Smaller editorial typography.
+   Comfortable reading width.
+   ========================================================= */
+
 @media (max-width: 620px) {
-    .history { padding: 21px 13px; }
-    .job { grid-template-columns: 28px minmax(0, 1fr); gap: 10px; padding-bottom: 37px; margin-bottom: 37px; }
-    .jobIndex { width: 28px; height: 28px; }
-    .timeline::before { left: 13px; }
-    .jobRole { font-size: clamp(25px, 6.7vw, 34px); line-height: 1.2; }
-    .organization { font-size: 16px; }
-    .description { font-size: 16px; line-height: 1.68; }
-    .highlights { gap: 15px; }
-    .highlights li { font-size: 16px; line-height: 1.65; }
 
-}
-@media (max-width: 380px) {
-    .history { padding: 18px 10px; }
-    .job { grid-template-columns: 26px minmax(0, 1fr); gap: 8px; }
-    .jobIndex { width: 26px; height: 26px; }
-    .timeline::before { left: 12px; }
-    .jobRole { font-size: 24px; }
-    .description, .highlights li { font-size: 15px; }
-}
+    /* SECTION */
 
-@media (max-width: 380px) {
+    .section {
+        padding:
+            88px 16px 100px;
+    }
+
+    .dossier {
+        width: 100%;
+    }
+
+
+    /* PAPER STACK */
+
+    .backSheet {
+        inset:
+            7px -4px -7px 4px;
+
+        border-width: 2px;
+
+        transform: rotate(0.2deg);
+    }
+
+    .tab {
+        top: -30px;
+        right: 7%;
+
+        padding:
+            11px 14px 19px;
+
+        border-width: 2px;
+
+        font-size: 10px;
+    }
+
+    .paper {
+        padding:
+            36px 18px 44px;
+
+        border-width: 2px;
+
+        box-shadow:
+            5px 5px 0 var(--ink);
+    }
+
+
+    /* HEADER */
+
+    .header {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 38px;
+    }
+
+    .eyebrow {
+        margin-bottom: 18px;
+
+        font-size: 10px;
+
+        line-height: 1.5;
+
+        letter-spacing: 0.07em;
+    }
+
+    .title {
+        max-width: 100%;
+
+        margin-bottom: 24px;
+
+        font-size: clamp(36px, 9vw, 46px);
+
+        line-height: 1.08;
+
+        letter-spacing: -0.04em;
+
+        overflow-wrap: break-word;
+    }
+
+    .intro {
+        font-size: 15px;
+
+        line-height: 1.75;
+
+        color: #403931;
+    }
+
+
+    /* IDENTITY CARD */
+
+    .identity {
+        width: min(100%, 290px);
+
+        align-self: flex-end;
+
+        margin-top: 12px;
+        margin-bottom: 8px;
+
+        padding:
+            24px 19px 19px;
+
+        font-size: 11px;
+
+        transform: rotate(1deg);
+    }
+
+    .identity strong {
+        font-size: 17px;
+    }
+
+
+    /* DOCUMENT RULE */
+
+    .rule {
+        margin:
+            45px 0 42px;
+
+        padding: 11px 0;
+
+        font-size: 10px;
+    }
+
+    .rule span:last-child {
+        display: none;
+    }
+
+
+    /* SECTION HEADING */
+
+    .sectionHeading {
+        margin-bottom: 32px;
+
+        gap: 14px;
+    }
+
+    .sectionTab {
+        padding: 10px 12px;
+
+        font-size: 11px;
+    }
+
+    .headingNote {
+        font-size: 10px;
+    }
+
+
+    /* MAIN LAYOUT */
+
+    .layout {
+        grid-template-columns:
+            minmax(0, 1fr);
+
+        gap: 58px;
+    }
+
+
+    /* WORK HISTORY READING SURFACE */
 
     .history {
-        padding: 18px 10px;
+        padding:
+            28px 16px 32px;
+    }
+
+
+    /* TIMELINE */
+
+    .timeline::before {
+        left: 13px;
+    }
+
+    .job {
+        grid-template-columns:
+            28px minmax(0, 1fr);
+
+        gap: 12px;
+
+        margin-bottom: 44px;
+        padding-bottom: 44px;
+    }
+
+    .job:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .jobIndex {
+        width: 28px;
+        height: 28px;
+
+        font-size: 10px;
+
+        box-shadow:
+            2px 2px 0 var(--ink);
+    }
+
+
+    /* JOB TYPOGRAPHY */
+
+    .jobMeta {
+        margin-bottom: 14px;
+
+        font-size: 10px;
+
+        line-height: 1.6;
+
+        gap: 5px 12px;
+    }
+
+    .jobRole {
+        margin-bottom: 12px;
+
+        font-size: clamp(24px, 6.5vw, 30px);
+
+        line-height: 1.22;
+    }
+
+    .organization {
+        margin-top: 8px;
+        margin-bottom: 20px;
+
+        font-size: 16px;
+
+        line-height: 1.5;
+    }
+
+    .description {
+        margin-bottom: 26px;
+
+        font-size: 15px;
+
+        line-height: 1.75;
+    }
+
+
+    /* ACCOMPLISHMENTS */
+
+    .highlights {
+        gap: 18px;
+
+        margin-bottom: 28px;
+    }
+
+    .highlights li {
+        padding-left: 18px;
+
+        font-size: 15px;
+
+        line-height: 1.75;
+    }
+
+
+    /* SKILL TAGS */
+
+    .tags {
+        gap: 9px;
+    }
+
+    .tag {
+        padding: 7px 10px;
+
+        font-size: 10px;
+
+        line-height: 1.4;
+    }
+
+
+    /* SIDEBAR */
+
+    .sidebar {
+        display: flex;
+
+        flex-direction: column;
+
+        gap: 52px;
+
+        margin-top: 0;
+
+        padding-top: 0;
+    }
+
+    .sideCard {
+        width: 100%;
+
+        padding:
+            46px 22px 32px;
+
+        transform: none;
+    }
+
+    .cardLabel {
+        top: -18px;
+
+        font-size: 10px;
+    }
+
+
+    /* SKILLS */
+
+    .skillLabel {
+        font-size: 11px;
+    }
+
+    .skillValues {
+        font-size: 15px;
+
+        line-height: 1.7;
+    }
+
+
+    /* PROJECTS */
+
+    .projectName {
+        font-size: 24px;
+    }
+
+    .projectType {
+        font-size: 10px;
+    }
+
+    .projectDescription {
+        font-size: 14px;
+
+        line-height: 1.7;
+    }
+
+
+    /* EDUCATION */
+
+    .degree {
+        font-size: 27px;
+    }
+
+    .school {
+        font-size: 15px;
+    }
+
+    .educationDetail {
+        font-size: 10px;
+    }
+
+
+    /* FIELD NOTE */
+
+    .noteCard {
+        align-self: flex-start;
+
+        font-size: 11px;
+
+        transform: rotate(2deg);
+    }
+
+
+    /* FOOTER */
+
+    .footer {
+        margin-top: 60px;
+
+        padding-top: 24px;
+
+        gap: 16px;
+
+        font-size: 10px;
+
+        line-height: 1.7;
+    }
+}
+
+
+/* =========================================================
+   21 — VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .section {
+        padding:
+            82px 12px 92px;
+    }
+
+    .paper {
+        padding:
+            32px 14px 38px;
+    }
+
+    .title {
+        font-size: clamp(34px, 9vw, 39px);
+    }
+
+    .intro {
+        font-size: 15px;
+    }
+
+    .history {
+        padding:
+            24px 12px 28px;
     }
 
     .job {
         grid-template-columns:
             26px minmax(0, 1fr);
 
-        gap: 8px;
+        gap: 10px;
     }
 
     .jobIndex {
@@ -3370,12 +1616,44 @@
         font-size: 23px;
     }
 
-    .description {
-        font-size: 15px;
-    }
-
+    .description,
     .highlights li {
         font-size: 14px;
+
+        line-height: 1.75;
     }
 
+    .sideCard {
+        padding:
+            42px 18px 28px;
+    }
+
+    .project {
+        grid-template-columns:
+            24px minmax(0, 1fr);
+
+        gap: 9px;
+    }
+
+    .projectName {
+        font-size: 23px;
+    }
+}
+
+
+/* =========================================================
+   22 — REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .paper,
+    .identity,
+    .job,
+    .jobIndex,
+    .sideCard,
+    .tag,
+    .noteCard {
+        transition: none;
+    }
 }
