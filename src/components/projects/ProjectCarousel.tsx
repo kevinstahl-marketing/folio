@@ -45,7 +45,11 @@ export default function ProjectCarousel({
 }: ProjectCarouselProps) {
   const stageRef = useRef<HTMLDivElement>(null);
   const railRef = useRef<HTMLDivElement>(null);
+const scrollEndTimer = useRef<
+  ReturnType<typeof setTimeout> | null
+>(null);
 
+const programmaticScroll = useRef(false);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const [stageWidth, setStageWidth] = useState(0);
@@ -166,25 +170,34 @@ export default function ProjectCarousel({
      NAVIGATION
      ========================================================= */
 
-  const goToProject = (index: number) => {
-    const rail = railRef.current;
-    const card = cardRefs.current[index];
+const goToProject = (index: number) => {
+  const rail = railRef.current;
+  const card = cardRefs.current[index];
 
-    if (!rail || !card) return;
+  if (!rail || !card) return;
 
-    const target =
-      card.offsetLeft -
-      rail.clientWidth / 2 +
-      card.clientWidth / 2;
+  programmaticScroll.current = true;
 
-    rail.scrollTo({
-      left: target,
-      behavior: "smooth",
-    });
+  if (scrollEndTimer.current) {
+    clearTimeout(scrollEndTimer.current);
+  }
 
-    setActiveProject(index);
-  };
+  const target =
+    card.offsetLeft -
+    rail.clientWidth / 2 +
+    card.clientWidth / 2;
 
+  rail.scrollTo({
+    left: target,
+    behavior: "smooth",
+  });
+
+  setActiveProject(index);
+
+  setTimeout(() => {
+    programmaticScroll.current = false;
+  }, 500);
+};
   const previousProject = () => {
     setTitleDirection("right");
 
@@ -228,7 +241,69 @@ export default function ProjectCarousel({
 
     setOpenProjectId(projects[index].id);
   };
+/* =========================================================
+   MOBILE SWIPE — SNAP TO NEAREST PROJECT
+   ========================================================= */
 
+const handleRailScroll = () => {
+  if (programmaticScroll.current) return;
+
+  if (scrollEndTimer.current) {
+    clearTimeout(scrollEndTimer.current);
+  }
+
+  scrollEndTimer.current = setTimeout(() => {
+    const rail = railRef.current;
+
+    if (!rail) return;
+
+    const railCenter =
+      rail.scrollLeft + rail.clientWidth / 2;
+
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+
+    cardRefs.current.forEach((card, index) => {
+      if (!card) return;
+
+      const cardCenter =
+        card.offsetLeft + card.clientWidth / 2;
+
+      const distance = Math.abs(
+        railCenter - cardCenter
+      );
+
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        closestIndex = index;
+      }
+    });
+
+    if (closestIndex !== activeProject) {
+      setTitleDirection(
+        closestIndex > activeProject ? "left" : "right"
+      );
+
+      setActiveProject(closestIndex);
+    }
+
+    const card = cardRefs.current[closestIndex];
+
+    if (!card) return;
+
+    const target =
+      card.offsetLeft -
+      rail.clientWidth / 2 +
+      card.clientWidth / 2;
+
+    if (Math.abs(rail.scrollLeft - target) > 2) {
+      rail.scrollTo({
+        left: target,
+        behavior: "smooth",
+      });
+    }
+  }, 120);
+};
   /* =========================================================
      INITIAL POSITION
      ========================================================= */
@@ -389,9 +464,10 @@ export default function ProjectCarousel({
 
           <div className={styles.railViewport}>
             <div
-              ref={railRef}
-              className={styles.rail}
-            >
+  ref={railRef}
+  className={styles.rail}
+  onScroll={handleRailScroll}
+>
               <div
                 className={styles.railSpacer}
                 style={{

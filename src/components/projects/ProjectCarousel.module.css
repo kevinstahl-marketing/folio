@@ -1709,3 +1709,26 @@
   .rail { gap: 22px; padding-top: 37px; padding-bottom: 38px; }
   .stageFooter { font-size: 8px; }
 }
+
+
+/* =========================================================
+   MOBILE — PROJECT SNAP
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+  .rail {
+    scroll-snap-type: x mandatory;
+
+    scroll-behavior: smooth;
+
+    -webkit-overflow-scrolling: touch;
+
+    overscroll-behavior-x: contain;
+  }
+
+  .cardSlot {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+}

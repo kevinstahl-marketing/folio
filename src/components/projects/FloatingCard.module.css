@@ -887,3 +887,94 @@
         transform: translateY(-5px);
     }
 }
+
+
+/* =========================================================
+   PROJECT CTA — YELLOW STICKY NOTE
+   ========================================================= */
+
+.exploreNote {
+  position: absolute;
+
+  z-index: 45;
+
+  top: 18px;
+  left: -12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 35px;
+
+  padding: 9px 12px;
+
+  color: #1a1714;
+  background: #f0c94d;
+
+  border: 2px solid #1a1714;
+
+  box-shadow:
+    3px 3px 0 #1a1714;
+
+  font-family:
+    "JetBrains Mono",
+    monospace;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  line-height: 1.2;
+
+  letter-spacing: 0.025em;
+
+  white-space: nowrap;
+
+  transform: rotate(-5deg);
+
+  pointer-events: none;
+
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.exploreMobile {
+  display: none;
+}
+
+@media (hover: hover) {
+
+  .card:hover .exploreNote {
+    transform:
+      rotate(-2deg)
+      translateY(-4px);
+
+    box-shadow:
+      5px 6px 0 #1a1714;
+  }
+}
+
+@media (max-width: 560px) {
+
+  .exploreNote {
+    top: 15px;
+    left: -8px;
+
+    min-height: 30px;
+
+    padding: 7px 9px;
+
+    font-size: 9px;
+
+    transform: rotate(-4deg);
+  }
+
+  .exploreDesktop {
+    display: none;
+  }
+
+  .exploreMobile {
+    display: inline;
+  }
+}

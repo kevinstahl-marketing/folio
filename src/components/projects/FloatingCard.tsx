@@ -119,7 +119,20 @@ export default function FloatingCard({
             strokeWidth={2.6}
           />
         </div>
+{/* PROJECT CTA — YELLOW STICKY NOTE */}
 
+<div
+  className={styles.exploreNote}
+  aria-hidden="true"
+>
+  <span className={styles.exploreDesktop}>
+    CLICK TO EXPLORE ↗
+  </span>
+
+  <span className={styles.exploreMobile}>
+    TAP TO EXPLORE ↗
+  </span>
+</div>
         {/* IMAGE STAGE */}
 
         <div className={styles.media}>
