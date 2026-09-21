@@ -244,7 +244,7 @@ export default function ProjectCarousel({
 
     rail.scrollTo({
       left: target,
-      behavior: mobile ? "instant" : "smooth",
+      behavior: mobile ? "smooth" : "smooth",
     });
 
     setActiveProject(index);
