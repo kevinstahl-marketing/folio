@@ -28,7 +28,8 @@ export type ProjectMedia = {
 };
 
 export type ProjectPreview = {
-  media?: "primary" | "secondary";
+  src: string;
+  alt: string;
   fit?: "cover" | "contain";
   position?: string;
   scale?: number;
@@ -79,14 +80,15 @@ export type Project = {
 export const projects: Project[] = [
   /* ---------------------------------------------------------
      EZCALCS
+     Engineering blue / cool ivory
      --------------------------------------------------------- */
 
   {
     id: "ezc",
     num: "01",
 
-    accent: "#3a5ec8",
-    bg: "#edf0f8",
+    accent: "#3B63B8",
+    bg: "#EDF1F8",
 
     title: "EZCalcs",
     sub: "ENGINEERING CALCULATOR PLATFORM",
@@ -95,9 +97,10 @@ export const projects: Project[] = [
       "A formula-driven engineering calculation platform built around reusable formulas, unit-aware inputs, and symbolic computation.",
 
     preview: {
-      media: "primary",
+      src: "/images/ezcalcs/preview.jpg",
+      alt: "Engineering and technical visualization",
       fit: "cover",
-      position: "top center",
+      position: "center",
     },
 
     media: [
@@ -112,7 +115,7 @@ export const projects: Project[] = [
         scale: 0.96,
       },
       {
-        src: "/images/ezcalcs/calculator.jpg",
+        src: "/images/ezcalcs/secondary.jpg",
         alt: "EZCalcs engineering calculator interface",
         slot: "secondary",
         frame: "browser",
@@ -157,14 +160,15 @@ export const projects: Project[] = [
 
   /* ---------------------------------------------------------
      LA CONCHERIA
+     Bakery terracotta / warm cream
      --------------------------------------------------------- */
 
   {
     id: "lca",
     num: "02",
 
-    accent: "#be3e1e",
-    bg: "#faf5ef",
+    accent: "#B84D35",
+    bg: "#FAF0E7",
 
     title: "La Concheria",
     sub: "SHOPIFY E-COMMERCE · CAFÉ + BAKERY",
@@ -173,9 +177,10 @@ export const projects: Project[] = [
       "A customized Shopify commerce experience for a Rio Grande Valley café and bakery, connecting its brand, product catalog, online storefront, and day-to-day commerce operations.",
 
     preview: {
-      media: "primary",
+      src: "/images/la-concheria/preview.jpg",
+      alt: "Freshly baked pastries",
       fit: "cover",
-      position: "top center",
+      position: "center",
     },
 
     media: [
@@ -236,14 +241,15 @@ export const projects: Project[] = [
 
   /* ---------------------------------------------------------
      PIANO TEACHER LINK
+     Muted violet / lavender paper
      --------------------------------------------------------- */
 
   {
     id: "ptl",
     num: "03",
 
-    accent: "#4a3f9a",
-    bg: "#f2f0fa",
+    accent: "#7164A5",
+    bg: "#F2F0F8",
 
     title: "PianoTeacherLink",
     sub: "DRUPAL MARKETPLACE · MUSIC EDUCATION",
@@ -252,9 +258,10 @@ export const projects: Project[] = [
       "A Drupal-based marketplace platform designed to connect piano students with instructors through structured teacher profiles, discovery, and platform workflows.",
 
     preview: {
-      media: "primary",
+      src: "/images/piano-teacher-link/preview.jpg",
+      alt: "Piano keyboard in a music studio",
       fit: "cover",
-      position: "top center",
+      position: "center",
     },
 
     media: [
@@ -318,14 +325,15 @@ export const projects: Project[] = [
 export const systemsProjects: Project[] = [
   /* ---------------------------------------------------------
      HR DATA QUALITY
+     Industrial slate / cool paper
      --------------------------------------------------------- */
 
   {
     id: "tmd-hr",
     num: "01",
 
-    accent: "#d96b52",
-    bg: "#f5eee8",
+    accent: "#5B7C86",
+    bg: "#EDF2F3",
 
     title: "HR Data Quality",
     sub: "TEXAS MILITARY DEPARTMENT · DATA AUTOMATION",
@@ -334,7 +342,8 @@ export const systemsProjects: Project[] = [
       "Access SQL workflows built to streamline personnel data-quality assurance and recurring HR reporting at Texas Military Headquarters.",
 
     preview: {
-      media: "primary",
+      src: "/images/hr-data/preview.jpg",
+      alt: "Data analytics displayed on a computer",
       fit: "cover",
       position: "center",
     },
@@ -396,14 +405,15 @@ export const systemsProjects: Project[] = [
 
   /* ---------------------------------------------------------
      PAY FILE AUTOMATION
+     Excel green / soft sage
      --------------------------------------------------------- */
 
   {
     id: "tmd-pay",
     num: "02",
 
-    accent: "#4f8b68",
-    bg: "#edf3ed",
+    accent: "#66836C",
+    bg: "#EFF3EC",
 
     title: "Pay File Automation",
     sub: "TEXAS MILITARY DEPARTMENT · EXCEL + VBA",
@@ -412,7 +422,8 @@ export const systemsProjects: Project[] = [
       "Excel and VBA automation built to clean and standardize difficult recurring pay files used in statewide National Guard payment workflows.",
 
     preview: {
-      media: "primary",
+      src: "/images/pay-automation/preview.jpg",
+      alt: "Computer displaying data and analytics",
       fit: "cover",
       position: "center",
     },
@@ -474,14 +485,15 @@ export const systemsProjects: Project[] = [
 
   /* ---------------------------------------------------------
      GC-MS DATA SORTER
+     Laboratory steel blue / cool gray
      --------------------------------------------------------- */
 
   {
     id: "dps-gcms",
     num: "03",
 
-    accent: "#7255a3",
-    bg: "#f1eef6",
+    accent: "#677E93",
+    bg: "#EEF1F4",
 
     title: "GC-MS Data Sorter",
     sub: "TEXAS DPS · SCIENTIFIC DATA TOOL",
@@ -490,7 +502,8 @@ export const systemsProjects: Project[] = [
       "A Python desktop utility built to organize THC decision-point GC-MS data and assemble complete analytical file sets for laboratory workflows.",
 
     preview: {
-      media: "primary",
+      src: "/images/gcms/preview.jpg",
+      alt: "Scientific laboratory equipment",
       fit: "cover",
       position: "center",
     },
@@ -556,14 +569,15 @@ export const systemsProjects: Project[] = [
 export const commerceProjects: Project[] = [
   /* ---------------------------------------------------------
      RUA BOUTIQUE
+     Antique gold / warm ivory
      --------------------------------------------------------- */
 
   {
     id: "rua",
     num: "01",
 
-    accent: "#d88fa3",
-    bg: "#f8eef1",
+    accent: "#A68A50",
+    bg: "#F5F1E8",
 
     title: "Rua Boutique",
     sub: "SHOPIFY · RETAIL COMMERCE SYSTEM",
@@ -572,9 +586,10 @@ export const commerceProjects: Project[] = [
       "A boutique commerce implementation connecting the Shopify storefront with inventory, Faire, and point-of-sale workflows.",
 
     preview: {
-      media: "primary",
+      src: "/images/rua/preview.jpg",
+      alt: "Fashion boutique interior",
       fit: "cover",
-      position: "top center",
+      position: "center",
     },
 
     media: [
@@ -634,14 +649,15 @@ export const commerceProjects: Project[] = [
 
   /* ---------------------------------------------------------
      SCULPTED SERENITY
+     Muted clay / spa cream
      --------------------------------------------------------- */
 
   {
     id: "sculpted-serenity",
     num: "02",
 
-    accent: "#c59664",
-    bg: "#f4efe8",
+    accent: "#B58B79",
+    bg: "#F6F0EB",
 
     title: "Sculpted Serenity",
     sub: "WOOCOMMERCE · SERVICE COMMERCE",
@@ -650,9 +666,10 @@ export const commerceProjects: Project[] = [
       "A WooCommerce implementation adapted around a service-based purchasing workflow where a conventional product-store model did not fit the business.",
 
     preview: {
-      media: "primary",
+      src: "/images/sculpted-serenity/preview.jpg",
+      alt: "Warm spa and wellness interior",
       fit: "cover",
-      position: "top center",
+      position: "center",
     },
 
     media: [
@@ -711,14 +728,15 @@ export const commerceProjects: Project[] = [
 
   /* ---------------------------------------------------------
      MARIACHI ESTRELLAS DEL VALLE
+     Brass gold / champagne paper
      --------------------------------------------------------- */
 
   {
     id: "mariachi",
     num: "03",
 
-    accent: "#d0a83f",
-    bg: "#f6f1df",
+    accent: "#B89A48",
+    bg: "#F5F0E3",
 
     title: "Mariachi Estrellas",
     sub: "CLIENT WEBSITE · LOCAL BUSINESS",
@@ -727,9 +745,10 @@ export const commerceProjects: Project[] = [
       "A responsive marketing website built for a regional mariachi group with an emphasis on presentation, discoverability, and direct customer contact.",
 
     preview: {
-      media: "primary",
+      src: "/images/mariachi/preview.jpg",
+      alt: "Live musical performance",
       fit: "cover",
-      position: "top center",
+      position: "center",
     },
 
     media: [
@@ -788,14 +807,15 @@ export const commerceProjects: Project[] = [
 
   /* ---------------------------------------------------------
      THE STAHL MARKETING
+     Editorial orange / warm off-white
      --------------------------------------------------------- */
 
   {
     id: "stahl-marketing",
     num: "04",
 
-    accent: "#647fbc",
-    bg: "#edf0f7",
+    accent: "#D75B3C",
+    bg: "#FAF1EA",
 
     title: "The Stahl Marketing",
     sub: "AGENCY · WEB + DIGITAL COMMERCE",
@@ -804,9 +824,10 @@ export const commerceProjects: Project[] = [
       "An agency platform built around web development, ecommerce, POS, advertising, and integrated digital systems for small businesses.",
 
     preview: {
-      media: "primary",
+      src: "/images/stahl-marketing/preview.jpg",
+      alt: "Creative design workspace",
       fit: "cover",
-      position: "top center",
+      position: "center",
     },
 
     media: [

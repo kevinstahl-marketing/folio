@@ -751,3 +751,114 @@
         transition: none;
     }
 }
+
+
+/* =========================================================
+   IMAGE CLARITY REFINEMENTS
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   PRIMARY IMAGE
+
+   No additional transforms or filters on the image.
+   --------------------------------------------------------- */
+
+.masterImage {
+    transform: none;
+    filter: none;
+}
+
+.masterImage img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: none;
+    max-height: none;
+
+    object-fit: cover;
+
+    filter: none;
+    opacity: 1;
+
+    transform: none;
+}
+
+/* ---------------------------------------------------------
+   SECONDARY PREVIEW
+
+   Slightly larger landscape holder.
+   Less aggressive rotation.
+   --------------------------------------------------------- */
+
+.secondaryCard {
+    width: 43%;
+    aspect-ratio: 16 / 10;
+
+    transform:
+        rotate(var(--secondary-rotation, 1deg));
+
+    transform-origin: center;
+}
+
+.secondaryScreen {
+    overflow: hidden;
+}
+
+.secondaryScreen img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: none;
+    max-height: none;
+
+    object-fit: cover;
+
+    filter: none;
+    opacity: 1;
+
+    transform: none;
+}
+
+/* ---------------------------------------------------------
+   HOVER
+
+   Lift the paper without scaling the entire image.
+   --------------------------------------------------------- */
+
+@media (hover: hover) {
+
+    .card:hover .mainSheet {
+        transform: translateY(-5px);
+
+        box-shadow:
+            7px 9px 0 rgba(26, 23, 20, 0.13);
+    }
+
+    .card:hover .secondaryCard {
+        transform:
+            translateY(-6px)
+            rotate(0deg);
+
+        box-shadow:
+            8px 10px 0 var(--accent),
+            12px 14px 0 rgba(26, 23, 20, 0.14);
+    }
+}
+
+/* ---------------------------------------------------------
+   MOBILE
+
+   Keep secondary image readable without covering
+   too much of the primary screenshot.
+   --------------------------------------------------------- */
+
+@media (max-width: 560px) {
+
+    .secondaryCard {
+        width: 41%;
+    }
+}

@@ -297,8 +297,8 @@ export default function ProjectCarousel({
           <div
             key={activeProject}
             className={`${styles.projectTitles} ${titleDirection === "left"
-                ? styles.titlesFromRight
-                : styles.titlesFromLeft
+              ? styles.titlesFromRight
+              : styles.titlesFromLeft
               }`}
           >
             {[
@@ -315,8 +315,8 @@ export default function ProjectCarousel({
                   type="button"
                   key={`${project.id}-${position}`}
                   className={`${styles.projectTitle} ${active
-                      ? styles.projectTitleActive
-                      : ""
+                    ? styles.projectTitleActive
+                    : ""
                     }`}
                   onClick={() =>
                     selectProject(index)
@@ -417,83 +417,40 @@ export default function ProjectCarousel({
                           ? -2.1
                           : 2.1;
 
-                /* =====================================
-                   PRIMARY SCREENSHOT
+     
+/* =====================================
+   DEDICATED PROJECT PREVIEW
 
-                   Always use the primary image.
-                   Every image fills a 16:10 holder.
-                   ===================================== */
+   FloatingCard uses its own preview image.
 
-                const primaryMedia =
-                  project.media.find(
-                    (media) =>
-                      media.slot === "primary"
-                  ) ??
-                  project.media[0] ??
-                  null;
+   ProjectModal continues using project.media
+   for primary and secondary screenshots.
+   ===================================== */
 
-                const previewContent =
-                  primaryMedia ? (
-                    <img
-                      src={primaryMedia.src}
-                      alt={primaryMedia.alt}
-                      draggable={false}
-                      loading="lazy"
-                      style={{
-                        display: "block",
+const previewContent = (
+  <img
+    src={project.preview.src}
+    alt={project.preview.alt}
+    draggable={false}
+    loading="lazy"
+    decoding="async"
+    style={{
+      display: "block",
 
-                        width: "100%",
-                        height: "100%",
+      width: "100%",
+      height: "100%",
 
-                        objectFit: "cover",
-                        objectPosition: "center top",
+      objectFit:
+        project.preview.fit ?? "cover",
 
-                        transform: "scale(1.12)",
-                        transformOrigin: "center top",
+      objectPosition:
+        project.preview.position ?? "center",
 
-                        userSelect: "none",
-                        pointerEvents: "none",
-                      }}
-                    />
-                  ) : null;
-
-                /* =====================================
-                   SECONDARY SCREENSHOT
-
-                   Keep the small overlapping image.
-                   Always use a landscape holder.
-
-                   No phone-shaped frame.
-                   ===================================== */
-
-                const secondaryMedia =
-                  project.media.find(
-                    (media) =>
-                      media.slot === "secondary"
-                  ) ?? null;
-
-                const secondaryContent =
-                  secondaryMedia ? (
-                    <img
-                      src={secondaryMedia.src}
-                      alt={secondaryMedia.alt}
-                      draggable={false}
-                      loading="lazy"
-                      style={{
-                        display: "block",
-
-                        width: "100%",
-                        height: "100%",
-
-                        objectFit: "cover",
-                        objectPosition: "center",
-
-                        userSelect: "none",
-                        pointerEvents: "none",
-                      }}
-                    />
-                  ) : null;
-
+      userSelect: "none",
+      pointerEvents: "none",
+    }}
+  />
+);
                 return (
                   <div
                     key={project.id}
@@ -502,8 +459,8 @@ export default function ProjectCarousel({
                         element;
                     }}
                     className={`${styles.cardSlot} ${active
-                        ? styles.cardSlotActive
-                        : styles.cardSlotInactive
+                      ? styles.cardSlotActive
+                      : styles.cardSlotInactive
                       }`}
                   >
                     <button
@@ -525,9 +482,6 @@ export default function ProjectCarousel({
                         accent={project.accent}
                         rotation={rotation}
                         content={previewContent}
-                        secondaryContent={
-                          secondaryContent
-                        }
                         cardW={cardW}
                         cardH={cardH}
                       />

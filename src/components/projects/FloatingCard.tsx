@@ -1,4 +1,7 @@
+
 "use client";
+
+import type { CSSProperties, ReactNode } from "react";
 
 import { ArrowUpRight, Pin, Plus } from "lucide-react";
 
@@ -12,8 +15,8 @@ type FloatingCardProps = {
   rotation: number;
   accent: string;
 
-  content: React.ReactNode;
-  secondaryContent?: React.ReactNode;
+  content: ReactNode;
+  secondaryContent?: ReactNode;
 
   cardW: number;
   cardH: number;
@@ -21,18 +24,15 @@ type FloatingCardProps = {
 
 /* =========================================================
    PIN COLORS
-
-   Deterministic by project ID:
-   same project = same pin color every render.
    ========================================================= */
 
 const pinColors = [
-  "#e86a5a", // coral
-  "#e5b94f", // mustard
-  "#5f8f78", // muted green
-  "#6f83a8", // slate blue
-  "#a9788d", // dusty rose
-  "#d47c4f", // burnt orange
+  "#e86a5a",
+  "#e5b94f",
+  "#5f8f78",
+  "#6f83a8",
+  "#a9788d",
+  "#d47c4f",
 ];
 
 function getPinColor(id: string) {
@@ -50,7 +50,7 @@ function getPinColor(id: string) {
 }
 
 /* =========================================================
-   COMPONENT
+   FLOATING CARD
    ========================================================= */
 
 export default function FloatingCard({
@@ -66,63 +66,48 @@ export default function FloatingCard({
 }: FloatingCardProps) {
   const pinColor = getPinColor(id);
 
+  const cardStyle = {
+    width: cardW,
+    height: cardH,
+
+    "--accent": accent,
+    "--pin-color": pinColor,
+
+    "--rotation": `${rotation}deg`,
+
+    "--accent-rotation":
+      `${rotation * 0.8}deg`,
+
+    "--dark-rotation":
+      `${rotation * 0.35}deg`,
+
+    "--secondary-rotation":
+      `${rotation > 0 ? -1 : 1}deg`,
+  } as CSSProperties;
+
   return (
     <article
       className={styles.card}
       data-project={id}
-      style={
-        {
-          width: cardW,
-          height: cardH,
-
-          "--accent": accent,
-          "--pin-color": pinColor,
-
-          "--rotation": `${rotation}deg`,
-
-          "--image-rotation":
-            `${rotation * 0.3}deg`,
-
-          "--accent-rotation":
-            `${rotation * 0.8}deg`,
-
-          "--dark-rotation":
-            `${rotation * 0.35}deg`,
-
-          "--secondary-rotation":
-            `${rotation > 0 ? -2.5 : 2.5}deg`,
-        } as React.CSSProperties
-      }
+      style={cardStyle}
     >
-      {/* =====================================================
-          BACK PAPER — BLACK
-          ===================================================== */}
+      {/* BACKING PAPERS */}
 
       <div
         className={styles.darkSheet}
         aria-hidden="true"
       />
 
-      {/* =====================================================
-          MIDDLE PAPER — ACCENT
-          ===================================================== */}
-
       <div
         className={styles.accentSheet}
         aria-hidden="true"
       />
 
-      {/* =====================================================
-          MAIN PAPER
-          ===================================================== */}
+      {/* MAIN PAPER */}
 
       <div className={styles.mainSheet}>
-        {/* ===================================================
-            PIN
 
-            Real Lucide icon.
-            Color comes from --pin-color.
-            =================================================== */}
+        {/* PUSH PIN */}
 
         <div
           className={styles.pinWrap}
@@ -135,27 +120,19 @@ export default function FloatingCard({
           />
         </div>
 
-        {/* ===================================================
-            MEDIA
-            =================================================== */}
+        {/* IMAGE STAGE */}
 
         <div className={styles.media}>
-          {/* -------------------------------------------------
-              PRIMARY IMAGE
-              ------------------------------------------------- */}
 
-        <div className={styles.mediaInner}>
-  <div className={styles.masterImage}>
-    {content}
-  </div>
-</div>
+          {/* PRIMARY SCREENSHOT */}
 
-          {/* -------------------------------------------------
-              SECONDARY IMAGE
+          <div className={styles.mediaInner}>
+            <div className={styles.masterImage}>
+              {content}
+            </div>
+          </div>
 
-              Physical little clipping/card.
-              CSS controls its hover lift.
-              ------------------------------------------------- */}
+          {/* SECONDARY SCREENSHOT */}
 
           {secondaryContent && (
             <div
@@ -185,18 +162,14 @@ export default function FloatingCard({
             </div>
           )}
 
-          {/* -------------------------------------------------
-              RESTING CORNER MARK
-              ------------------------------------------------- */}
+          {/* CORNER MARK */}
 
           <div
             className={styles.cornerMark}
             aria-hidden="true"
           />
 
-          {/* -------------------------------------------------
-              OPEN PROJECT INDICATOR
-              ------------------------------------------------- */}
+          {/* OPEN PROJECT INDICATOR */}
 
           <div
             className={styles.openMark}
@@ -208,9 +181,7 @@ export default function FloatingCard({
             />
           </div>
 
-          {/* -------------------------------------------------
-              MEDIA REGISTRATION MARK
-              ------------------------------------------------- */}
+          {/* REGISTRATION MARK */}
 
           <div
             className={styles.mediaRegistration}
@@ -220,16 +191,12 @@ export default function FloatingCard({
           </div>
         </div>
 
-        {/* ===================================================
-            CAPTION
-            =================================================== */}
+        {/* CAPTION */}
 
         <div className={styles.caption}>
-          {/* -------------------------------------------------
-              PROJECT COPY
-              ------------------------------------------------- */}
 
           <div className={styles.copy}>
+
             <h3
               className={styles.title}
               style={{
@@ -258,10 +225,6 @@ export default function FloatingCard({
             </div>
           </div>
 
-          {/* -------------------------------------------------
-              REGISTRATION MARK
-              ------------------------------------------------- */}
-
           <div
             className={styles.registration}
             aria-hidden="true"
@@ -271,10 +234,6 @@ export default function FloatingCard({
               strokeWidth={2}
             />
           </div>
-
-          {/* -------------------------------------------------
-              BOTTOM ACCENT STRIP
-              ------------------------------------------------- */}
 
           <div
             className={styles.bottomAccent}
