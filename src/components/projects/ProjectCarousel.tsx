@@ -362,10 +362,34 @@ export default function ProjectCarousel({
         card.clientWidth / 2;
 
       if (Math.abs(rail.scrollLeft - target) > 2) {
-        rail.scrollTo({
-          left: target,
-          behavior: mobile ? "smooth" : "smooth",
-        });
+        if (mobile) {
+  const start = rail.scrollLeft;
+  const distance = target - start;
+  const duration = 250; // Mobile scroll speed (ms)
+  const startTime = performance.now();
+
+  const animate = (now: number) => {
+    const progress = Math.min(
+      (now - startTime) / duration,
+      1
+    );
+
+    const eased = 1 - Math.pow(1 - progress, 3);
+
+    rail.scrollLeft = start + distance * eased;
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    }
+  };
+
+  requestAnimationFrame(animate);
+} else {
+  rail.scrollTo({
+    left: target,
+    behavior: "smooth",
+  });
+}
       }
     }, mobile ? 65 : 120);
   };
