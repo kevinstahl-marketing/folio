@@ -24,9 +24,7 @@ const geistMono = Geist_Mono({
    SITE CONFIGURATION
    ========================================================= */
 
-const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ||
-  "https://YOUR-FOLIO-URL.vercel.app";
+const siteUrl = "https://kevinstahl.com";
 
 const siteName = "Kevin Stahl | Full-Stack Developer";
 
@@ -72,6 +70,7 @@ export const metadata: Metadata = {
     "PHP",
     "Python",
     "Shopify",
+    "Drupal",
     "E-Commerce Development",
     "Software Engineering",
     "Portfolio",
@@ -80,6 +79,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/",
   },
+
+  /* =========================================================
+     OPEN GRAPH — LINKEDIN / FACEBOOK / DISCORD
+     ========================================================= */
 
   openGraph: {
     type: "website",
@@ -93,19 +96,25 @@ export const metadata: Metadata = {
     title: siteName,
 
     description:
-      "Digital products. Commerce. Systems. Explore my selected projects and engineering work.",
+      "Full-stack development, e-commerce, and custom systems. Explore my projects and engineering work.",
 
     images: [
       {
-        url: "/og-image.jpg",
+        url: `${siteUrl}/og-image.jpg`,
 
         width: 1200,
         height: 630,
 
-        alt: "Kevin Stahl — Full-Stack Developer Portfolio",
+        alt: "Kevin Stahl — Full-Stack Developer",
+
+        type: "image/jpeg",
       },
     ],
   },
+
+  /* =========================================================
+     TWITTER / X
+     ========================================================= */
 
   twitter: {
     card: "summary_large_image",
@@ -113,15 +122,35 @@ export const metadata: Metadata = {
     title: siteName,
 
     description:
-      "Digital products. Commerce. Systems.",
+      "Full-stack development, e-commerce, and custom systems.",
 
-    images: ["/og-image.jpg"],
+    images: [
+      {
+        url: `${siteUrl}/og-image.jpg`,
+
+        width: 1200,
+        height: 630,
+
+        alt: "Kevin Stahl — Full-Stack Developer",
+      },
+    ],
   },
 
+  /* =========================================================
+     SEARCH ENGINE INDEXING
+     ========================================================= */
 
   robots: {
     index: true,
     follow: true,
+
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 
