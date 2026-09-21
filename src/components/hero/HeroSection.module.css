@@ -1246,3 +1246,86 @@
         transform: translateY(-4px);
     }
 }
+
+
+/* =========================================================
+   MOBILE — STATIC ICONS / PINNED PAPER
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    /* Keep the original card rotation */
+
+    .skillCard,
+    .skillCard:hover,
+    .skillCard:active,
+    .skillCard:focus-within {
+        transform: rotate(var(--skill-rotation)) !important;
+    }
+
+    /* No floating or drifting */
+
+    .driftOne,
+    .driftTwo,
+    .accentFloat {
+        animation: none !important;
+    }
+
+    /* Category icons stay completely still */
+
+    .skillIcon,
+    .skillCard:hover .skillIcon,
+    .skillCard:active .skillIcon,
+    .skillCard:focus-within .skillIcon {
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+
+    /* Technology badges and their icons stay still */
+
+    .techItem,
+    .techItem:hover,
+    .techItem:active,
+    .techItem:focus-within {
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+        background: transparent;
+    }
+
+    .techIcon,
+    .techItem svg,
+    .techItem img,
+    .techItem:hover .techIcon,
+    .techItem:hover svg,
+    .techItem:hover img,
+    .techItem:active .techIcon,
+    .techItem:active svg,
+    .techItem:active img {
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+        filter: none !important;
+    }
+
+    /* Registration mark stays still */
+
+    .skillMark,
+    .skillCard:hover .skillMark {
+        transform: none !important;
+        transition: none !important;
+    }
+
+    /* Prevent accidental touch-hover paper movement */
+
+    .skillCard:hover .skillPaper,
+    .skillCard:active .skillPaper {
+        transform: none;
+    }
+
+    .skillCard:hover .skillPin,
+    .skillCard:active .skillPin {
+        transform: translateX(-50%);
+    }
+}
