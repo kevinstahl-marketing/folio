@@ -1,3 +1,4 @@
+
 export type ProjectId =
   | "ezc"
   | "lca"
@@ -71,7 +72,6 @@ export type Project = {
   mockupLeft?: boolean;
 };
 
-
 /* =========================================================
    FEATURED PROJECTS
    ========================================================= */
@@ -102,7 +102,7 @@ export const projects: Project[] = [
 
     media: [
       {
-        src: "/images/ezcalcs/main.png",
+        src: "/images/ezcalcs/main.jpg",
         alt: "EZCalcs engineering calculator platform",
         slot: "primary",
         frame: "browser",
@@ -112,7 +112,7 @@ export const projects: Project[] = [
         scale: 0.96,
       },
       {
-        src: "/images/ezcalcs/calculator.png",
+        src: "/images/ezcalcs/calculator.jpg",
         alt: "EZCalcs engineering calculator interface",
         slot: "secondary",
         frame: "browser",
@@ -190,7 +190,7 @@ export const projects: Project[] = [
         scale: 0.96,
       },
       {
-        src: "/images/la-concheria/secondary.png",
+        src: "/images/la-concheria/secondary.jpg",
         alt: "La Concheria product and ecommerce experience",
         slot: "secondary",
         frame: "browser",
@@ -310,7 +310,6 @@ export const projects: Project[] = [
     },
   },
 ];
-
 
 /* =========================================================
    SYSTEMS + AUTOMATION
@@ -549,7 +548,6 @@ export const systemsProjects: Project[] = [
     },
   },
 ];
-
 
 /* =========================================================
    COMMERCE + CLIENT SYSTEMS
@@ -868,7 +866,6 @@ export const commerceProjects: Project[] = [
     },
   },
 ];
-
 
 /* =========================================================
    ALL PROJECTS
