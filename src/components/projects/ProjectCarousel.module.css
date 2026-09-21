@@ -1732,3 +1732,66 @@
     scroll-snap-stop: always;
   }
 }
+
+
+
+/* =========================================================
+   FINAL CAROUSEL REFINEMENTS
+   ========================================================= */
+
+/* Faster visual transition between projects */
+
+.cardSlot {
+    transition: opacity 100ms ease-out;
+}
+
+/* Keep neighboring projects visible */
+
+.cardSlotInactive {
+    opacity: 0.72;
+}
+
+.cardSlotActive {
+    opacity: 1;
+}
+
+/* Reduce unnecessary vertical whitespace */
+
+.rail {
+    padding-top: 34px;
+    padding-bottom: 36px;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 560px) {
+
+    .rail {
+        gap: 22px;
+
+        padding-top: 32px;
+        padding-bottom: 34px;
+
+        scroll-snap-type: x mandatory;
+        scroll-behavior: auto;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .cardSlot {
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+
+        transition: opacity 80ms ease-out;
+    }
+
+    .cardSlotInactive {
+        opacity: 0.82;
+    }
+
+    .cardSlotActive {
+        opacity: 1;
+    }
+}

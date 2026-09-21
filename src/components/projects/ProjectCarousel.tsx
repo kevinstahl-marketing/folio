@@ -45,11 +45,11 @@ export default function ProjectCarousel({
 }: ProjectCarouselProps) {
   const stageRef = useRef<HTMLDivElement>(null);
   const railRef = useRef<HTMLDivElement>(null);
-const scrollEndTimer = useRef<
-  ReturnType<typeof setTimeout> | null
->(null);
+  const scrollEndTimer = useRef<
+    ReturnType<typeof setTimeout> | null
+  >(null);
 
-const programmaticScroll = useRef(false);
+  const programmaticScroll = useRef(false);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const [stageWidth, setStageWidth] = useState(0);
@@ -123,21 +123,23 @@ const programmaticScroll = useRef(false);
     stageWidth - (mobile ? 70 : tablet ? 110 : 180)
   );
 
-  const maxCardHeight = mobile
-    ? viewportHeight * 0.58
-    : tablet
-      ? viewportHeight * 0.64
-      : viewportHeight * 0.72;
 
-  const cardRatio = mobile ? 0.90 : tablet ? 0.88 : 0.82;
+  const maxCardHeight = mobile
+    ? viewportHeight * 0.68
+    : tablet
+      ? viewportHeight * 0.72
+      : viewportHeight * 0.78;
+
+  const cardRatio = mobile ? 1.12 : tablet ? 1.06 : 1.02;
   const cardW = Math.max(
     0,
     Math.floor(
       Math.min(
-        mobile ? 340 : tablet ? 440 : 580,
+
+        mobile ? 340 : tablet ? 470 : 640,
 
         availableWidth *
-        (mobile ? 0.92 : tablet ? 0.72 : 0.50),
+        (mobile ? 0.92 : tablet ? 0.78 : 0.56),
 
         maxCardHeight / cardRatio
       )
@@ -170,34 +172,34 @@ const programmaticScroll = useRef(false);
      NAVIGATION
      ========================================================= */
 
-const goToProject = (index: number) => {
-  const rail = railRef.current;
-  const card = cardRefs.current[index];
+  const goToProject = (index: number) => {
+    const rail = railRef.current;
+    const card = cardRefs.current[index];
 
-  if (!rail || !card) return;
+    if (!rail || !card) return;
 
-  programmaticScroll.current = true;
+    programmaticScroll.current = true;
 
-  if (scrollEndTimer.current) {
-    clearTimeout(scrollEndTimer.current);
-  }
+    if (scrollEndTimer.current) {
+      clearTimeout(scrollEndTimer.current);
+    }
 
-  const target =
-    card.offsetLeft -
-    rail.clientWidth / 2 +
-    card.clientWidth / 2;
+    const target =
+      card.offsetLeft -
+      rail.clientWidth / 2 +
+      card.clientWidth / 2;
 
-  rail.scrollTo({
-    left: target,
-    behavior: "smooth",
-  });
+    rail.scrollTo({
+      left: target,
+      behavior: "instant",
+    });
 
-  setActiveProject(index);
+    setActiveProject(index);
 
-  setTimeout(() => {
-    programmaticScroll.current = false;
-  }, 500);
-};
+    setTimeout(() => {
+      programmaticScroll.current = false;
+    }, 500);
+  };
   const previousProject = () => {
     setTitleDirection("right");
 
@@ -241,69 +243,69 @@ const goToProject = (index: number) => {
 
     setOpenProjectId(projects[index].id);
   };
-/* =========================================================
-   MOBILE SWIPE — SNAP TO NEAREST PROJECT
-   ========================================================= */
+  /* =========================================================
+     MOBILE SWIPE — SNAP TO NEAREST PROJECT
+     ========================================================= */
 
-const handleRailScroll = () => {
-  if (programmaticScroll.current) return;
+  const handleRailScroll = () => {
+    if (programmaticScroll.current) return;
 
-  if (scrollEndTimer.current) {
-    clearTimeout(scrollEndTimer.current);
-  }
+    if (scrollEndTimer.current) {
+      clearTimeout(scrollEndTimer.current);
+    }
 
-  scrollEndTimer.current = setTimeout(() => {
-    const rail = railRef.current;
+    scrollEndTimer.current = setTimeout(() => {
+      const rail = railRef.current;
 
-    if (!rail) return;
+      if (!rail) return;
 
-    const railCenter =
-      rail.scrollLeft + rail.clientWidth / 2;
+      const railCenter =
+        rail.scrollLeft + rail.clientWidth / 2;
 
-    let closestIndex = 0;
-    let closestDistance = Infinity;
+      let closestIndex = 0;
+      let closestDistance = Infinity;
 
-    cardRefs.current.forEach((card, index) => {
+      cardRefs.current.forEach((card, index) => {
+        if (!card) return;
+
+        const cardCenter =
+          card.offsetLeft + card.clientWidth / 2;
+
+        const distance = Math.abs(
+          railCenter - cardCenter
+        );
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
+      });
+
+      if (closestIndex !== activeProject) {
+        setTitleDirection(
+          closestIndex > activeProject ? "left" : "right"
+        );
+
+        setActiveProject(closestIndex);
+      }
+
+      const card = cardRefs.current[closestIndex];
+
       if (!card) return;
 
-      const cardCenter =
-        card.offsetLeft + card.clientWidth / 2;
+      const target =
+        card.offsetLeft -
+        rail.clientWidth / 2 +
+        card.clientWidth / 2;
 
-      const distance = Math.abs(
-        railCenter - cardCenter
-      );
-
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestIndex = index;
+      if (Math.abs(rail.scrollLeft - target) > 2) {
+        rail.scrollTo({
+          left: target,
+          behavior: "smooth",
+        });
       }
-    });
-
-    if (closestIndex !== activeProject) {
-      setTitleDirection(
-        closestIndex > activeProject ? "left" : "right"
-      );
-
-      setActiveProject(closestIndex);
-    }
-
-    const card = cardRefs.current[closestIndex];
-
-    if (!card) return;
-
-    const target =
-      card.offsetLeft -
-      rail.clientWidth / 2 +
-      card.clientWidth / 2;
-
-    if (Math.abs(rail.scrollLeft - target) > 2) {
-      rail.scrollTo({
-        left: target,
-        behavior: "smooth",
-      });
-    }
-  }, 120);
-};
+    }, 65);
+  };
   /* =========================================================
      INITIAL POSITION
      ========================================================= */
@@ -464,10 +466,10 @@ const handleRailScroll = () => {
 
           <div className={styles.railViewport}>
             <div
-  ref={railRef}
-  className={styles.rail}
-  onScroll={handleRailScroll}
->
+              ref={railRef}
+              className={styles.rail}
+              onScroll={handleRailScroll}
+            >
               <div
                 className={styles.railSpacer}
                 style={{
@@ -493,40 +495,40 @@ const handleRailScroll = () => {
                           ? -2.1
                           : 2.1;
 
-     
-/* =====================================
-   DEDICATED PROJECT PREVIEW
 
-   FloatingCard uses its own preview image.
+                /* =====================================
+                   DEDICATED PROJECT PREVIEW
+                
+                   FloatingCard uses its own preview image.
+                
+                   ProjectModal continues using project.media
+                   for primary and secondary screenshots.
+                   ===================================== */
 
-   ProjectModal continues using project.media
-   for primary and secondary screenshots.
-   ===================================== */
+                const previewContent = (
+                  <img
+                    src={project.preview.src}
+                    alt={project.preview.alt}
+                    draggable={false}
+                    loading="lazy"
+                    decoding="async"
+                    style={{
+                      display: "block",
 
-const previewContent = (
-  <img
-    src={project.preview.src}
-    alt={project.preview.alt}
-    draggable={false}
-    loading="lazy"
-    decoding="async"
-    style={{
-      display: "block",
+                      width: "100%",
+                      height: "100%",
 
-      width: "100%",
-      height: "100%",
+                      objectFit:
+                        project.preview.fit ?? "cover",
 
-      objectFit:
-        project.preview.fit ?? "cover",
+                      objectPosition:
+                        project.preview.position ?? "center",
 
-      objectPosition:
-        project.preview.position ?? "center",
-
-      userSelect: "none",
-      pointerEvents: "none",
-    }}
-  />
-);
+                      userSelect: "none",
+                      pointerEvents: "none",
+                    }}
+                  />
+                );
                 return (
                   <div
                     key={project.id}
