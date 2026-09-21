@@ -54,9 +54,9 @@
     gap: 9px;
 
     font-family: var(--font-mono, monospace);
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 900;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.075em;
 }
 
 .projectCode span:first-child {
@@ -119,12 +119,12 @@
     margin: 0;
 
     font-family: var(--font-display, serif);
-    font-size: clamp(42px, 6vw, 78px);
+    font-size: clamp(44px, 6vw, 78px);
     font-style: italic;
     font-weight: 700;
 
-    line-height: 0.92;
-    letter-spacing: -0.035em;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
 
     overflow-wrap: anywhere;
 }
@@ -133,11 +133,11 @@
     margin-top: 12px;
 
     font-family: var(--font-mono, monospace);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 800;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.055em;
 
-    opacity: 0.5;
+    opacity: 0.85;
 }
 
 .accentRule {
@@ -184,26 +184,26 @@
     color: var(--project-accent);
 
     font-family: var(--font-mono, monospace);
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 900;
 
-    letter-spacing: 0.14em;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
 }
 
 .infoPrimary {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 800;
-    line-height: 1.35;
+    line-height: 1.4;
 }
 
 .infoSecondary {
     margin-top: 3px;
 
-    font-size: 12px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.55;
 
-    opacity: 0.8;
+    opacity: 1;
 }
 
 .summary {
@@ -211,10 +211,10 @@
 
     max-width: 42ch;
 
-    font-size: 17px;
-    line-height: 1.65;
+    font-size: 18px;
+    line-height: 1.6;
 
-    opacity: 0.8;
+    opacity: 1;
 }
 
 .stack {
@@ -256,9 +256,9 @@
     border: 1.5px solid var(--ink);
 
     font-family: var(--font-mono, monospace);
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 900;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.08em;
 }
 
 .bulletGrid {
@@ -291,12 +291,12 @@
     min-width: 0;
     margin: 0;
 
-    font-size: 14px;
-    line-height: 1.55;
+    font-size: 15px;
+    line-height: 1.6;
 
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
 
-    opacity: 0.78;
+    opacity: 1;
 }
 
 /* =========================================================
@@ -334,9 +334,9 @@
     border: 1.5px solid var(--ink);
 
     font-family: var(--font-mono, monospace);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 900;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.035em;
 
     text-decoration: none;
 
@@ -410,10 +410,10 @@
 
     max-width: 80ch;
 
-    font-size: 14px;
-    line-height: 1.7;
+    font-size: 15px;
+    line-height: 1.65;
 
-    opacity: 0.72;
+    opacity: 1;
 }
 
 /* =========================================================
@@ -430,7 +430,7 @@
     }
 
     .summary {
-        font-size: 16px;
+        font-size: 17px;
     }
 }
 
@@ -503,7 +503,8 @@
     }
 
     .title {
-        font-size: 40px;
+        font-size: clamp(36px, 10vw, 40px);
+        line-height: 1.05;
     }
 
     .projectCode span:last-child {
@@ -703,12 +704,12 @@
 
     max-width: 80ch;
 
-    font-size: 14px;
-    line-height: 1.7;
+    font-size: 15px;
+    line-height: 1.65;
 
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
 
-    opacity: 0.8;
+    opacity: 1;
 }
 
 /* =========================================================

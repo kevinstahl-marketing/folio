@@ -73,7 +73,7 @@
 
     overflow: visible;
 
-    transform: translateY(0) scale(1);
+    transform: none;
 
     transition:
         transform 340ms cubic-bezier(.22, 1, .36, 1),
@@ -409,6 +409,7 @@
    No stretching or oversized white space.
    ========================================================= */
 
+
 .caption {
     position: relative;
     z-index: 5;
@@ -420,50 +421,59 @@
 
     display: grid;
 
-    grid-template-columns:
-        minmax(0, 1fr) auto;
-
+    grid-template-columns: minmax(0, 1fr);
     align-items: center;
 
     gap: 8px;
 
-    padding:
-        clamp(10px, 1.3vw, 15px)
-        clamp(12px, 1.5vw, 18px);
+    padding: 16px 18px 19px;
 
+    color: #171411;
     background: var(--paper);
 
     overflow: hidden;
 
     transition: background 160ms ease;
 }
-
 .copy {
     min-width: 0;
 }
 
 /* =========================================================
-   TITLE
+   TITLE — BOLD EDITORIAL TYPOGRAPHY
    ========================================================= */
 
 .title {
-    margin: 0 0 6px;
+    margin: 0 0 7px;
 
     color: #171411;
 
-    font-size: clamp(19px, 1.8vw, 27px);
-    font-style: italic;
-    font-weight: 700;
+    font-family:
+        "Outfit",
+        Arial,
+        sans-serif !important;
 
-    line-height: 1.12;
-    letter-spacing: -0.015em;
+    font-size: clamp(26px, 2.3vw, 34px);
+
+    font-style: normal;
+    font-weight: 900;
+
+    line-height: 1.02;
+    letter-spacing: -0.035em;
 
     white-space: normal;
-    overflow-wrap: anywhere;
+    overflow-wrap: normal;
+    word-break: normal;
+
+    text-wrap: balance;
+
+    -webkit-font-smoothing: auto;
+    text-rendering: optimizeLegibility;
 }
 /* =========================================================
    SUBTITLE
    ========================================================= */
+
 
 .subtitle {
     display: flex;
@@ -472,12 +482,12 @@
     gap: 8px;
     min-width: 0;
 
-    color: #211d19;
+    color: #38322c;
 
-    font-size: clamp(10px, 0.85vw, 12px);
+    font-size: clamp(11px, 0.95vw, 13px);
     font-weight: 800;
 
-    line-height: 1.4;
+    line-height: 1.35;
     letter-spacing: 0.015em;
 
     text-transform: uppercase;
@@ -516,20 +526,7 @@
    ========================================================= */
 
 .registration {
-    align-self: end;
-
-    display: grid;
-    place-items: center;
-
-    color: var(--ink);
-
-    opacity: .28;
-
-    pointer-events: none;
-
-    transition:
-        opacity 160ms ease,
-        transform 200ms cubic-bezier(.34, 1.56, .64, 1);
+    display: none;
 }
 
 /* =========================================================
@@ -643,7 +640,7 @@
     }
 
     .title {
-        font-size: clamp(17px, 2.6vw, 23px);
+        font-size: clamp(24px, 3vw, 30px);
     }
 
     .subtitle {
@@ -676,14 +673,14 @@
     }
 
     .caption {
-        gap: 5px;
-        padding: 10px 11px 12px;
+        gap: 6px;
+        padding: 13px 14px 16px;
     }
 
   .title {
-    font-size: 19px;
-    margin-bottom: 5px;
-    line-height: 1.12;
+        font-size: 25px;
+        margin-bottom: 6px;
+        line-height: 1.05;
 }
 
 .subtitle {
@@ -860,5 +857,33 @@
 
     .secondaryCard {
         width: 41%;
+    }
+}
+
+
+.registration {
+    display: none;
+}
+/* =========================================================
+   FINAL CAPTION CLARITY
+   ========================================================= */
+
+.title,
+.subtitle,
+.subtitleText {
+    filter: none;
+    opacity: 1;
+    text-shadow: none;
+    -webkit-text-stroke: 0;
+}
+
+.copy {
+    min-width: 0;
+    width: 100%;
+}
+
+@media (hover: hover) {
+    .card:hover .mainSheet {
+        transform: translateY(-5px);
     }
 }
