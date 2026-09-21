@@ -45,11 +45,17 @@ export default function ProjectCarousel({
 }: ProjectCarouselProps) {
   const stageRef = useRef<HTMLDivElement>(null);
   const railRef = useRef<HTMLDivElement>(null);
+
   const scrollEndTimer = useRef<
     ReturnType<typeof setTimeout> | null
   >(null);
 
+  const programmaticTimer = useRef<
+    ReturnType<typeof setTimeout> | null
+  >(null);
+
   const programmaticScroll = useRef(false);
+
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const [stageWidth, setStageWidth] = useState(0);
@@ -109,8 +115,17 @@ export default function ProjectCarousel({
   /* =========================================================
      RESPONSIVE CARD DIMENSIONS
 
-     Preserve the existing carousel proportions.
-     FloatingCard handles the internal 16:10 image holder.
+     MOBILE:
+     Keep existing large mobile cards.
+
+     TABLET:
+     Keep existing dimensions.
+
+     DESKTOP:
+     Wider cards without increasing their height.
+
+     The image fills the available space above the
+     caption, giving it a wider landscape proportion.
      ========================================================= */
 
   const mobile = stageWidth < 560;
@@ -123,30 +138,64 @@ export default function ProjectCarousel({
     stageWidth - (mobile ? 70 : tablet ? 110 : 180)
   );
 
-
   const maxCardHeight = mobile
     ? viewportHeight * 0.68
     : tablet
       ? viewportHeight * 0.72
-      : viewportHeight * 0.78;
+      : viewportHeight * 0.52;
 
-  const cardRatio = mobile ? 1.12 : tablet ? 1.06 : 1.02;
+  /* Original mobile/tablet proportions */
+
+  const cardRatio = mobile
+    ? 1.12
+    : tablet
+      ? 1.06
+      : 1.22;
+
+  /* =========================================================
+     CARD WIDTH
+
+     Desktop width increased from 480px to 560px.
+
+     Mobile and tablet calculations are unchanged.
+     ========================================================= */
+
   const cardW = Math.max(
     0,
     Math.floor(
       Math.min(
+        mobile ? 340 : tablet ? 470 : 560,
 
-        mobile ? 340 : tablet ? 470 : 640,
+        mobile
+          ? availableWidth * 0.92
+          : tablet
+            ? availableWidth * 0.78
+            : stageWidth * 0.40,
 
-        availableWidth *
-        (mobile ? 0.92 : tablet ? 0.78 : 0.56),
-
-        maxCardHeight / cardRatio
+        mobile || tablet
+          ? maxCardHeight / cardRatio
+          : maxCardHeight / 0.95
       )
     )
   );
 
-  const cardH = Math.round(cardW * cardRatio);
+  /* =========================================================
+     CARD HEIGHT
+
+     Mobile/tablet retain their original ratios.
+
+     Desktop gets a wider, shorter proportion,
+     constrained to 52% of the viewport height.
+     ========================================================= */
+
+  const cardH = mobile || tablet
+    ? Math.round(cardW * cardRatio)
+    : Math.round(
+        Math.min(
+          cardW * 0.95,
+          maxCardHeight
+        )
+      );
 
   /* =========================================================
      ACTIVE PROJECT HELPERS
@@ -155,7 +204,7 @@ export default function ProjectCarousel({
   const prevIndex =
     projects.length > 0
       ? (activeProject - 1 + projects.length) %
-      projects.length
+        projects.length
       : 0;
 
   const nextIndex =
@@ -184,6 +233,10 @@ export default function ProjectCarousel({
       clearTimeout(scrollEndTimer.current);
     }
 
+    if (programmaticTimer.current) {
+      clearTimeout(programmaticTimer.current);
+    }
+
     const target =
       card.offsetLeft -
       rail.clientWidth / 2 +
@@ -191,15 +244,16 @@ export default function ProjectCarousel({
 
     rail.scrollTo({
       left: target,
-      behavior: "instant",
+      behavior: mobile ? "instant" : "smooth",
     });
 
     setActiveProject(index);
 
-    setTimeout(() => {
+    programmaticTimer.current = setTimeout(() => {
       programmaticScroll.current = false;
-    }, 500);
+    }, mobile ? 100 : 500);
   };
+
   const previousProject = () => {
     setTitleDirection("right");
 
@@ -243,8 +297,15 @@ export default function ProjectCarousel({
 
     setOpenProjectId(projects[index].id);
   };
+
   /* =========================================================
-     MOBILE SWIPE — SNAP TO NEAREST PROJECT
+     RAIL SCROLL
+
+     Desktop:
+     Preserve smooth scrolling.
+
+     Mobile:
+     Snap to the nearest project quickly.
      ========================================================= */
 
   const handleRailScroll = () => {
@@ -283,7 +344,9 @@ export default function ProjectCarousel({
 
       if (closestIndex !== activeProject) {
         setTitleDirection(
-          closestIndex > activeProject ? "left" : "right"
+          closestIndex > activeProject
+            ? "left"
+            : "right"
         );
 
         setActiveProject(closestIndex);
@@ -301,11 +364,12 @@ export default function ProjectCarousel({
       if (Math.abs(rail.scrollLeft - target) > 2) {
         rail.scrollTo({
           left: target,
-          behavior: "smooth",
+          behavior: mobile ? "instant" : "smooth",
         });
       }
-    }, 65);
+    }, mobile ? 65 : 120);
   };
+
   /* =========================================================
      INITIAL POSITION
      ========================================================= */
@@ -324,6 +388,22 @@ export default function ProjectCarousel({
 
     rail.scrollLeft = target;
   }, [cardW, initialProject]);
+
+  /* =========================================================
+     CLEANUP
+     ========================================================= */
+
+  useEffect(() => {
+    return () => {
+      if (scrollEndTimer.current) {
+        clearTimeout(scrollEndTimer.current);
+      }
+
+      if (programmaticTimer.current) {
+        clearTimeout(programmaticTimer.current);
+      }
+    };
+  }, []);
 
   /* =========================================================
      SAFETY
@@ -373,10 +453,11 @@ export default function ProjectCarousel({
 
           <div
             key={activeProject}
-            className={`${styles.projectTitles} ${titleDirection === "left"
-              ? styles.titlesFromRight
-              : styles.titlesFromLeft
-              }`}
+            className={`${styles.projectTitles} ${
+              titleDirection === "left"
+                ? styles.titlesFromRight
+                : styles.titlesFromLeft
+            }`}
           >
             {[
               prevIndex,
@@ -391,10 +472,11 @@ export default function ProjectCarousel({
                 <button
                   type="button"
                   key={`${project.id}-${position}`}
-                  className={`${styles.projectTitle} ${active
-                    ? styles.projectTitleActive
-                    : ""
-                    }`}
+                  className={`${styles.projectTitle} ${
+                    active
+                      ? styles.projectTitleActive
+                      : ""
+                  }`}
                   onClick={() =>
                     selectProject(index)
                   }
@@ -495,15 +577,7 @@ export default function ProjectCarousel({
                           ? -2.1
                           : 2.1;
 
-
-                /* =====================================
-                   DEDICATED PROJECT PREVIEW
-                
-                   FloatingCard uses its own preview image.
-                
-                   ProjectModal continues using project.media
-                   for primary and secondary screenshots.
-                   ===================================== */
+                /* DEDICATED PROJECT PREVIEW */
 
                 const previewContent = (
                   <img
@@ -522,13 +596,15 @@ export default function ProjectCarousel({
                         project.preview.fit ?? "cover",
 
                       objectPosition:
-                        project.preview.position ?? "center",
+                        project.preview.position ??
+                        "center",
 
                       userSelect: "none",
                       pointerEvents: "none",
                     }}
                   />
                 );
+
                 return (
                   <div
                     key={project.id}
@@ -536,10 +612,11 @@ export default function ProjectCarousel({
                       cardRefs.current[index] =
                         element;
                     }}
-                    className={`${styles.cardSlot} ${active
-                      ? styles.cardSlotActive
-                      : styles.cardSlotInactive
-                      }`}
+                    className={`${styles.cardSlot} ${
+                      active
+                        ? styles.cardSlotActive
+                        : styles.cardSlotInactive
+                    }`}
                   >
                     <button
                       type="button"

@@ -777,7 +777,7 @@
 .cardSlotInactive {
     z-index: 1;
 
-    opacity: 0.4;
+    opacity: 0.0;
 
     transform: none;
     animation: none;
@@ -1735,17 +1735,22 @@
 
 
 
+
 /* =========================================================
    FINAL CAROUSEL REFINEMENTS
    ========================================================= */
 
-/* Faster visual transition between projects */
+/* DESKTOP — ORIGINAL SMOOTH SCROLLING */
 
-.cardSlot {
-    transition: opacity 100ms ease-out;
+.rail {
+    scroll-behavior: smooth;
 }
 
-/* Keep neighboring projects visible */
+/* Keep neighboring cards visible */
+
+.cardSlot {
+    transition: opacity 180ms ease;
+}
 
 .cardSlotInactive {
     opacity: 0.72;
@@ -1755,15 +1760,8 @@
     opacity: 1;
 }
 
-/* Reduce unnecessary vertical whitespace */
-
-.rail {
-    padding-top: 34px;
-    padding-bottom: 36px;
-}
-
 /* =========================================================
-   MOBILE
+   MOBILE ONLY — INSTANT NAVIGATION / LARGER CARDS
    ========================================================= */
 
 @media (max-width: 560px) {
@@ -1778,6 +1776,7 @@
         scroll-behavior: auto;
 
         -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
     }
 
     .cardSlot {
@@ -1794,4 +1793,48 @@
     .cardSlotActive {
         opacity: 1;
     }
+}
+
+/* =========================================================
+   DESKTOP — COMPACT CAROUSEL HEIGHT
+   ========================================================= */
+
+@media (min-width: 901px) {
+
+    .carousel {
+        padding-top: 32px;
+        padding-bottom: 38px;
+    }
+
+    .sectionMarker {
+        padding-top: 22px;
+    }
+
+    .projectNav {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .railViewport {
+        padding-top: 12px;
+    }
+
+    .rail {
+        padding-top: 28px;
+        padding-bottom: 32px;
+    }
+
+    .projectStage {
+        margin-bottom: 20px;
+    }
+}
+
+/* FADE INACTIVE PROJECTS */
+
+.cardSlotInactive {
+    opacity: 0.35 !important;
+}
+
+.cardSlotActive {
+    opacity: 1 !important;
 }

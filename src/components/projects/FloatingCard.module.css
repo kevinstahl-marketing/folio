@@ -2,10 +2,6 @@
 /* =========================================================
    FLOATING CARD
    Pinned paper / editorial project card
-
-   Image fills available card space.
-   Caption remains compact.
-   Secondary preview is always landscape.
    ========================================================= */
 
 .card {
@@ -126,9 +122,10 @@
 }
 
 /* =========================================================
-   PRIMARY MEDIA HOLDER
+   PRIMARY MEDIA
 
-   The image takes all available space above the caption.
+   Image fills the space above the caption.
+   No fixed percentage heights.
    ========================================================= */
 
 .media {
@@ -146,10 +143,6 @@
 
     border-bottom: 3px solid var(--ink);
 }
-
-/* =========================================================
-   PRIMARY IMAGE
-   ========================================================= */
 
 .mediaInner,
 .masterImage {
@@ -173,6 +166,11 @@
     height: 100%;
 }
 
+.masterImage {
+    transform: none;
+    filter: none;
+}
+
 .masterImage img {
     display: block;
 
@@ -182,14 +180,17 @@
     max-width: none;
     max-height: none;
 
-    object-fit: cover !important;
-    object-position: center;
+    object-fit: cover;
+object-position: center;
+
+    filter: none;
+    opacity: 1;
+
+    transform: none;
 }
 
 /* =========================================================
    SECONDARY MEDIA
-
-   Landscape clipping overlapping the primary image.
    ========================================================= */
 
 .secondaryCard {
@@ -199,7 +200,7 @@
     right: 12px;
     bottom: 12px;
 
-    width: 38%;
+    width: 43%;
     aspect-ratio: 16 / 10;
 
     padding: 4px;
@@ -216,18 +217,14 @@
         8px 8px 0 rgba(26, 23, 20, .16);
 
     transform:
-        rotate(var(--secondary-rotation, 2deg));
+        rotate(var(--secondary-rotation, 1deg));
 
-    transform-origin: center bottom;
+    transform-origin: center;
 
     transition:
         transform 300ms cubic-bezier(.22, 1, .36, 1),
         box-shadow 300ms ease;
 }
-
-/* =========================================================
-   SECONDARY TAPE
-   ========================================================= */
 
 .secondaryTape {
     position: absolute;
@@ -248,10 +245,6 @@
 
     pointer-events: none;
 }
-
-/* =========================================================
-   SECONDARY IMAGE VIEWPORT
-   ========================================================= */
 
 .secondaryScreen {
     position: relative;
@@ -288,11 +281,12 @@
 
     object-fit: cover !important;
     object-position: center;
-}
 
-/* =========================================================
-   SECONDARY REGISTRATION MARK
-   ========================================================= */
+    filter: none;
+    opacity: 1;
+
+    transform: none;
+}
 
 .secondaryRegistration {
     position: absolute;
@@ -314,7 +308,7 @@
 }
 
 /* =========================================================
-   MEDIA CORNER MARK
+   MEDIA MARKS
    ========================================================= */
 
 .cornerMark {
@@ -335,10 +329,6 @@
 
     transition: opacity 130ms ease;
 }
-
-/* =========================================================
-   OPEN PROJECT INDICATOR
-   ========================================================= */
 
 .openMark {
     position: absolute;
@@ -373,10 +363,6 @@
         transform 200ms cubic-bezier(.34, 1.56, .64, 1);
 }
 
-/* =========================================================
-   MEDIA REGISTRATION MARK
-   ========================================================= */
-
 .mediaRegistration {
     position: absolute;
     z-index: 8;
@@ -405,10 +391,9 @@
 /* =========================================================
    CAPTION
 
-   Compact bottom strip.
-   No stretching or oversized white space.
+   Natural height.
+   Image takes remaining space.
    ========================================================= */
-
 
 .caption {
     position: relative;
@@ -435,12 +420,14 @@
 
     transition: background 160ms ease;
 }
+
 .copy {
     min-width: 0;
+    width: 100%;
 }
 
 /* =========================================================
-   TITLE — BOLD EDITORIAL TYPOGRAPHY
+   TITLE
    ========================================================= */
 
 .title {
@@ -470,10 +457,10 @@
     -webkit-font-smoothing: auto;
     text-rendering: optimizeLegibility;
 }
+
 /* =========================================================
    SUBTITLE
    ========================================================= */
-
 
 .subtitle {
     display: flex;
@@ -492,6 +479,7 @@
 
     text-transform: uppercase;
 }
+
 .subtitleDash {
     flex: 0 0 auto;
 
@@ -520,10 +508,6 @@
 
     overflow-wrap: break-word;
 }
-
-/* =========================================================
-   CAPTION REGISTRATION MARK
-   ========================================================= */
 
 .registration {
     display: none;
@@ -554,14 +538,66 @@
 }
 
 /* =========================================================
-   POP-UP INTERACTIONS
+   PROJECT CTA — YELLOW STICKY NOTE
+   ========================================================= */
+
+.exploreNote {
+    position: absolute;
+
+    z-index: 45;
+
+    top: 18px;
+    left: -12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 35px;
+
+    padding: 9px 12px;
+
+    color: #1a1714;
+    background: #f0c94d;
+
+    border: 2px solid #1a1714;
+
+    box-shadow:
+        3px 3px 0 #1a1714;
+
+    font-family:
+        "JetBrains Mono",
+        monospace;
+
+    font-size: 10px;
+    font-weight: 900;
+
+    line-height: 1.2;
+    letter-spacing: 0.025em;
+
+    white-space: nowrap;
+
+    transform: rotate(-5deg);
+
+    pointer-events: none;
+
+    transition:
+        transform 200ms ease,
+        box-shadow 200ms ease;
+}
+
+.exploreMobile {
+    display: none;
+}
+
+/* =========================================================
+   HOVER INTERACTIONS
    ========================================================= */
 
 @media (hover: hover) {
 
     .card:hover .mainSheet {
-        transform:
-            translateY(-4px) scale(1.025);
+        transform: translateY(-5px);
 
         box-shadow:
             7px 9px 0 rgba(26, 23, 20, .13);
@@ -592,7 +628,8 @@
 
     .card:hover .secondaryCard {
         transform:
-            translateY(-8px) rotate(0deg);
+            translateY(-6px)
+            rotate(0deg);
 
         box-shadow:
             8px 10px 0 var(--accent),
@@ -618,14 +655,43 @@
         width: 29px;
     }
 
-    .card:hover .registration {
-        opacity: .58;
-
-        transform: rotate(90deg);
-    }
-
     .card:hover .bottomAccent {
         width: 48%;
+    }
+
+    .card:hover .exploreNote {
+        transform:
+            rotate(-2deg)
+            translateY(-4px);
+
+        box-shadow:
+            5px 6px 0 #1a1714;
+    }
+}
+
+/* =========================================================
+   DESKTOP — STABLE CAPTION
+
+   No forced media height.
+   ========================================================= */
+
+@media (min-width: 901px) {
+
+    .media {
+        flex: 1 1 0;
+        height: auto;
+        min-height: 0;
+    }
+
+    .caption {
+        flex: 0 0 auto;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .title {
+        font-size: clamp(24px, 2vw, 30px);
+        line-height: 1.08;
     }
 }
 
@@ -648,7 +714,7 @@
     }
 
     .secondaryCard {
-        width: 38%;
+        width: 43%;
         right: 10px;
         bottom: 10px;
     }
@@ -673,37 +739,46 @@
     }
 
     .caption {
-        gap: 6px;
-        padding: 13px 14px 16px;
+        gap: 5px;
+        padding: 11px 12px 14px;
     }
 
-  .title {
-        font-size: 25px;
-        margin-bottom: 6px;
-        line-height: 1.05;
-}
+    .title {
+        font-size: 21px;
+        font-weight: 900;
 
-.subtitle {
-    font-size: 10px;
-    gap: 5px;
-    line-height: 1.3;
-}
+        line-height: 1.08;
+        letter-spacing: -0.025em;
+
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+        font-size: 9px;
+        font-weight: 700;
+
+        line-height: 1.35;
+        letter-spacing: 0;
+
+        gap: 5px;
+    }
 
     .subtitleDash {
-        width: 12px;
+        width: 10px;
         height: 3px;
+
         margin-top: 4px;
     }
 
-    .registration {
-        display: none;
+    .subtitleText {
+        -webkit-line-clamp: 2;
     }
 
     .secondaryCard {
         right: 8px;
         bottom: 8px;
 
-        width: 38%;
+        width: 41%;
 
         padding: 3px;
 
@@ -726,6 +801,41 @@
         width: 20px;
         height: 20px;
     }
+
+    .exploreNote {
+        top: 15px;
+        left: -8px;
+
+        min-height: 30px;
+
+        padding: 7px 9px;
+
+        font-size: 9px;
+
+        transform: rotate(-4deg);
+    }
+
+    .exploreDesktop {
+        display: none;
+    }
+
+    .exploreMobile {
+        display: inline;
+    }
+}
+
+/* =========================================================
+   TEXT CLARITY
+   ========================================================= */
+
+.title,
+.subtitle,
+.subtitleText {
+    filter: none;
+    opacity: 1;
+
+    text-shadow: none;
+    -webkit-text-stroke: 0;
 }
 
 /* =========================================================
@@ -744,277 +854,8 @@
     .subtitleDash,
     .registration,
     .bottomAccent,
-    .caption {
+    .caption,
+    .exploreNote {
         transition: none;
-    }
-}
-
-
-/* =========================================================
-   IMAGE CLARITY REFINEMENTS
-   ========================================================= */
-
-/* ---------------------------------------------------------
-   PRIMARY IMAGE
-
-   No additional transforms or filters on the image.
-   --------------------------------------------------------- */
-
-.masterImage {
-    transform: none;
-    filter: none;
-}
-
-.masterImage img {
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    max-width: none;
-    max-height: none;
-
-    object-fit: cover;
-
-    filter: none;
-    opacity: 1;
-
-    transform: none;
-}
-
-/* ---------------------------------------------------------
-   SECONDARY PREVIEW
-
-   Slightly larger landscape holder.
-   Less aggressive rotation.
-   --------------------------------------------------------- */
-
-.secondaryCard {
-    width: 43%;
-    aspect-ratio: 16 / 10;
-
-    transform:
-        rotate(var(--secondary-rotation, 1deg));
-
-    transform-origin: center;
-}
-
-.secondaryScreen {
-    overflow: hidden;
-}
-
-.secondaryScreen img {
-    display: block;
-
-    width: 100%;
-    height: 100%;
-
-    max-width: none;
-    max-height: none;
-
-    object-fit: cover;
-
-    filter: none;
-    opacity: 1;
-
-    transform: none;
-}
-
-/* ---------------------------------------------------------
-   HOVER
-
-   Lift the paper without scaling the entire image.
-   --------------------------------------------------------- */
-
-@media (hover: hover) {
-
-    .card:hover .mainSheet {
-        transform: translateY(-5px);
-
-        box-shadow:
-            7px 9px 0 rgba(26, 23, 20, 0.13);
-    }
-
-    .card:hover .secondaryCard {
-        transform:
-            translateY(-6px)
-            rotate(0deg);
-
-        box-shadow:
-            8px 10px 0 var(--accent),
-            12px 14px 0 rgba(26, 23, 20, 0.14);
-    }
-}
-
-/* ---------------------------------------------------------
-   MOBILE
-
-   Keep secondary image readable without covering
-   too much of the primary screenshot.
-   --------------------------------------------------------- */
-
-@media (max-width: 560px) {
-
-    .secondaryCard {
-        width: 41%;
-    }
-}
-
-
-.registration {
-    display: none;
-}
-/* =========================================================
-   FINAL CAPTION CLARITY
-   ========================================================= */
-
-.title,
-.subtitle,
-.subtitleText {
-    filter: none;
-    opacity: 1;
-    text-shadow: none;
-    -webkit-text-stroke: 0;
-}
-
-.copy {
-    min-width: 0;
-    width: 100%;
-}
-
-@media (hover: hover) {
-    .card:hover .mainSheet {
-        transform: translateY(-5px);
-    }
-}
-
-
-/* =========================================================
-   PROJECT CTA — YELLOW STICKY NOTE
-   ========================================================= */
-
-.exploreNote {
-  position: absolute;
-
-  z-index: 45;
-
-  top: 18px;
-  left: -12px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 35px;
-
-  padding: 9px 12px;
-
-  color: #1a1714;
-  background: #f0c94d;
-
-  border: 2px solid #1a1714;
-
-  box-shadow:
-    3px 3px 0 #1a1714;
-
-  font-family:
-    "JetBrains Mono",
-    monospace;
-
-  font-size: 10px;
-  font-weight: 900;
-
-  line-height: 1.2;
-
-  letter-spacing: 0.025em;
-
-  white-space: nowrap;
-
-  transform: rotate(-5deg);
-
-  pointer-events: none;
-
-  transition:
-    transform 200ms ease,
-    box-shadow 200ms ease;
-}
-
-.exploreMobile {
-  display: none;
-}
-
-@media (hover: hover) {
-
-  .card:hover .exploreNote {
-    transform:
-      rotate(-2deg)
-      translateY(-4px);
-
-    box-shadow:
-      5px 6px 0 #1a1714;
-  }
-}
-
-@media (max-width: 560px) {
-
-  .exploreNote {
-    top: 15px;
-    left: -8px;
-
-    min-height: 30px;
-
-    padding: 7px 9px;
-
-    font-size: 9px;
-
-    transform: rotate(-4deg);
-  }
-
-  .exploreDesktop {
-    display: none;
-  }
-
-  .exploreMobile {
-    display: inline;
-  }
-}
-
-
-/* =========================================================
-   MOBILE — REFINED CARD TYPOGRAPHY
-   ========================================================= */
-
-@media (max-width: 560px) {
-
-    .caption {
-        gap: 5px;
-        padding: 11px 12px 14px;
-    }
-
-    .title {
-        font-size: 21px;
-        font-weight: 900;
-        line-height: 1.08;
-        letter-spacing: -0.025em;
-
-        margin-bottom: 5px;
-    }
-
-    .subtitle {
-        font-size: 9px;
-        font-weight: 700;
-        line-height: 1.35;
-        letter-spacing: 0;
-        gap: 5px;
-    }
-
-    .subtitleDash {
-        width: 10px;
-        height: 3px;
-        margin-top: 4px;
-    }
-
-    .subtitleText {
-        -webkit-line-clamp: 2;
     }
 }
