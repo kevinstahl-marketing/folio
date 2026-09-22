@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import "./globals.css";
 
@@ -33,6 +33,11 @@ const siteName = "Kevin Stahl | Full-Stack Developer";
 
 const siteDescription =
   "Kevin Stahl is a full-stack developer building web applications, e-commerce experiences, and custom systems. Explore selected projects, engineering work, and professional experience.";
+
+// New image URL to bypass old social preview caches.
+// File location: public/folio-preview.jpg
+
+const socialImage = `${siteUrl}/folio-preview.jpg`;
 
 /* =========================================================
    SEO / SOCIAL SHARING
@@ -103,7 +108,7 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: `${siteUrl}/og-image.jpg`,
+        url: socialImage,
 
         width: 1200,
         height: 630,
@@ -129,7 +134,7 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: `${siteUrl}/og-image.jpg`,
+        url: socialImage,
 
         width: 1200,
         height: 630,
@@ -182,8 +187,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         {children}
-        <SpeedInsights/>
-        < Analytics />
+
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
