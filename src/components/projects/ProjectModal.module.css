@@ -773,3 +773,164 @@
         padding: 16px;
     }
 }
+
+
+/* =========================================================
+   SHORT DESKTOP SCREENS — COMPACT MODAL
+
+   Only applies to desktop/laptop screens with
+   limited vertical space.
+
+   Mobile, tablet, animations, and modal functionality
+   remain unchanged.
+   ========================================================= */
+
+@media (min-width: 901px) and (max-height: 850px) {
+
+    /* OUTER MODAL */
+
+    .backdrop {
+        padding: clamp(12px, 2vh, 22px);
+    }
+
+    .modal {
+        width: min(1044px, 94vw);
+
+        max-height: calc(100dvh - 44px);
+
+        padding: clamp(20px, 2vw, 30px);
+    }
+
+    /* TOP BAR */
+
+    .topBar {
+        min-height: 34px;
+
+        margin-bottom: 18px;
+    }
+
+    .closeButton {
+        top: 8px;
+
+        width: 36px;
+        height: 36px;
+
+        margin-bottom: -36px;
+
+        font-size: 22px;
+    }
+
+    /* PROJECT IDENTITY */
+
+    .identity {
+        margin-bottom: 22px;
+    }
+
+    .title {
+        font-size: clamp(38px, 4vw, 58px);
+
+        line-height: 1.02;
+    }
+
+    .sub {
+        margin-top: 8px;
+
+        font-size: 11px;
+    }
+
+    .accentRule {
+        margin-top: 12px;
+
+        height: 4px;
+    }
+
+    /* HERO */
+
+    .hero {
+        grid-template-columns:
+            minmax(0, 1.35fr)
+            minmax(250px, 0.8fr);
+
+        gap: clamp(24px, 3vw, 42px);
+    }
+
+    .overview {
+        gap: 18px;
+    }
+
+    .eyebrow {
+        margin-bottom: 5px;
+    }
+
+    .infoPrimary {
+        font-size: 15px;
+    }
+
+    .infoSecondary {
+        font-size: 13px;
+
+        line-height: 1.45;
+    }
+
+    .summary {
+        font-size: 15px;
+
+        line-height: 1.5;
+    }
+
+    .stack {
+        gap: 5px;
+    }
+
+    /* WHAT I BUILT */
+
+    .built {
+        margin-top: 26px;
+
+        padding: 18px 20px;
+    }
+
+    .builtLabel {
+        margin-bottom: 12px;
+    }
+
+    .bulletGrid {
+        gap: 9px 20px;
+    }
+
+    .bullet p {
+        font-size: 13px;
+
+        line-height: 1.45;
+    }
+
+    /* FOOTER */
+
+    .footer {
+        margin-top: 20px;
+
+        gap: 14px;
+    }
+
+    .detailButton,
+    .primaryAction,
+    .secondaryAction {
+        min-height: 36px;
+
+        padding: 8px 12px;
+
+        font-size: 11px;
+    }
+
+    .expanded {
+        margin-top: 12px;
+
+        padding: 16px;
+    }
+
+    .expanded p {
+        font-size: 13px;
+
+        line-height: 1.5;
+    }
+}

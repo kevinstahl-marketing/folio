@@ -139,10 +139,10 @@ export default function ProjectCarousel({
   );
 
   const maxCardHeight = mobile
-    ? viewportHeight * 0.68
+    ? viewportHeight * 0.47
     : tablet
       ? viewportHeight * 0.72
-      : viewportHeight * 0.52;
+      : viewportHeight * 0.468;
 
   /* Original mobile/tablet proportions */
 
@@ -159,26 +159,24 @@ export default function ProjectCarousel({
 
      Mobile and tablet calculations are unchanged.
      ========================================================= */
+const cardW = Math.max(
+  0,
+  Math.floor(
+    Math.min(
+      mobile ? 340 : tablet ? 470 : 454,
 
-  const cardW = Math.max(
-    0,
-    Math.floor(
-      Math.min(
-        mobile ? 340 : tablet ? 470 : 560,
+      mobile
+        ? availableWidth * 0.92
+        : tablet
+          ? availableWidth * 0.78
+          : stageWidth * 0.324,
 
-        mobile
-          ? availableWidth * 0.92
-          : tablet
-            ? availableWidth * 0.78
-            : stageWidth * 0.40,
-
-        mobile || tablet
-          ? maxCardHeight / cardRatio
-          : maxCardHeight / 0.95
-      )
+      mobile || tablet
+        ? maxCardHeight / cardRatio
+        : maxCardHeight / 0.95
     )
-  );
-
+  )
+);
   /* =========================================================
      CARD HEIGHT
 
