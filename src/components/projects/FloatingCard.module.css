@@ -613,19 +613,18 @@ object-position: center;
             translate(-9px, 10px) rotate(-2.7deg);
     }
 
-    .card:hover .pinWrap {
-        transform:
-            translateX(-50%)
-            translateY(-13px)
-            translateX(4px)
-            rotate(15deg);
+  .card:hover .pinWrap {
+    transform:
+        translateX(-50%)
+        translateY(-3px)
+        translateX(4px)
+        rotate(15deg);
 
-        filter:
-            drop-shadow(
-                4px 6px 0 rgba(26, 23, 20, .16)
-            );
-    }
-
+    filter:
+        drop-shadow(
+            4px 6px 0 rgba(26, 23, 20, .16)
+        );
+}
     .card:hover .secondaryCard {
         transform:
             translateY(-6px)

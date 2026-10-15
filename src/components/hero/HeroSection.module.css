@@ -91,6 +91,7 @@
         transform 340ms cubic-bezier(0.22, 1, 0.36, 1);
 
     will-change: transform;
+    z-index: 1;
 }
 
 
@@ -563,7 +564,6 @@
    ========================================================= */
 
 .skillCard:hover {
-    z-index: 20;
 
     transform:
         translateY(-4px) rotate(0deg);
@@ -1329,3 +1329,4 @@
         transform: translateX(-50%);
     }
 }
+
