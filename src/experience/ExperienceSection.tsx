@@ -25,32 +25,8 @@ const experience = [
             "E-Commerce",
         ],
     },
-
     {
-        period: "2021 — 2024",
-        role: "Forensic Scientist — Seized Drugs",
-        organization: "Texas Department of Public Safety",
-        location: "Weslaco, Texas",
-        description:
-            "Performed forensic examination and instrumental analysis of controlled substances in a regulated laboratory environment requiring rigorous scientific analysis, documentation, quality control, and evidence handling.",
-        highlights: [
-            { lead: 'GC-MS analysis', text: 'Analyze forensic evidence using analytical chemistry techniques and GC-MS instrumentation.', featured: false },
-            { lead: 'Scientific systems', text: 'Operate and interpret data through Agilent ChemStation and laboratory information management systems.', featured: false },
-            { lead: 'Data & documentation', text: 'Work with scientific datasets, technical documentation, analytical workflows, and laboratory information systems.', featured: false },
-            { lead: 'Quality assurance', text: 'Produce defensible scientific findings under established forensic quality assurance and chain-of-custody procedures.', featured: false },
-        ],
-        tags: [
-            "GC-MS",
-            "ChemStation",
-            "LIMS",
-            "Analytical Chemistry",
-            "Scientific Data",
-            "Forensics",
-        ],
-    },
-
-    {
-        period: "2020 — 2021",
+        period: "2020 — 2025",
         role: "HR Systems Analyst",
         organization:
             "Texas Military Department · Joint Force Headquarters",
